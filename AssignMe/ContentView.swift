@@ -13,9 +13,12 @@ struct ContentView: View {
             .padding()
         Text("This is a better test.")
             .padding()
+        Text("This is a betterer test.")
+            .padding()
         Text("I HATE tests.")
             .padding()
         Text("This is BESTEST test.(tai)")
+        
         .padding()
     }
 
