@@ -11,11 +11,10 @@ struct ContentView: View {
     var body: some View {
         Text("This is just a test.")
             .padding()
-    }
-    var body: some View {
         Text("This is a better test.")
             .padding()
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
