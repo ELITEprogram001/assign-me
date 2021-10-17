@@ -13,6 +13,8 @@
 		1FBB93CC2717339300C6C2F2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FBB93CB2717339300C6C2F2 /* Preview Assets.xcassets */; };
 		1FBB93D72717339400C6C2F2 /* AssignMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB93D62717339400C6C2F2 /* AssignMeTests.swift */; };
 		1FBB93E22717339400C6C2F2 /* AssignMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB93E12717339400C6C2F2 /* AssignMeUITests.swift */; };
+		303CFCAF2719C38B003B7139 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCAE2719C38B003B7139 /* Category.swift */; };
+		303CFCB12719C705003B7139 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB02719C705003B7139 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		1FBB93DD2717339400C6C2F2 /* AssignMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssignMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FBB93E12717339400C6C2F2 /* AssignMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignMeUITests.swift; sourceTree = "<group>"; };
 		1FBB93E32717339400C6C2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		303CFCAE2719C38B003B7139 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		303CFCB02719C705003B7139 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 			children = (
 				1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */,
 				1FBB93C62717338E00C6C2F2 /* ContentView.swift */,
+				303CFCAE2719C38B003B7139 /* Category.swift */,
+				303CFCB02719C705003B7139 /* Task.swift */,
 				1FBB93C82717339300C6C2F2 /* Assets.xcassets */,
 				1FBB93CD2717339300C6C2F2 /* Info.plist */,
 				1FBB93CA2717339300C6C2F2 /* Preview Content */,
@@ -259,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
 				1FBB93C52717338E00C6C2F2 /* AssignMeApp.swift in Sources */,
+				303CFCAF2719C38B003B7139 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

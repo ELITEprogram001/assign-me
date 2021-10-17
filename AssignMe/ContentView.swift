@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
-
 struct ContentView: View {
+    // Test Category
+    var Mental_Health = Category(name:"Mental Health",color:"Blue")
+    
     var body: some View {
-        Text("This is just a test.")
+        Text("Name of Category Mental Health: \(Mental_Health.name)")
             .padding()
-        Text("This is a better test.")
+        //Test Task
+        let Meditate = Task(name:"Meditate",category:Mental_Health,description:"Take a breather.",difficulty:3, dueDate: Date(), dateCompleted: Date(), isOverdue:false )
+        Text("Attributes Of Task Metidate: \(Meditate.listAttributes())")
             .padding()
+        
         Text("This is a betterer test.")
             .padding()
         Text("I HATE tests.")
@@ -21,6 +26,7 @@ struct ContentView: View {
         
         .padding()
     }
+    
 
 }
 
