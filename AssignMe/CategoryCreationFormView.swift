@@ -122,6 +122,9 @@ struct CategoryCreationFormView: View {
             }
     
         }
+       .navigationBarTitle("")
+       .navigationBarBackButtonHidden(true)
+       .navigationBarHidden(true)
     }
 }
 

@@ -20,7 +20,13 @@ struct ContentView: View {
         */
         if (testing)
         {
-            CategoryCreationFormView()
+            NavigationView {
+                        NavigationLink(destination: CategoryCreationFormView()) {
+                            Text("PUSH")
+                                .foregroundColor(Color.black)
+                        }
+                    }
+            
         }
     }
     
