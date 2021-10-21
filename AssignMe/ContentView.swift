@@ -25,7 +25,7 @@ struct ContentView: View {
                             Text("PUSH")
                                 .foregroundColor(Color.black)
                         }
-                    }
+            }
             
         }
     }
