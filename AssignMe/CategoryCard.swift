@@ -62,7 +62,6 @@ struct CategoryCard: View {
                         .foregroundColor(.red)
                         .padding(.leading, 0.0)
                         .frame(width: 20.0, height: 100)
-                    
                 } //attributes for the category colour tab END
                 .padding(.leading, -165.0) //padding for category colour tab
                 
@@ -109,9 +108,9 @@ struct CategoryCard: View {
                 } //black bottom line END
                 .padding(.top, 99.0) //padding for black bottom line
                 
-            }//ZStack END
+            } //ZStack END
         
-    }//var body: some View END
+    } //var body: some View END
     
 } //struct CategoryCard: View END
 
