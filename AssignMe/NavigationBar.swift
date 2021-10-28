@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NavigationBar: View {
     var body: some View {
-        TabView{
+        //TabView{
             Text("first")
                 .tabItem{
                     Text("hello world")

@@ -15,7 +15,6 @@
 		1FBB93E22717339400C6C2F2 /* AssignMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB93E12717339400C6C2F2 /* AssignMeUITests.swift */; };
 		303CFCAF2719C38B003B7139 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCAE2719C38B003B7139 /* Category.swift */; };
 		303CFCB12719C705003B7139 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB02719C705003B7139 /* Task.swift */; };
-		33CB23E82726589F00D0FCAC /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CB23E72726589F00D0FCAC /* NavigationBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		1FBB93E32717339400C6C2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		303CFCAE2719C38B003B7139 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		303CFCB02719C705003B7139 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		33CB23E72726589F00D0FCAC /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +103,6 @@
 				1FBB93C62717338E00C6C2F2 /* ContentView.swift */,
 				303CFCAE2719C38B003B7139 /* Category.swift */,
 				303CFCB02719C705003B7139 /* Task.swift */,
-				33CB23E72726589F00D0FCAC /* NavigationBar.swift */,
 				1FBB93C82717339300C6C2F2 /* Assets.xcassets */,
 				1FBB93CD2717339300C6C2F2 /* Info.plist */,
 				1FBB93CA2717339300C6C2F2 /* Preview Content */,
@@ -268,7 +265,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33CB23E82726589F00D0FCAC /* NavigationBar.swift in Sources */,
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
 				1FBB93C52717338E00C6C2F2 /* AssignMeApp.swift in Sources */,

@@ -7,27 +7,36 @@
 
 import SwiftUI
 struct ContentView: View {
-    // Test Category
-    var Mental_Health = Category(name:"Mental Health",color:"Blue")
     
     var body: some View {
-        Text("Name of Category Mental Health: \(Mental_Health.name)")
-            .padding()
-        //Test Task
-        let Meditate = Task(name:"Meditate",category:Mental_Health,description:"Take a breather.",difficulty:3, dueDate: Date(), dateCompleted: Date(), isOverdue:false )
-        Text("Attributes Of Task Metidate: \(Meditate.listAttributes())")
-            .padding()
-        
-        Text("This is a betterer test.")
-            .padding()
-        Text("I HATE tests.")
-            .padding()
-        Text("This is BESTEST test.(tai)")
-        
-        .padding()
+        TabView{
+            Weekly()
+                .tabItem {
+                    Text("default")
+                    Image("home-alt-plus")
+                }
+            Calendar()
+                .tabItem {
+                    Text("calendar")
+                    Image(systemName: "calendar")
+                }
+            TaskEntry()
+                .tabItem {
+                    Text("Task Entry")
+                    Image(systemName: "plus.app.fill").imageScale(.large)
+                }
+            Category()
+                .tabItem {
+                    Text("Category List")
+                    Image(systemName: "")
+                }
+            Profile()
+                .tabItem {
+                    Text("Profile")
+                    Image(systemName: "person.fill")
+                }
+        }
     }
-    
-
 }
 
 struct ContentView_Previews: PreviewProvider {
