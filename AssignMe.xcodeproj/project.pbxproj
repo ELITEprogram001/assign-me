@@ -14,8 +14,13 @@
 		1FBB93E22717339400C6C2F2 /* AssignMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB93E12717339400C6C2F2 /* AssignMeUITests.swift */; };
 		303CFCAF2719C38B003B7139 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCAE2719C38B003B7139 /* Category.swift */; };
 		303CFCB12719C705003B7139 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB02719C705003B7139 /* Task.swift */; };
+<<<<<<< HEAD
 		303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */; };
 		303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */; };
+=======
+		DE51FE51271CB25B00238784 /* CategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51FE50271CB25B00238784 /* CategoryCard.swift */; };
+		DEC794B92723DAD300380B52 /* CategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC794B82723DAD300380B52 /* CategoryDetails.swift */; };
+>>>>>>> origin/Category-Card
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +54,13 @@
 		1FBB93E32717339400C6C2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		303CFCAE2719C38B003B7139 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		303CFCB02719C705003B7139 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationFormView.swift; sourceTree = "<group>"; };
 		303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewTest.swift; sourceTree = "<group>"; };
+=======
+		DE51FE50271CB25B00238784 /* CategoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCard.swift; sourceTree = "<group>"; tabWidth = 4; };
+		DEC794B82723DAD300380B52 /* CategoryDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetails.swift; sourceTree = "<group>"; };
+>>>>>>> origin/Category-Card
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +118,13 @@
 				303CFCB02719C705003B7139 /* Task.swift */,
 				1FBB93C82717339300C6C2F2 /* Assets.xcassets */,
 				1FBB93CD2717339300C6C2F2 /* Info.plist */,
+<<<<<<< HEAD
 				303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */,
+=======
+				1FBB93CA2717339300C6C2F2 /* Preview Content */,
+				DE51FE50271CB25B00238784 /* CategoryCard.swift */,
+				DEC794B82723DAD300380B52 /* CategoryDetails.swift */,
+>>>>>>> origin/Category-Card
 			);
 			path = AssignMe;
 			sourceTree = "<group>";
@@ -259,9 +275,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */,
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */,
+=======
+				DEC794B92723DAD300380B52 /* CategoryDetails.swift in Sources */,
+				303CFCB12719C705003B7139 /* Task.swift in Sources */,
+				DE51FE51271CB25B00238784 /* CategoryCard.swift in Sources */,
+>>>>>>> origin/Category-Card
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
 				1FBB93C52717338E00C6C2F2 /* AssignMeApp.swift in Sources */,
 				303CFCAF2719C38B003B7139 /* Category.swift in Sources */,
