@@ -7,38 +7,58 @@
 
 import SwiftUI
 struct ContentView: View {
-
+<<<<<<< HEAD
+    // Test Category
+    var Mental_Health = Category(name:"Mental Health",color:"Blue")
+    var testing=true
+    var body: some View {
+        /*
+        NavigationView {
+                    NavigationLink(destination: CategoryCreationFormView()){
+                        Text("Calendar View")
+                    }
+        }
+        */
+        if (testing)
+        {
+            NavigationView {
+                        NavigationLink(destination: CategoryCreationFormView()) {
+                            Text("PUSH")
+                                .foregroundColor(Color.black)
+                        }
+            }
+            
+=======
     
     var body: some View {
-
         TabView{
-            //Weekly()
+            Weekly()
                 .tabItem {
                     Text("default")
                     Image("home-alt-plus")
                 }
-            //Calendar()
+            Calendar()
                 .tabItem {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            //TaskEntry()
+            TaskEntry()
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.app.fill").imageScale(.large)
                 }
-            //Category()
+            Category()
                 .tabItem {
                     Text("Category List")
                     Image(systemName: "")
                 }
-            //Profile()
+            Profile()
                 .tabItem {
                     Text("Profile")
                     Image(systemName: "person.fill")
                 }
-
-        }//end body
+>>>>>>> 7acf0f75e7d7fc1728117518f1eb576714d90776
+        }
     }
 }
 
