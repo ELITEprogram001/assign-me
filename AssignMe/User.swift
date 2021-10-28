@@ -12,7 +12,12 @@ class User{
     var completedList = [Task]()
     var availableColors = [Color]()
     init(){
+        availableColors.append(Color.black)
         availableColors.append(Color.red)
-        availableColors.append(Color.red)
+        availableColors.append(Color.green)
+        availableColors.append(Color.blue)
+        availableColors.append(Color.yellow)
+        availableColors.append(Color.orange)
+        availableColors.append(Color.purple)
     }
 }
