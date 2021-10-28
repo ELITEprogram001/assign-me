@@ -4,12 +4,12 @@
 //
 //  Created by Rohan Jose on 10/15/21.
 //
-
+import SwiftUI
 import Foundation
 class Category{
     var name:String
-    var color:String
-    init(name:String, color:String){
+    var color:Color
+    init(name:String, color:Color){
         self.name=name
         self.color=color
     }

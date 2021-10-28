@@ -16,6 +16,7 @@
 		303CFCB12719C705003B7139 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB02719C705003B7139 /* Task.swift */; };
 		303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */; };
 		303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */; };
+		303E9276272AF1F000B71B63 /* CategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9275272AF1F000B71B63 /* CategoryCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		303CFCB02719C705003B7139 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationFormView.swift; sourceTree = "<group>"; };
 		303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewTest.swift; sourceTree = "<group>"; };
+		303E9275272AF1F000B71B63 /* CategoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		1FBB93C32717338E00C6C2F2 /* AssignMe */ = {
 			isa = PBXGroup;
 			children = (
+				303E9275272AF1F000B71B63 /* CategoryCard.swift */,
 				303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */,
 				1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */,
 				1FBB93C62717338E00C6C2F2 /* ContentView.swift */,
@@ -263,6 +266,7 @@
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
+				303E9276272AF1F000B71B63 /* CategoryCard.swift in Sources */,
 				1FBB93C52717338E00C6C2F2 /* AssignMeApp.swift in Sources */,
 				303CFCAF2719C38B003B7139 /* Category.swift in Sources */,
 			);
