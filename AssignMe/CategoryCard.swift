@@ -8,6 +8,8 @@
 import SwiftUI
 import Foundation
 
+//comment
+
 var Testing = Category(name: "Fitness", color: "red") //comment out when no longer needed for designing category card
 //var Cat_Task_Count = Int count of items in list of tasks assigned to specific category
 //var Cat_Task_Count = 13 //placeholder test for Cat_Task_Count
