@@ -105,10 +105,10 @@
 				1FBB93C62717338E00C6C2F2 /* ContentView.swift */,
 				303CFCAE2719C38B003B7139 /* Category.swift */,
 				303CFCB02719C705003B7139 /* Task.swift */,
+				33CB23E72726589F00D0FCAC /* NavigationBar.swift */,
 				1FBB93C82717339300C6C2F2 /* Assets.xcassets */,
 				1FBB93CD2717339300C6C2F2 /* Info.plist */,
 				1FBB93CA2717339300C6C2F2 /* Preview Content */,
-				33CB23E72726589F00D0FCAC /* NavigationBar.swift */,
 			);
 			path = AssignMe;
 			sourceTree = "<group>";

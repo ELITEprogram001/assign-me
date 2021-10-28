@@ -11,9 +11,9 @@ struct NavigationBar: View {
     var body: some View {
         TabView{
             Text("first")
-            tabItem{
-                Label("menu",system.Image: "list.dash")
-            }
+                .tabItem{
+                    Text("hello world")
+                }
         }
         
     }
