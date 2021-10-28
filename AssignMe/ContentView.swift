@@ -20,6 +20,7 @@ struct ContentView: View {
         */
         if (testing)
         {
+
             NavigationView {
                         NavigationLink(destination: CategoryCreationFormView()) {
                             Text("PUSH")
