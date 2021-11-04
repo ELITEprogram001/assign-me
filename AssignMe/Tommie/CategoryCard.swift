@@ -10,7 +10,7 @@ import Foundation
 
 //comment
 
-var Testing = Category(name: "Fitness", color: Color.red) //comment out when no longer needed for designing category card
+var Testing = Category(name: "Fitness", color: .red) //comment out when no longer needed for designing category card
 //var Cat_Task_Count = Int count of items in list of tasks assigned to specific category
 //var Cat_Task_Count = 13 //placeholder test for Cat_Task_Count
 
@@ -34,7 +34,7 @@ struct CategoryCard: View {
     var body: some View {
             ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
                 Rectangle() //Card Body
-                    .fill(Color.gray) //can be .Clear
+                    .fill(Color (red: 0.35, green: 0.35, blue: 0.35)) //can be Color: .Clear
                     .frame(width: 325, height: 100)
                     .shadow(radius: 6) //optional
         
@@ -61,7 +61,7 @@ struct CategoryCard: View {
                 
                 HStack{ //attributes for the category colour tab to the left
                     Rectangle() //Left-hand category colour tab
-                        .foregroundColor(.red)
+                        .foregroundColor(Testing.color)
                         .padding(.leading, 0.0)
                         .frame(width: 20.0, height: 100)
                 } //attributes for the category colour tab END
@@ -69,37 +69,45 @@ struct CategoryCard: View {
                 
                 
                 HStack{ //attributes for blue edit button background
-                    RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        .frame(width: 50, height: 50)
-                } //attributes for blue edit button background END
-                .padding(.leading, 100) //padding for blue edit button background
-                
-                
-                HStack{ //edit button 'pencil' image
                     Button(
                     action:{print("pls edit")},
-                    label: {Image("edit")}
-                    )
-                } //edit button 'pencil' image END
-                .padding(.leading, 100) //padding for edit button 'pencil'
-                
-                
-                HStack{ // attributes for delete button background
-                    RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .foregroundColor(.clear)
+                    label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
+                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                         .frame(width: 50, height: 50)
+                        }
+                    )
+                } //attributes for blue edit button background' image END
+                .padding(.leading, 100) //padding for //attributes for blue edit button background'
+                
+                
+                HStack{ //attributes for edit button image 'pencil'
+                    Image(systemName: "pencil")
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                } //attributes for edit button image 'pencil' END
+                .padding(.leading, 100) //padding for edit button image 'pencil'
+                
+                
+                HStack{ //attributes for delete button background
+                    Button(
+                    action:{print("pls delete")},
+                        label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .foregroundColor(.clear)
+                            .frame(width: 50, height: 50)
+                            }
+                        )
                 } //attributes for delete button background END
                 .padding(.leading, 245) //padding for delete button background
                 
                 
-                HStack{ // delete button 'trashcan' image
-                    Button(
-                    action:{print("pls delete")},
-                    label: {Image("trash_full_Red")}
-                    )
-                } //delete button 'trashcan' image END
-                .padding(.leading, 245) //padding for delete button 'trashcan'
+                HStack{ //attributes for delete button image 'trash'
+                    Image(systemName: "trash")
+                        .resizable()
+                        .foregroundColor(.red)
+                        .frame(width: 45, height: 45)
+                } //attributes for delete button image 'trash' END
+                .padding(.leading, 245) //padding for delete button image 'trash'
+                
                 
                 
                 VStack{ //black bottom line
