@@ -104,13 +104,12 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .preferredColorScheme(.dark)//dark mode
     }
 }
 
 
 
-///#################### embedded view within a view JUST A PLACE HOLDER for other view File
+///#################### embedded view within a view JUST A PLACE HOLDER
 struct WeeklyView: View {
     var body: some View {
         Text("Weekly VIEW")
@@ -140,6 +139,7 @@ struct CategoryView: View {
                         
                     }
                 }
+            
                 
         }
     }
