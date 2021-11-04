@@ -104,6 +104,8 @@ struct Cell: View {
             Text(day)
         }
         .font(.custom("Avenir Next", size: 16, relativeTo: .body))
+        .frame(maxHeight: 60)
+        .frame(maxWidth: 60)
         .padding(.bottom, 45) // Modifies the padding of each cell bottom
         .padding(.horizontal, 5)
         .border(Color.gray, width: 1)
