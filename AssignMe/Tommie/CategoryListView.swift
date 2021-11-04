@@ -43,15 +43,15 @@ struct CategoryListView: View {
                .padding(.leading, 275)
                .padding(.bottom, 660)
                                
-                       //Spacer()
+            Spacer()
                        
                ScrollView {
-                   VStack(alignment: .trailing) {
-                           ForEach(0..<13) {
+                           ForEach(0..<130) {
                                Text("Row \($0)")
                            }
-                   }
-               }
+               } //ScrollView END
+               .frame(width: 350, height: 550)
+               .padding(.top, 5)
                                
            } //ZStack END
        }
