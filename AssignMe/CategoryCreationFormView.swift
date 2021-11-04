@@ -48,23 +48,21 @@ struct CategoryCreationFormView: View {
             Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
             VStack() {
                 HStack(){
-                Spacer()
-                Button("Back"){
+                    Button("Back"){
                         
                     }
                     .buttonStyle(FilledButton(isActive: false))
-                    .padding(.leading,15)
+                    .padding()
                 Spacer()
                     Text("Category Entry")
                     .font(.system(size: 25, weight: .bold, design: .serif))
                     .foregroundColor(.white)
                 Spacer()
-                Button("Add"){
+                    Button("Add"){
                         
                     }
                     .buttonStyle(FilledButton(isActive: isActive))
-                    .padding(.trailing,15)
-                Spacer()
+                    .padding()
                 }
                 TextField("", text: $categoryName
                           , onCommit: {
@@ -77,12 +75,10 @@ struct CategoryCreationFormView: View {
                     
                     .background(Color(red: 0.133, green: 0.133, blue: 0.133))
                     .padding(.horizontal, 30)
-                    .padding(.trailing, 10)
-                    .padding(.leading, 10)
                     .foregroundColor(Color.white)
                 Rectangle()
                     .fill(Color.black)
-                    .frame(width:340, height:1)
+                    .frame(width:375, height:1)
                     .padding(.horizontal, 30)
                 Menu("\(currentColor)"){
                     Button(action:{currentColor="Yellow" }, label:{
@@ -120,9 +116,8 @@ struct CategoryCreationFormView: View {
                 .padding(.horizontal, 30)
                 Rectangle()
                     .fill(Color.black)
-                    .frame(width:340, height:1)
+                    .frame(width:375, height:1)
                     .padding(.horizontal, 30)
-
                 Spacer()
             }
     

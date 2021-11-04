@@ -21,8 +21,11 @@ struct ContentView: View {
         */
         if (testing)
         {
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+>>>>>>> parent of 06c8157 (Merge branch 'Category-Creation-Form-View')
             NavigationView {
                         NavigationLink(destination: CategoryCreationFormView()) {
                             Text("PUSH")
