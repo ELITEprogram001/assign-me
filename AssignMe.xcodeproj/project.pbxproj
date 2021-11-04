@@ -109,6 +109,11 @@
 		1FBB93C32717338E00C6C2F2 /* AssignMe */ = {
 			isa = PBXGroup;
 			children = (
+				CE6307052733681D0031B8A9 /* Alejandro */,
+				CE630704273368020031B8A9 /* Tommie */,
+				CE630703273367FA0031B8A9 /* Dalton */,
+				CE630702273367E90031B8A9 /* Tai */,
+				CE630701273367DA0031B8A9 /* Rohan */,
 				303E9275272AF1F000B71B63 /* CategoryCard.swift */,
 				303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */,
 				1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */,
@@ -141,6 +146,41 @@
 				1FBB93E32717339400C6C2F2 /* Info.plist */,
 			);
 			path = AssignMeUITests;
+			sourceTree = "<group>";
+		};
+		CE630701273367DA0031B8A9 /* Rohan */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Rohan;
+			sourceTree = "<group>";
+		};
+		CE630702273367E90031B8A9 /* Tai */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tai;
+			sourceTree = "<group>";
+		};
+		CE630703273367FA0031B8A9 /* Dalton */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dalton;
+			sourceTree = "<group>";
+		};
+		CE630704273368020031B8A9 /* Tommie */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tommie;
+			sourceTree = "<group>";
+		};
+		CE6307052733681D0031B8A9 /* Alejandro */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Alejandro;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
