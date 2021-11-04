@@ -35,7 +35,7 @@ struct ContentView: View {
     var body: some View {
 
         TabView{
-            //CategoryCreationFormView()
+            CategoryCreationFormView()
             WeeklyView()
                 .tabItem {
                     Text("Weekly View")
@@ -79,17 +79,17 @@ struct ContentView_Previews: PreviewProvider {
 //////
 
 ///#################### embedded view within a view JUST A PLACE HOLDER for other view File
-struct WeeklyView: View {
+/*struct WeeklyView: View {
     var body: some View {
         Text("Weekly VIEW")
     }
-}
+}*/
 
-struct CalendarView: View {
+/*struct CalendarView: View {
     var body: some View {
         Text(" Calendar VIEW")
     }
-}
+}*/
 
 struct TaskEntry: View {
     var body: some View {
