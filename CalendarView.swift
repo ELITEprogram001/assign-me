@@ -22,6 +22,8 @@ struct CalendarView: View {
     ]
     
     var body: some View {
+        
+       
         HStack {
             Spacer()
             Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
@@ -36,37 +38,45 @@ struct CalendarView: View {
             }
             .foregroundColor(.red)
             Spacer()
-        }
+        }//HStack
+        
         .padding(.top, 20.0)
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(data, id: \.self) { item in
-                    Text(item)
-                }
-                .padding(.bottom, 20.0)
-            }
-            .padding(.horizontal)
-        }
-        .frame(maxHeight: 420)
-        ZStack {
-            Color.black.ignoresSafeArea()
-            VStack(spacing: 20){
-                HStack {
-                    Text(date.description)
-                        .bold()
-                        .font(.title2)
-                        .foregroundColor(.red)
-                        .padding(.leading)
-                    Spacer()
-                }
-                ScrollView {
-                    LazyVStack(spacing: 20){
-                        
-                    }
-                }
-            }
-            
-        }
+//        ScrollView {
+//            LazyVGrid(columns: columns, spacing: 20) {
+//                ForEach(data, id: \.self) { item in
+//                    Text(item)
+//                }
+//                .padding(.bottom, 20.0)
+//            }
+//            .padding(.horizontal)
+//        }//scrolling
+//
+//        .frame(maxHeight: 420)
+//        ZStack {
+//            Color.black.ignoresSafeArea()
+//            VStack(spacing: 20){
+//                HStack {
+//                    Text(date.description)
+//                        .bold()
+//                        .font(.title2)
+//                        .foregroundColor(.red)
+//                        .padding(.leading)
+//                    Spacer()
+//                }
+//                ScrollView {
+//                    LazyVStack(spacing: 20){
+//
+//                    }
+//                }
+//            }
+//
+//        }//zstack
+        
+    
+     
+        
+        
+        
     }
 }
 
