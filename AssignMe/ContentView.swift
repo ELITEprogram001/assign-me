@@ -7,30 +7,66 @@
 
 import SwiftUI
 struct ContentView: View {
-    // Test Category
-    var Mental_Health = Category(name:"Mental Health",color:Color.red)
-    var testing=true
-    var user:User
-    init()
-    {
-        user=User()
-        user.addCategory(cat:Mental_Health)
-    }
-    var body: some View {
+///##############################
+//    // Test Category
+//    var Mental_Health = Category(name:"Mental Health",color:Color.red)
+//    var testing=true
+//    var user:User
+//    init()
+//    {
+//        user=User()
+//        user.addCategory(cat:Mental_Health)
+//    }
+//    var body: some View {
+//
+//        if (testing)
+//        {
+//
+//            NavigationView {
+//                NavigationLink(destination: TaskCreationFormView(user:user)) {
+//                            Text("PUSH")
+//                                .foregroundColor(Color.black)
+//                        }
+//            }
+//        }//end iff
+//    }//end body var
+//##################################
     
-        if (testing)
-        {
+    var body: some View {
 
-            NavigationView {
-                NavigationLink(destination: TaskCreationFormView(user:user)) {
-                            Text("PUSH")
-                                .foregroundColor(Color.black)
-                        }
-            }
-            
+        TabView{
+            //CategoryCreationFormView()
+            WeeklyView()
+                .tabItem {
+                    Text("Weekly View")
+                    Image(systemName: "homekit")
+                }
+            CalendarView()
+                .tabItem {
+                    Text("calendar")
+                    Image(systemName: "calendar")
+                }
+            TaskEntry()
+                .tabItem {
+                    Text("Task Entry")
+                    Image(systemName: "plus.circle.fill")
+                }
+            CategoryView()
+                .tabItem {
+                    Text("Category List")
+                    Image(systemName: "square.grid.2x2.fill")
+                }
+            Profile()
+                .tabItem {
+                    Text("Profile")
+                    Image(systemName: "person.fill")
+                }
 
-        }
-    }
+        }   //end tabview
+    }//end body
+    
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -38,3 +74,53 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+//////
+
+///#################### embedded view within a view JUST A PLACE HOLDER for other view File
+struct WeeklyView: View {
+    var body: some View {
+        Text("Weekly VIEW")
+    }
+}
+
+struct CalendarView: View {
+    var body: some View {
+        Text(" Calendar VIEW")
+    }
+}
+
+struct TaskEntry: View {
+    var body: some View {
+        Text("TASK ENTRY")
+    }
+}
+
+struct CategoryView: View {
+    var body: some View {
+        NavigationView{
+            Text("category view")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        
+                        NavigationLink("add", destination: CategoryCreationFormView())
+                        
+                    }
+                }
+                
+        }
+    }
+}
+struct Profile: View {
+    var body: some View {
+        Text("Profile")
+    }
+}
+
+
+
+
+
+
+
