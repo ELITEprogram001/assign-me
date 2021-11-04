@@ -19,11 +19,14 @@
 <<<<<<< HEAD
 		303E9276272AF1F000B71B63 /* CategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9275272AF1F000B71B63 /* CategoryCard.swift */; };
 		303E9278272AF3AE00B71B63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9277272AF3AE00B71B63 /* User.swift */; };
+<<<<<<< HEAD
 		303E927A272C5E9200B71B63 /* TaskCreationFromView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9279272C5E9200B71B63 /* TaskCreationFromView.swift */; };
 		30954F14272E3E4000E100BE /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30954F13272E3E4000E100BE /* RatingView.swift */; };
 =======
 		CE70132727335BD400BDBFB7 /* CategoryEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE70132627335BD400BDBFB7 /* CategoryEdit.swift */; };
 >>>>>>> Navigation-Bar
+=======
+>>>>>>> parent of ee27bda (Added Difficulty, updated Text boxes/Titles , added Datepicker)
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,11 +65,14 @@
 <<<<<<< HEAD
 		303E9275272AF1F000B71B63 /* CategoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCard.swift; sourceTree = "<group>"; };
 		303E9277272AF3AE00B71B63 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		303E9279272C5E9200B71B63 /* TaskCreationFromView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFromView.swift; sourceTree = "<group>"; };
 		30954F13272E3E4000E100BE /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 =======
 		CE70132627335BD400BDBFB7 /* CategoryEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEdit.swift; sourceTree = "<group>"; };
 >>>>>>> Navigation-Bar
+=======
+>>>>>>> parent of ee27bda (Added Difficulty, updated Text boxes/Titles , added Datepicker)
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,8 +134,6 @@
 				1FBB93C82717339300C6C2F2 /* Assets.xcassets */,
 				1FBB93CD2717339300C6C2F2 /* Info.plist */,
 				303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */,
-				303E9279272C5E9200B71B63 /* TaskCreationFromView.swift */,
-				30954F13272E3E4000E100BE /* RatingView.swift */,
 			);
 			path = AssignMe;
 			sourceTree = "<group>";
@@ -284,10 +288,8 @@
 				303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */,
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */,
-				30954F14272E3E4000E100BE /* RatingView.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
 				303E9278272AF3AE00B71B63 /* User.swift in Sources */,
-				303E927A272C5E9200B71B63 /* TaskCreationFromView.swift in Sources */,
 				303E9276272AF1F000B71B63 /* CategoryCard.swift in Sources */,
 				1FBB93C52717338E00C6C2F2 /* AssignMeApp.swift in Sources */,
 				303CFCAF2719C38B003B7139 /* Category.swift in Sources */,

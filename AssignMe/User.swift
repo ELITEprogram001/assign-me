@@ -20,7 +20,4 @@ class User{
         availableColors.append(Color.orange)
         availableColors.append(Color.purple)
     }
-    func addCategory(cat:Category){
-        categoryList.append(cat)
-    }
 }
