@@ -21,6 +21,8 @@
 		303E927A272C5E9200B71B63 /* TaskCreationFromView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9279272C5E9200B71B63 /* TaskCreationFromView.swift */; };
 		30954F14272E3E4000E100BE /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30954F13272E3E4000E100BE /* RatingView.swift */; };
 		CE630707273369B50031B8A9 /* CategoryEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE630706273369B50031B8A9 /* CategoryEdit.swift */; };
+		DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE998A4327336DC3000A08CF /* TaskCard.swift */; };
+		DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE998A4527336ECE000A08CF /* CategoryListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		303E9279272C5E9200B71B63 /* TaskCreationFromView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFromView.swift; sourceTree = "<group>"; };
 		30954F13272E3E4000E100BE /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		CE630706273369B50031B8A9 /* CategoryEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEdit.swift; sourceTree = "<group>"; };
+		DE998A4327336DC3000A08CF /* TaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCard.swift; sourceTree = "<group>"; };
+		DE998A4527336ECE000A08CF /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +120,6 @@
 				CE630703273367FA0031B8A9 /* Dalton */,
 				CE630702273367E90031B8A9 /* Tai */,
 				CE630701273367DA0031B8A9 /* Rohan */,
-				303E9275272AF1F000B71B63 /* CategoryCard.swift */,
 				303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */,
 				CE630706273369B50031B8A9 /* CategoryEdit.swift */,
 				1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */,
@@ -175,6 +178,9 @@
 		CE630704273368020031B8A9 /* Tommie */ = {
 			isa = PBXGroup;
 			children = (
+				DE998A4327336DC3000A08CF /* TaskCard.swift */,
+				303E9275272AF1F000B71B63 /* CategoryCard.swift */,
+				DE998A4527336ECE000A08CF /* CategoryListView.swift */,
 			);
 			path = Tommie;
 			sourceTree = "<group>";
@@ -319,7 +325,9 @@
 				303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */,
 				30954F14272E3E4000E100BE /* RatingView.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
+				DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */,
 				303E9278272AF3AE00B71B63 /* User.swift in Sources */,
+				DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */,
 				CE630707273369B50031B8A9 /* CategoryEdit.swift in Sources */,
 				303E927A272C5E9200B71B63 /* TaskCreationFromView.swift in Sources */,
 				303E9276272AF1F000B71B63 /* CategoryCard.swift in Sources */,
