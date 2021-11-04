@@ -16,6 +16,7 @@
 		303CFCB12719C705003B7139 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB02719C705003B7139 /* Task.swift */; };
 		303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */; };
 		303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */; };
+		CE70132727335BD400BDBFB7 /* CategoryEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE70132627335BD400BDBFB7 /* CategoryEdit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		303CFCB02719C705003B7139 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationFormView.swift; sourceTree = "<group>"; };
 		303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewTest.swift; sourceTree = "<group>"; };
+		CE70132627335BD400BDBFB7 /* CategoryEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEdit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */,
 				1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */,
 				1FBB93C62717338E00C6C2F2 /* ContentView.swift */,
+				CE70132627335BD400BDBFB7 /* CategoryEdit.swift */,
 				303CFCAE2719C38B003B7139 /* Category.swift */,
 				303CFCB02719C705003B7139 /* Task.swift */,
 				1FBB93C82717339300C6C2F2 /* Assets.xcassets */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE70132727335BD400BDBFB7 /* CategoryEdit.swift in Sources */,
 				303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */,
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */,
