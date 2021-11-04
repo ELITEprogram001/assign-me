@@ -10,7 +10,7 @@ import SwiftUI
 struct DifficultyView: View {
     @Binding var rating: Int
     var label = ""
-    var maximumRating = 5
+    var maximumRating = 4
     var offImage: Image?
     var onImage = Image(systemName:"star.fill")
     var offColor = Color.gray
