@@ -8,7 +8,21 @@
 import SwiftUI
 
 struct CategoryListView: View {
+    
+    var catList = [Category]()
+    
+    mutating func showCats() {
+        let testCat1 = Category(name: "Fitness", color: .red)
+        let testCat2 = Category(name: "Mental Health", color:.blue)
+
+        catList.append(testCat1)
+        catList.append(testCat2)
+    }
+    
+    
     var body: some View {
+        
+        
            ZStack{
                Color(red: 0.150, green: 0.150, blue: 0.150)
                                
