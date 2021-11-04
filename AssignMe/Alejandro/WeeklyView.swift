@@ -10,7 +10,7 @@ import SwiftUI
 struct WeeklyView: View {
 
     
-//tbd
+//tbd tbdx2
     var dateArray = [Date]()
     var stringArray = [String]()
     init() {
