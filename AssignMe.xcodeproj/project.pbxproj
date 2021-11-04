@@ -125,7 +125,6 @@
 				CE630702273367E90031B8A9 /* Tai */,
 				CE630701273367DA0031B8A9 /* Rohan */,
 				303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */,
-				CE630706273369B50031B8A9 /* CategoryEdit.swift */,
 				1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */,
 				1FBB93C62717338E00C6C2F2 /* ContentView.swift */,
 				303CFCAE2719C38B003B7139 /* Category.swift */,
@@ -168,6 +167,7 @@
 		CE630702273367E90031B8A9 /* Tai */ = {
 			isa = PBXGroup;
 			children = (
+				CE630706273369B50031B8A9 /* CategoryEdit.swift */,
 			);
 			path = Tai;
 			sourceTree = "<group>";
