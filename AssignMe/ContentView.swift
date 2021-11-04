@@ -11,7 +11,7 @@ struct ContentView: View {
 //    // Test Category
 //    var Mental_Health = Category(name:"Mental Health",color:Color.red)
 //    var testing=true
-//    var user:User
+    var user:User = User()
 //    init()
 //    {
 //        user=User()
@@ -46,7 +46,7 @@ struct ContentView: View {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            TaskEntry()
+            TaskCreationFormView(user:user)
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.circle.fill")
@@ -79,17 +79,17 @@ struct ContentView_Previews: PreviewProvider {
 //////
 
 ///#################### embedded view within a view JUST A PLACE HOLDER for other view File
-struct WeeklyView: View {
+/*struct WeeklyView: View {
     var body: some View {
         Text("Weekly VIEW")
     }
-}
+}*/
 
-struct CalendarView: View {
+/*struct CalendarView: View {
     var body: some View {
         Text(" Calendar VIEW")
     }
-}
+}*/
 
 struct TaskEntry: View {
     var body: some View {
