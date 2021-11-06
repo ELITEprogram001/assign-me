@@ -20,6 +20,7 @@
 		303E9278272AF3AE00B71B63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9277272AF3AE00B71B63 /* User.swift */; };
 		303E927A272C5E9200B71B63 /* TaskCreationFromView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9279272C5E9200B71B63 /* TaskCreationFromView.swift */; };
 		30954F14272E3E4000E100BE /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30954F13272E3E4000E100BE /* RatingView.swift */; };
+		30954F1A273478FA00E100BE /* TaskEditFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30954F19273478FA00E100BE /* TaskEditFormView.swift */; };
 		8730CB9E2733717100D175DB /* WeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730CB9D2733717100D175DB /* WeeklyView.swift */; };
 		8730CBA02733725B00D175DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730CB9F2733725B00D175DB /* CalendarView.swift */; };
 		CE630707273369B50031B8A9 /* CategoryEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE630706273369B50031B8A9 /* CategoryEdit.swift */; };
@@ -64,6 +65,7 @@
 		303E9277272AF3AE00B71B63 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		303E9279272C5E9200B71B63 /* TaskCreationFromView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationFromView.swift; sourceTree = "<group>"; };
 		30954F13272E3E4000E100BE /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		30954F19273478FA00E100BE /* TaskEditFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditFormView.swift; sourceTree = "<group>"; };
 		8730CB9D2733717100D175DB /* WeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyView.swift; sourceTree = "<group>"; };
 		8730CB9F2733725B00D175DB /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = SOURCE_ROOT; };
 		CE630706273369B50031B8A9 /* CategoryEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEdit.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		CE630701273367DA0031B8A9 /* Rohan */ = {
 			isa = PBXGroup;
 			children = (
+				30954F19273478FA00E100BE /* TaskEditFormView.swift */,
 			);
 			path = Rohan;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */,
 				303E9278272AF3AE00B71B63 /* User.swift in Sources */,
 				DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */,
+				30954F1A273478FA00E100BE /* TaskEditFormView.swift in Sources */,
 				8730CB9E2733717100D175DB /* WeeklyView.swift in Sources */,
 				CE630707273369B50031B8A9 /* CategoryEdit.swift in Sources */,
 				303E927A272C5E9200B71B63 /* TaskCreationFromView.swift in Sources */,
