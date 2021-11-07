@@ -9,12 +9,14 @@ import SwiftUI
 
 struct CalendarView: View {
     
-    let data = (1...31).map { "\($0)" }
+    var dayCount: Int
     var dueDateComponents = DateComponents()
     var userCalendar = Calendar(identifier: .gregorian)
     var dueDate: Date
     @State var date = Date()
     @State var monthTitle = "October"
+    @State var dayTitle = "Sunday"
+    @State var numTitle = "1"
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private let monthNames = Calendar.current.monthSymbols
 
@@ -30,11 +32,11 @@ struct CalendarView: View {
     
     var body: some View {
         
-        VStack(){
+        VStack(spacing: 0){
             HStack {
                 Spacer()
                 Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
-                    Text("<-")
+                    Image(systemName: "arrow.left")
                 }
                 .foregroundColor(.red)
                 Spacer()
@@ -43,7 +45,7 @@ struct CalendarView: View {
                     .font(.custom("Viga-Regular", size: 40, relativeTo: .title))
                 Spacer()
                 Button(action: getNextMonth) {
-                    Text("->")
+                    Image(systemName: "arrow.right")
                 }
                 .foregroundColor(.red)
                 Spacer()
@@ -51,15 +53,20 @@ struct CalendarView: View {
             .padding(.bottom, 0)
             // end HStack
             
-            ScrollView {
+            ScrollView() {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(dayLabels) { item in
                         Text(item.label)
+                            .foregroundColor(Color.red)
                     }
-                    .font(.custom("Ubuntu-Bold", size: 16, relativeTo:.body))
+                    .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.body))
                     .padding(.bottom, 10)
-                    ForEach(data, id: \.self) { item in
-                        Cell(id: Int(item) ?? 0, item)
+                    let offset = 0...Calendar.current.firstWeekday - 1
+                    ForEach(offset, id: \.self) {_ in
+                        Spacer()
+                    }
+                    ForEach((1...getLastDay()), id: \.self) { day in
+                        Cell(id: day, day.description)
                     }
                 }
                 .padding(.horizontal, 20) // Changes the padding on either side of the grid
@@ -69,13 +76,14 @@ struct CalendarView: View {
             
             VStack(spacing: 20){
                 HStack {
-                    Text("Tue, 21")
-                        .bold()
-                        .font(.custom("Viga-Regular", size: 24, relativeTo: .title2))
-                        .padding(.leading)
-                        .padding(.top, 20)
+                    let numDay = Calendar.current.component(.day, from: date)
+                    let suffix: String = getDaySuffix(numDay)
+                    Text("\(dayTitle), \(numDay)\(suffix)")
                     Spacer()
                 }
+                .font(.custom("Viga-Regular", size: 28, relativeTo: .title2))
+                .padding(.leading)
+                .padding(.top, 10)
                 ScrollView {
                     LazyVStack(spacing: 20){
                         // DUMMY DATA
@@ -83,8 +91,8 @@ struct CalendarView: View {
                         let task = Task(name: "Dummy task", category: category, description: "Just some dummy task", difficulty: 2, dueDate: dueDate, dateCompleted: dueDate, isOverdue: false)
                         TaskCard(task: task)
                         // END DUMMY DATA
-                    }
-                }
+                    } // end LazyVStack
+                } // end Scrollview
             }
             .background(Color.bg_dark.ignoresSafeArea())
             .foregroundColor(Color.white)
@@ -102,10 +110,32 @@ struct CalendarView: View {
         dueDate = Calendar.current.date(from: dueDateComponents)!
         
         // Get Current Month
+        dayCount = 0
     }
     
     func getNextMonth() {
         
+    }
+    
+    func getLastDay() -> Int {
+        let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: date)
+        let lastDay = Calendar.current.date(byAdding: .day, value: -Calendar.current.component(.day, from: date), to: nextMonth ?? date)
+        return Calendar.current.component(.day, from: lastDay!)
+    }
+    
+    /**
+     Returns either "st", "nd", or "th" based on the day's number.
+     - Parameter day: The day in integer form
+     - Returns: Either "st", "nd", or "th" based on the day's number
+     */
+    func getDaySuffix(_ day: Int) -> String {
+        if(day == 1 || day == 21 || day == 31) {
+            return "st"
+        } else if(day == 2 || day == 22) {
+            return "nd"
+        } else {
+            return "th"
+        }
     }
     
 }
@@ -121,15 +151,21 @@ struct Cell: View, Identifiable {
     }
     
     var body: some View {
-        VStack(){
-            Text(day)
+        VStack(spacing: 3){
+            Text(day).bold()
+            Divider()
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .frame(height: 1)
+                .padding(.vertical, 0)
+                .background(Color.white)
+            //Circle()
+            Spacer()
         }
         .font(.custom("Ubuntu-Regular", size: 16, relativeTo: .body))
-        .frame(maxHeight: 60)
-        .frame(maxWidth: 60)
-        .padding(.bottom, 45) // Modifies the padding of each cell bottom
-        .padding(.horizontal, 5)
-        .border(Color.gray, width: 1)
+        .frame(minHeight: 60, maxHeight: 100)
+        //.frame(maxWidth: 60)
+        //.padding(.bottom, 45) // Modifies the padding of each cell bottom
+        //.border(Color.gray, width: 1)
     }
     
     func selectDay() {
