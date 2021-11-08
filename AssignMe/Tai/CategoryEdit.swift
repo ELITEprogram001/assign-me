@@ -7,197 +7,162 @@
 
 import SwiftUI
 
-struct CategoryEdit: View {
-    
-    
-    @State private var text = ""
-    
-    var body: some View {
-        
-
-        NavigationView{
-            VStack{
-
-                TextField("Name", text: $text)
-                    
-             
-                
-                Menu("Changed Color"){
-                    
-                    Button("Red"){
-                        print("red")
-                    }
-                    Button("Green"){
-                        print("red")
-                    }
-                    Button("Blue"){
-                        print("red")
-                    }
-                    
-            }
-            
-            }
-            
-
-            .navigationTitle("Category Edit")
-            .navigationBarTitleDisplayMode(.inline)
-
-//            .toolbar{
-//                ToolbarItemGroup(placement: .navigationBarLeading){
+//struct CategoryEdit: View {
+//    @State private var text = ""
 //
-//                })
+//    var body: some View {
+//        NavigationView{
+//            VStack{
+//                TextField("Name", text: $text)
+//                Menu("Changed Color"){
+//                    Button("Red"){
+//                        print("red")
+//                    }
+//                    Button("Green"){
+//                        print("red")
+//                    }
+//                    Button("Blue"){
+//                        print("red")
+//                    }
+//                }
 //            }
-
-
-
-        }//navigation view
-
-    }//body
-}
-
-    struct CategoryEdit_Previews: PreviewProvider {
-        static var previews: some View {
-            Group {
-                CategoryEdit()
-                    
-               
-            }
-        }
-    }
+//            .navigationTitle("Category Edit")
+//            .navigationBarTitleDisplayMode(.inline)
+//
+////            .toolbar{
+////                ToolbarItemGroup(placement: .navigationBarLeading){
+////
+////                })
+////            }
+//
+//
+//
+//        }//navigation view
+//
+//    }//body
+//}
+//
+//    struct CategoryEdit_Previews: PreviewProvider {
+//        static var previews: some View {
+//            Group {
+//                CategoryEdit()
+//            }
+//        }
+//    }
 
     
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    struct FilledButton: ButtonStyle {
-//        @Environment(\.isEnabled) private var isEnabled
-//        var isActive: Bool
-//        func makeBody(configuration: Configuration) -> some View {
-//            configuration
-//                .label
-//                .foregroundColor(configuration.isPressed ? .gray : .white)
-//                .padding()
-//                .background(isActive ? Color.blue : Color(red: 0.15, green: 0.15, blue: 0.15))
-//                .cornerRadius(8)
-//        }
-//    }
-//    extension View {
-//        func placeholder<Content: View>(
-//            when shouldShow: Bool,
-//            alignment: Alignment = .leading,
-//            @ViewBuilder placeholder: () -> Content) -> some View {
-//
-//            ZStack(alignment: alignment) {
-//                placeholder().opacity(shouldShow ? 1 : 0)
-//                self
-//            }
-//        }
-//    }
-//    struct Category: View {
-//        @State var categoryName: String = ""
-//        @State var currentColor: String = "Select Category Color..."
-//        @State var isActive: Bool = false
-//        func ActiveLogic() -> Bool{
-//            if(categoryName=="Enter Category Name...")
-//            {
-//                return false
-//            }
-//            else{
-//                return true
-//            }
-//        }
-//        var body: some View {
-//            ZStack(){
-//                Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
-//                VStack() {
-//                    HStack(){
-//                    Spacer()
-//                    Button("Back"){
-//
-//                        }
-//                        .buttonStyle(FilledButton(isActive: false))
-//                        .padding(.leading,15)
-//                    Spacer()
-//                        Text("Category Entry")
-//                        .font(.system(size: 25, weight: .bold, design: .serif))
-//                        .foregroundColor(.white)
-//                    Spacer()
-//                    Button("Add"){
-//
-//                        }
-//                        .buttonStyle(FilledButton(isActive: isActive))
-//                        .padding(.trailing,15)
-//                    Spacer()
-//                    }
-//                    TextField("", text: $categoryName
-//                              , onCommit: {
-//                                          isActive=true
-//                                      }
-//                        )
-//                        .placeholder(when: categoryName.isEmpty) {
-//                                Text("Enter Category Name...").foregroundColor(.white)
-//                        }
-//
-//                        .background(Color(red: 0.133, green: 0.133, blue: 0.133))
-//                        .padding(.horizontal, 30)
-//                        .padding(.trailing, 10)
-//                        .padding(.leading, 10)
-//                        .foregroundColor(Color.white)
-//                    Rectangle()
-//                        .fill(Color.black)
-//                        .frame(width:340, height:1)
-//                        .padding(.horizontal, 30)
-//                    Menu("\(currentColor)"){
-//                        Button(action:{currentColor="Yellow" }, label:{
-//                            Text("Yellow")
-//
-//                        })
-//                        Button(action:{currentColor="Blue" }, label:{
-//                            Text("Blue")
-//
-//                        })
-//                        Button(action:{currentColor="Red" }, label:{
-//                            Text("Red")
-//
-//                        })
-//                        Button(action:{currentColor="Green" }, label:{
-//                            Text("Green")
-//
-//                        })
-//                        Button(action:{currentColor="Orange" }, label:{
-//                            Text("Orange")
-//
-//                        })
-//                        Button(action:{currentColor="Indigo" }, label:{
-//                            Text("Indigo")
-//
-//                        })
-//                        Button(action:{currentColor="Violet" }, label:{
-//                            Text("Violet")
-//
-//                        })
-//
-//
-//                    }
-//                    .foregroundColor(.white)
-//                    .padding(.horizontal, 30)
-//                    Rectangle()
-//                        .fill(Color.black)
-//                        .frame(width:340, height:1)
-//                        .padding(.horizontal, 30)
-//
-//                    Spacer()
-//                }
-//
-//            }
-//           .navigationBarHidden(true)
-//
-//        }
-//    }
+struct CategoryEdit: View {
+    @State var taskName: String
+    @State var taskDesc: String = ""
+    @State var currentCategory: String = "Uncategorized"
+    @State var dueDate: Date = Date()
+    @State var difficulty=1
+    @State var isActive: Bool = false
+    var task:Task
+    init(task:Task){
+        self.task=task
+        _taskName = State(initialValue: task.name)
+        _taskDesc = State(initialValue: task.description)
+        _currentCategory = State(initialValue: task.category.name)
+        _dueDate = State(initialValue: task.dueDate)
+        _difficulty = State(initialValue: task.difficulty)
+    }
+    var body: some View {
+        ZStack(){
+            Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
+            VStack() {
+                HStack(){
+                Spacer()
+                Button("Back"){
+                        
+                    }
+                    .buttonStyle(FilledButton(isActive: false))
+                    .padding(.leading,15)
+                Spacer()
+                    Text("Task Details")
+                    .font(.system(size: 25, weight: .bold, design: .serif))
+                    .foregroundColor(.white)
+                Spacer()
+                Button("Save"){
+                        
+                    }
+                    .buttonStyle(FilledButton(isActive: isActive))
+                    .padding(.trailing,15)
+                Spacer()
+                }
+                Group{
+                Text("Name:")
+                        .foregroundColor(.blue)
+                TextField("Enter Task Name...", text: self.$taskName, onCommit: {
+                    isActive=true
+                })
+                    .frame(height: 55)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
+                    .padding([.horizontal], 4)
+                    .cornerRadius(16)
+                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                    .padding([.horizontal], 24)
+                    .foregroundColor(.white)
+                Text("Description:")
+                        .foregroundColor(.blue)
+                TextField("Enter Task Description...", text: self.$taskDesc)
+                    .frame(height: 55)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
+                    .padding([.horizontal], 4)
+                    .cornerRadius(16)
+                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                    .padding([.horizontal], 24)
+                    .foregroundColor(.white)
+                Text("Category:")
+                        .foregroundColor(.blue)
+                Menu("\(currentCategory)"){
+                        Button(action:{currentCategory="Mental Health" }, label:{
+                            Text("Mental Health")
+                                
+                        })
+                        Button(action:{currentCategory="Physical Health" }, label:{
+                            Text("Physical Health")
+                                
+                        })
+                        Button(action:{currentCategory="Financial" }, label:{
+                            Text("Financial")
+                                
+                        })
+                        Button(action:{currentCategory="Spiritual" }, label:{
+                            Text("Spiritual")
+                                
+                        })
+                    }
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 30)
+                Rectangle()
+                        .fill(Color.black)
+                        .frame(width:340, height:1)
+                        .padding(.horizontal, 30)
+                }
+                Text("Due Date:")
+                    .foregroundColor(.blue)
+                DatePicker("", selection: $dueDate)
+                    .labelsHidden()
+                    .accentColor(.white)
+                    .colorScheme(.dark)
+                Rectangle()
+                        .fill(Color.black)
+                        .frame(width:340, height:1)
+                        .padding(.horizontal, 30)
+                Text("Difficulty:")
+                    .foregroundColor(.blue)
+                DifficultyView(rating: $difficulty)
+                Spacer()
+            }
+    
+        }
+       .navigationBarHidden(true)
 
-    
-    
-    
-    
-    
-    
+    }
+}
 
 
