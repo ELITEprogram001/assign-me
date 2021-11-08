@@ -19,7 +19,7 @@ struct CalendarView: View {
     @State var numTitle = "1"
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private let monthNames = Calendar.current.monthSymbols
-    //@Binding var lastSelectedCell: Cell
+    @State var lastSelectedCell = Cell(id: 99, "99", date: Date())
 
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -45,7 +45,7 @@ struct CalendarView: View {
                     .bold()
                     .font(.custom("Viga-Regular", size: 40, relativeTo: .title))
                 Spacer()
-                Button(action: getNextMonth) {
+                Button(action: {}) {
                     Image(systemName: "arrow.right")
                 }
                 .foregroundColor(.red)
@@ -64,23 +64,43 @@ struct CalendarView: View {
                 .padding(.bottom, 10)
                 let offset = 0...Calendar.current.firstWeekday - 1
                 ForEach(offset, id: \.self) {_ in
-                    Spacer()
+                    VStack {
+                        Divider()
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .frame(height: 1)
+                            .padding(.vertical, 0)
+                            .background(Color.gray)
+                        Spacer()
+                    }
                 }
                 ForEach((1...getLastDay()), id: \.self) { day in
-                    Cell(id: day, day.description)
+                    var cell = Cell(id: day, day.description, date: date)
+                    cell.onTapGesture {
+                        if(lastSelectedCell != cell){
+                            lastSelectedCell.selected = false
+                            cell.selected = true
+            
+                            print("Last: \(lastSelectedCell.id)")
+                            print("Curr: \(cell.id)")
+                            lastSelectedCell = cell
+                        }
+                    }
                 }
             }
             .padding(.horizontal, 30.0)
             .padding(.bottom)
+            .onTapGesture {
+                print("tapped on grid")
+            }
             // end LazyVGrid
             Divider()
                 .frame(height: 4)
                 .background(Color.white)
             VStack(spacing: 10){
                 HStack {
-                    let numDay = Calendar.current.component(.day, from: date)
-                    let suffix: String = getDaySuffix(numDay)
-                    Text("\(dayTitle), \(numDay)\(suffix)")
+                    let comp = Calendar.current.dateComponents([.weekday, .day], from: date)
+                    let suffix: String = getDaySuffix(comp.day ?? 0)
+                    Text("\(Calendar.current.standaloneWeekdaySymbols[(comp.weekday ?? 1) - 1]), \(comp.day ?? 0)\(suffix)")
                     Spacer()
                 }
                 .font(.custom("Viga-Regular", size: 28, relativeTo: .title2))
@@ -146,39 +166,34 @@ struct Cell: View, Identifiable, Equatable {
     
     let day: String
     let id: Int
+    let date: Date
     @State var background = Color.white
+    @State var selected = false
     
-    init(id: Int, _ day: String) {
+    init(id: Int, _ day: String, date: Date) {
         self.day = day
         self.id = id
+        self.date = date
     }
     
     var body: some View {
         VStack(spacing: 3){
-            Text(day).bold()
-                .foregroundColor(background)
             Divider()
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .frame(height: 1)
                 .padding(.vertical, 0)
                 .background(Color.gray)
+            Text(day).bold()
+                .foregroundColor(background)
             Spacer()
         }
         .font(.custom("Ubuntu-Regular", size: 16, relativeTo: .body))
         .frame(minHeight: 60, maxHeight: 100)
         .contentShape(Rectangle())
-        .onTapGesture {
-            background = Color.red
-        }
     }
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {
         return lhs.day == rhs.day
-    }
-    
-    
-    func selectDay() {
-        
     }
 }
 
