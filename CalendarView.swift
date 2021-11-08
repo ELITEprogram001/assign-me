@@ -19,6 +19,7 @@ struct CalendarView: View {
     @State var numTitle = "1"
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private let monthNames = Calendar.current.monthSymbols
+    //@Binding var lastSelectedCell: Cell
 
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -50,31 +51,32 @@ struct CalendarView: View {
                 .foregroundColor(.red)
                 Spacer()
             }
-            .padding(.bottom, 0)
+            .padding(.bottom, 10)
             // end HStack
             
-            ScrollView() {
-                LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(dayLabels) { item in
-                        Text(item.label)
-                            .foregroundColor(Color.red)
-                    }
-                    .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.body))
-                    .padding(.bottom, 10)
-                    let offset = 0...Calendar.current.firstWeekday - 1
-                    ForEach(offset, id: \.self) {_ in
-                        Spacer()
-                    }
-                    ForEach((1...getLastDay()), id: \.self) { day in
-                        Cell(id: day, day.description)
-                    }
-                }
-                .padding(.horizontal, 20) // Changes the padding on either side of the grid
-            }
-            .frame(maxHeight: 420)
-            // end ScrollView
             
-            VStack(spacing: 20){
+            LazyVGrid(columns: columns, spacing: 0) {
+                ForEach(dayLabels) { item in
+                    Text(item.label)
+                        .foregroundColor(Color.red)
+                }
+                .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.body))
+                .padding(.bottom, 10)
+                let offset = 0...Calendar.current.firstWeekday - 1
+                ForEach(offset, id: \.self) {_ in
+                    Spacer()
+                }
+                ForEach((1...getLastDay()), id: \.self) { day in
+                    Cell(id: day, day.description)
+                }
+            }
+            .padding(.horizontal, 30.0)
+            .padding(.bottom)
+            // end LazyVGrid
+            Divider()
+                .frame(height: 4)
+                .background(Color.white)
+            VStack(spacing: 10){
                 HStack {
                     let numDay = Calendar.current.component(.day, from: date)
                     let suffix: String = getDaySuffix(numDay)
@@ -87,7 +89,7 @@ struct CalendarView: View {
                 ScrollView {
                     LazyVStack(spacing: 20){
                         // DUMMY DATA
-                        let category = Category(name: "Mental Health", color: Color.pink)
+                        let category = Category(name: "Mental Health", color: Color.blew)
                         let task = Task(name: "Dummy task", category: category, description: "Just some dummy task", difficulty: 2, dueDate: dueDate, dateCompleted: dueDate, isOverdue: false)
                         TaskCard(task: task)
                         // END DUMMY DATA
@@ -140,10 +142,11 @@ struct CalendarView: View {
     
 }
 
-struct Cell: View, Identifiable {
+struct Cell: View, Identifiable, Equatable {
     
     let day: String
     let id: Int
+    @State var background = Color.white
     
     init(id: Int, _ day: String) {
         self.day = day
@@ -153,20 +156,26 @@ struct Cell: View, Identifiable {
     var body: some View {
         VStack(spacing: 3){
             Text(day).bold()
+                .foregroundColor(background)
             Divider()
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .frame(height: 1)
                 .padding(.vertical, 0)
-                .background(Color.white)
-            //Circle()
+                .background(Color.gray)
             Spacer()
         }
         .font(.custom("Ubuntu-Regular", size: 16, relativeTo: .body))
         .frame(minHeight: 60, maxHeight: 100)
-        //.frame(maxWidth: 60)
-        //.padding(.bottom, 45) // Modifies the padding of each cell bottom
-        //.border(Color.gray, width: 1)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            background = Color.red
+        }
     }
+    
+    static func == (lhs: Cell, rhs: Cell) -> Bool {
+        return lhs.day == rhs.day
+    }
+    
     
     func selectDay() {
         
@@ -185,6 +194,7 @@ private struct DayLabel: Identifiable {
 extension Color {
     static let bg_dark = Color.init(red: 30/255, green: 30/255, blue: 30/255)
     static let bg_light = Color.init(red: 45/255, green: 45/255, blue: 45/255)
+    static let blew = Color.init(red: 131/255, green: 201/255, blue: 244/255)
 }
 
 struct CalendarView_Previews: PreviewProvider {
