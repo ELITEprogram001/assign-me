@@ -11,7 +11,7 @@ struct ContentView: View {
 //    // Test Category
 //    var Mental_Health = Category(name:"Mental Health",color:Color.red)
 //    var testing=true
-    var user:User = User()
+    var user:User = User(name: "Rommie")
 //    init()
 //    {
 //        user=User()
@@ -33,7 +33,7 @@ struct ContentView: View {
 //##################################
     
     var body: some View {
-
+        
         TabView{
             //CategoryCreationFormView()
             WeeklyView()
@@ -46,7 +46,7 @@ struct ContentView: View {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            TaskCreationFormView(user:user)
+            TaskCreationFormView()
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.circle.fill")
@@ -62,7 +62,7 @@ struct ContentView: View {
                     Image(systemName: "person.fill")
                 }
 
-        }   //end tabview
+        }.environmentObject(user)   //end tabview
     }//end body
     
     
