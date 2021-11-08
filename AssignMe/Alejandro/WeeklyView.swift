@@ -73,16 +73,9 @@ struct WeeklyView: View {
         ZStack {
             Color(red:0.150, green:0.150, blue:0.150 )
             .ignoresSafeArea()
-            HStack {
-                /*ScrollView {
-                        VStack {
-                            ForEach(0..<100) {
-                                Text("Row \($0)")
-                            }
-                        }
-                    }*/
+           // HStack {
                 //displays the date between task cards
-            VStack {
+                VStack(alignment:.leading) {
                         AnyView(myViews[0])
                         AnyView(myViews[1])
 
@@ -93,12 +86,12 @@ struct WeeklyView: View {
                             HStack{
                                 TaskCard(task: taskList[0])
                             }
-                            .padding(.leading,170)
+                            //.padding(.leading,170)
                         }
                     }
             //.padding(.init(top: 0, leading: 20, bottom: 400, trailing: 20))
-        }
-            .padding(.leading,-170)
+       // }
+            .padding(.leading,10)// vstack padding for date and task cards
         }
                 }
         }
