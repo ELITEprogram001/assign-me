@@ -9,19 +9,29 @@ import SwiftUI
 
 struct CategoryListView: View {
     
-    var catList = [Category]()
+    //var category: Category
+    var categoryList = [Category]()
     
     mutating func showCats() {
         let testCat1 = Category(name: "Fitness", color: .red)
         let testCat2 = Category(name: "Mental Health", color:.blue)
 
-        catList.append(testCat1)
-        catList.append(testCat2)
+        categoryList.append(testCat1)
+        categoryList.append(testCat2)
+    }
+    
+    init() {
+        showCats()
+        
+        let testCat1 = Category(name: "Fitness", color: .red)
+        let testCat2 = Category(name: "Mental Health", color:.blue)
+
+        categoryList.append(testCat1)
+        categoryList.append(testCat2)
     }
     
     
     var body: some View {
-        
         
            ZStack{
                Color(red: 0.150, green: 0.150, blue: 0.150)
@@ -60,9 +70,14 @@ struct CategoryListView: View {
             Spacer()
                        
                ScrollView {
-                           ForEach(0..<130) {
-                               Text("Row \($0)")
+                        ForEach(0..<8) {index in
+                            HStack{
+                                CategoryCard(category: categoryList[0])
+                            }
+                            .padding(.bottom, 15)
+                            
                            }
+
                } //ScrollView END
                .frame(width: 350, height: 550)
                .padding(.top, 5)

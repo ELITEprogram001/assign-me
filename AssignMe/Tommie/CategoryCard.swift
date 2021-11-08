@@ -10,7 +10,7 @@ import Foundation
 
 //comment
 
-var Testing = Category(name: "Fitness", color: .red) //comment out when no longer needed for designing category card
+//var Testing = Category(name: "Fitness", color: .red) //comment out when no longer needed for designing category card
 //var Cat_Task_Count = Int count of items in list of tasks assigned to specific category
 //var Cat_Task_Count = 13 //placeholder test for Cat_Task_Countt
 
@@ -29,17 +29,17 @@ label: {Image("edit")}
 
 struct CategoryCard: View {
     
-    //var category: Category  //KEEP THIS; uncomment when ready for use
+    var category: Category  //KEEP THIS; uncomment when ready for use
     
     var body: some View {
             ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
                 Rectangle() //Card Body
-                    .fill(Color (red: 0.35, green: 0.35, blue: 0.35)) //can be Color: .Clear
+                    .fill(Color.clear) //(red: 0.35, green: 0.35, blue: 0.35)) //can be Color: .Clear
                     .frame(width: 325, height: 100)
                     .shadow(radius: 6) //optional
         
                 
-                Text("\(Testing.name)") //variable category name
+                Text("\(category.name)") //variable category name
                     .font(.system(size: 21, weight: .light, design: .serif))
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
@@ -61,7 +61,7 @@ struct CategoryCard: View {
                 
                 HStack{ //attributes for the category colour tab to the left
                     Rectangle() //Left-hand category colour tab
-                        .foregroundColor(Testing.color)
+                        .foregroundColor(category.color)
                         .padding(.leading, 0.0)
                         .frame(width: 20.0, height: 100)
                 } //attributes for the category colour tab END
@@ -123,10 +123,10 @@ struct CategoryCard: View {
     } //var body: some View END
     
 } //struct CategoryCard: View END
-
+/*
 struct CategoryCard_Previews: PreviewProvider {
     static var previews: some View {
         CategoryCard()
     }
 }
-
+*/
