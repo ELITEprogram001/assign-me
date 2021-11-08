@@ -14,6 +14,7 @@ struct WeeklyView: View {
     var dateArray = [Date]()
     var stringArray = [String]()
     var taskList = [Task]()
+    var myViews = [AnyView]()
     var fitness = Category (name: "Health", color: .green)
     
     mutating func populateTasks(){
@@ -36,7 +37,8 @@ struct WeeklyView: View {
     init() {
 
         populateTasks()
-        
+        myViews.append(AnyView(Text("Test Text Display")))
+        myViews.append(AnyView(TaskCard(task: taskList[0])))
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let testDate = formatter.date(from: "2016/10/08 22:31")!
@@ -81,7 +83,9 @@ struct WeeklyView: View {
                     }*/
                 //displays the date between task cards
             VStack {
-              
+                        AnyView(myViews[0])
+                        AnyView(myViews[1])
+
                         ForEach(0..<stringArray.count) { index in
                             Text(stringArray[index])
                               .font(.system(size: 40  ))
