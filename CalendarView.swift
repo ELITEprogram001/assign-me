@@ -9,17 +9,15 @@ import SwiftUI
 
 struct CalendarView: View {
     
-    var dayCount: Int
-    var dueDateComponents = DateComponents()
     var userCalendar = Calendar(identifier: .gregorian)
-    var dueDate: Date
     @State var date = Date()
-    @State var monthTitle = "October"
-    @State var dayTitle = "Sunday"
-    @State var numTitle = "1"
+    @State var monthTitle = "September"
+    @State var dayTitle = "Tuesday"
+    @State var numTitle = "8"
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private let monthNames = Calendar.current.monthSymbols
     @State var lastSelectedCell = Cell(id: 99, "99", date: Date())
+    @ObservedObject var cellColorState = ColorState()
 
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -74,11 +72,13 @@ struct CalendarView: View {
                     }
                 }
                 ForEach((1...getLastDay()), id: \.self) { day in
-                    var cell = Cell(id: day, day.description, date: date)
+                    var cell = createCell(id: day, cellDate: date)
                     cell.onTapGesture {
-                        if(lastSelectedCell != cell){
+                        if(lastSelectedCell != cell) {
+                            lastSelectedCell.updateColor(color: Color.white)
                             lastSelectedCell.selected = false
                             cell.selected = true
+                            cell.updateColor(color: Color.red)
             
                             print("Last: \(lastSelectedCell.id)")
                             print("Curr: \(cell.id)")
@@ -90,6 +90,7 @@ struct CalendarView: View {
             .padding(.horizontal, 30.0)
             .padding(.bottom)
             .onTapGesture {
+                // delete later
                 print("tapped on grid")
             }
             // end LazyVGrid
@@ -107,12 +108,11 @@ struct CalendarView: View {
                 .padding(.leading)
                 .padding(.top, 10)
                 ScrollView {
-                    LazyVStack(spacing: 20){
-                        // DUMMY DATA
-                        let category = Category(name: "Mental Health", color: Color.blew)
-                        let task = Task(name: "Dummy task", category: category, description: "Just some dummy task", difficulty: 2, dueDate: dueDate, dateCompleted: dueDate, isOverdue: false)
-                        TaskCard(task: task)
-                        // END DUMMY DATA
+                    LazyVStack(spacing: 0){
+                        // TODO: Add filter to only show the current day
+                        debugTaskCard(name: "Take Out Trash", desc: "Take out kitchen and bathroom trash", dif: 1, dueM: 11, dueD: 9)
+                        debugTaskCard(name: "Run 2 Miles", desc: "Training for a 5k", dif: 3, dueM: 11, dueD: 9)
+                        debugTaskCard(name: "Create an App", desc: "Learn Swift and make a functional app :/", dif: 5, dueM: 12, dueD: 9)
                     } // end LazyVStack
                 } // end Scrollview
             }
@@ -125,14 +125,36 @@ struct CalendarView: View {
         // end VStack
     } // end body
     
-    // Init for creating dummy data
     init(){
-        dueDateComponents.month = 10
-        dueDateComponents.day = 21
-        dueDate = Calendar.current.date(from: dueDateComponents)!
+        // Initialized with the current date on calendar load
+    }
+    
+    func createCell(id: Int, cellDate: Date) -> Cell {
+        var cellComp = Calendar.current.dateComponents([.year, .day, .weekday, .month], from: cellDate)
+        cellComp.day = id
+        let cell = Cell(id: id, id.description, date: Calendar.current.date(from: cellComp) ?? date)
+        if(Calendar.current.component(.day, from: cell.date) == Calendar.current.component(.day, from: date)) {
+            print("Cell: \(cell)")
+            cell.updateColor(color: .red)
+            cell.selected = true
+            lastSelectedCell = cell
+        }
+        return cell
+    }
+    
+    func updateDayCard() {
         
-        // Get Current Month
-        dayCount = 0
+    }
+    
+    func debugTaskCard(name: String, desc: String, dif: Int, dueM: Int, dueD: Int) -> some View {
+        var dueDateComponents = DateComponents()
+        var dueDate: Date
+        dueDateComponents.month = dueM
+        dueDateComponents.day = dueD
+        dueDate = Calendar.current.date(from: dueDateComponents)!
+        let category = Category(name: "Uncategorized", color: Color.blew)
+        let task = Task(name: name, category: category, description: desc, difficulty: dif, dueDate: dueDate, dateCompleted: dueDate, isOverdue: false)
+        return TaskCard(task: task)
     }
     
     func getNextMonth() {
@@ -162,18 +184,19 @@ struct CalendarView: View {
     
 }
 
-struct Cell: View, Identifiable, Equatable {
+struct Cell: View, Identifiable, Equatable{
     
     let day: String
     let id: Int
     let date: Date
-    @State var background = Color.white
+    @ObservedObject var color: ColorState
     @State var selected = false
     
     init(id: Int, _ day: String, date: Date) {
         self.day = day
         self.id = id
         self.date = date
+        self.color = ColorState()
     }
     
     var body: some View {
@@ -184,7 +207,7 @@ struct Cell: View, Identifiable, Equatable {
                 .padding(.vertical, 0)
                 .background(Color.gray)
             Text(day).bold()
-                .foregroundColor(background)
+                .foregroundColor(color.color)
             Spacer()
         }
         .font(.custom("Ubuntu-Regular", size: 16, relativeTo: .body))
@@ -192,9 +215,18 @@ struct Cell: View, Identifiable, Equatable {
         .contentShape(Rectangle())
     }
     
+    func updateColor (color: Color) {
+        print("Changing cell \(id) to color: \(color)")
+        self.color.color = color
+    }
+    
     static func == (lhs: Cell, rhs: Cell) -> Bool {
         return lhs.day == rhs.day
     }
+}
+
+class ColorState: ObservableObject {
+    @Published var color = Color.white
 }
 
 private struct DayLabel: Identifiable {
