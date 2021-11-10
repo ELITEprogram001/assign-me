@@ -11,10 +11,10 @@ struct CalendarView: View {
     
     var userCalendar = Calendar(identifier: .gregorian)
     @State var date = Date()
-    @State var monthTitle = "September"
-    @State var dayTitle = "Tuesday"
-    @State var numTitle = 8
-    @State var suffix = "th"
+    @State var monthTitle = "Error"
+    @State var dayTitle = "Error"
+    @State var numTitle = 99
+    @State var suffix = "Error"
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private var shift = Offsets()
     @State var lastSelectedCell = Cell(id: 99, "99", date: Date())
@@ -85,6 +85,8 @@ struct CalendarView: View {
                             cell.selected = true
                             cell.updateColor(color: Color.red)
             
+                            updateDailyViewTitle(d: cell.date)
+                            
                             print("Last: \(lastSelectedCell.id)")
                             print("Curr: \(cell.id)")
                             lastSelectedCell = cell
@@ -94,17 +96,15 @@ struct CalendarView: View {
             }
             .padding(.horizontal, 30.0)
             .padding(.bottom)
-            .onTapGesture {
-                // delete later
-                print("tapped on grid")
-            }
             // end LazyVGrid
             Divider()
                 .frame(height: 4)
                 .background(Color.white)
             VStack(spacing: 10){
                 HStack {
-                    Text("\(getDayTitle(d: date)), \(numTitle)\(suffix)")
+                    DailyViewTitle(dayTitle: $dayTitle, numTitle: $numTitle, suffix: $suffix)
+                    // I don't understand why the above code works and the below code doesn't
+                    //Text("\(dayTitle), \(numTitle)\(suffix)")
                     Spacer()
                 }
                 .font(.custom("Viga-Regular", size: 28, relativeTo: .title2))
@@ -137,7 +137,7 @@ struct CalendarView: View {
         cellDateComp.day = id
         let cell = Cell(id: id, id.description, date: Calendar.current.date(from: cellDateComp) ?? date)
         // Need to compare year, month, and day
-        if(Calendar.current.component(.day, from: cell.date) == Calendar.current.component(.day, from: date)) {
+        if(Calendar.current.component(.day, from: cell.date) == Calendar.current.component(.day, from: date) && Calendar.current.component(.month, from: cell.date) == Calendar.current.component(.month, from: date) && Calendar.current.component(.year, from: cell.date) == Calendar.current.component(.year, from: date)) {
             cell.updateColor(color: .red)
             cell.selected = true
             dayTitle = Calendar.current.shortStandaloneWeekdaySymbols[(cellDateComp.weekday ?? 1) - 1]
@@ -163,17 +163,19 @@ struct CalendarView: View {
         return Calendar.current.component(.weekday, from: firstDay ?? Date())
     }
     
+    func updateDailyViewTitle(d: Date) {
+        dayTitle = Calendar.current.weekdaySymbols[(Calendar.current.component(.weekday, from: d)) - 1]
+        numTitle = Calendar.current.component(.day, from: d)
+        suffix = getDaySuffix(numTitle)
+    }
+    
     func getMonthTitle(d: Date) -> String {
         return Calendar.current.monthSymbols[(Calendar.current.component(.month, from: d)) - 1]
     }
     
-    func getDayTitle(d: Date) -> String {
-        return Calendar.current.weekdaySymbols[(Calendar.current.component(.weekday, from: d)) - 1]
-    }
-    
-    func updateDayCard() {
-        
-    }
+//    func getDayTitle(d: Date) -> String {
+//        return Calendar.current.weekdaySymbols[(Calendar.current.component(.weekday, from: d)) - 1]
+//    }
     
     func debugTaskCard(name: String, desc: String, dif: Int, dueM: Int, dueD: Int) -> some View {
         var dueDateComponents = DateComponents()
@@ -211,6 +213,16 @@ struct CalendarView: View {
         }
     }
     
+}
+
+struct DailyViewTitle: View {
+    @Binding var dayTitle: String
+    @Binding var numTitle: Int
+    @Binding var suffix: String
+    
+    var body: some View {
+        Text("\(dayTitle), \(numTitle)\(suffix)")
+    }
 }
 
 struct Cell: View, Identifiable, Equatable{
