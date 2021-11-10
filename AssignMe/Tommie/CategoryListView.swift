@@ -15,9 +15,11 @@ struct CategoryListView: View {
     mutating func showCats() {
         let testCat1 = Category(name: "Fitness", color: .red)
         let testCat2 = Category(name: "Mental Health", color:.blue)
+        let testCat3 = Category(name: "Physical Health", color: .yellow)
 
         categoryList.append(testCat1)
         categoryList.append(testCat2)
+        categoryList.append(testCat3)
     }
     
     init() {
@@ -25,9 +27,11 @@ struct CategoryListView: View {
         
         let testCat1 = Category(name: "Fitness", color: .red)
         let testCat2 = Category(name: "Mental Health", color:.blue)
+        let testCat3 = Category(name: "Physical Health", color: .yellow)
 
         categoryList.append(testCat1)
         categoryList.append(testCat2)
+        categoryList.append(testCat3)
     }
     
     
@@ -72,15 +76,15 @@ struct CategoryListView: View {
                ScrollView {
                         ForEach(0..<8) {index in
                             HStack{
-                                CategoryCard(category: categoryList[0])
+                                CategoryCard(category: categoryList[2])
                             }
                             .padding(.bottom, 15)
                             
                            }
 
                } //ScrollView END
-               .frame(width: 350, height: 550)
-               .padding(.top, 5)
+               .frame(width: 350, height: 600)
+               //.padding(.top, 5)
                                
            } //ZStack END
        }

@@ -44,9 +44,9 @@ struct CategoryCard: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.leading)
-                    .frame (width: 100)
+                    .frame (width: 150)
                     .lineLimit(1)
-                    .padding(.leading, -145.0)
+                    .padding(.leading, -125.0)
                     .padding (.bottom, 50)
                     
                 
@@ -68,47 +68,39 @@ struct CategoryCard: View {
                 .padding(.leading, -165.0) //padding for category colour tab
                 
                 
-                HStack{ //attributes for blue edit button background
+                HStack{ //attributes for blue edit button
                     Button(
                     action:{print("pls edit")},
                     label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        .frame(width: 50, height: 50)
-                        }
-                    )
-                } //attributes for blue edit button background' image END
+                        .frame(width: 50, height: 50);
+                        
+                            HStack{ //attributes for edit button image 'pencil'
+                                Image(systemName: "pencil")
+                                .resizable()
+                                .foregroundColor(.black)
+                                .frame(width: 35, height: 35)
+                            } //attributes for edit button image 'pencil' END
+                            .padding(.leading, -50) //padding for edit button image 'pencil'
+                        
+                        } //label end
+                    ) //button end
+                } //attributes for blue edit button END
                 .padding(.leading, 100) //padding for //attributes for blue edit button background'
-                
-                
-                HStack{ //attributes for edit button image 'pencil'
-                    Image(systemName: "pencil")
-                        .resizable()
-                        .frame(width: 35, height: 35)
-                } //attributes for edit button image 'pencil' END
-                .padding(.leading, 100) //padding for edit button image 'pencil'
                 
                 
                 HStack{ //attributes for delete button background
                     Button(
                     action:{print("pls delete")},
-                        label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .foregroundColor(.clear)
-                            .frame(width: 50, height: 50)
+                    label: {Image(systemName: "trash")
+                                .resizable()
+                                .foregroundColor(.red)
+                                .frame(width: 45, height: 45)
                             }
                         )
                 } //attributes for delete button background END
                 .padding(.leading, 245) //padding for delete button background
-                
-                
-                HStack{ //attributes for delete button image 'trash'
-                    Image(systemName: "trash")
-                        .resizable()
-                        .foregroundColor(.red)
-                        .frame(width: 45, height: 45)
-                } //attributes for delete button image 'trash' END
-                .padding(.leading, 245) //padding for delete button image 'trash'
-                
-                
+            
                 
                 VStack{ //black bottom line
                     Rectangle()
