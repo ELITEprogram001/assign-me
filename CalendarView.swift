@@ -79,7 +79,12 @@ struct CalendarView: View {
                 ForEach((1...getLastDay()), id: \.self) { day in
                     let cell = createCell(id: day, cellDate: date)
                     cell.onTapGesture {
-                        if(lastSelectedCell != cell) {
+                        print("[DATE: cell.ontap] \(date)")
+                        print("[COMPARE LAST: cell.ontap] \(lastSelectedCell.date)")
+                        print("[COMPARE CURR: cell.ontap] \(cell.date)")
+                        if(lastSelectedCell == cell) {
+                            print("[COMPARE] cells are equal")
+                        } else {
                             lastSelectedCell.updateColor(color: Color.white)
                             lastSelectedCell.selected = false
                             cell.selected = true
@@ -87,8 +92,6 @@ struct CalendarView: View {
             
                             updateDailyViewTitle(d: cell.date)
                             
-                            print("Last: \(lastSelectedCell.id)")
-                            print("Curr: \(cell.id)")
                             lastSelectedCell = cell
                         }
                     }
@@ -137,11 +140,14 @@ struct CalendarView: View {
         cellDateComp.day = id
         let cell = Cell(id: id, id.description, date: Calendar.current.date(from: cellDateComp) ?? date)
         // Need to compare year, month, and day
-        if(Calendar.current.component(.day, from: cell.date) == Calendar.current.component(.day, from: date) && Calendar.current.component(.month, from: cell.date) == Calendar.current.component(.month, from: date) && Calendar.current.component(.year, from: cell.date) == Calendar.current.component(.year, from: date)) {
+        if(Calendar.current.component(.day, from: cell.date) == Calendar.current.component(.day, from: Date()) && Calendar.current.component(.month, from: cell.date) == Calendar.current.component(.month, from: Date()) && Calendar.current.component(.year, from: cell.date) == Calendar.current.component(.year, from: Date())) {
             cell.updateColor(color: .red)
             cell.selected = true
             dayTitle = Calendar.current.shortStandaloneWeekdaySymbols[(cellDateComp.weekday ?? 1) - 1]
             lastSelectedCell = cell
+        } else {
+            cell.selected = false
+            cell.updateColor(color: Color.white)
         }
         return cell
     }
@@ -172,10 +178,6 @@ struct CalendarView: View {
     func getMonthTitle(d: Date) -> String {
         return Calendar.current.monthSymbols[(Calendar.current.component(.month, from: d)) - 1]
     }
-    
-//    func getDayTitle(d: Date) -> String {
-//        return Calendar.current.weekdaySymbols[(Calendar.current.component(.weekday, from: d)) - 1]
-//    }
     
     func debugTaskCard(name: String, desc: String, dif: Int, dueM: Int, dueD: Int) -> some View {
         var dueDateComponents = DateComponents()
@@ -208,6 +210,8 @@ struct CalendarView: View {
             return "st"
         } else if(day == 2 || day == 22) {
             return "nd"
+        } else if (day == 3 || day == 23) {
+            return "rd"
         } else {
             return "th"
         }
@@ -262,7 +266,9 @@ struct Cell: View, Identifiable, Equatable{
     }
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {
-        return lhs.day == rhs.day
+        let lhsComp = Calendar.current.dateComponents([.day, .month, .year], from: lhs.date)
+        let rhsComp = Calendar.current.dateComponents([.day, .month, .year], from: rhs.date)
+        return (lhsComp.day == rhsComp.day) && (lhsComp.month == rhsComp.month) && (lhsComp.year == rhsComp.year)
     }
 }
 
