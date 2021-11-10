@@ -13,9 +13,10 @@ struct CalendarView: View {
     @State var date = Date()
     @State var monthTitle = "September"
     @State var dayTitle = "Tuesday"
-    @State var numTitle = "8"
+    @State var numTitle = 8
+    @State var suffix = "th"
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
-    private let monthNames = Calendar.current.monthSymbols
+    private var shift = Offsets()
     @State var lastSelectedCell = Cell(id: 99, "99", date: Date())
     @ObservedObject var cellColorState = ColorState()
 
@@ -34,16 +35,20 @@ struct CalendarView: View {
         VStack(spacing: 0){
             HStack {
                 Spacer()
-                Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
+                Button(action: {
+                    getNextMonth(value: -1)
+                }) {
                     Image(systemName: "arrow.left")
                 }
                 .foregroundColor(.red)
                 Spacer()
-                Text(monthNames[Calendar.current.component(.month, from: date) - 1])
+                Text(getMonthTitle(d: date))
                     .bold()
                     .font(.custom("Viga-Regular", size: 40, relativeTo: .title))
                 Spacer()
-                Button(action: {}) {
+                Button(action: {
+                    getNextMonth(value: 1)
+                }) {
                     Image(systemName: "arrow.right")
                 }
                 .foregroundColor(.red)
@@ -60,8 +65,8 @@ struct CalendarView: View {
                 }
                 .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.body))
                 .padding(.bottom, 10)
-                let offset = 0...Calendar.current.firstWeekday - 1
-                ForEach(offset, id: \.self) {_ in
+                // add spacers to the view to shift the first week
+                ForEach(getOffset()) { _ in
                     VStack {
                         Divider()
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -72,7 +77,7 @@ struct CalendarView: View {
                     }
                 }
                 ForEach((1...getLastDay()), id: \.self) { day in
-                    var cell = createCell(id: day, cellDate: date)
+                    let cell = createCell(id: day, cellDate: date)
                     cell.onTapGesture {
                         if(lastSelectedCell != cell) {
                             lastSelectedCell.updateColor(color: Color.white)
@@ -99,9 +104,7 @@ struct CalendarView: View {
                 .background(Color.white)
             VStack(spacing: 10){
                 HStack {
-                    let comp = Calendar.current.dateComponents([.weekday, .day], from: date)
-                    let suffix: String = getDaySuffix(comp.day ?? 0)
-                    Text("\(Calendar.current.standaloneWeekdaySymbols[(comp.weekday ?? 1) - 1]), \(comp.day ?? 0)\(suffix)")
+                    Text("\(getDayTitle(d: date)), \(numTitle)\(suffix)")
                     Spacer()
                 }
                 .font(.custom("Viga-Regular", size: 28, relativeTo: .title2))
@@ -125,21 +128,46 @@ struct CalendarView: View {
         // end VStack
     } // end body
     
-    init(){
-        // Initialized with the current date on calendar load
+    init() {
+        print("init called")
     }
     
     func createCell(id: Int, cellDate: Date) -> Cell {
-        var cellComp = Calendar.current.dateComponents([.year, .day, .weekday, .month], from: cellDate)
-        cellComp.day = id
-        let cell = Cell(id: id, id.description, date: Calendar.current.date(from: cellComp) ?? date)
+        var cellDateComp = Calendar.current.dateComponents([.year, .day, .weekday, .month], from: cellDate)
+        cellDateComp.day = id
+        let cell = Cell(id: id, id.description, date: Calendar.current.date(from: cellDateComp) ?? date)
+        // Need to compare year, month, and day
         if(Calendar.current.component(.day, from: cell.date) == Calendar.current.component(.day, from: date)) {
             print("Cell: \(cell)")
             cell.updateColor(color: .red)
             cell.selected = true
+            dayTitle = Calendar.current.shortStandaloneWeekdaySymbols[(cellDateComp.weekday ?? 1) - 1]
             lastSelectedCell = cell
         }
         return cell
+    }
+    
+    func getOffset() -> [EmptyCell] {
+        for i in 0...getFirstWeekdayOfMonth(d: date) {
+            shift.offsets.append(EmptyCell())
+        }
+        print(shift.offsets.count)
+        return shift.offsets
+    }
+    
+    func getFirstWeekdayOfMonth(d: Date) -> Int{
+        var comp = Calendar.current.dateComponents(Set<Calendar.Component>(), from: d)
+        comp.day = 1
+        let firstDay = Calendar.current.date(from: comp)
+        return Calendar.current.component(.weekday, from: firstDay ?? Date())
+    }
+    
+    func getMonthTitle(d: Date) -> String {
+        return Calendar.current.monthSymbols[(Calendar.current.component(.month, from: d)) - 1]
+    }
+    
+    func getDayTitle(d: Date) -> String {
+        return Calendar.current.weekdaySymbols[(Calendar.current.component(.weekday, from: d)) - 1]
     }
     
     func updateDayCard() {
@@ -157,8 +185,8 @@ struct CalendarView: View {
         return TaskCard(task: task)
     }
     
-    func getNextMonth() {
-        
+    func getNextMonth(value: Int) {
+        date = Calendar.current.date(byAdding: .month, value: value, to: date) ?? Date()
     }
     
     func getLastDay() -> Int {
@@ -238,10 +266,22 @@ private struct DayLabel: Identifiable {
     }
 }
 
+struct EmptyCell: Identifiable, Hashable {
+    var id = UUID()
+}
+
 extension Color {
     static let bg_dark = Color.init(red: 30/255, green: 30/255, blue: 30/255)
     static let bg_light = Color.init(red: 45/255, green: 45/255, blue: 45/255)
     static let blew = Color.init(red: 131/255, green: 201/255, blue: 244/255)
+}
+
+class Offsets {
+    var offsets: [EmptyCell]
+    
+    init() {
+        offsets = []
+    }
 }
 
 struct CalendarView_Previews: PreviewProvider {
