@@ -138,7 +138,6 @@ struct CalendarView: View {
         let cell = Cell(id: id, id.description, date: Calendar.current.date(from: cellDateComp) ?? date)
         // Need to compare year, month, and day
         if(Calendar.current.component(.day, from: cell.date) == Calendar.current.component(.day, from: date)) {
-            print("Cell: \(cell)")
             cell.updateColor(color: .red)
             cell.selected = true
             dayTitle = Calendar.current.shortStandaloneWeekdaySymbols[(cellDateComp.weekday ?? 1) - 1]
@@ -148,17 +147,19 @@ struct CalendarView: View {
     }
     
     func getOffset() -> [EmptyCell] {
-        for i in 0...getFirstWeekdayOfMonth(d: date) {
+        shift.offsets.removeAll()
+        let firstWeekday = getFirstWeekdayOfMonth(d: date)
+        for _ in 1...(firstWeekday - 1) {
             shift.offsets.append(EmptyCell())
         }
-        print(shift.offsets.count)
         return shift.offsets
     }
     
     func getFirstWeekdayOfMonth(d: Date) -> Int{
-        var comp = Calendar.current.dateComponents(Set<Calendar.Component>(), from: d)
+        var comp = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: d)
         comp.day = 1
         let firstDay = Calendar.current.date(from: comp)
+        print(firstDay!)
         return Calendar.current.component(.weekday, from: firstDay ?? Date())
     }
     
