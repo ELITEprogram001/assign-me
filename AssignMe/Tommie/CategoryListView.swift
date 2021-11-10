@@ -74,9 +74,10 @@ struct CategoryListView: View {
             Spacer()
                        
                ScrollView {
-                        ForEach(0..<8) {index in
+                        ForEach(0..<8) {
+                            index in
                             HStack{
-                                CategoryCard(category: categoryList[2])
+                                CategoryCard(category: categoryList[0])
                             }
                             .padding(.bottom, 15)
                             

@@ -44,7 +44,7 @@ struct CategoryCard: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.leading)
-                    .frame (width: 150)
+                    .frame(minWidth: 0, idealWidth: 150, maxWidth: 150, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .leading)
                     .lineLimit(1)
                     .padding(.leading, -125.0)
                     .padding (.bottom, 50)
@@ -55,7 +55,7 @@ struct CategoryCard: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.leading)
-                    .padding(.leading, -133.0)
+                    .padding(.leading, -139.0)
                     .padding(.bottom, -30)
                 
                 
