@@ -34,7 +34,8 @@ struct TaskCreationFormView: View {
                     .foregroundColor(.white)
                 Spacer()
                 Button("Add"){
-                    var toAdd = Task( name:taskName, description:taskDesc, dueDate:dueDate, difficulty:difficulty, dateCompleted:dueDate, isOverdue:false, category: )
+                    let toAdd = Task( name:taskName,category: user.categoryList[0], description:taskDesc, difficulty:difficulty, dueDate:dueDate,  dateCompleted:dueDate, isOverdue:false)
+                    user.taskList.append(toAdd)
                     }
                     .buttonStyle(FilledButton(isActive: isActive))
                     .padding(.trailing,15)
