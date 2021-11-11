@@ -18,8 +18,8 @@ struct TaskCard: View {
         }
         
         var body: some View {
-            
-                        ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
+            //add some change
+                        ZStack{ //Stacks all text, buttons, and other details; starting from bottom to topPP
                             Rectangle() //Card Body
                                 .fill(Color (red: 0.35, green: 0.35, blue: 0.35))
                                 .frame(width: 325, height: 87)
@@ -35,7 +35,7 @@ struct TaskCard: View {
                                 .padding(.leading, -93.0)
                                 .padding (.bottom, 60)
                             
-                            Text("\(formatter.string(from:task.dueDate)) - ") //Task's due date
+                            Text("\(formatter.string(from:task.dueDate))-") //Task's due date
                                 .font(.system(size: 13, weight: .light, design: .serif))
                                 .fontWeight(.bold)
                                 .foregroundColor(task.category.color) //Color of due date text that corresponds to assigned category's color
