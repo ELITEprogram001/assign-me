@@ -8,6 +8,7 @@
 import SwiftUI
 
 import SwiftUI
+
 struct TaskCreationFormView: View {
     @State var taskName: String = ""
     @State var taskDesc: String = ""
@@ -15,7 +16,7 @@ struct TaskCreationFormView: View {
     @State var dueDate: Date = Date()
     @State var difficulty=1
     @State var isActive: Bool = false
-    var user:User
+    @EnvironmentObject var user: User
     var body: some View {
         ZStack(){
             Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
@@ -33,7 +34,8 @@ struct TaskCreationFormView: View {
                     .foregroundColor(.white)
                 Spacer()
                 Button("Add"){
-                        
+                    let toAdd = Task( name:taskName,category: user.categoryList[0], description:taskDesc, difficulty:difficulty, dueDate:dueDate,  dateCompleted:dueDate, isOverdue:false)
+                    user.taskList.append(toAdd)
                     }
                     .buttonStyle(FilledButton(isActive: isActive))
                     .padding(.trailing,15)
