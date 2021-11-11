@@ -68,8 +68,7 @@ struct CategoryCreationFormView: View {
                 
                 Text("Name:")
                     .foregroundColor(.blue)
-                TextField("Enter Category Name...", text: $categoryName)
-                   
+                TextField("    Enter Category Name...", text: $categoryName)
                     .padding(.horizontal, 1)
                     .frame(height: 55)
                     .background(Color(red: 0.17, green: 0.17, blue: 0.17))
@@ -106,22 +105,20 @@ struct CategoryCreationFormView: View {
                     })
                     Button(action:{currentColor="Violet" }, label:{
                         Text("Violet")
+                            
 
                     })
-                    
-                    
-                }
-                .foregroundColor(.white)
-                
+                    .foregroundColor(.purple)
+                } //menu
+                .foregroundColor(.gray)
                 Spacer()
-            }
+            } //vstack
             
         }
         .navigationBarHidden(true)
         
     }
 }
-
 struct CategoryCreationFormView_Previews: PreviewProvider {
     static var previews: some View {
         CategoryCreationFormView().preferredColorScheme(.dark)
