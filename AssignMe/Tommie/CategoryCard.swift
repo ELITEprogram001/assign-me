@@ -10,7 +10,7 @@ import Foundation
 
 //comment
 
-var Testing = Category(name: "Fitness", color: .red) //comment out when no longer needed for designing category card
+//var Testing = Category(name: "Fitness", color: .red) //comment out when no longer needed for designing category card
 //var Cat_Task_Count = Int count of items in list of tasks assigned to specific category
 //var Cat_Task_Count = 13 //placeholder test for Cat_Task_Countt
 
@@ -29,24 +29,24 @@ label: {Image("edit")}
 
 struct CategoryCard: View {
     
-    //var category: Category  //KEEP THIS; uncomment when ready for use
+    var category: Category  //KEEP THIS; uncomment when ready for use
     
     var body: some View {
             ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
                 Rectangle() //Card Body
-                    .fill(Color (red: 0.35, green: 0.35, blue: 0.35)) //can be Color: .Clear
+                    .fill(Color.clear) //(red: 0.35, green: 0.35, blue: 0.35)) //can be Color: .Clear
                     .frame(width: 325, height: 100)
                     .shadow(radius: 6) //optional
         
                 
-                Text("\(Testing.name)") //variable category name
+                Text("\(category.name)") //variable category name
                     .font(.system(size: 21, weight: .light, design: .serif))
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.leading)
-                    .frame (width: 100)
+                    .frame(minWidth: 0, idealWidth: 150, maxWidth: 150, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .leading)
                     .lineLimit(1)
-                    .padding(.leading, -145.0)
+                    .padding(.leading, -125.0)
                     .padding (.bottom, 50)
                     
                 
@@ -55,60 +55,52 @@ struct CategoryCard: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.leading)
-                    .padding(.leading, -133.0)
+                    .padding(.leading, -139.0)
                     .padding(.bottom, -30)
                 
                 
                 HStack{ //attributes for the category colour tab to the left
                     Rectangle() //Left-hand category colour tab
-                        .foregroundColor(Testing.color)
+                        .foregroundColor(category.color)
                         .padding(.leading, 0.0)
                         .frame(width: 20.0, height: 100)
                 } //attributes for the category colour tab END
                 .padding(.leading, -165.0) //padding for category colour tab
                 
                 
-                HStack{ //attributes for blue edit button background
+                HStack{ //attributes for blue edit button
                     Button(
                     action:{print("pls edit")},
                     label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        .frame(width: 50, height: 50)
-                        }
-                    )
-                } //attributes for blue edit button background' image END
+                        .frame(width: 50, height: 50);
+                        
+                            HStack{ //attributes for edit button image 'pencil'
+                                Image(systemName: "pencil")
+                                .resizable()
+                                .foregroundColor(.black)
+                                .frame(width: 35, height: 35)
+                            } //attributes for edit button image 'pencil' END
+                            .padding(.leading, -50) //padding for edit button image 'pencil'
+                        
+                        } //label end
+                    ) //button end
+                } //attributes for blue edit button END
                 .padding(.leading, 100) //padding for //attributes for blue edit button background'
-                
-                
-                HStack{ //attributes for edit button image 'pencil'
-                    Image(systemName: "pencil")
-                        .resizable()
-                        .frame(width: 35, height: 35)
-                } //attributes for edit button image 'pencil' END
-                .padding(.leading, 100) //padding for edit button image 'pencil'
                 
                 
                 HStack{ //attributes for delete button background
                     Button(
                     action:{print("pls delete")},
-                        label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .foregroundColor(.clear)
-                            .frame(width: 50, height: 50)
+                    label: {Image(systemName: "trash")
+                                .resizable()
+                                .foregroundColor(.red)
+                                .frame(width: 45, height: 45)
                             }
                         )
                 } //attributes for delete button background END
                 .padding(.leading, 245) //padding for delete button background
-                
-                
-                HStack{ //attributes for delete button image 'trash'
-                    Image(systemName: "trash")
-                        .resizable()
-                        .foregroundColor(.red)
-                        .frame(width: 45, height: 45)
-                } //attributes for delete button image 'trash' END
-                .padding(.leading, 245) //padding for delete button image 'trash'
-                
-                
+            
                 
                 VStack{ //black bottom line
                     Rectangle()
@@ -123,10 +115,10 @@ struct CategoryCard: View {
     } //var body: some View END
     
 } //struct CategoryCard: View END
-
+/*
 struct CategoryCard_Previews: PreviewProvider {
     static var previews: some View {
         CategoryCard()
     }
 }
-
+*/
