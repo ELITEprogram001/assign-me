@@ -9,14 +9,13 @@ import SwiftUI
 struct ContentView: View {
 ///##############################
 //    // Test Category
-//    var Mental_Health = Category(name:"Mental Health",color:Color.red)
+    var Mental_Health = Category(name:"Mental Health",color:Color.red)
 //    var testing=true
-
-//    init()
-//    {
-//        user=User()
-//        user.addCategory(cat:Mental_Health)
-//    }
+    var user:User = User(name: "Rommie")
+    init()
+    {
+        user.addCategory(cat:Mental_Health)
+    }
 //    var body: some View {
 //
 //        if (testing)
@@ -36,7 +35,7 @@ struct ContentView: View {
     
     
     var body: some View {
-        
+        TabView{
             //CategoryCreationFormView()
             WeeklyView()
                 .tabItem {
@@ -48,7 +47,7 @@ struct ContentView: View {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            TaskCreationFormView(user: user)
+            TaskCreationFormView()
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.circle.fill")
@@ -65,11 +64,13 @@ struct ContentView: View {
                 }
 
 
-    }//end body
-    
-    
+    }.environmentObject(user)//end body
+
+}
     
 }
+
+    
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -99,6 +100,7 @@ struct CategoryView: View {
         }
     }
 }
+    
 struct Profile: View {
     var body: some View {
         Text("Profile")
