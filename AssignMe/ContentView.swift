@@ -11,7 +11,11 @@ struct ContentView: View {
 //    // Test Category
 //    var Mental_Health = Category(name:"Mental Health",color:Color.red)
 //    var testing=true
+<<<<<<< HEAD
     var user:User = User(name: "Rommie")
+=======
+    //var user:User = User()
+>>>>>>> Tommie
 //    init()
 //    {
 //        user=User()
@@ -32,9 +36,18 @@ struct ContentView: View {
 //    }//end body var
 //##################################
     
+    //var catList = [Category]()
+    
+    
     var body: some View {
         
+<<<<<<< HEAD
         TabView{
+=======
+        CategoryListView()
+
+     /*   TabView{
+>>>>>>> Tommie
             //CategoryCreationFormView()
             WeeklyView()
                 .tabItem {
@@ -62,7 +75,11 @@ struct ContentView: View {
                     Image(systemName: "person.fill")
                 }
 
+<<<<<<< HEAD
         }.environmentObject(user)   //end tabview
+=======
+        }   //end tabview   */
+>>>>>>> Tommie
     }//end body
     
     
