@@ -18,7 +18,7 @@ struct TaskCard: View {
         }
         
         var body: some View {
-            
+            //add some change
                         ZStack{ //Stacks all text, buttons, and other details; starting from bottom to topPP
                             Rectangle() //Card Body
                                 .fill(Color (red: 0.35, green: 0.35, blue: 0.35))
