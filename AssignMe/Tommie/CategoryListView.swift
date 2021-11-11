@@ -10,7 +10,7 @@ import SwiftUI
 struct CategoryListView: View {
     
     //var category: Category
-    var categoryList = [Category]() //from User class
+    var categoryList = [Category]() //from User classS
     
     var maxCategories = 7 //variable for func TorF
     func TorF () -> Bool { //Boolean condition to disable 'blue plus' button when maximum amount of categories exist
