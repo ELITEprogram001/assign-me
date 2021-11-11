@@ -18,6 +18,8 @@ struct CalendarView: View {
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private var shift = Offsets()
     @State var lastSelectedCell = Cell(id: 99, "99", date: Date())
+    @State var selectedCell = Cell(id: 66, "66", date: Date())
+    //Calendar.current.date(byAdding: .month, value: -1, to: Date())!
     @ObservedObject var cellColorState = ColorState()
 
     let columns = [
@@ -79,20 +81,21 @@ struct CalendarView: View {
                 ForEach((1...getLastDay()), id: \.self) { day in
                     let cell = createCell(id: day, cellDate: date)
                     cell.onTapGesture {
-                        print("[DATE: cell.ontap] \(date)")
-                        print("[COMPARE LAST: cell.ontap] \(lastSelectedCell.date)")
-                        print("[COMPARE CURR: cell.ontap] \(cell.date)")
-                        if(lastSelectedCell == cell) {
-                            print("[COMPARE] cells are equal")
+                        if(selectedCell == cell) {
+                            print("[COMPARE] SELE == CELL")
                         } else {
+                            // Update lastSelectedCell and make it white
+                            lastSelectedCell = selectedCell
                             lastSelectedCell.updateColor(color: Color.white)
                             lastSelectedCell.selected = false
-                            cell.selected = true
-                            cell.updateColor(color: Color.red)
-            
-                            updateDailyViewTitle(d: cell.date)
                             
-                            lastSelectedCell = cell
+                            // Update selected cell and highlight it red
+                            selectedCell = cell
+                            selectedCell.selected = true
+                            print("[Selected \(selectedCell.id)]")
+                            selectedCell.updateColor(color: Color.red)
+                            
+                            updateDailyViewTitle(d: selectedCell.date)
                         }
                     }
                 }
@@ -135,20 +138,15 @@ struct CalendarView: View {
         print("init called")
     }
     
+    func selectCell(cell: Cell) {
+        
+    }
+    
     func createCell(id: Int, cellDate: Date) -> Cell {
         var cellDateComp = Calendar.current.dateComponents([.year, .day, .weekday, .month], from: cellDate)
         cellDateComp.day = id
         let cell = Cell(id: id, id.description, date: Calendar.current.date(from: cellDateComp) ?? date)
-        // Need to compare year, month, and day
-        if(Calendar.current.component(.day, from: cell.date) == Calendar.current.component(.day, from: Date()) && Calendar.current.component(.month, from: cell.date) == Calendar.current.component(.month, from: Date()) && Calendar.current.component(.year, from: cell.date) == Calendar.current.component(.year, from: Date())) {
-            cell.updateColor(color: .red)
-            cell.selected = true
-            dayTitle = Calendar.current.shortStandaloneWeekdaySymbols[(cellDateComp.weekday ?? 1) - 1]
-            lastSelectedCell = cell
-        } else {
-            cell.selected = false
-            cell.updateColor(color: Color.white)
-        }
+        // If the cell is equal to the current day but NOT the last cell selected
         return cell
     }
     
@@ -261,7 +259,7 @@ struct Cell: View, Identifiable, Equatable{
     }
     
     func updateColor (color: Color) {
-        print("Changing cell \(id) to color: \(color)")
+        print("\(id) -> \(color)")
         self.color.color = color
     }
     
