@@ -5,7 +5,8 @@
 //  Created by Rohan Jose on 10/15/21.
 //
 import Foundation
-class Task{
+class Task: Identifiable {
+    let id = UUID()
     var name:String
     var category:Category
     var description:String

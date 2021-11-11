@@ -46,7 +46,7 @@ struct ContentView: View {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            TaskCreationFormView()
+            TaskCreationFormView(user: user)
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.circle.fill")
@@ -72,6 +72,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
     }
 }
 
@@ -79,23 +80,7 @@ struct ContentView_Previews: PreviewProvider {
 //////
 
 ///#################### embedded view within a view JUST A PLACE HOLDER for other view File
-/*struct WeeklyView: View {
-    var body: some View {
-        Text("Weekly VIEW")
-    }
-}*/
 
-/*struct CalendarView: View {
-    var body: some View {
-        Text(" Calendar VIEW")
-    }
-}*/
-
-struct TaskEntry: View {
-    var body: some View {
-        Text("TASK ENTRY")
-    }
-}
 
 struct CategoryView: View {
     var body: some View {
