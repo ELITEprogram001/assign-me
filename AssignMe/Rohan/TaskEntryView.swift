@@ -71,6 +71,7 @@ struct TaskEntryView: View {
                     Button("Add"){
                         let toAdd = Task( name:taskName,category: user.categoryList[0], description:taskDesc, difficulty:difficulty, dueDate:dueDate,  dateCompleted:dueDate, isOverdue:false)
                         user.taskList.append(toAdd)
+                        
                     }.frame(width: 60, height: 40)
                     .background(Color.blue)
                     .foregroundColor(.white)

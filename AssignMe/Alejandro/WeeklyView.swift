@@ -12,6 +12,7 @@ struct WeeklyView: View {
     
 //tbd tbdx2
     @EnvironmentObject var user: User
+    @State var arrString = [String]()
     var dateArray = [Date]()
     var stringArray = [String]()
     var taskList = [Task]()
@@ -53,17 +54,17 @@ struct WeeklyView: View {
             Color(red:0.150, green:0.150, blue:0.150 )
             .ignoresSafeArea()
            // HStack {
-                //displays the date between task cards
+                //displays the tasks (test)
                 VStack(alignment:.leading) {
                     Text("\(user.taskList.count)")
-                    ForEach(0..<user.taskList.count) { index in
+                    ForEach(0..<user.taskList.count, id: \.self) { index in
                         Text("\(user.taskList[index].name)")
                           .font(.system(size: 40  ))
                             .foregroundColor(Color.white) /*.padding(.leading, 0.0)*/
                         //.padding(.leading,170)
                     }
                     // WEEKLY VIEW DISPLAY
-                        ForEach(0..<stringArray.count) { index in
+                        ForEach(0..<stringArray.count, id: \.self ) { index in
                             Text(stringArray[index])
                               .font(.system(size: 40  ))
                                 .foregroundColor(Color.white)
@@ -82,6 +83,8 @@ struct WeeklyView: View {
         }
         .background(Color(red: 0.150, green: 0.150, blue: 0.150))
 
+        }.onAppear(){
+            
         }
 }
 }
