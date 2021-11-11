@@ -44,42 +44,39 @@ struct CategoryCreationFormView: View {
         }
     }
     var body: some View {
+        
         ZStack(){
             Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
             VStack() {
                 HStack(){
-                Spacer()
-                Button("Back"){
+                    Spacer()
+                    Button("Back"){
                         
                     }
                     .buttonStyle(FilledButton(isActive: false))
                     .padding(.leading,15)
-                Spacer()
+                    Spacer()
                     Text("Category Entry")
-                    .font(.system(size: 25, weight: .bold, design: .serif))
-                    .foregroundColor(.white)
-                Spacer()
-                Button("Add"){
+                        .font(.system(size: 25, weight: .bold, design: .serif))
+                        .foregroundColor(.white)
+                    Spacer()
+                    Button("Add"){
                         
                     }
                     .buttonStyle(FilledButton(isActive: isActive))
                     .padding(.trailing,15)
-                Spacer()
-                }
-                TextField("", text: $categoryName
-                          , onCommit: {
-                                      isActive=true
-                                  }
-                    )
-                    .placeholder(when: categoryName.isEmpty) {
-                            Text("Enter Category Name...").foregroundColor(.white)
-                    }
-                    
-                    .background(Color(red: 0.133, green: 0.133, blue: 0.133))
-                    .padding(.horizontal, 30)
-                    .padding(.trailing, 10)
-                    .padding(.leading, 10)
-                    .foregroundColor(Color.white)
+                    Spacer()
+                } //hstack
+                
+                
+                TextField("Enter Category Name...", text: $categoryName, onCommit: {
+                    isActive=true
+                })
+                    .frame(height: 55)
+                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
+                    .padding(.horizontal, 1)
+                    .cornerRadius(15)
+                
                 Rectangle()
                     .fill(Color.black)
                     .frame(width:340, height:1)
@@ -87,34 +84,34 @@ struct CategoryCreationFormView: View {
                 Menu("\(currentColor)"){
                     Button(action:{currentColor="Yellow" }, label:{
                         Text("Yellow")
-                            
+                        
                     })
                     Button(action:{currentColor="Blue" }, label:{
                         Text("Blue")
-                            
+                        
                     })
                     Button(action:{currentColor="Red" }, label:{
                         Text("Red")
-                            
+                        
                     })
                     Button(action:{currentColor="Green" }, label:{
                         Text("Green")
-                            
+                        
                     })
                     Button(action:{currentColor="Orange" }, label:{
                         Text("Orange")
-                            
+                        
                     })
                     Button(action:{currentColor="Indigo" }, label:{
                         Text("Indigo")
-                            
+                        
                     })
                     Button(action:{currentColor="Violet" }, label:{
                         Text("Violet")
-                            
+                        
                     })
-
-
+                    
+                    
                 }
                 .foregroundColor(.white)
                 .padding(.horizontal, 30)
@@ -122,18 +119,20 @@ struct CategoryCreationFormView: View {
                     .fill(Color.black)
                     .frame(width:340, height:1)
                     .padding(.horizontal, 30)
-
+                
                 Spacer()
             }
-    
+            
         }
-       .navigationBarHidden(true)
-
+        .navigationBarHidden(true)
+        
     }
 }
 
 struct CategoryCreationFormView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryCreationFormView()
+        CategoryCreationFormView().preferredColorScheme(Color(red: 0.17, green: 0.17, blue: 0.17))
+       
     }
 }
+
