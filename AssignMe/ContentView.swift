@@ -46,7 +46,7 @@ struct ContentView: View {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            TaskCreationFormView()
+            TaskCreationFormView(user: user)
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.circle.fill")
