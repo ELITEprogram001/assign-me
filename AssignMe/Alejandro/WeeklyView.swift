@@ -58,9 +58,11 @@ struct WeeklyView: View {
                 VStack(alignment:.leading) {
                     Text("\(user.taskList.count)")
                     ForEach(0..<user.taskList.count, id: \.self) { index in
-                        Text("\(user.taskList[index].name)")
+                        TaskCard(task:user.taskList[index])
+ /*                       Text("\(user.taskList[index].name)")
                           .font(.system(size: 40  ))
-                            .foregroundColor(Color.white) /*.padding(.leading, 0.0)*/
+                            .foregroundColor(Color.white)/*.padding(.leading, 0.0)*/
+  */
                         //.padding(.leading,170)
                     }
                     // WEEKLY VIEW DISPLAY
