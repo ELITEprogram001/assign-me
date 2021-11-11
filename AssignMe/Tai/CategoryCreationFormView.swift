@@ -13,7 +13,6 @@ struct FilledButton: ButtonStyle {
         configuration
             .label
             .foregroundColor(configuration.isPressed ? .gray : .white)
-            .padding()
             .background(isActive ? Color.blue : Color(red: 0.15, green: 0.15, blue: 0.15))
             .cornerRadius(8)
     }
@@ -29,62 +28,61 @@ extension View {
             self
         }
     }
-}
+} //view extension
+
 struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
     @State var currentColor: String = "Select Category Color..."
-    @State var isActive: Bool = false
-    func ActiveLogic() -> Bool{
-        if(categoryName=="Enter Category Name...")
-        {
-            return false
-        }
-        else{
-            return true
-        }
-    }
+//    @State var isActive: Bool = false
+//    func ActiveLogic() -> Bool{
+//        if(categoryName=="Enter Category Name...")
+//        {
+//            return false
+//        }
+//        else{
+//            return true
+//        }
+//    }
+    
     var body: some View {
         
         ZStack(){
             Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
-            VStack() {
+            VStack(spacing: 15) {
                 HStack(){
-                    Spacer()
-                    Button("Back"){
-                        
-                    }
-                    .buttonStyle(FilledButton(isActive: false))
-                    .padding(.leading,15)
+                    
                     Spacer()
                     Text("Category Entry")
                         .font(.system(size: 25, weight: .bold, design: .serif))
+                        //.padding(.horizontal)
                         .foregroundColor(.white)
-                    Spacer()
-                    Button("Add"){
-                        
-                    }
-                    .buttonStyle(FilledButton(isActive: isActive))
-                    .padding(.trailing,15)
-                    Spacer()
+                    BlueButton(title:"Add")
+                        .padding(.horizontal,10)
+//                    Button("Add"){
+//
+//                    }
+//                    .buttonStyle(FilledButton(isActive: isActive))
+//                    .padding(.trailing,15)
+                    
                 } //hstack
                 
-                
-                TextField("Enter Category Name...", text: $categoryName, onCommit: {
-                    isActive=true
-                })
+                Text("Name:")
+                    .foregroundColor(.blue)
+                TextField("Enter Category Name...", text: $categoryName)
+                   
+                    .padding(.horizontal, 1)
                     .frame(height: 55)
                     .background(Color(red: 0.17, green: 0.17, blue: 0.17))
                     .padding(.horizontal, 1)
                     .cornerRadius(15)
                 
-                Rectangle()
-                    .fill(Color.black)
-                    .frame(width:340, height:1)
-                    .padding(.horizontal, 30)
+                Text("Color:")
+                    .foregroundColor(.blue)
+                   
                 Menu("\(currentColor)"){
+                    //Text("hello")
                     Button(action:{currentColor="Yellow" }, label:{
                         Text("Yellow")
-                        
                     })
                     Button(action:{currentColor="Blue" }, label:{
                         Text("Blue")
@@ -108,17 +106,12 @@ struct CategoryCreationFormView: View {
                     })
                     Button(action:{currentColor="Violet" }, label:{
                         Text("Violet")
-                        
+
                     })
                     
                     
                 }
                 .foregroundColor(.white)
-                .padding(.horizontal, 30)
-                Rectangle()
-                    .fill(Color.black)
-                    .frame(width:340, height:1)
-                    .padding(.horizontal, 30)
                 
                 Spacer()
             }
@@ -131,8 +124,19 @@ struct CategoryCreationFormView: View {
 
 struct CategoryCreationFormView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryCreationFormView().preferredColorScheme(Color(red: 0.17, green: 0.17, blue: 0.17))
+        CategoryCreationFormView().preferredColorScheme(.dark)
        
     }
 }
 
+private struct BlueButton: View {
+    var title: String
+    var body: some View {
+        Text(title)
+            .bold()
+            .frame(width:60, height: 40)
+            .background(Color(.systemBlue))
+            .foregroundColor(.white)
+            .cornerRadius(10)
+    }
+}
