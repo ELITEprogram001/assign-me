@@ -35,7 +35,7 @@ struct TaskCard: View {
                                 .padding(.leading, -93.0)
                                 .padding (.bottom, 60)
                             
-                            Text("\(formatter.string(from:task.dueDate)) - ") //Task's due date
+                            Text("\(formatter.string(from:task.dueDate))-") //Task's due date
                                 .font(.system(size: 13, weight: .light, design: .serif))
                                 .fontWeight(.bold)
                                 .foregroundColor(task.category.color) //Color of due date text that corresponds to assigned category's color
