@@ -20,7 +20,7 @@ struct CalendarView: View {
     @State var lastSelectedCell = Cell(id: 99, "99", date: Date())
     @State var selectedCell = Cell(id: 66, "66", date: Date())
     //Calendar.current.date(byAdding: .month, value: -1, to: Date())!
-    @ObservedObject var cellColorState = ColorState()
+    @ObservedObject var cellState = CellState()
 
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -86,14 +86,12 @@ struct CalendarView: View {
                         } else {
                             // Update lastSelectedCell and make it white
                             lastSelectedCell = selectedCell
-                            lastSelectedCell.updateColor(color: Color.white)
-                            lastSelectedCell.selected = false
+                            lastSelectedCell.updateState(selected: false)
                             
                             // Update selected cell and highlight it red
                             selectedCell = cell
-                            selectedCell.selected = true
                             print("[Selected \(selectedCell.id)]")
-                            selectedCell.updateColor(color: Color.red)
+                            selectedCell.updateState(selected: true)
                             
                             updateDailyViewTitle(d: selectedCell.date)
                         }
@@ -232,14 +230,13 @@ struct Cell: View, Identifiable, Equatable{
     let day: String
     let id: Int
     let date: Date
-    @ObservedObject var color: ColorState
-    @State var selected = false
+    @ObservedObject var cellState: CellState
     
     init(id: Int, _ day: String, date: Date) {
         self.day = day
         self.id = id
         self.date = date
-        self.color = ColorState()
+        self.cellState = CellState()
     }
     
     var body: some View {
@@ -250,7 +247,7 @@ struct Cell: View, Identifiable, Equatable{
                 .padding(.vertical, 0)
                 .background(Color.gray)
             Text(day).bold()
-                .foregroundColor(color.color)
+                .foregroundColor(cellState.color)
             Spacer()
         }
         .font(.custom("Ubuntu-Regular", size: 16, relativeTo: .body))
@@ -258,9 +255,13 @@ struct Cell: View, Identifiable, Equatable{
         .contentShape(Rectangle())
     }
     
-    func updateColor (color: Color) {
-        print("\(id) -> \(color)")
-        self.color.color = color
+    func updateState (selected: Bool) {
+        if(selected) {
+            print("\(id) selected")
+            self.cellState.color = Color.red
+        } else {
+            self.cellState.color = Color.white
+        }
     }
     
     static func == (lhs: Cell, rhs: Cell) -> Bool {
@@ -270,8 +271,9 @@ struct Cell: View, Identifiable, Equatable{
     }
 }
 
-class ColorState: ObservableObject {
+class CellState: ObservableObject {
     @Published var color = Color.white
+    @Published var selected = false
 }
 
 private struct DayLabel: Identifiable {
