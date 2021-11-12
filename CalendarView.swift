@@ -12,14 +12,14 @@ struct CalendarView: View {
     var userCalendar = Calendar(identifier: .gregorian)
     @State var date = Date()
     @State var monthTitle = "Error"
-    @State var dayTitle = "Error"
-    @State var numTitle = 99
-    @State var suffix = "Error"
+    @State var dayTitle: String
+    @State var numTitle: Int
+    @State var suffix: String
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private var shift = Offsets()
     @State var lastSelectedCell = Cell(id: "9999-99-99", "99", date: Date())
-    @State var selectedCell = Cell(id: "6666-66-66", "66", date: Date())
-    //Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+    @State var selectedCell: Cell
+    //Cell(id: "6666-66-66", "66", date: Date())
     @ObservedObject var cellState = CellState()
     var calendar: [[[Cell]]]
 
@@ -91,6 +91,7 @@ struct CalendarView: View {
                             selectedCell = cell
                             selectedCell.updateState(selected: true)
                             print("[SELECT] cell: \(cell.id)\tselected: \(cell.cellState.selected)")
+                            print("[DEBUG] selectedCell: \(selectedCell)")
 
                             updateDailyViewTitle(d: selectedCell.date)
                         }
@@ -133,6 +134,10 @@ struct CalendarView: View {
     init() {
         print("init called")
         calendar = [[[Cell]]]()
+        _selectedCell = State(initialValue: Cell(id: "6666-66-66", "66", date: Date()))
+        _dayTitle = State(initialValue: "Error")
+        _numTitle = State(initialValue: 99)
+        _suffix = State(initialValue: "th")
         
         // Goal is to create cells for each month of the previous, current, and next year on initialization and add more if the user navigates further
         for yearOffset in -1...1 {
@@ -149,23 +154,42 @@ struct CalendarView: View {
                     let year = comp.year!
                     let month = comp.month!
                     let id = year.description + "-" + month.description + "-" + day.description
-                    currentMonth.append(Cell(id: id, day.description, date: completeDate ?? Date()))
+                    let cell = Cell(id: id, day.description, date: completeDate ?? Date())
+                    let DateComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+                    let yearNow = DateComponents.year!
+                    let monthNow = DateComponents.month!
+                    let dayNow = DateComponents.day!
+                    if((year == yearNow) && (month == monthNow) && (day == dayNow)) {
+                        print("[INFO] initial selected cell \(year)-\(month)-\(day)")
+                        cell.updateState(selected: true)
+                        lastSelectedCell = cell
+                        _selectedCell = State(initialValue: cell)
+                        print("[DEBUG] selectedCell: \(selectedCell)")
+                        print("[DEBUG] cell: \(cell)")
+                    }
+                    currentMonth.append(cell)
                 }
                 yearArr.append(currentMonth)
             }
             calendar.append(yearArr)
         }
+        
+        // Update the initial value of the Daily View title
+        _dayTitle = State(initialValue: Calendar.current.weekdaySymbols[Calendar.current.component(.weekday, from: selectedCell.date) - 1])
+        _numTitle = State(initialValue: Calendar.current.component(.day, from: selectedCell.date))
+        _suffix = State(initialValue: getDaySuffix(Calendar.current.component(.day, from: selectedCell.date)))
+        
     }
     
     func getMonthCells(d: Date) -> [Cell]? {
         let year = Calendar.current.component(.year, from: d)
         let month = Calendar.current.component(.month, from: d)
-        print("[INFO] looking for \(year)-\(month)")
+        //print("[INFO] looking for \(year)-\(month)")
         for yearArr in calendar {
-            print("[INFO] found year: \(Calendar.current.component(.year, from: yearArr[0][0].date))")
+            //print("[INFO] found year: \(Calendar.current.component(.year, from: yearArr[0][0].date))")
             if (Calendar.current.component(.year, from: yearArr[0][0].date) == year) {
                 for monthArr in yearArr {
-                    print("[INFO] found month: \(Calendar.current.component(.month, from: monthArr[0].date))")
+                    //print("[INFO] found month: \(Calendar.current.component(.month, from: monthArr[0].date))")
                     if (Calendar.current.component(.month, from: monthArr[0].date) == month) {
                         print("================= Gathered Month Array =================")
                         for cell in monthArr {
