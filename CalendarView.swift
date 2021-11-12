@@ -17,10 +17,11 @@ struct CalendarView: View {
     @State var suffix = "Error"
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private var shift = Offsets()
-    @State var lastSelectedCell = Cell(id: 99, "99", date: Date())
-    @State var selectedCell = Cell(id: 66, "66", date: Date())
+    @State var lastSelectedCell = Cell(id: "9999-99-99", "99", date: Date())
+    @State var selectedCell = Cell(id: "6666-66-66", "66", date: Date())
     //Calendar.current.date(byAdding: .month, value: -1, to: Date())!
     @ObservedObject var cellState = CellState()
+    var calendar: [[[Cell]]]
 
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -78,24 +79,21 @@ struct CalendarView: View {
                         Spacer()
                     }
                 }
-                ForEach((1...getLastDay()), id: \.self) { day in
-                    let cell = createCell(id: day, cellDate: date)
-                    cell.onTapGesture {
-                        if(selectedCell == cell) {
-                            print("[COMPARE] SELE == CELL")
-                        } else {
+                // Call a method to calculate what the current month is and return all the cells
+                ForEach(getMonthCells(d: date) ?? calendar[0][0]) { cell in
+                    cell
+                        .onTapGesture {
                             // Update lastSelectedCell and make it white
                             lastSelectedCell = selectedCell
                             lastSelectedCell.updateState(selected: false)
-                            
+
                             // Update selected cell and highlight it red
                             selectedCell = cell
-                            print("[Selected \(selectedCell.id)]")
                             selectedCell.updateState(selected: true)
-                            
+                            print("[SELECT] cell: \(cell.id)\tselected: \(cell.cellState.selected)")
+
                             updateDailyViewTitle(d: selectedCell.date)
                         }
-                    }
                 }
             }
             .padding(.horizontal, 30.0)
@@ -134,18 +132,53 @@ struct CalendarView: View {
     
     init() {
         print("init called")
-    }
-    
-    func selectCell(cell: Cell) {
+        calendar = [[[Cell]]]()
         
+        // Goal is to create cells for each month of the previous, current, and next year on initialization and add more if the user navigates further
+        for yearOffset in -1...1 {
+            let yearDate = Calendar.current.date(byAdding: .year, value: yearOffset, to: Date())
+            var yearArr = [[Cell]]()
+            for month in 1...12 {
+                var comp = Calendar.current.dateComponents([.year, .month, .day], from: yearDate ?? Date())
+                comp.month = month
+                let yearAndMonth = Calendar.current.date(from: comp)
+                var currentMonth = [Cell]()
+                for day in 1...getLastDay(month: yearAndMonth ?? Date()) {
+                    comp.day = day
+                    let completeDate = Calendar.current.date(from: comp)
+                    let year = comp.year!
+                    let month = comp.month!
+                    let id = year.description + "-" + month.description + "-" + day.description
+                    currentMonth.append(Cell(id: id, day.description, date: completeDate ?? Date()))
+                }
+                yearArr.append(currentMonth)
+            }
+            calendar.append(yearArr)
+        }
     }
     
-    func createCell(id: Int, cellDate: Date) -> Cell {
-        var cellDateComp = Calendar.current.dateComponents([.year, .day, .weekday, .month], from: cellDate)
-        cellDateComp.day = id
-        let cell = Cell(id: id, id.description, date: Calendar.current.date(from: cellDateComp) ?? date)
-        // If the cell is equal to the current day but NOT the last cell selected
-        return cell
+    func getMonthCells(d: Date) -> [Cell]? {
+        let year = Calendar.current.component(.year, from: d)
+        let month = Calendar.current.component(.month, from: d)
+        print("[INFO] looking for \(year)-\(month)")
+        for yearArr in calendar {
+            print("[INFO] found year: \(Calendar.current.component(.year, from: yearArr[0][0].date))")
+            if (Calendar.current.component(.year, from: yearArr[0][0].date) == year) {
+                for monthArr in yearArr {
+                    print("[INFO] found month: \(Calendar.current.component(.month, from: monthArr[0].date))")
+                    if (Calendar.current.component(.month, from: monthArr[0].date) == month) {
+                        print("================= Gathered Month Array =================")
+                        for cell in monthArr {
+                            print("cell: \(cell.id)\tselected: \(cell.cellState.selected)")
+                        }
+                        print("=================== End Month Array ====================")
+                        return monthArr
+                    }
+                }
+            }
+        }
+        print("[ERROR] couldn't find the month \(Calendar.current.monthSymbols[Calendar.current.component(.month, from: d)])")
+        return nil
     }
     
     func getOffset() -> [EmptyCell] {
@@ -161,7 +194,6 @@ struct CalendarView: View {
         var comp = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: d)
         comp.day = 1
         let firstDay = Calendar.current.date(from: comp)
-        print(firstDay!)
         return Calendar.current.component(.weekday, from: firstDay ?? Date())
     }
     
@@ -190,7 +222,8 @@ struct CalendarView: View {
         date = Calendar.current.date(byAdding: .month, value: value, to: date) ?? Date()
     }
     
-    func getLastDay() -> Int {
+    // Get the last day given a date with the selected month
+    func getLastDay(month: Date) -> Int {
         let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: date)
         let lastDay = Calendar.current.date(byAdding: .day, value: -Calendar.current.component(.day, from: date), to: nextMonth ?? date)
         return Calendar.current.component(.day, from: lastDay!)
@@ -228,11 +261,11 @@ struct DailyViewTitle: View {
 struct Cell: View, Identifiable, Equatable{
     
     let day: String
-    let id: Int
+    let id: String
     let date: Date
     @ObservedObject var cellState: CellState
     
-    init(id: Int, _ day: String, date: Date) {
+    init(id: String, _ day: String, date: Date) {
         self.day = day
         self.id = id
         self.date = date
@@ -256,8 +289,8 @@ struct Cell: View, Identifiable, Equatable{
     }
     
     func updateState (selected: Bool) {
+        self.cellState.selected = selected
         if(selected) {
-            print("\(id) selected")
             self.cellState.color = Color.red
         } else {
             self.cellState.color = Color.white
