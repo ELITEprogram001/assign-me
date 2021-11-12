@@ -132,7 +132,7 @@ struct CalendarView: View {
     } // end body
     
     init() {
-        print("init called")
+        print("[INIT] start")
         calendar = [[[Cell]]]()
         _selectedCell = State(initialValue: Cell(id: "6666-66-66", "66", date: Date()))
         _dayTitle = State(initialValue: "Error")
@@ -179,6 +179,7 @@ struct CalendarView: View {
         _numTitle = State(initialValue: Calendar.current.component(.day, from: selectedCell.date))
         _suffix = State(initialValue: getDaySuffix(Calendar.current.component(.day, from: selectedCell.date)))
         
+        print("[INIT] end")
     }
     
     func getMonthCells(d: Date) -> [Cell]? {
@@ -191,11 +192,11 @@ struct CalendarView: View {
                 for monthArr in yearArr {
                     //print("[INFO] found month: \(Calendar.current.component(.month, from: monthArr[0].date))")
                     if (Calendar.current.component(.month, from: monthArr[0].date) == month) {
-                        print("================= Gathered Month Array =================")
-                        for cell in monthArr {
-                            print("cell: \(cell.id)\tselected: \(cell.cellState.selected)")
-                        }
-                        print("=================== End Month Array ====================")
+//                        print("================= Gathered Month Array =================")
+//                        for cell in monthArr {
+//                            print("cell: \(cell.id)\tselected: \(cell.cellState.selected)")
+//                        }
+//                        print("=================== End Month Array ====================")
                         return monthArr
                     }
                 }
@@ -208,8 +209,11 @@ struct CalendarView: View {
     func getOffset() -> [EmptyCell] {
         shift.offsets.removeAll()
         let firstWeekday = getFirstWeekdayOfMonth(d: date)
-        for _ in 1...(firstWeekday - 1) {
-            shift.offsets.append(EmptyCell())
+        print("[DEBUG] first weekday is: \(firstWeekday)")
+        if(firstWeekday > 1) {
+            for _ in 1...(firstWeekday - 1) {
+                shift.offsets.append(EmptyCell())
+            }
         }
         return shift.offsets
     }
@@ -248,9 +252,12 @@ struct CalendarView: View {
     
     // Get the last day given a date with the selected month
     func getLastDay(month: Date) -> Int {
-        let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: date)
-        let lastDay = Calendar.current.date(byAdding: .day, value: -Calendar.current.component(.day, from: date), to: nextMonth ?? date)
-        return Calendar.current.component(.day, from: lastDay!)
+        let nextMonthDate = Calendar.current.date(byAdding: .month, value: 1, to: month)
+        var monthComp = Calendar.current.dateComponents([.year, .month, .day], from: nextMonthDate ?? Date())
+        monthComp.day = 1
+        let nextMonth = Calendar.current.date(from: monthComp)
+        let lastDay = Calendar.current.date(byAdding: .day, value: -1, to: nextMonth ?? Date())
+        return Calendar.current.component(.day, from: lastDay ?? Date())
     }
     
     /**
