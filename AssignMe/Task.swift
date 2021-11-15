@@ -29,5 +29,29 @@ struct Task: Identifiable {
 
 
 
+struct TaskList {
+    static let taskArray = [
+        Task(
+            name: "Go to the gym",
+            category: Category(name: "fitness", color: .red),
+            description: "100 push up, 100 situp, 10k run",
+            difficulty: 5,
+            dueDate: Date(),
+            dateCompleted: Date(),
+            isOverdue: Bool()
+        ),
+        Task(
+            name: "Shopping",
+            category: Category(name: "Pleasure", color: .yellow),
+            description: "trying not to spend alot of money at the mall",
+            difficulty: 5,
+            dueDate: Date(),
+            dateCompleted: Date(),
+            isOverdue: Bool()
+        ),
+    ]
+}
+
+
 
 
