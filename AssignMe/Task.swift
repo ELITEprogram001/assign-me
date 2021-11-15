@@ -5,7 +5,7 @@
 //  Created by Rohan Jose on 10/15/21.
 //
 import Foundation
-class Task: Identifiable {
+struct Task: Identifiable {
     let id = UUID()
     var name:String
     var category:Category
@@ -26,3 +26,8 @@ class Task: Identifiable {
     }
     
 }
+
+
+
+
+
