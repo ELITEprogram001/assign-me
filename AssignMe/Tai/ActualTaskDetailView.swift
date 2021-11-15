@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ActualTaskDetailView: View {
+    
+    var task: Task
+    
+    
     var body: some View {
         ZStack {
             Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
@@ -15,9 +19,9 @@ struct ActualTaskDetailView: View {
                 
                 HStack(){
                     Spacer()
-                    Text("Category Edit")
+                    Text("Task Detail")
                         .font(.system(size: 25, weight: .bold, design: .serif))
-                        .padding(.horizontal,20)
+                        .padding(.horizontal,45)
                         .foregroundColor(.white)
                     Button(action:{   }, label:{ Image(systemName: "square.and.pencil")
 //                        let toAdd = Task(
@@ -36,29 +40,64 @@ struct ActualTaskDetailView: View {
                     .cornerRadius(10)
                 } //hstack
                 
-                Text("Task Details") //title
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center) //to alight to center
-                    .padding(.horizontal)
+        
                 
-                //VStack(alignment: .leading, spacing: 40){
-                Text("Task Name:")
-                    .foregroundColor(.blue)
-                
-                Text("Description:")
-                    .foregroundColor(.blue)
-                Text("Due Date:")
-                    .foregroundColor(.blue)
-                Text("Difficulty:")
-                    .foregroundColor(.blue)
-                
-                Text("Category:")
-                    .foregroundColor(.blue)
-                //}//vstack
-                
+                VStack(alignment: .leading, spacing: 25){
+                    Text("Task Name:")
+                        .foregroundColor(.blue)
+                    
+                    Text(task.name)
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center) //to alight to center
+                        .padding(.horizontal)
+                    Text("Description:")
+                        .foregroundColor(.blue)
+                    Text(task.description)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center) //to alight to center
+                        .padding(.horizontal)
+                    Text("Due Date:")
+                        .foregroundColor(.blue)
+                    Text("\(task.dueDate)")
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center) //to alight to center
+                        .padding(.horizontal)
+                    Text("Difficulty:")
+                        .foregroundColor(.blue)
+                    
+                    HStack( spacing: 1){
+                        let starCount = task.difficulty
+                        ForEach (1...starCount, id:\.self) { _ in
+                            Image(systemName: "star.fill")
+                                .resizable()
+                                .foregroundColor(Color.yellow)
+                                .frame(width: 45,height: 45)
+                        }.padding(.horizontal, 10 )
+                    } //hstack
+                    .padding()
+                    
+                    Text("Category:")
+                        .foregroundColor(.blue)
+//                    Text(task.category)
+//                        .font(.title)
+//                        .lineLimit(2)
+//                        .multilineTextAlignment(.center) //to alight to center
+//                        .padding(.horizontal)
+                    Text("Over Due ?:")
+                        .foregroundColor(.blue)
+//                    Text(task.isOverdue)
+//                        .font(.title)
+//                        .lineLimit(2)
+//                        .multilineTextAlignment(.center) //to alight to center
+//                        .padding(.horizontal)
+                    
+                } //vstack
+                .frame(width: 360 , alignment: .leading)
+                .font(.title2)
                 Spacer()
+                
                 
                 
                 
@@ -70,7 +109,8 @@ struct ActualTaskDetailView: View {
 
 struct ActualTaskDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ActualTaskDetailView().preferredColorScheme(.dark)
+        //ActualTaskDetailView(task: TaskList.allTask.first!).preferredColorScheme(.dark)
+        ActualTaskDetailView(task: TaskList.taskArray.first!).preferredColorScheme(.dark)
     }
 }
 
