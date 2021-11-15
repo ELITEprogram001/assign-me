@@ -19,9 +19,12 @@ struct WeeklyView: View {
             .ignoresSafeArea()
                 VStack(alignment:.leading) {
                     Text("\(user.taskList.count)")
+                    
+                    
                     ForEach(0..<user.taskList.count, id: \.self) { index in
                         TaskCard(task:user.taskList[index])
                     }
+                    
                 
                 }
       
@@ -38,7 +41,7 @@ struct WeeklyView: View {
 
 struct WeeklyView_Previews: PreviewProvider {
     static var previews: some View {
-        WeeklyView()
+        WeeklyView().environmentObject(User.init(name: "helo"))
     }
 }
 

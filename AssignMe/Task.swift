@@ -24,7 +24,5 @@ class Task: Identifiable {
         self.dateCompleted=dateCompleted
         self.isOverdue=isOverdue
     }
-    func listAttributes() -> String{
-        return "name: \(self.name) \ncategory: \(self.category.name)\ndescription: \(self.description)\ndifficulty: \(self.difficulty)"
-    }
+    
 }
