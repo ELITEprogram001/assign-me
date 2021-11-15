@@ -34,7 +34,7 @@ struct TaskList {
         Task(
             name: "Go to the gym",
             category: Category(name: "fitness", color: .red),
-            description: "100 push up, 100 situp, 10k run",
+            description: "100 push up, 100 situp, 10k run AHHHHhhhhHHHhhhhHHHHHhhhhhhHHHHHhh",
             difficulty: 5,
             dueDate: Date(),
             dateCompleted: Date(),

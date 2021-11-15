@@ -10,7 +10,7 @@ import SwiftUI
 struct ActualTaskDetailView: View {
     
     var task: Task
-    
+    @State private var isActive = false
     
     var body: some View {
         ZStack {
@@ -23,21 +23,18 @@ struct ActualTaskDetailView: View {
                         .font(.system(size: 25, weight: .bold, design: .serif))
                         .padding(.horizontal,45)
                         .foregroundColor(.white)
-                    Button(action:{   }, label:{ Image(systemName: "square.and.pencil")
-//                        let toAdd = Task(
-//                            name:taskName,
-//                            category: user.categoryList[0],
-//                            description:taskDesc,
-//                            difficulty:difficulty,
-//                            dueDate:dueDate,
-//                            dateCompleted:dueDate,
-//                            isOverdue:false)
-//                        user.taskList.append(toAdd)
+                    Button(action:{
+                        isActive = true
+                    },label:{
+                        
+                        Image(systemName: "square.and.pencil")
+                        .frame(width: 60, height: 40)
                     })  //button
-                    .frame(width: 60, height: 40)
+                    //.frame(width: 60, height: 40)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
+                    NavigationLink(destination: TaskDetailsView(task: task), isActive: $isActive) { } //navigationLink
                 } //hstack
                 
         
@@ -94,16 +91,14 @@ struct ActualTaskDetailView: View {
 //                        .padding(.horizontal)
                     
                 } //vstack
-                .frame(width: 360 , alignment: .leading)
+                .frame(width: 370 , alignment: .leading)
                 .font(.title2)
                 Spacer()
-                
-                
-                
-                
             } //vstack
-            .frame(width: 360)
+            .frame(width: 370)
+            //.ignoresSafeArea()
         }//Zstack
+       //.ignoresSafeArea(.all)
     }
 }
 
