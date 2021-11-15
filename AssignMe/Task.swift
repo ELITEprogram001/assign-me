@@ -28,7 +28,7 @@ struct Task: Identifiable {
 }
 
 
-
+//static task for testing mainly
 struct TaskList {
     static let taskArray = [
         Task(
