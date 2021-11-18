@@ -9,34 +9,37 @@ import SwiftUI
 struct ContentView: View {
 ///##############################
 //    // Test Category
-//    var Mental_Health = Category(name:"Mental Health",color:Color.red)
+    var Mental_Health = Category(name:"Mental Health",color:Color.red)
+//    var task: Task
 //    var testing=true
-
-//    init()
-//    {
-//        user=User()
-//        user.addCategory(cat:Mental_Health)
-//    }
+    var user:User = User(name: "Rommie")
+    init()
+    {
+        
+//        task = Task(name: "push ups", category: Mental_Health, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(),dateCompleted: Date(), isOverdue: true)
+        user.addCategory(cat:Mental_Health)
+    }
 //    var body: some View {
 //
 //        if (testing)
 //        {
 //
 //            NavigationView {
-//                NavigationLink(destination: TaskCreationFormView(user:user)) {
+//                NavigationLink(destination: TaskDetailsView(task: task)) {
 //                            Text("PUSH")
-//                                .foregroundColor(Color.black)
+//
 //                        }
 //            }
-//        }//end iff
-//    }//end body var
+//        } //end iff
+//    } //end body var
+//}
 //##################################
-    
+
+
     //var catList = [Category]()
-    
-    
+
     var body: some View {
-        
+        TabView{
             //CategoryCreationFormView()
             WeeklyView()
                 .tabItem {
@@ -48,7 +51,7 @@ struct ContentView: View {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            TaskCreationFormView(user: user)
+            TaskEntryView()
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.circle.fill")
@@ -65,11 +68,13 @@ struct ContentView: View {
                 }
 
 
-    }//end body
-    
-    
+    }.environmentObject(user)//end body
+
+}
     
 }
+
+    
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -77,12 +82,6 @@ struct ContentView_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
     }
 }
-
-
-//////
-
-///#################### embedded view within a view JUST A PLACE HOLDER for other view File
-
 
 struct CategoryView: View {
     var body: some View {
@@ -95,15 +94,16 @@ struct CategoryView: View {
                         
                     }
                 }
-                
         }
     }
 }
+    
 struct Profile: View {
     var body: some View {
         Text("Profile")
     }
 }
+
 
 
 

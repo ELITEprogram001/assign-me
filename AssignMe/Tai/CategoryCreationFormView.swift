@@ -6,29 +6,29 @@
 //
 
 import SwiftUI
-struct FilledButton: ButtonStyle {
-    @Environment(\.isEnabled) private var isEnabled
-    var isActive: Bool
-    func makeBody(configuration: Configuration) -> some View {
-        configuration
-            .label
-            .foregroundColor(configuration.isPressed ? .gray : .white)
-            .background(isActive ? Color.blue : Color(red: 0.15, green: 0.15, blue: 0.15))
-            .cornerRadius(8)
-    }
-}
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
-        }
-    }
-} //view extension
+//struct FilledButton: ButtonStyle {
+//    @Environment(\.isEnabled) private var isEnabled
+//    var isActive: Bool
+//    func makeBody(configuration: Configuration) -> some View {
+//        configuration
+//            .label
+//            .foregroundColor(configuration.isPressed ? .gray : .white)
+//            .background(isActive ? Color.blue : Color(red: 0.15, green: 0.15, blue: 0.15))
+//            .cornerRadius(8)
+//    }
+//}
+//extension View {
+//    func placeholder<Content: View>(
+//        when shouldShow: Bool,
+//        alignment: Alignment = .leading,
+//        @ViewBuilder placeholder: () -> Content) -> some View {
+//
+//        ZStack(alignment: alignment) {
+//            placeholder().opacity(shouldShow ? 1 : 0)
+//            self
+//        }
+//    }
+//} //view extension
 
 struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
@@ -50,7 +50,6 @@ struct CategoryCreationFormView: View {
             Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
             VStack(spacing: 15) {
                 HStack(){
-                    
                     Spacer()
                     Text("Category Entry")
                         .font(.system(size: 25, weight: .bold, design: .serif))
