@@ -12,6 +12,7 @@ struct ContentView: View {
     var Mental_Health = Category(name:"Mental Health",color:Color.red)
 //    var task: Task
 //    var testing=true
+    @State private var tabSelection = 1
     var user:User = User(name: "Rommie")
     init()
     {
@@ -39,33 +40,38 @@ struct ContentView: View {
     //var catList = [Category]()
 
     var body: some View {
-        TabView{
+        TabView(selection: $tabSelection){
             //CategoryCreationFormView()
-            WeeklyView()
+            WeeklyView(tabSelection: $tabSelection)
                 .tabItem {
                     Text("Weekly View")
                     Image(systemName: "homekit")
                 }
+                .tag(1)
             CalendarView()
                 .tabItem {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            TaskEntryView()
+                .tag(2)
+            TaskEntryView(tabSelection: $tabSelection)
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.circle.fill")
                 }
+                .tag(3)
             CategoryView()
                 .tabItem {
                     Text("Category List")
                     Image(systemName: "square.grid.2x2.fill")
                 }
+                .tag(4)
             Profile()
                 .tabItem {
                     Text("Profile")
                     Image(systemName: "person.fill")
                 }
+                .tag(5)
 
 
     }.environmentObject(user)//end body

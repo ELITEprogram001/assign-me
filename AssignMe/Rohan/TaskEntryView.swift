@@ -46,7 +46,6 @@ extension View {
     }
 } //view extension
 
-
 struct TaskEntryView: View {
     @State var taskName: String = ""
     @State var taskDesc: String = ""
@@ -55,6 +54,7 @@ struct TaskEntryView: View {
     @State var difficulty=1
     @State var isActive: Bool = false
     @EnvironmentObject var user: User
+    @Binding var tabSelection: Int
     var body: some View {
         ZStack(){
             Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
@@ -71,7 +71,7 @@ struct TaskEntryView: View {
                     Button("Add"){
                         let toAdd = Task( name:taskName,category: user.categoryList[0], description:taskDesc, difficulty:difficulty, dueDate:dueDate,  dateCompleted:dueDate, isOverdue:false)
                         user.taskList.append(toAdd)
-                        
+                        self.tabSelection=1
                     }.frame(width: 60, height: 40)
                     .background(Color.blue)
                     .foregroundColor(.white)
@@ -162,11 +162,3 @@ struct TaskEntryView: View {
 
     }
 }
-
-struct TaskCreationFormView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskEntryView().preferredColorScheme(.dark)
-       
-    }
-}
-
