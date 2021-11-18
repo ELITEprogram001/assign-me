@@ -29,7 +29,23 @@ import Foundation
 
 struct CategoryCard: View {
     
+    @State private var isActive = false
     var category: Category  //KEEP THIS; uncomment when ready for use
+    var categoryList = [Category]()
+    
+    func deleteOP() {
+        
+    }
+    
+   /* var task: Task
+    var taskList = [Task]()
+    func taskNum() -> Int{
+        var taskcount=0
+        if category.name == task.category.name{
+            taskcount = taskcount+1
+        }
+        return taskcount
+    } */
     
     var body: some View {
         ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
@@ -50,7 +66,7 @@ struct CategoryCard: View {
                 .padding (.bottom, 50)
             
             
-            Text("\nTasks: (2)") //"\nTasks: (2)" number is a placeholder for now
+            Text("\nTasks: 3") //"\nTasks: (2)" number is a placeholder for now
                 .font(.system(size: 21, weight: .light, design: .serif))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
@@ -68,27 +84,61 @@ struct CategoryCard: View {
             .padding(.leading, -165.0) //padding for category colour tab
             
             
-            HStack{ //attributes for blue edit button
-                Button(
-                    action:{print("pls edit")},
-                    label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        .frame(width: 50, height: 50);
-                        
-                        HStack{ //attributes for edit button image 'pencil'
-                            Image(systemName: "pencil")
-                                .resizable()
-                                .foregroundColor(.black)
-                                .frame(width: 35, height: 35)
-                        } //attributes for edit button image 'pencil' END
-                        .padding(.leading, -50) //padding for edit button image 'pencil'
-                        
-                    } //label end
-                ) //button end
-            } //attributes for blue edit button END
-            .padding(.leading, 100) //padding for //attributes for blue edit button background'
+            Button( //Blue edit button with black 'pencil' icon
+                action:{
+                    isActive = true
+                },
+                label: {
+                    Image(systemName: "pencil")
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                }
+            ) //Blue edit button END
+            .frame(width: 50, height: 50)
+            .background(Color.blue)
+            .foregroundColor(.black)
+            .cornerRadius(15.0)
+            .padding(.leading, 100)
             
+            Button( //Delete button with red 'trashcan' icon
+                action:{
+                    isActive = true
+                },
+                label: {
+                    Image(systemName: "trash")
+                        .resizable()
+                        .frame(width: 45, height: 45)
+                }
+            ) //Delete button END
+            .foregroundColor(.red)
+            .padding(.leading, 245)
             
+          /*  //NavigationLink(destination: CategoryEdit(), isActive: $isActive){
+                HStack{ //attributes for blue edit button
+                    NavigationLink(destination: CategoryEdit(), isActive: $isActive){
+                    Button(
+                        action:{},
+                        label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            .frame(width: 50, height: 50);
+                            
+                            //HStack{ //attributes for edit button image 'pencil'
+                                Image(systemName: "pencil")
+                                    .resizable()
+                                    .foregroundColor(.black)
+                                    .frame(width: 35, height: 35)
+                            //} //attributes for edit button image 'pencil' END
+                           // .padding(.leading, -50) //padding for edit button image 'pencil'
+                            
+                        } //label end
+                    ) //button end
+                    }
+                } //attributes for blue edit button END
+                .padding(.leading, 100) //padding for //attributes for blue edit button background'
+                
+            //} //NavigationLink END */
+            
+            /*
             HStack{ //attributes for delete button background
                 Button(
                     action:{print("pls delete")},
@@ -99,7 +149,7 @@ struct CategoryCard: View {
                     }
                 )
             } //attributes for delete button background END
-            .padding(.leading, 245) //padding for delete button background
+            .padding(.leading, 245) //padding for delete button background */
             
             
             VStack{ //black bottom line
