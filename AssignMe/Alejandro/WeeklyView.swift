@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WeeklyView: View {
     @EnvironmentObject var user: User
+    @Binding var tabSelection: Int
     var body: some View {
         ZStack {
             Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)

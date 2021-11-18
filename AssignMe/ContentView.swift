@@ -60,7 +60,7 @@ struct ContentView: View {
                     Image(systemName: "plus.circle.fill")
                 }
                 .tag(3)
-            CategoryView()
+            CategoryListView()
                 .tabItem {
                     Text("Category List")
                     Image(systemName: "square.grid.2x2.fill")
