@@ -39,7 +39,7 @@ struct WeeklyView: View {
 
 struct WeeklyView_Previews: PreviewProvider {
     static var previews: some View {
-        WeeklyView()
+        WeeklyView(tabSelection:1)
     }
 }
 
