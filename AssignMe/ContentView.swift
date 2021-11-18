@@ -42,7 +42,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $tabSelection){
             //CategoryCreationFormView()
-            WeeklyView(tabSelection: $tabSelection)
+            WeeklyView()
                 .tabItem {
                     Text("Weekly View")
                     Image(systemName: "homekit")

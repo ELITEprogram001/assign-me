@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WeeklyView: View {
     @EnvironmentObject var user: User
-    @Binding var tabSelection: Int
+    @State private var tabSelection = 1
     var body: some View {
         ZStack {
             Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
@@ -39,7 +39,7 @@ struct WeeklyView: View {
 
 struct WeeklyView_Previews: PreviewProvider {
     static var previews: some View {
-        WeeklyView(tabSelection:1)
+        WeeklyView()
     }
 }
 
