@@ -88,7 +88,7 @@ struct TaskCard: View {
             Button( //Button leading to Task Details (will need to path to Task Details for particular task)
                 action: {print("go to Task Details")},
                 label: {Rectangle()
-                    .frame(width: 325, height: 100)
+                    .frame(width: 325, height: 87)
                     .foregroundColor(.clear)
                 }
             ) // Button leading to Task Details END
