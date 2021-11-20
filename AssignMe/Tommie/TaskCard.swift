@@ -83,16 +83,6 @@ struct TaskCard: View {
                                 
                             } //VStack END
                             .frame(width: 305, height: 100, alignment: .trailing)
-                                
-                        
-                        Button( //Button leading to Task Details (will need to path to Task Details for particular task)
-                            action: {print("go to Task Details")},
-                            label: {Rectangle()
-                                .frame(width: 325, height: 100)
-                                .foregroundColor(.clear)
-                            }
-                        ) // Button leading to Task Details END
-                                
                             
                     } //ZStack END
         } // var body: some View END

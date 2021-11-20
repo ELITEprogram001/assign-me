@@ -12,6 +12,7 @@ import SwiftUI
 
 private struct FilledButton: ButtonStyle {
     //@Environment(\.isEnabled) private var isEnabled
+    
     var isActive: Bool
     func makeBody(configuration: Configuration) -> some View {
         configuration
@@ -54,6 +55,7 @@ struct TaskEntryView: View {
     @State var dueDate: Date = Date()
     @State var difficulty=1
     @State var isActive: Bool = false
+    @Binding var tabSelection: Int
     @EnvironmentObject var user: User
     
     var body: some View {
@@ -77,6 +79,7 @@ struct TaskEntryView: View {
                             dateCompleted:dueDate,
                             isOverdue:false)
                         user.taskList.append(toAdd)
+                        self.tabSelection=1
                     } //button
                     .frame(width: 60, height: 40)
                     .background(Color.blue)
@@ -158,11 +161,11 @@ struct TaskEntryView: View {
 
     }
 }
-
+/*
 struct TaskCreationFormView_Previews: PreviewProvider {
     static var previews: some View {
         TaskEntryView().preferredColorScheme(.dark)
        
     }
 }
-
+*/

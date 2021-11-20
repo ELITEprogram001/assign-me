@@ -20,16 +20,18 @@ private struct FilledButton: ButtonStyle {
 
 
 
-struct TaskDetailsView: View {
-    @State var taskName: String
+struct TaskEditView: View {
+    @State var taskName: String = ""
     @State var taskDesc: String = ""
     @State var currentCategory: String = "Uncategorized"
     @State var dueDate: Date = Date()
     @State var difficulty=1
     @State var isActive: Bool = false
-    var task:Task
-    init(task:Task){
-        self.task=task
+    @EnvironmentObject var user: User
+    var task: Task
+    @Environment(\.presentationMode) var presentation
+    init(task: Task){
+        self.task = task
         _taskName = State(initialValue: task.name)
         _taskDesc = State(initialValue: task.description)
         _currentCategory = State(initialValue: task.category.name)
@@ -43,7 +45,7 @@ struct TaskDetailsView: View {
                 HStack(){
                     Spacer()
                     Button("Back"){
-                        
+                        self.presentation.wrappedValue.dismiss()
                     }
                     //.buttonStyle(FilledButton(isActive: false))
                     .frame(width: 60, height: 40)
@@ -57,7 +59,16 @@ struct TaskDetailsView: View {
                         .foregroundColor(.white)
                     Spacer()
                     Button("Save"){
-                        
+                        user.currTask.name = taskName
+                        user.currTask.description = taskDesc
+                        // ToDO: change category user.currTask.category.name =
+                        user.currTask.dueDate = dueDate
+                        user.currTask.difficulty = difficulty
+                        user.taskList[user.currTaskIndex].name=taskName
+                        user.taskList[user.currTaskIndex].description=taskDesc
+                        user.taskList[user.currTaskIndex].dueDate=dueDate
+                        user.taskList[user.currTaskIndex].difficulty=difficulty
+                        self.presentation.wrappedValue.dismiss()
                     }.frame(width: 60, height: 40)
                     .background(Color.blue)
                     .foregroundColor(.white)
@@ -135,8 +146,8 @@ struct TaskDetailsView: View {
             }
     
         }
+        .navigationBarTitle("")
        .navigationBarHidden(true)
-
     }
 }
 
