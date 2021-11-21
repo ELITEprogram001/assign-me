@@ -16,7 +16,7 @@
 		1F553B3E2737061D00362BAF /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B362737061D00362BAF /* Ubuntu-Light.ttf */; };
 		1F553B3F2737061D00362BAF /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B372737061D00362BAF /* Ubuntu-LightItalic.ttf */; };
 		1F553B4127370B2100362BAF /* Viga-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B4027370B2100362BAF /* Viga-Regular.ttf */; };
-		1FB031B0274AF5BB00CBC739 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB031AF274AF5BB00CBC739 /* ProfileView.swift */; };
+		1FB031B2274AF73E00CBC739 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB031B1274AF73E00CBC739 /* ProfileView.swift */; };
 		1FBB93C52717338E00C6C2F2 /* AssignMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */; };
 		1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB93C62717338E00C6C2F2 /* ContentView.swift */; };
 		1FBB93C92717339300C6C2F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FBB93C82717339300C6C2F2 /* Assets.xcassets */; };
@@ -66,7 +66,7 @@
 		1F553B362737061D00362BAF /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		1F553B372737061D00362BAF /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
 		1F553B4027370B2100362BAF /* Viga-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Viga-Regular.ttf"; sourceTree = "<group>"; };
-		1FB031AF274AF5BB00CBC739 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = ../../../ProfileView.swift; sourceTree = "<group>"; };
+		1FB031B1274AF73E00CBC739 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = SOURCE_ROOT; };
 		1FBB93C12717338E00C6C2F2 /* AssignMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssignMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignMeApp.swift; sourceTree = "<group>"; };
 		1FBB93C62717338E00C6C2F2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 		CE630703273367FA0031B8A9 /* Dalton */ = {
 			isa = PBXGroup;
 			children = (
+				1FB031B1274AF73E00CBC739 /* ProfileView.swift */,
 				8730CB9F2733725B00D175DB /* CalendarView.swift */,
-				1FB031AF274AF5BB00CBC739 /* ProfileView.swift */,
 			);
 			path = Dalton;
 			sourceTree = "<group>";
@@ -389,7 +389,7 @@
 				DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */,
 				303E9278272AF3AE00B71B63 /* User.swift in Sources */,
 				DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */,
-				1FB031B0274AF5BB00CBC739 /* ProfileView.swift in Sources */,
+				1FB031B2274AF73E00CBC739 /* ProfileView.swift in Sources */,
 				30954F1A273478FA00E100BE /* TaskEditView.swift in Sources */,
 				8730CB9E2733717100D175DB /* WeeklyView.swift in Sources */,
 				CE630707273369B50031B8A9 /* CategoryEdit.swift in Sources */,
