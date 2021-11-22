@@ -43,7 +43,7 @@ struct CategoryListView: View {
     
     var maxCategories = 7 //variable for func TorF
     func TorF () -> Bool { //Boolean condition to disable 'blue plus' button when maximum amount of categories exist
-        if categoryList.count == maxCategories {
+        if user.categoryList.count == maxCategories {
             return true
         }
         else {
@@ -53,7 +53,7 @@ struct CategoryListView: View {
     
     
     //------------------------------- Testing Stuff START-------------------------
-     init() {
+  /*   init() {
      
      let testCat1 = Category(name: "Uncategorized", color: .gray)
      let testCat2 = Category(name: "Mental Health", color:.blue)
@@ -70,7 +70,7 @@ struct CategoryListView: View {
         categoryList.append(testCat5)
         categoryList.append(testCat6)
      //categoryList.append(testCat7)
-     }
+     } */
     //------------------------------- Testing Stuff END-------------------------
     
     var body: some View {
@@ -85,7 +85,7 @@ struct CategoryListView: View {
                 .padding(.bottom, 660) //positive values push text to top
             
             
-            Button( //Blue 'plus' button to navigate to CategoriesCreationPage
+    /*        Button( //Blue 'plus' button to navigate to CategoriesCreationPage
                 action:{
                     //isActive = true
                     willMoveToNextScreen = true
@@ -101,12 +101,12 @@ struct CategoryListView: View {
             .foregroundColor(.black)
             .cornerRadius(15.0)
             .padding(.leading, 275)
-            .padding(.bottom, 640)
+            .padding(.bottom, 640)   */
                 
             
-      /*      VStack{ //VStack to access CategoriesCreationPage view via 'blue plus' button
-               Button(
-                    action:{ print ("go to Category Creation Page")},
+            VStack{ //VStack to access CategoriesCreationPage view via 'blue plus' button
+                Button(
+                    action:{ willMoveToNextScreen = true},
                     label: { RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .frame(width: 75, height: 45)
                         
@@ -122,16 +122,16 @@ struct CategoryListView: View {
                 .disabled(TorF()) //func ToF() for 'true'/'false' condition to disable button
             } //VStack to access CategoriesCreationPage view END
             .padding(.leading, 275)
-            .padding(.bottom, 660) */
+            .padding(.bottom, 630)
             
             Spacer()
             
             VStack{
             ScrollView { //scroll view containing the CategoryCards to be populated into the CategoryListView
-                ForEach(0..<categoryList.count) { //starts at index 0 and cycles through categoryList
+                ForEach(0..<user.categoryList.count, id: \.self) { //starts at index 0 and cycles through categoryList
                     index in
                     HStack{ //HStack for Category Cards
-                        CategoryCard(category: categoryList[index])
+                        CategoryCard(category: user.categoryList[index])
                     } //HStack for Categories Cards END
                     .padding(.bottom, 15)
                     
