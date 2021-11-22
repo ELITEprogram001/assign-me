@@ -82,6 +82,9 @@ struct TaskEntryView: View {
                             isOverdue:false)
                         user.taskList.append(toAdd)
                         self.tabSelection=1
+                        taskName = ""
+                        taskDesc = ""
+                        difficulty = 1
                     } //button
                     .frame(width: 60, height: 40)
                     .background(Color.blue)
