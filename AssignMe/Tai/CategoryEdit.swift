@@ -48,23 +48,7 @@ struct CategoryEdit: View {
                     .padding(.horizontal, 1)
                     .cornerRadius(15)
                 Spacer()
-                //DifficultyView(rating: $difficulty)
-                    
-                        //
-                        //
-                        ////                Menu("Changed Color"){
-                        ////                    Button("Red"){
-                        //                //                        print, selection: ("red")
-                        ////                    }
-                        ////                    Button("Green"){
-                        ////                        print("red")
-                        ////                    }
-                        ////                    Button("Blue"){
-                        ////                        print("red")
-                        ////                    }
-                        ////                }
-                        //            }
-                        
+               
                     
             }
         } //vstack

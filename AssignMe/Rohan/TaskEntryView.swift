@@ -117,6 +117,7 @@ struct TaskEntryView: View {
                         Button(action:{currentCategory="Mental Health" }, label:{
                             Text("Mental Health")
                             
+                            
                         })
                         Button(action:{currentCategory="Physical Health" }, label:{
                             Text("Physical Health")

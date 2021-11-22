@@ -40,24 +40,27 @@ struct TaskEditView: View {
     }
     var body: some View {
         ZStack(){
-            Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
+            Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
             VStack() {
-                HStack(){
-                    Spacer()
-                    Button("Back"){
+                HStack(alignment: .center, spacing: 40){
+                    
+                    Button(action:{
+                        isActive = true
                         self.presentation.wrappedValue.dismiss()
-                    }
-                    //.buttonStyle(FilledButton(isActive: false))
-                    .frame(width: 60, height: 40)
-                    .padding(.leading,5)
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .foregroundColor(.gray)
+                    },label:{
+                        Image(systemName: "arrow.backward.circle")
+                            .frame(width: 60, height: 40)
+                        
+                    })
+                    .background(Color.blue)
+                    .foregroundColor(.white)
                     .cornerRadius(10)
-                    Spacer()
-                    Text("Task Details")
+                    .padding(.leading,55)
+                    Text("Task Edit")
+                        .frame(width: 120, height: 40)
                         .font(.system(size: 25, weight: .bold, design: .serif))
                         .foregroundColor(.white)
-                    Spacer()
+                        .padding(.horizontal, 10)
                     Button("Save"){
                         user.currTask.name = taskName
                         user.currTask.description = taskDesc
@@ -74,9 +77,10 @@ struct TaskEditView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     //.buttonStyle(FilledButton(isActive: isActive))
-                    .padding(.trailing,5)
-                    Spacer()
+                    .padding(.trailing, 55)
+                    
                 } //hstack
+                
                 Group{
                     Text("Name:")
                         .foregroundColor(.blue)
