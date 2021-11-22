@@ -93,6 +93,8 @@ struct CategoryCard: View {
             } //attributes for the category colour tab END
             .padding(.leading, -165.0) //padding for category colour tab
             
+            
+            NavigationLink(destination: CategoryEdit(), isActive: $isActive){
             Button( //Blue edit button with black 'pencil' icon
                 action:{
                     isActive = true
@@ -108,10 +110,13 @@ struct CategoryCard: View {
             .foregroundColor(.black)
             .cornerRadius(15.0)
             .padding(.leading, 100)
+        } //NavigationLink END
             
+            
+//-------------------- Delete Buttons ---------------------------------
             
             Button("") { //Alert popup menu for deletion confirmation
-                showAlert = true
+                //showAlert = true
             }
             .alert(isPresented: $showAlert) {
                 Alert(
@@ -141,8 +146,15 @@ struct CategoryCard: View {
             .foregroundColor(.red)
             .padding(.leading, 245)
             
+//-------------------- Delete Buttons END---------------------------------
             
             
+            
+            
+            
+            
+            
+//----------------------------------------------------------------------
             
       /*      Button( //Delete button with red 'trashcan' icon
                 action:{
