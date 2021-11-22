@@ -57,7 +57,7 @@ struct TaskEditView: View {
                     .cornerRadius(10)
                     .padding(.leading,55)
                     Text("Task Edit")
-                        .bold()                 
+                        .bold()
                         .font(.custom("Viga-Regular", size: 25))
                         .foregroundColor(.white)
                         .frame(width:120, height: 40)

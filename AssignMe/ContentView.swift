@@ -45,12 +45,12 @@ struct ContentView: View {
             WeeklyView(tabSelection: 1)
                 .tabItem {
                     Text("Weekly View")
-                    Image(systemName: "homekit")
+                    Image(systemName: "house.fill")
                 }
                 .tag(1)
             CalendarView()
                 .tabItem {
-                    Text("calendar")
+                    Text("Calendar")
                     Image(systemName: "calendar")
                 }
                 .tag(2)
