@@ -32,6 +32,16 @@ struct CategoryCard: View {
     @State private var isActive = false
     var category: Category  //KEEP THIS; uncomment when ready for use
     var categoryList = [Category]()
+    @EnvironmentObject var user: User
+    @Environment(\.presentationMode) var presentation
+    @State var showAlert = false
+    
+    
+    func del () {
+        user.categoryList.remove(at: user.currCategoryIndex)
+        self.presentation.wrappedValue.dismiss()
+    }
+    
     
     func deleteOP() {
         
@@ -83,7 +93,6 @@ struct CategoryCard: View {
             } //attributes for the category colour tab END
             .padding(.leading, -165.0) //padding for category colour tab
             
-            
             Button( //Blue edit button with black 'pencil' icon
                 action:{
                     isActive = true
@@ -100,8 +109,27 @@ struct CategoryCard: View {
             .cornerRadius(15.0)
             .padding(.leading, 100)
             
+            
+            Button("") { //Alert popup menu for deletion confirmation
+                showAlert = true
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Are you sure you want to delete this?"),
+                    message: Text("Decision is final"),
+                    primaryButton: .destructive(Text("Delete")) {
+                        print("Delete")
+                        del()
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
+            
+            
+            
             Button( //Delete button with red 'trashcan' icon
                 action:{
+                    showAlert = true
                     isActive = true
                 },
                 label: {
@@ -113,10 +141,27 @@ struct CategoryCard: View {
             .foregroundColor(.red)
             .padding(.leading, 245)
             
+            
+            
+            
+      /*      Button( //Delete button with red 'trashcan' icon
+                action:{
+                    isActive = true
+                    del()
+                },
+                label: {
+                    Image(systemName: "trash")
+                        .resizable()
+                        .frame(width: 45, height: 45)
+                }
+            ) //Delete button END
+            .foregroundColor(.red)
+            .padding(.leading, 245)   */
+            
           /*  //NavigationLink(destination: CategoryEdit(), isActive: $isActive){
                 HStack{ //attributes for blue edit button
                     NavigationLink(destination: CategoryEdit(), isActive: $isActive){
-                    Button(
+
                         action:{},
                         label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
                             .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
