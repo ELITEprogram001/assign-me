@@ -15,29 +15,36 @@ struct WeeklyView: View {
     @EnvironmentObject var user: User
     @State var tabSelection: Int
     var body: some View {
-        ZStack {
-            NavigationView{
+        NavigationView{
+            ZStack
+            {
+                Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
                 VStack{
-                    ForEach(0..<user.taskList.count, id: \.self) { index in
-                        NavigationLink(destination: TaskDetailsView()
-                                        .environmentObject(user)
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
-                                        .onAppear {
-                            user.currTask = user.taskList[index]
-                            user.currTaskIndex = index
-                                                }, label:{
-                            TaskCard(task: user.taskList[index])
-                                .ignoresSafeArea(.all)
-                        })
+                    ScrollView{
+                        ForEach(0..<user.taskList.count, id: \.self) { index in
+                            NavigationLink(destination: TaskDetailsView()
+                                            .environmentObject(user)
+                                            
+                                            .onAppear {
+                                                user.currTask = user.taskList[index]
+                                                user.currTaskIndex = index
+                                            },
+                                           label:{
+                                            TaskCard(task: user.taskList[index])
+                                                .ignoresSafeArea(.all)
+                                           })
+                            Spacer()
+                        } //foreach
                     }
-                }
+                } //vsatck
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+            } //navigation view
+            .onAppear{
+                user.taskList.append(Task(name:"", category:user.categoryList[0], description:"", difficulty: 1, dueDate: Date(),  dateCompleted: Date(), isOverdue: false ))
+                user.taskList.removeLast()
             }
-        }
-        .onAppear{
-            user.taskList.append(Task(name:"", category:user.categoryList[0], description:"", difficulty: 1, dueDate: Date(),  dateCompleted: Date(), isOverdue: false ))
-            user.taskList.removeLast()
-        }
+        }  
     }
     
 }

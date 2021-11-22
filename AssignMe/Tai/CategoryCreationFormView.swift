@@ -53,15 +53,31 @@ struct CategoryCreationFormView: View {
             VStack(spacing: 15) {
                 HStack(){
                     Spacer()
-                    Button("Back"){
+                    Button(action:{
+                    
+                     
                         self.presentation.wrappedValue.dismiss()
-                    }
-                    //.buttonStyle(FilledButton(isActive: false))
-                    .frame(width: 60, height: 40)
-                    .padding(.leading,5)
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                    },label:{
+                        
+                        Image(systemName: "arrow.backward.circle")
+                        .frame(width: 60, height: 40)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.leading, 8 )
+
+                    })  //button
+                    
+//                    Button("Back"){
+//                        self.presentation.wrappedValue.dismiss()
+//                    }
+//                    //.buttonStyle(FilledButton(isActive: false))
+//                    .frame(width: 60, height: 40)
+//                    .padding(.leading,5)
+//                    .background(Color(.blue))
+//                    .foregroundColor(.white)
+//                    .cornerRadius(10)
+                    
                     Spacer()
                     Text("Category Entry")
                         .font(.system(size: 25, weight: .bold, design: .serif))

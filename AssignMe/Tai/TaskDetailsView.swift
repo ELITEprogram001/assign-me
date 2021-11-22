@@ -149,9 +149,11 @@ struct TaskDetailsView: View {
                 Spacer()
             } //vstack
             .frame(width: 370)
+            .navigationBarTitle("")
             .navigationBarHidden(true)
             //.ignoresSafeArea()
         }
+        .navigationBarTitle("")
         .navigationBarHidden(true)
         .navigate(to: TaskEditView(task:user.currTask).navigationBarHidden(true), when: $willMoveToNextScreen)
         //Zstack
@@ -191,7 +193,7 @@ extension View {
             ZStack {
                 self
                     .navigationBarTitle("")
-                
+                    .navigationBarHidden(true)
                 
                 NavigationLink(
                     destination: view
@@ -203,5 +205,7 @@ extension View {
                 }
             }
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
     }
 }   //extension view
