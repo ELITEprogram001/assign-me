@@ -15,8 +15,9 @@ struct WeeklyView: View {
     @EnvironmentObject var user: User
     @State var tabSelection: Int
     var body: some View {
-        ZStack {
-            NavigationView{
+        NavigationView{
+            ZStack{
+                Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
                 VStack{
                     ScrollView{
                         ForEach(0..<user.taskList.count, id: \.self) { index in
@@ -36,18 +37,15 @@ struct WeeklyView: View {
                             //.ignoresSafeArea(.all)
                             //Color(.yellow)    //for debug
                             Spacer()
-                            
                         } //foreach
                     }
                 } //vstack
-                        //these delete the top portion
+                //these delete the top portion
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
-            } //navigation View
-            
-        } //zstack
-    }
-    
+            } //zstack
+        } //navigation View
+    } //body
 }
 
 struct WeeklyView_Previews: PreviewProvider {

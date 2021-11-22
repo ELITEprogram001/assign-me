@@ -12,7 +12,7 @@ struct TaskDetailsView: View {
     @EnvironmentObject var user: User
     @State private var isActive = false
     @State private var willMoveToNextScreen = false
-    
+    let formatter = DateFormatter()
     var body: some View {
         ZStack {
             Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
@@ -35,7 +35,7 @@ struct TaskDetailsView: View {
                     })  //button
                     
                     Spacer()
-                    Text("Task Detail")
+                    Text("Task Details")
                         .font(.system(size: 25, weight: .bold, design: .serif))
                         //.padding(.horizontal,45)
                         .foregroundColor(.white)
@@ -53,9 +53,6 @@ struct TaskDetailsView: View {
                             .cornerRadius(10)
                             .padding(.trailing, 15 )
                     })  //button
-                    
-                    
-                    
                 } //hstack
                 
                 
@@ -79,9 +76,12 @@ struct TaskDetailsView: View {
                     Text("Due Date:")
                         .foregroundColor(.blue)
                     Text("\(user.currTask.dueDate)")
+                        
+ //                   Text((formatter.date(from: "\(user.currTask.dueDate)" )
                         .lineLimit(2)
                         .multilineTextAlignment(.center) //to alight to center
                         .padding(.horizontal)
+                        
                     Text("Difficulty:")
                         .foregroundColor(.blue)
                     HStack( spacing: 1){
@@ -111,24 +111,28 @@ struct TaskDetailsView: View {
                         //                            .foregroundColor(.blue)
                         //                    } //hStack
                         
+                        Spacer()
                         HStack{
-                            Button("Delete Task",action:{
+                            Spacer()
+                            
+                            Button("Delete",action:{
                                 DeleteTask()
                             })
-                            .frame(width: 60, height: 40)
+                            .frame(width: 120, height: 50)
                             .background(Color.red)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.leading, 15 )
-                            
-                            Button("Complete Task",action:{
+                            Spacer()
+                            Button("Complete",action:{
                                 CompleteTask()
                             })
-                            .frame(width: 60, height: 40)
+                            .frame(width: 120, height: 50)
                             .background(Color.green)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.leading, 15 )
+                            Spacer()
                         }
                         
                     }
