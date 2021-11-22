@@ -34,6 +34,10 @@ struct WeeklyView: View {
                 }
             }
         }
+        .onAppear{
+            user.taskList.append(Task(name:"", category:user.categoryList[0], description:"", difficulty: 1, dueDate: Date(),  dateCompleted: Date(), isOverdue: false ))
+            user.taskList.removeLast()
+        }
     }
     
 }

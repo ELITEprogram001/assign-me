@@ -35,27 +35,28 @@ struct CategoryCard: View {
     @EnvironmentObject var user: User
     @Environment(\.presentationMode) var presentation
     @State var showAlert = false
+    @State private var showingAlert = false
+    var catIndex: Int
     
     
     func del () {
-        user.categoryList.remove(at: user.currCategoryIndex)
-        self.presentation.wrappedValue.dismiss()
+        user.categoryList.remove(at: catIndex)
+        //self.presentation.wrappedValue.dismiss()
     }
     
-    
-    func deleteOP() {
-        
-    }
-    
-   /* var task: Task
-    var taskList = [Task]()
-    func taskNum() -> Int{
-        var taskcount=0
-        if category.name == task.category.name{
-            taskcount = taskcount+1
+    func indexCheck () ->Category {
+        if catIndex >= user.categoryList.count {
+            return user.categoryList[0]
         }
-        return taskcount
-    } */
+        return user.categoryList[catIndex]
+    }
+    
+    func intCheck () -> Int {
+        if catIndex >= user.categoryList.count{
+            return 0
+        }
+        return catIndex
+    }
     
     var body: some View {
         ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
@@ -94,7 +95,7 @@ struct CategoryCard: View {
             .padding(.leading, -165.0) //padding for category colour tab
             
             
-            NavigationLink(destination: CategoryEdit(), isActive: $isActive){
+            NavigationLink(destination: CategoryEdit(category: indexCheck(), catIndex: intCheck()), isActive: $isActive){
             Button( //Blue edit button with black 'pencil' icon
                 action:{
                     isActive = true
@@ -114,28 +115,34 @@ struct CategoryCard: View {
             
             
 //-------------------- Delete Buttons ---------------------------------
+            //Partially functional delete alert popup
             
-            Button("") { //Alert popup menu for deletion confirmation
-                //showAlert = true
+      /*     Button("Hello") { //Alert popup menu for deletion confirmation
+                showingAlert = true
             }
+            
+            .alert("Important message", isPresented:\($showingAlert)) {
+                        Button("OK", role: .cancel) { }
+                    }
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Are you sure you want to delete this?"),
                     message: Text("Decision is final"),
                     primaryButton: .destructive(Text("Delete")) {
                         print("Delete")
-                        del()
+                       // del()
                     },
                     secondaryButton: .cancel()
                 )
-            }
+            } */
             
             
             
             Button( //Delete button with red 'trashcan' icon
                 action:{
-                    showAlert = true
-                    isActive = true
+                    //showAlert = true
+      //              isActive = true
+                      del()
                 },
                 label: {
                     Image(systemName: "trash")
@@ -147,66 +154,6 @@ struct CategoryCard: View {
             .padding(.leading, 245)
             
 //-------------------- Delete Buttons END---------------------------------
-            
-            
-            
-            
-            
-            
-            
-//----------------------------------------------------------------------
-            
-      /*      Button( //Delete button with red 'trashcan' icon
-                action:{
-                    isActive = true
-                    del()
-                },
-                label: {
-                    Image(systemName: "trash")
-                        .resizable()
-                        .frame(width: 45, height: 45)
-                }
-            ) //Delete button END
-            .foregroundColor(.red)
-            .padding(.leading, 245)   */
-            
-          /*  //NavigationLink(destination: CategoryEdit(), isActive: $isActive){
-                HStack{ //attributes for blue edit button
-                    NavigationLink(destination: CategoryEdit(), isActive: $isActive){
-
-                        action:{},
-                        label: {RoundedRectangle(cornerRadius: 15, style: .continuous)
-                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                            .frame(width: 50, height: 50);
-                            
-                            //HStack{ //attributes for edit button image 'pencil'
-                                Image(systemName: "pencil")
-                                    .resizable()
-                                    .foregroundColor(.black)
-                                    .frame(width: 35, height: 35)
-                            //} //attributes for edit button image 'pencil' END
-                           // .padding(.leading, -50) //padding for edit button image 'pencil'
-                            
-                        } //label end
-                    ) //button end
-                    }
-                } //attributes for blue edit button END
-                .padding(.leading, 100) //padding for //attributes for blue edit button background'
-                
-            //} //NavigationLink END */
-            
-            /*
-            HStack{ //attributes for delete button background
-                Button(
-                    action:{print("pls delete")},
-                    label: {Image(systemName: "trash")
-                        .resizable()
-                        .foregroundColor(.red)
-                        .frame(width: 45, height: 45)
-                    }
-                )
-            } //attributes for delete button background END
-            .padding(.leading, 245) //padding for delete button background */
             
             
             VStack{ //black bottom line

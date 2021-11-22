@@ -33,6 +33,8 @@ import SwiftUI
 struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
     @State var currentColor: String = "Select Category Color..."
+    @EnvironmentObject var user: User
+    @Environment(\.presentationMode) var presentation
 //    @State var isActive: Bool = false
 //    func ActiveLogic() -> Bool{
 //        if(categoryName=="Enter Category Name...")
@@ -51,12 +53,39 @@ struct CategoryCreationFormView: View {
             VStack(spacing: 15) {
                 HStack(){
                     Spacer()
+                    Button("Back"){
+                        self.presentation.wrappedValue.dismiss()
+                    }
+                    //.buttonStyle(FilledButton(isActive: false))
+                    .frame(width: 60, height: 40)
+                    .padding(.leading,5)
+                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    Spacer()
                     Text("Category Entry")
                         .font(.system(size: 25, weight: .bold, design: .serif))
                         //.padding(.horizontal)
                         .foregroundColor(.white)
-                    BlueButton(title:"Add")
                         .padding(.horizontal,10)
+                    
+                 /*   BlueButton(title:"Add")
+                        .padding(.horizontal,10)  */
+                    Spacer()
+                    Button("Add"){
+                        let toAdd = Category(
+                            name:categoryName,
+                            color: .red)
+                        user.categoryList.append(toAdd)
+                        self.presentation.wrappedValue.dismiss()
+                    } //button
+                    .frame(width: 60, height: 40)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal,2)
+                    
+                    Spacer()
 //                    Button("Add"){
 //
 //                    }
