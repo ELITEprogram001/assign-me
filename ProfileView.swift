@@ -43,26 +43,21 @@ struct ProfileView: View {
                 .background(Color.white)
             */
  
-            // Last Week Section
-            VStack (spacing: 0) {
-                HStack (spacing: 0) {
-                    Text("Your Last Week")
-                        .padding(.vertical, 16)
-                        .padding(.horizontal)
-                    Spacer()
-                }
-                TabView {
-                    Text("First")
-                    Text("Second")
-                    Text("Third")
-                    Text("Fourth")
-                }
-                .tabViewStyle(PageTabViewStyle())
-                .indexViewStyle(PageIndexViewStyle())
+            // Statistics Section
+            TabView {
+                Text("TODO Graph")
+                Text("TODO Medal Stats")
+                QuoteView(quote: "You simply have to put one foot in front of the other and keep going. Put blinders on and plow right ahead.", author: "George Lucas")
             }
+            .tabViewStyle(PageTabViewStyle())
+            .indexViewStyle(PageIndexViewStyle())
+            .background(Color.red)
             .font(.custom("Viga-Regular", size: 20, relativeTo: .title))
             .foregroundColor(Color.white)
+            .frame(minWidth: 0, idealWidth: .infinity)
             
+            
+            // Achievement Section
             ScrollView(.vertical) {
                 HStack {
                     Text("Achievements")
@@ -116,9 +111,10 @@ struct AchievementCards: View {
                             .padding(.horizontal, 6)
                         Spacer()
                     }
+                    Spacer()
                     Text(desc)
                         .font(.custom("Ubuntu-Regular", size: 12, relativeTo:.body))
-                        .padding(.vertical, 5)
+                        .padding(.vertical, 8)
                 }
             }
         }
@@ -128,5 +124,50 @@ struct AchievementCards: View {
         self.title = title
         self.desc = desc
         self.color = color
+    }
+}
+
+struct QuoteView: View {
+    
+    let quote: String
+    let author: String
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack (spacing: 0) {
+                Spacer()
+                Image(systemName: "quote.bubble")
+                    .resizable()
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    .frame(width: 35, height: 35, alignment: .leading)
+                    .padding()
+                    .foregroundColor(Color.white)
+                Text("A Quote For Consideration")
+                    .padding(.vertical, 16)
+                Spacer()
+            }
+            .padding(.top, 15)
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Spacer()
+                    Text(quote)
+                        .font(.custom("Ubuntu-Italic", size: 16, relativeTo:.body))
+                    Spacer()
+                }
+                .padding(.horizontal, 40)
+                Text("- " + author)
+                    .font(.custom("Ubuntu-LightItalic", size: 12, relativeTo:.footnote))
+                    .offset(x: 60, y: 0)
+                    .padding(.top, 20)
+            }
+            .padding(.top, 30)
+            Spacer()
+        }
+        .background(Color.near_black)
+    }
+    
+    init(quote: String, author: String) {
+        self.quote = quote
+        self.author = author
     }
 }
