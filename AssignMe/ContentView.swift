@@ -9,16 +9,8 @@ import SwiftUI
 struct ContentView: View {
 ///##############################
 //    // Test Category
-    var Mental_Health = Category(name:"Uncategorized",color:Color.gray)
-    let testCat1 = Category(name: "Recreation", color: .red)
-    let testCat2 = Category(name: "Mental Health", color:.blue)
-    let testCat3 = Category(name: "Spiritual Health", color: .yellow)
-    let testCat4 = Category(name: "Pls send help", color:.green)
-    let testCat5 = Category(name: "School and Work", color: .orange)
-    let testCat6 = Category(name: "Family and Relationships", color: .purple)
-    
-    
-    
+    @State private var tabSelection = 1
+    var Mental_Health = Category(name:"Mental Health",color:Color.red)
 //    var task: Task
 //    var testing=true
     var user:User = User(name: "Rommie")
@@ -26,15 +18,7 @@ struct ContentView: View {
     {
         
 //        task = Task(name: "push ups", category: Mental_Health, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(),dateCompleted: Date(), isOverdue: true)
-        
-        
         user.addCategory(cat:Mental_Health)
-        user.addCategory(cat:testCat1)
-        user.addCategory(cat:testCat2)
-        user.addCategory(cat:testCat3)
-        user.addCategory(cat:testCat4)
-        user.addCategory(cat:testCat5)
-        user.addCategory(cat:testCat6)
     }
 //    var body: some View {
 //
@@ -56,33 +40,38 @@ struct ContentView: View {
     //var catList = [Category]()
 
     var body: some View {
-        TabView{
+        TabView(selection:$tabSelection){
             //CategoryCreationFormView()
-            WeeklyView()
+            WeeklyView(tabSelection: 1)
                 .tabItem {
                     Text("Weekly View")
                     Image(systemName: "homekit")
                 }
+                .tag(1)
             CalendarView()
                 .tabItem {
                     Text("calendar")
                     Image(systemName: "calendar")
                 }
-            TaskEntryView()
+                .tag(2)
+            TaskEntryView(tabSelection: $tabSelection)
                 .tabItem {
                     Text("Task Entry")
                     Image(systemName: "plus.circle.fill")
                 }
-            CategoryListView()
+                .tag(3)
+            CategoryView()
                 .tabItem {
                     Text("Category List")
                     Image(systemName: "square.grid.2x2.fill")
                 }
+                .tag(4)
             Profile()
                 .tabItem {
                     Text("Profile")
                     Image(systemName: "person.fill")
                 }
+                .tag(5)
 
 
     }.environmentObject(user)//end body
