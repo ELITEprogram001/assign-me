@@ -63,11 +63,13 @@ struct TaskEntryView: View {
             Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
             VStack(spacing: 15) {
                 HStack(alignment: .center){
-                    Spacer()
+                   
                     Text("Task Entry")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
-                        //.padding(.horizontal)
+                        .bold()
+                        .font(.custom("Viga-Regular", size: 25))
+                        .padding(.leading,140 )
                         .foregroundColor(.white)
+                    Spacer()
                     
                     Button("Add"){
                         let toAdd = Task(

@@ -36,7 +36,8 @@ struct TaskDetailsView: View {
                     
                     Spacer()
                     Text("Task Details")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
+                        .bold()
+                        .font(.custom("Viga-Regular", size: 25))
                         //.padding(.horizontal,45)
                         .foregroundColor(.white)
                     

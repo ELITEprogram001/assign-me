@@ -80,7 +80,8 @@ struct CategoryCreationFormView: View {
                     
                     Spacer()
                     Text("Category Entry")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
+                        .bold()
+                        .font(.custom("Viga-Regular", size: 25))
                         //.padding(.horizontal)
                         .foregroundColor(.white)
                         .padding(.horizontal,10)

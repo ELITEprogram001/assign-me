@@ -57,9 +57,10 @@ struct TaskEditView: View {
                     .cornerRadius(10)
                     .padding(.leading,55)
                     Text("Task Edit")
-                        .frame(width: 120, height: 40)
-                        .font(.system(size: 25, weight: .bold, design: .serif))
+                        .bold()                 
+                        .font(.custom("Viga-Regular", size: 25))
                         .foregroundColor(.white)
+                        .frame(width:120, height: 40)
                         .padding(.horizontal, 10)
                     Button("Save"){
                         user.currTask.name = taskName

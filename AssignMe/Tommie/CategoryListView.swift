@@ -81,7 +81,9 @@ struct CategoryListView: View {
                      .onAppear {} }) */
 
                     Text("Categories")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
+                        .bold()
+                        .font(.custom("Viga-Regular", size: 25))
+                        //.font(.system(size: 25, weight: .bold, design: .serif))
                         //.padding(.horizontal,45)
                         .padding(.leading,120)
                         .foregroundColor(.white)

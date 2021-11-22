@@ -16,23 +16,21 @@ struct WeeklyView: View {
     @State var tabSelection: Int
     var body: some View {
         NavigationView{
-            ZStack
-            {
+            ZStack{
                 Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
                 VStack{
                     ScrollView{
                         ForEach(0..<user.taskList.count, id: \.self) { index in
                             NavigationLink(destination: TaskDetailsView()
-                                            .environmentObject(user)
-                                            
-                                            .onAppear {
-                                                user.currTask = user.taskList[index]
-                                                user.currTaskIndex = index
-                                            },
-                                           label:{
-                                            TaskCard(task: user.taskList[index])
-                                                .ignoresSafeArea(.all)
-                                           })
+                                .environmentObject(user)
+                                .onAppear {
+                                    user.currTask = user.taskList[index]
+                                    user.currTaskIndex = index
+                                },
+                               label:{
+                                TaskCard(task: user.taskList[index])
+                                    .ignoresSafeArea(.all)
+                               })
                             Spacer()
                         } //foreach
                     }
@@ -40,14 +38,21 @@ struct WeeklyView: View {
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
             } //navigation view
-            .onAppear{
-                user.taskList.append(Task(name:"", category:user.categoryList[0], description:"", difficulty: 1, dueDate: Date(),  dateCompleted: Date(), isOverdue: false ))
-                user.taskList.removeLast()
-            }
-        }  
-    }
+                .onAppear{
+                    user.taskList.append(Task(
+                                            name:"",
+                                            category:user.categoryList[0],
+                                            description:"",
+                                            difficulty: 1,
+                                            dueDate: Date(),
+                                            dateCompleted: Date(),
+                                            isOverdue: false ))
+                    user.taskList.removeLast()
+                }
+        } //navigation
+    }//body
     
-}
+} //weeklyview
 
 struct WeeklyView_Previews: PreviewProvider {
     static var previews: some View {
