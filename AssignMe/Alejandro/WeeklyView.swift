@@ -18,22 +18,34 @@ struct WeeklyView: View {
         ZStack {
             NavigationView{
                 VStack{
-                    ForEach(0..<user.taskList.count, id: \.self) { index in
-                        NavigationLink(destination: TaskDetailsView()
-                                        .environmentObject(user)
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
-                                        .onAppear {
-                            user.currTask = user.taskList[index]
-                            user.currTaskIndex = index
-                                                }, label:{
-                            TaskCard(task: user.taskList[index])
-                                .ignoresSafeArea(.all)
-                        })
+                    ScrollView{
+                        ForEach(0..<user.taskList.count, id: \.self) { index in
+                            //Color(.red)   //for debuing
+                            NavigationLink(destination: TaskDetailsView()
+                                .environmentObject(user)
+                                .navigationBarTitle("")
+                                .navigationBarHidden(true)
+                                .onAppear {
+                                    user.currTask = user.taskList[index]
+                                    user.currTaskIndex = index
+                                }, label:{
+                                    //Color(.blue)      //for debug
+                                    TaskCard(task: user.taskList[index])
+                                    //Color(.green).ignoresSafeArea(.all)       //for debug
+                                }) //navigationLInk
+                            //.ignoresSafeArea(.all)
+                            //Color(.yellow)    //for debug
+                            Spacer()
+                            
+                        } //foreach
                     }
-                }
-            }
-        }
+                } //vstack
+                        //these delete the top portion
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+            } //navigation View
+            
+        } //zstack
     }
     
 }

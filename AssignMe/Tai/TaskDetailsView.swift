@@ -20,28 +20,17 @@ struct TaskDetailsView: View {
                 
                 HStack(){
                     Button(action:{
-                        //user.taskList.remove(at:user.currTaskIndex)
-                        /*
-                         var index=0
-                         for taskelem in user.taskList {
-                         if (taskelem.id == user.currTask.id)
-                         {
-                         user.taskList.remove(at:index)
-                         break
-                         }
-                         index=index+1
-                         }
-                         */
+                    
                         isActive = true
                         self.presentation.wrappedValue.dismiss()
                     },label:{
                         
                         Image(systemName: "arrow.backward.circle")
                         .frame(width: 60, height: 40)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .padding(.leading, 15 )
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.leading, 15 )
 
                     })  //button
                     
@@ -106,26 +95,44 @@ struct TaskDetailsView: View {
                     } //hstack
                     .padding()
                     
-                    Text("Category:")
-                        .foregroundColor(.blue)
+                    Group{
+                        Text("Category:")
+                            .foregroundColor(.blue)
+                        
+//                        Text("\(user.currTask.category)")
+//                            .font(.title)
+//                            .lineLimit(2)
+//                            .multilineTextAlignment(.center) //to alight to center
+//                            .padding(.horizontal)
+                        
+                        //                    Text("hello")
+                        //                    HStack(){
+                        //                        Text("Over Due ?:")
+                        //                            .foregroundColor(.blue)
+                        //                    } //hStack
+                        
+                        HStack{
+                            Button("Delete Task",action:{
+                                DeleteTask()
+                            })
+                            .frame(width: 60, height: 40)
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding(.leading, 15 )
+                            
+                            Button("Complete Task",action:{
+                                CompleteTask()
+                            })
+                            .frame(width: 60, height: 40)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding(.leading, 15 )
+                        }
+                        
+                    }
                     
-//                    Text("\(user.currTask.category.color)")
-//                        .font(.title)
-//                        .lineLimit(2)
-//                        .multilineTextAlignment(.center) //to alight to center
-//                        .padding(.horizontal)
-                    
-//                    Text("hello")
-//                    HStack(){
-//                        Text("Over Due ?:")
-//                            .foregroundColor(.blue)
-//                        Button("Delete Task",action:{
-//                            DeleteTask()
-//                        })
-//                        Button("Complete Task",action:{
-//                            CompleteTask()
-//                        })
-//                    } //hStack
                     
                     //                    Text(task.isOverdue)
                     //                        .font(.title)
