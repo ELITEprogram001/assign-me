@@ -52,6 +52,7 @@ struct TaskEntryView: View {
     @State var taskName: String = ""
     @State var taskDesc: String = ""
     @State var currentCategory: String = "Uncategorized"
+    @State var currentCategoryIndex: Int = 0
     @State var dueDate: Date = Date()
     @State var difficulty=1
     @State var isActive: Bool = false
@@ -60,19 +61,21 @@ struct TaskEntryView: View {
     
     var body: some View {
         ZStack(){
-            Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
+            Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)
             VStack(spacing: 15) {
                 HStack(alignment: .center){
-                    Spacer()
+                   
                     Text("Task Entry")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
-                        //.padding(.horizontal)
+                        .bold()
+                        .font(.custom("Viga-Regular", size: 25))
+                        .padding(.leading,140 )
                         .foregroundColor(.white)
+                    Spacer()
                     
                     Button("Add"){
                         let toAdd = Task(
                             name:taskName,
-                            category: user.categoryList[0],
+                            category: user.categoryList[currentCategoryIndex],
                             description:taskDesc,
                             difficulty:difficulty,
                             dueDate:dueDate,
@@ -80,6 +83,9 @@ struct TaskEntryView: View {
                             isOverdue:false)
                         user.taskList.append(toAdd)
                         self.tabSelection=1
+                        taskName = ""
+                        taskDesc = ""
+                        difficulty = 1
                     } //button
                     .frame(width: 60, height: 40)
                     .background(Color.blue)
@@ -114,11 +120,14 @@ struct TaskEntryView: View {
                     Text("Category:")       //category
                         .foregroundColor(.blue)
                     Menu("\(currentCategory)"){
-                        Button(action:{currentCategory="Mental Health" }, label:{
-                            Text("Mental Health")
-                            
-                        })
-                        Button(action:{currentCategory="Physical Health" }, label:{
+                        ForEach(0..<user.categoryList.count, id: \.self) { index in
+                            Button(action:{currentCategory = user.categoryList[index].name;
+                                currentCategoryIndex = index
+                            }, label:{
+                                Text(user.categoryList[index].name)
+                            })
+                        }
+                    /*    Button(action:{currentCategory="Physical Health" }, label:{
                             Text("Physical Health")
                             
                         })
@@ -129,8 +138,9 @@ struct TaskEntryView: View {
                         Button(action:{currentCategory="Spiritual" }, label:{
                             Text("Spiritual")
                             
-                        })
+                        })   */
                     } //menu
+                    .onAppear{currentCategory = "Uncategorized"; currentCategoryIndex = 0}
                     
                     .foregroundColor(.white)
                     .padding(.horizontal, 30)
@@ -145,6 +155,7 @@ struct TaskEntryView: View {
                     .labelsHidden()
                     .accentColor(.white)
                     .colorScheme(.dark)
+                    .onAppear{dueDate = Date()}
                 Rectangle()
                         .fill(Color.black)
                         .frame(width:340, height:1)

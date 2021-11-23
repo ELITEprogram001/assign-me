@@ -6,20 +6,6 @@
 //
 import SwiftUI
 
-private struct FilledButton: ButtonStyle {
-    //@Environment(\.isEnabled) private var isEnabled
-    var isActive: Bool
-    func makeBody(configuration: Configuration) -> some View {
-        configuration
-            .label
-            .foregroundColor(configuration.isPressed ? .gray : .white)
-            .background(isActive ? Color.blue : Color(red: 0.15, green: 0.15, blue: 0.15))
-            .cornerRadius(8)
-    }
-}
-
-
-
 struct TaskEditView: View {
     @State var taskName: String = ""
     @State var taskDesc: String = ""
@@ -30,6 +16,7 @@ struct TaskEditView: View {
     @EnvironmentObject var user: User
     var task: Task
     @Environment(\.presentationMode) var presentation
+    
     init(task: Task){
         self.task = task
         _taskName = State(initialValue: task.name)
@@ -40,31 +27,31 @@ struct TaskEditView: View {
     }
     var body: some View {
         ZStack(){
-            Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
+            Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
             VStack() {
-                HStack(){
-                    Spacer()
-                    Button("Back"){
+                HStack(alignment: .center, spacing: 40){
+                    
+                    Button(action:{
+                        isActive = true
                         self.presentation.wrappedValue.dismiss()
-                    }
-                    //.buttonStyle(FilledButton(isActive: false))
-                    .frame(width: 60, height: 40)
-                    .padding(.leading,5)
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .foregroundColor(.gray)
+                    },label:{
+                        Image(systemName: "arrow.backward.circle")
+                            .frame(width: 60, height: 40)
+                        
+                    })
+                    .background(Color.blue)
+                    .foregroundColor(.white)
                     .cornerRadius(10)
-                    Spacer()
-                    Text("Task Details")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
+                    .padding(.leading,55)
+                    Text("Task Edit")
+                        .bold()
+                        .font(.custom("Viga-Regular", size: 25))
                         .foregroundColor(.white)
-                    Spacer()
+                        .frame(width:120, height: 40)
+                        .padding(.horizontal, 10)
                     Button("Save"){
-                        user.currTask.name = taskName
-                        user.currTask.description = taskDesc
-                        // ToDO: change category user.currTask.category.name =
-                        user.currTask.dueDate = dueDate
-                        user.currTask.difficulty = difficulty
                         user.taskList[user.currTaskIndex].name=taskName
+                        user.taskList[user.currTaskIndex].category=user.categoryList[user.indexCatList]
                         user.taskList[user.currTaskIndex].description=taskDesc
                         user.taskList[user.currTaskIndex].dueDate=dueDate
                         user.taskList[user.currTaskIndex].difficulty=difficulty
@@ -73,10 +60,10 @@ struct TaskEditView: View {
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
-                    //.buttonStyle(FilledButton(isActive: isActive))
-                    .padding(.trailing,5)
-                    Spacer()
+                    .padding(.trailing, 55)
+                    
                 } //hstack
+                
                 Group{
                     Text("Name:")
                         .foregroundColor(.blue)
@@ -89,7 +76,7 @@ struct TaskEditView: View {
                         .padding([.horizontal], 4)
                         .cornerRadius(16)
                         .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                        .padding([.horizontal], 24)
+                        .padding(.horizontal, 40)
                         .foregroundColor(.white)
                     Text("Description:")
                         .foregroundColor(.blue)
@@ -100,27 +87,19 @@ struct TaskEditView: View {
                         .padding([.horizontal], 4)
                         .cornerRadius(16)
                         .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                        .padding([.horizontal], 24)
+                        .padding(.horizontal, 40)
                         .foregroundColor(.white)
                     Text("Category:")
                         .foregroundColor(.blue)
                     Menu("\(currentCategory)"){
-                        Button(action:{currentCategory="Mental Health" }, label:{
-                            Text("Mental Health")
-                            
-                        })
-                        Button(action:{currentCategory="Physical Health" }, label:{
-                            Text("Physical Health")
-                            
-                        })
-                        Button(action:{currentCategory="Financial" }, label:{
-                            Text("Financial")
-                            
-                        })
-                        Button(action:{currentCategory="Spiritual" }, label:{
-                            Text("Spiritual")
-                            
-                        })
+                        ForEach(0..<user.categoryList.count, id: \.self) { index in
+                            Button(action:{currentCategory = user.categoryList[index].name;
+                                user.indexCatList = index
+                            }, label:{
+                                Text(user.categoryList[index].name)
+                            })
+                        }
+
                     }   //menus
                         .foregroundColor(.white)
                         .padding(.horizontal, 30)

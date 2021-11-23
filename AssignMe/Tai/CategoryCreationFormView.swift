@@ -6,43 +6,13 @@
 //
 
 import SwiftUI
-//struct FilledButton: ButtonStyle {
-//    @Environment(\.isEnabled) private var isEnabled
-//    var isActive: Bool
-//    func makeBody(configuration: Configuration) -> some View {
-//        configuration
-//            .label
-//            .foregroundColor(configuration.isPressed ? .gray : .white)
-//            .background(isActive ? Color.blue : Color(red: 0.15, green: 0.15, blue: 0.15))
-//            .cornerRadius(8)
-//    }
-//}
-//extension View {
-//    func placeholder<Content: View>(
-//        when shouldShow: Bool,
-//        alignment: Alignment = .leading,
-//        @ViewBuilder placeholder: () -> Content) -> some View {
-//
-//        ZStack(alignment: alignment) {
-//            placeholder().opacity(shouldShow ? 1 : 0)
-//            self
-//        }
-//    }
-//} //view extension
 
 struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
     @State var currentColor: String = "Select Category Color..."
-//    @State var isActive: Bool = false
-//    func ActiveLogic() -> Bool{
-//        if(categoryName=="Enter Category Name...")
-//        {
-//            return false
-//        }
-//        else{
-//            return true
-//        }
-//    }
+    @State var tabColor: Color = .red
+    @EnvironmentObject var user: User
+    @Environment(\.presentationMode) var presentation
     
     var body: some View {
         
@@ -51,17 +21,45 @@ struct CategoryCreationFormView: View {
             VStack(spacing: 15) {
                 HStack(){
                     Spacer()
+                    Button(action:{
+                    
+                     
+                        self.presentation.wrappedValue.dismiss()
+                    },label:{
+                        
+                        Image(systemName: "arrow.backward.circle")
+                        .frame(width: 60, height: 40)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.leading, 8 )
+
+                    })  //button
+                    
+                    Spacer()
                     Text("Category Entry")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
+                        .bold()
+                        .font(.custom("Viga-Regular", size: 25))
                         //.padding(.horizontal)
                         .foregroundColor(.white)
-                    BlueButton(title:"Add")
                         .padding(.horizontal,10)
-//                    Button("Add"){
-//
-//                    }
-//                    .buttonStyle(FilledButton(isActive: isActive))
-//                    .padding(.trailing,15)
+                    
+
+                    Spacer()
+                    Button("Add"){
+                        let toAdd = Category(
+                            name:categoryName,
+                            color: tabColor)
+                        user.categoryList.append(toAdd)
+                        self.presentation.wrappedValue.dismiss()
+                    } //button
+                    .frame(width: 60, height: 40)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal,2)
+                    
+                    Spacer()
                     
                 } //hstack
                 
@@ -79,31 +77,38 @@ struct CategoryCreationFormView: View {
                    
                 Menu("\(currentColor)"){
                     //Text("hello")
-                    Button(action:{currentColor="Yellow" }, label:{
+                    Button(action:{currentColor = "Yellow";
+                            tabColor = .yellow }, label:{
                         Text("Yellow")
                     })
-                    Button(action:{currentColor="Blue" }, label:{
+                    Button(action:{currentColor = "Blue";
+                            tabColor = .blue }, label:{
                         Text("Blue")
                         
                     })
-                    Button(action:{currentColor="Red" }, label:{
+                    Button(action:{currentColor = "Red";
+                            tabColor = .red }, label:{
                         Text("Red")
                         
                     })
-                    Button(action:{currentColor="Green" }, label:{
+                    Button(action:{currentColor = "Green";
+                            tabColor = .green}, label:{
                         Text("Green")
                         
                     })
-                    Button(action:{currentColor="Orange" }, label:{
+                    Button(action:{currentColor = "Orange";
+                            tabColor = .orange }, label:{
                         Text("Orange")
                         
                     })
-                    Button(action:{currentColor="Indigo" }, label:{
-                        Text("Indigo")
+                    Button(action:{currentColor = "Pink";
+                            tabColor = .pink}, label:{
+                        Text("Pink")
                         
                     })
-                    Button(action:{currentColor="Violet" }, label:{
-                        Text("Violet")
+                    Button(action:{currentColor = "Purple";
+                            tabColor = .purple }, label:{
+                        Text("Purple")
                             
 
                     })
@@ -120,7 +125,7 @@ struct CategoryCreationFormView: View {
 }
 struct CategoryCreationFormView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryCreationFormView().preferredColorScheme(.dark)
+        CategoryCreationFormView()
        
     }
 }

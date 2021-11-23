@@ -7,6 +7,7 @@
 import SwiftUI
 import Foundation
 class Category{
+    let id = UUID()
     var name:String
     var color:Color
     init(name:String, color:Color){

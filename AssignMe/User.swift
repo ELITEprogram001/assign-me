@@ -6,10 +6,12 @@
 //
 import SwiftUI
 import Foundation
-var Mental_Health = Category(name:"Mental Health",color:Color.red)
+var Uncategorized = Category(name:"Uncategorized",color:Color.gray)
+
 class User: ObservableObject {
     @Published var currTask: Task
     @Published var currTaskIndex: Int
+    @Published var indexCatList: Int
     @Published var name: String
     @Published var taskList = [Task]()
     @Published var categoryList = [Category]()
@@ -17,8 +19,16 @@ class User: ObservableObject {
     @Published var availableColors = [Color]()
     init(name: String){
         self.name = name
-        self.currTask = Task(name:"", category:Mental_Health, description:"", difficulty: 1, dueDate: Date(),  dateCompleted: Date(), isOverdue: false )
+        self.currTask = Task(
+            name:"",
+            category: Uncategorized,
+            description:"",
+            difficulty: 1,
+            dueDate: Date(),
+            dateCompleted: Date(),
+            isOverdue: false )
         self.currTaskIndex = 0
+        self.indexCatList = 0
     }
     func addCategory(cat:Category){
         categoryList.append(cat)

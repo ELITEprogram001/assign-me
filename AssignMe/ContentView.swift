@@ -10,7 +10,9 @@ struct ContentView: View {
 ///##############################
 //    // Test Category
     @State private var tabSelection = 1
-    var Mental_Health = Category(name:"Mental Health",color:Color.red)
+    var Uncategorized = Category(name:"Uncategorized",color:Color.gray) //var for uncategorized category that's hidden from CategoriesListView
+    
+    
 //    var task: Task
 //    var testing=true
     var user:User = User(name: "Rommie")
@@ -18,7 +20,9 @@ struct ContentView: View {
     {
         
 //        task = Task(name: "push ups", category: Mental_Health, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(),dateCompleted: Date(), isOverdue: true)
-        user.addCategory(cat:Mental_Health)
+        
+        
+        user.addCategory(cat:Uncategorized) //init for uncategorized category
     }
 //    var body: some View {
 //
@@ -45,12 +49,12 @@ struct ContentView: View {
             WeeklyView(tabSelection: 1)
                 .tabItem {
                     Text("Weekly View")
-                    Image(systemName: "homekit")
+                    Image(systemName: "house.fill")
                 }
                 .tag(1)
             CalendarView()
                 .tabItem {
-                    Text("calendar")
+                    Text("Calendar")
                     Image(systemName: "calendar")
                 }
                 .tag(2)
@@ -60,7 +64,7 @@ struct ContentView: View {
                     Image(systemName: "plus.circle.fill")
                 }
                 .tag(3)
-            CategoryView()
+            CategoryListView()
                 .tabItem {
                     Text("Category List")
                     Image(systemName: "square.grid.2x2.fill")
@@ -72,13 +76,16 @@ struct ContentView: View {
                     Image(systemName: "person.fill")
                 }
                 .tag(5)
-
-
-    }.environmentObject(user)//end body
-
-}
+            
+            
+        }
+        .environmentObject(user)//end body
+        .preferredColorScheme(.dark)
+        
+    }
     
-}
+} //view
+
 
     
 

@@ -8,88 +8,79 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    
-    //var category: Category
+    @State private var isActive = false
+    @EnvironmentObject var user: User //Connects CategoryListView to the User object
+    @State private var willMoveToNextScreen = false
     var categoryList = [Category]() //from User classSS
-    
-    var maxCategories = 7 //variable for func TorF
+    var maxCategories = 8 //variable for func TorF
     func TorF () -> Bool { //Boolean condition to disable 'blue plus' button when maximum amount of categories exist
-        if categoryList.count == maxCategories {
+        if user.categoryList.count == maxCategories {
             return true
         }
         else {
             return false
         }
     } // func TorF END
-
-    
-    /* init() {
-        
-        let testCat1 = Category(name: "Fitness", color: .red)
-        let testCat2 = Category(name: "Mental Health", color:.blue)
-        let testCat3 = Category(name: "Spiritual Health", color: .yellow)
-        let testCat4 = Category(name: "Pls send help", color:.green)
-        let testCat5 = Category(name: "School and Work", color: .orange)
-        let testCat6 = Category(name: "Family and Relationships", color: .purple)
-        let testCat7 = Category(name: "My cult", color: .black)
-
-        categoryList.append(testCat1)
-        categoryList.append(testCat2)
-        categoryList.append(testCat3)
-        categoryList.append(testCat4)
-        categoryList.append(testCat5)
-        categoryList.append(testCat6)
-        categoryList.append(testCat7)
-    } */
     
     var body: some View {
-        
-           ZStack{
-               Color(red: 0.150, green: 0.150, blue: 0.150)
-                               
-               Text("Categories") //"Categories" title on top of CategoryListView
-                   .font(.system(size: 27, weight: .medium, design: .serif))
-                   //.fontWeight(.bold)
-                   .foregroundColor(Color.white)
-                   .padding(.bottom, 660) //positive values push text to top
-                       
-                VStack{ //VStack to access CategoriesCreationPage view via 'blue plus' button
-                    Button(
-                        action:{ print ("go to Category Creation Page")},
-                        label: { RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                .frame(width: 75, height: 45)
-                     
-                            VStack{ //VStack for 'plus' symbol within button label
-                                Image(systemName: "plus")
-                                 .resizable()
-                                 .foregroundColor(.black)
-                                 .frame(width: 20, height: 20)
-                            } //VStack for 'plus' symbol within button label END
-                            .padding(.leading, -55)
-                        } //label END
-                    ) //Button END
-                    .disabled(TorF())
-                } //VStack to access CategoriesCreationPage view END
-                .padding(.leading, 275)
-                .padding(.bottom, 660)
-                               
-                Spacer()
-                       
+        ZStack{
+            Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)
+            VStack{
+                HStack{
+
+                    Text("Categories")
+                        .bold()
+                        .font(.custom("Viga-Regular", size: 25))
+                        //.font(.system(size: 25, weight: .bold, design: .serif))
+                        //.padding(.horizontal,45)
+                        .padding(.leading,120)
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    
+                            VStack{ //VStack to access CategoriesCreationPage view via 'blue plus' button
+                                Button(
+                                    action:{ isActive = true
+                                            willMoveToNextScreen = true},
+                                    label: {
+                                        
+                                        ZStack{ //ZStack for 'plus' symbol and blue background
+                                            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                                .frame(width: 75, height: 45)
+                                            Image(systemName: "plus")
+                                                .resizable()
+                                                .foregroundColor(.black)
+                                                .frame(width: 20, height: 20)
+                                        } //ZStack END
+                                        .padding(.trailing, 15)
+                                    } //label END
+                                ) //Button END
+                                .disabled(TorF()) //func ToF() for 'true'/'false' condition to disable button
+                            } //VStack to access CategoriesCreationPage view END
+  
+    
+                } //HStack END
+                
                 ScrollView { //scroll view containing the CategoryCards to be populated into the CategoryListView
-                    ForEach(0..<categoryList.count) { //starts at index 0 and cycles through categoryList
+                    ForEach(1..<user.categoryList.count, id: \.self) { //starts at index 0 and cycles through categoryList
                         index in
-                            HStack{ //HStack for Category Cards
-                                CategoryCard(category: categoryList[index])
-                            } //HStack for Categories Cards END
+                        HStack{ //HStack for Category Cards
+                            CategoryCard(category: user.categoryList[index], catIndex: index)
+                        } //HStack for Categories Cards END
                         .padding(.bottom, 15)
                         
                     } //ForEach loop END
-               } //ScrollView END
-               .frame(width: 350, height: 600)
-                               
-           } //ZStack END
-       } //var body: some View END
-   } //struct CategoryListView: View END
+                } //ScrollView END
+                .frame(width: 350, height: 600)
+                
+            } //Vstack
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+        } //ZStack END
+        .navigate(to: CategoryCreationFormView(), when: $willMoveToNextScreen)
+    } //var body: some View END
+} //struct CategoryListView: View END
 
 struct CategoryListView_Previews: PreviewProvider {
     static var previews: some View {
