@@ -7,10 +7,32 @@
 
 import SwiftUI
 
+extension UIColor {
+    var name: String? {
+        switch self {
+        case UIColor.black: return "black"
+        case UIColor.darkGray: return "darkGray"
+        case UIColor.lightGray: return "lightGray"
+        case UIColor.white: return "white"
+        case UIColor.gray: return "gray"
+        case UIColor.red: return "red"
+        case UIColor.green: return "green"
+        case UIColor.blue: return "blue"
+        case UIColor.cyan: return "cyan"
+        case UIColor.yellow: return "yellow"
+        case UIColor.magenta: return "magenta"
+        case UIColor.orange: return "orange"
+        case UIColor.purple: return "purple"
+        case UIColor.brown: return "brown"
+        default: return nil
+        }
+    }
+}
+
 struct CategoryEdit: View {
     @State private var categoryName: String = ""
     @State private var color: String = ""
-    @State private var difficulty: String = ""
+    @State private var actualColor: Color
     var category: Category
     var catIndex: Int
     @EnvironmentObject var user: User
@@ -20,8 +42,26 @@ struct CategoryEdit: View {
         self.category = category
         self.catIndex = catIndex
         _categoryName = State(initialValue: category.name)
-        _color = State(initialValue: "red")
+        _actualColor = State(initialValue: category.color)
+        _color = State(initialValue: colorString (color: category.color))
     }
+    
+    func colorString (color: Color) -> String {
+        switch color {
+        case Color.black: return "black"
+        case Color.white: return "white"
+        case Color.gray: return "Gray"
+        case Color.red: return "Red"
+        case Color.green: return "Green"
+        case Color.blue: return "Blue"
+        case Color.yellow: return "Yellow"
+        case Color.orange: return "Orange"
+        case Color.purple: return "Purple"
+        case Color.pink: return "Pink"
+        default: return "uncolored"
+        }
+    }
+    
     
     var body: some View {
         
@@ -54,7 +94,7 @@ struct CategoryEdit: View {
                     Button(
                         action:{
                             user.categoryList[catIndex].name = categoryName
-                            user.categoryList[catIndex].color = .blue
+                            user.categoryList[catIndex].color = actualColor
                             self.presentation.wrappedValue.dismiss()},
                         label:{Text("Save")
                             .bold()
@@ -83,31 +123,38 @@ struct CategoryEdit: View {
                    
                 Menu("\(color)"){
                     //Text("hello")
-                    Button(action:{color="Yellow" }, label:{
+                    Button(action:{color = "Yellow";
+                            actualColor = .yellow }, label:{
                         Text("Yellow")
                     })
-                    Button(action:{color="Blue" }, label:{
+                    Button(action:{color = "Blue";
+                            actualColor = .blue }, label:{
                         Text("Blue")
                         
                     })
-                    Button(action:{color="Red" }, label:{
+                    Button(action:{color = "Red";
+                            actualColor = .red }, label:{
                         Text("Red")
                         
                     })
-                    Button(action:{color="Green" }, label:{
+                    Button(action:{color = "Green";
+                            actualColor = .green}, label:{
                         Text("Green")
                         
                     })
-                    Button(action:{color="Orange" }, label:{
+                    Button(action:{color = "Orange";
+                            actualColor = .orange }, label:{
                         Text("Orange")
                         
                     })
-                    Button(action:{color="Indigo" }, label:{
-                        Text("Indigo")
+                    Button(action:{color = "Pink";
+                            actualColor = .pink}, label:{
+                        Text("Pink")
                         
                     })
-                    Button(action:{color="Violet" }, label:{
-                        Text("Violet")
+                    Button(action:{color = "Purple";
+                            actualColor = .purple }, label:{
+                        Text("Purple")
                             
 
                     })

@@ -24,6 +24,7 @@ struct TaskEditView: View {
     @State var taskName: String = ""
     @State var taskDesc: String = ""
     @State var currentCategory: String = "Uncategorized"
+    @State var currentCategoryIndex: Int = 0
     @State var dueDate: Date = Date()
     @State var difficulty=1
     @State var isActive: Bool = false
@@ -65,10 +66,11 @@ struct TaskEditView: View {
                     Button("Save"){
                         user.currTask.name = taskName
                         user.currTask.description = taskDesc
-                        // ToDO: change category user.currTask.category.name =
+                        user.currTask.category = user.categoryList[currentCategoryIndex]
                         user.currTask.dueDate = dueDate
                         user.currTask.difficulty = difficulty
                         user.taskList[user.currTaskIndex].name=taskName
+                        user.taskList[user.currTaskIndex].category=user.categoryList[currentCategoryIndex]
                         user.taskList[user.currTaskIndex].description=taskDesc
                         user.taskList[user.currTaskIndex].dueDate=dueDate
                         user.taskList[user.currTaskIndex].difficulty=difficulty
@@ -110,11 +112,14 @@ struct TaskEditView: View {
                     Text("Category:")
                         .foregroundColor(.blue)
                     Menu("\(currentCategory)"){
-                        Button(action:{currentCategory="Mental Health" }, label:{
-                            Text("Mental Health")
-                            
-                        })
-                        Button(action:{currentCategory="Physical Health" }, label:{
+                        ForEach(0..<user.categoryList.count, id: \.self) { index in
+                            Button(action:{currentCategory = user.categoryList[index].name;
+                                currentCategoryIndex = index
+                            }, label:{
+                                Text(user.categoryList[index].name)
+                            })
+                        }
+           /*             Button(action:{currentCategory="Physical Health" }, label:{
                             Text("Physical Health")
                             
                         })
@@ -125,7 +130,7 @@ struct TaskEditView: View {
                         Button(action:{currentCategory="Spiritual" }, label:{
                             Text("Spiritual")
                             
-                        })
+                        })  */
                     }   //menus
                         .foregroundColor(.white)
                         .padding(.horizontal, 30)

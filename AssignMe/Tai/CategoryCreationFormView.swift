@@ -33,6 +33,7 @@ import SwiftUI
 struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
     @State var currentColor: String = "Select Category Color..."
+    @State var tabColor: Color = .red
     @EnvironmentObject var user: User
     @Environment(\.presentationMode) var presentation
 //    @State var isActive: Bool = false
@@ -92,7 +93,7 @@ struct CategoryCreationFormView: View {
                     Button("Add"){
                         let toAdd = Category(
                             name:categoryName,
-                            color: .red)
+                            color: tabColor)
                         user.categoryList.append(toAdd)
                         self.presentation.wrappedValue.dismiss()
                     } //button
@@ -125,31 +126,38 @@ struct CategoryCreationFormView: View {
                    
                 Menu("\(currentColor)"){
                     //Text("hello")
-                    Button(action:{currentColor="Yellow" }, label:{
+                    Button(action:{currentColor = "Yellow";
+                            tabColor = .yellow }, label:{
                         Text("Yellow")
                     })
-                    Button(action:{currentColor="Blue" }, label:{
+                    Button(action:{currentColor = "Blue";
+                            tabColor = .blue }, label:{
                         Text("Blue")
                         
                     })
-                    Button(action:{currentColor="Red" }, label:{
+                    Button(action:{currentColor = "Red";
+                            tabColor = .red }, label:{
                         Text("Red")
                         
                     })
-                    Button(action:{currentColor="Green" }, label:{
+                    Button(action:{currentColor = "Green";
+                            tabColor = .green}, label:{
                         Text("Green")
                         
                     })
-                    Button(action:{currentColor="Orange" }, label:{
+                    Button(action:{currentColor = "Orange";
+                            tabColor = .orange }, label:{
                         Text("Orange")
                         
                     })
-                    Button(action:{currentColor="Indigo" }, label:{
-                        Text("Indigo")
+                    Button(action:{currentColor = "Pink";
+                            tabColor = .pink}, label:{
+                        Text("Pink")
                         
                     })
-                    Button(action:{currentColor="Violet" }, label:{
-                        Text("Violet")
+                    Button(action:{currentColor = "Purple";
+                            tabColor = .purple }, label:{
+                        Text("Purple")
                             
 
                     })
@@ -166,7 +174,7 @@ struct CategoryCreationFormView: View {
 }
 struct CategoryCreationFormView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryCreationFormView().preferredColorScheme(.dark)
+        CategoryCreationFormView()
        
     }
 }

@@ -6,7 +6,7 @@
 //
 import SwiftUI
 import Foundation
-var Mental_Health = Category(name:"Mental Health",color:Color.red)
+var Uncategorized = Category(name:"Uncategorized",color:Color.gray)
 
 class User: ObservableObject {
     @Published var currTask: Task
@@ -20,7 +20,7 @@ class User: ObservableObject {
         self.name = name
         self.currTask = Task(
             name:"",
-            category: Mental_Health,
+            category: Uncategorized,
             description:"",
             difficulty: 1,
             dueDate: Date(),

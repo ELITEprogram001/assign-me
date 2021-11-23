@@ -40,6 +40,12 @@ struct CategoryCard: View {
     
     
     func del () {
+        for index in 0..<user.taskList.count {
+            if (user.taskList[index].category.id == user.categoryList[catIndex].id){
+                user.taskList[index].category = user.categoryList[0]
+            }
+        }
+        
         user.categoryList.remove(at: catIndex)
         //self.presentation.wrappedValue.dismiss()
     }
@@ -67,6 +73,20 @@ struct CategoryCard: View {
             
             
             Text("\(category.name)") //variable category name
+                .font(.system(size: 30, weight: .light, design: .serif))
+                .fontWeight(.bold)
+                .foregroundColor(Color.white)
+                .multilineTextAlignment(.leading)
+                .lineLimit(2)
+                //.frame(minWidth: 0, idealWidth: 150, maxWidth: 150, minHeight: 0, idealHeight: 3, maxHeight: 5, alignment: .leading)
+                .frame(width: 150, height: 50, alignment: .leading)
+                .minimumScaleFactor(0.39)
+                .padding(.leading, -125.0)
+                .padding (.bottom, 2)
+            
+            
+            
+    /*        Text("\(category.name)") //variable category name
                 .font(.system(size: 21, weight: .light, design: .serif))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
@@ -74,16 +94,16 @@ struct CategoryCard: View {
                 .frame(minWidth: 0, idealWidth: 150, maxWidth: 150, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .leading)
                 .lineLimit(1)
                 .padding(.leading, -125.0)
-                .padding (.bottom, 50)
+                .padding (.bottom, 50) */
             
             
-            Text("\nTasks: 3") //"\nTasks: (2)" number is a placeholder for now
+     /*       Text("\nTasks: 3") //"\nTasks: (2)" number is a placeholder for now
                 .font(.system(size: 21, weight: .light, design: .serif))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.leading)
                 .padding(.leading, -139.0)
-                .padding(.bottom, -30)
+                .padding(.bottom, -30) */
             
             
             HStack{ //attributes for the category colour tab to the left

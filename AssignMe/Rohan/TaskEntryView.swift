@@ -52,6 +52,7 @@ struct TaskEntryView: View {
     @State var taskName: String = ""
     @State var taskDesc: String = ""
     @State var currentCategory: String = "Uncategorized"
+    @State var currentCategoryIndex: Int = 0
     @State var dueDate: Date = Date()
     @State var difficulty=1
     @State var isActive: Bool = false
@@ -74,7 +75,7 @@ struct TaskEntryView: View {
                     Button("Add"){
                         let toAdd = Task(
                             name:taskName,
-                            category: user.categoryList[0],
+                            category: user.categoryList[currentCategoryIndex],
                             description:taskDesc,
                             difficulty:difficulty,
                             dueDate:dueDate,
@@ -119,12 +120,14 @@ struct TaskEntryView: View {
                     Text("Category:")       //category
                         .foregroundColor(.blue)
                     Menu("\(currentCategory)"){
-                        Button(action:{currentCategory="Mental Health" }, label:{
-                            Text("Mental Health")
-                            
-                            
-                        })
-                        Button(action:{currentCategory="Physical Health" }, label:{
+                        ForEach(0..<user.categoryList.count, id: \.self) { index in
+                            Button(action:{currentCategory = user.categoryList[index].name;
+                                currentCategoryIndex = index
+                            }, label:{
+                                Text(user.categoryList[index].name)
+                            })
+                        }
+                    /*    Button(action:{currentCategory="Physical Health" }, label:{
                             Text("Physical Health")
                             
                         })
@@ -135,8 +138,9 @@ struct TaskEntryView: View {
                         Button(action:{currentCategory="Spiritual" }, label:{
                             Text("Spiritual")
                             
-                        })
+                        })   */
                     } //menu
+                    .onAppear{currentCategory = "Uncategorized"; currentCategoryIndex = 0}
                     
                     .foregroundColor(.white)
                     .padding(.horizontal, 30)
@@ -151,6 +155,7 @@ struct TaskEntryView: View {
                     .labelsHidden()
                     .accentColor(.white)
                     .colorScheme(.dark)
+                    .onAppear{dueDate = Date()}
                 Rectangle()
                         .fill(Color.black)
                         .frame(width:340, height:1)
