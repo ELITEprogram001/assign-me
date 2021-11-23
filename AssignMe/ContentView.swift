@@ -70,7 +70,7 @@ struct ContentView: View {
                     Image(systemName: "square.grid.2x2.fill")
                 }
                 .tag(4)
-            Profile()
+            ProfileView()
                 .tabItem {
                     Text("Profile")
                     Image(systemName: "person.fill")

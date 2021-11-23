@@ -90,8 +90,6 @@ struct CalendarView: View {
                             // Update selected cell and highlight it red
                             selectedCell = cell
                             selectedCell.updateState(selected: true)
-                            print("[SELECT] cell: \(cell.id)\tselected: \(cell.cellState.selected)")
-                            print("[DEBUG] selectedCell: \(selectedCell)")
 
                             updateDailyViewTitle(d: selectedCell.date)
                         }
@@ -101,7 +99,7 @@ struct CalendarView: View {
             .padding(.bottom)
             // end LazyVGrid
             Divider()
-                .frame(height: 4)
+                .frame(height: 3)
                 .background(Color.white)
             VStack(spacing: 10){
                 HStack {
@@ -164,8 +162,6 @@ struct CalendarView: View {
                         cell.updateState(selected: true)
                         lastSelectedCell = cell
                         _selectedCell = State(initialValue: cell)
-                        print("[DEBUG] selectedCell: \(selectedCell)")
-                        print("[DEBUG] cell: \(cell)")
                     }
                     currentMonth.append(cell)
                 }
@@ -185,18 +181,11 @@ struct CalendarView: View {
     func getMonthCells(d: Date) -> [Cell]? {
         let year = Calendar.current.component(.year, from: d)
         let month = Calendar.current.component(.month, from: d)
-        //print("[INFO] looking for \(year)-\(month)")
         for yearArr in calendar {
-            //print("[INFO] found year: \(Calendar.current.component(.year, from: yearArr[0][0].date))")
             if (Calendar.current.component(.year, from: yearArr[0][0].date) == year) {
                 for monthArr in yearArr {
                     //print("[INFO] found month: \(Calendar.current.component(.month, from: monthArr[0].date))")
                     if (Calendar.current.component(.month, from: monthArr[0].date) == month) {
-//                        print("================= Gathered Month Array =================")
-//                        for cell in monthArr {
-//                            print("cell: \(cell.id)\tselected: \(cell.cellState.selected)")
-//                        }
-//                        print("=================== End Month Array ====================")
                         return monthArr
                     }
                 }
@@ -209,7 +198,6 @@ struct CalendarView: View {
     func getOffset() -> [EmptyCell] {
         shift.offsets.removeAll()
         let firstWeekday = getFirstWeekdayOfMonth(d: date)
-        print("[DEBUG] first weekday is: \(firstWeekday)")
         if(firstWeekday > 1) {
             for _ in 1...(firstWeekday - 1) {
                 shift.offsets.append(EmptyCell())
@@ -358,6 +346,7 @@ extension Color {
     static let bg_light = Color.init(red: 45/255, green: 45/255, blue: 45/255)
     static let blew = Color.init(red: 131/255, green: 201/255, blue: 244/255)
     static let near_black = Color.init(red: 10/255, green: 10/255, blue: 10/255)
+    static let bright_maroon = Color.init(red: 185/255, green: 49/255, blue: 79/255)
 }
 
 class Offsets {

@@ -17,45 +17,66 @@ struct ProfileView: View {
     var body: some View {
         VStack(spacing: 0) {
             
-            // Banner Section
-            HStack() {
-                Spacer()
-                Image("cuttlefish_eye")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .mask(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 3))
-                    .offset(x: 0, y: 100/4)
-                Spacer()
+            ZStack {
+                VStack(spacing: 0) {
+                    // Banner Section
+                    HStack() {
+                        //Image("underwater_banner")
+                        //.resizable()
+                        Rectangle()
+                            .fill(Color.bright_maroon)
+                            /* Uncomment if a gradient is desired
+                            .overlay(Rectangle()
+                                        .fill(
+                                            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.9), Color.black.opacity(0.1)]), startPoint: .bottom, endPoint: .top)
+                                        )
+                                    )
+                            */
+                            .ignoresSafeArea()
+                    }
+                    .frame(minHeight: 40, idealHeight: 60, maxHeight: 70)
+                    .background(Color.yellow)
+                    // end HStack
+         
+                    Divider()
+                        .frame(height: 3)
+                        .background(Color.white)
+                    
+                    // Graph and Quote Section
+                    TabView {
+                        Text("TODO Graph")
+                        Text("TODO Medal Stats")
+                        QuoteView(quote: "You simply have to put one foot in front of the other and keep going. Put blinders on and plow right ahead.", author: "George Lucas")
+                    }
+                    .tabViewStyle(PageTabViewStyle())
+                    .indexViewStyle(PageIndexViewStyle())
+                    .background(Color.black)
+                    .font(.custom("Viga-Regular", size: 20, relativeTo: .title))
+                    .foregroundColor(Color.white)
+                    // end TabView
+                    
+                    //Spacer() Leaving this as a learning reminder. Spacers have a minimum distance and sometimes act like padding 
+                }
+                VStack(spacing: 0) {
+                    HStack() {
+                        Spacer()
+                        Image("cuttlefish_eye")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                            .mask(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 3))
+                            .offset(x: 0, y: 80/8)
+                        Spacer()
+                    }
+                    Spacer()
+                }
             }
-            .background(
-                Image("underwater_banner")
-                    .resizable()
-                    .ignoresSafeArea()
-            )
-            // end HStack
+            .frame(minHeight: 20, idealHeight: 80, maxHeight: 300)
+            // end ZStack
             
-            /* TODO: Need to figure out how to put divider under picture
             Divider()
-                .frame(minWidth: 0, maxWidth: .infinity)
                 .frame(height: 3)
-                .padding(.vertical, 0)
                 .background(Color.white)
-            */
- 
-            // Statistics Section
-            TabView {
-                Text("TODO Graph")
-                Text("TODO Medal Stats")
-                QuoteView(quote: "You simply have to put one foot in front of the other and keep going. Put blinders on and plow right ahead.", author: "George Lucas")
-            }
-            .tabViewStyle(PageTabViewStyle())
-            .indexViewStyle(PageIndexViewStyle())
-            .background(Color.red)
-            .font(.custom("Viga-Regular", size: 20, relativeTo: .title))
-            .foregroundColor(Color.white)
-            .frame(minWidth: 0, idealWidth: .infinity)
-            
             
             // Achievement Section
             ScrollView(.vertical) {
@@ -66,26 +87,24 @@ struct ProfileView: View {
                 .font(.custom("Viga-Regular", size: 20, relativeTo: .title))
                 .foregroundColor(Color.white)
                 .padding(.horizontal)
+                .padding(.top, 8)
                 // end HStack
                 
                 LazyVGrid (columns: columns, spacing: 15) {
-                    AchievementCards(title: "Redemption", desc: "Complete 3 tasks that were overdue.", color: .red)
-                    AchievementCards(title: "Overachiever", desc: "Complete 5 tasks that aren't due for another week.", color: .green)
-                    AchievementCards(title: "A Marathon Starts With a Step", desc: "Complete your first task!", color: .blue)
-                    AchievementCards(title: "Dedicated", desc: "Complete 4 tasks for one category back to back.", color: .orange)
-                    AchievementCards(title: "Busy Bee", desc: "Have 15 tasks scheduled.", color: .yellow)
-                    AchievementCards(title: "Consistent Worker", desc: "Complete all your tasks on time for 5 days in a row.", color: .red)
-                    AchievementCards(title: "The Planner", desc: "Plan your first 3 tasks.", color: .orange)
-                    AchievementCards(title: "Take a break", desc: "Complete 3 tasks in 1 hour.", color: .green)
+                    AchievementCards(title: "Redemption", desc: "Complete 3 tasks that were overdue.", color: .gray)
+                    AchievementCards(title: "Overachiever", desc: "Complete 5 tasks that aren't due for another week.", color: .gray)
+                    AchievementCards(title: "A Marathon Starts With a Step", desc: "Complete your first task!", color: .gray)
+                    AchievementCards(title: "Dedicated", desc: "Complete 4 tasks for one category back to back.", color: .gray)
+                    AchievementCards(title: "Busy Bee", desc: "Have 15 tasks scheduled.", color: .gray)
+                    AchievementCards(title: "Consistent Worker", desc: "Complete all your tasks on time for 5 days in a row.", color: .gray)
+                    AchievementCards(title: "The Planner", desc: "Plan your first 3 tasks.", color: .gray)
+                    AchievementCards(title: "Take a break", desc: "Complete 3 tasks in 1 hour.", color: .gray)
                 }
                 .padding(.horizontal)
             }
-            .padding(.top, 10)
             .background(Color.bg_dark.ignoresSafeArea())
-            
-            Spacer()
         }
-        .background(Color.bg_light.ignoresSafeArea())
+        .background(Color.yellow.ignoresSafeArea())
         // end VStack
     }
 }
@@ -136,17 +155,20 @@ struct QuoteView: View {
         VStack(spacing: 0) {
             HStack (spacing: 0) {
                 Spacer()
+                /* I don't know how I feel about the image
                 Image(systemName: "quote.bubble")
                     .resizable()
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                     .frame(width: 35, height: 35, alignment: .leading)
-                    .padding()
+                    .padding(.horizontal)
                     .foregroundColor(Color.white)
-                Text("A Quote For Consideration")
-                    .padding(.vertical, 16)
+                 */
+                Text("Keep it up!")
                 Spacer()
             }
-            .padding(.top, 15)
+            .padding(.top, 32)
+            .padding(.bottom, 16)
+            
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     Spacer()
@@ -159,8 +181,9 @@ struct QuoteView: View {
                     .font(.custom("Ubuntu-LightItalic", size: 12, relativeTo:.footnote))
                     .offset(x: 60, y: 0)
                     .padding(.top, 20)
+                    .padding(.bottom, 30)
             }
-            .padding(.top, 30)
+            
             Spacer()
         }
         .background(Color.near_black)
