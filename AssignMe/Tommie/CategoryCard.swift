@@ -85,6 +85,7 @@ struct CategoryCard: View {
                 .padding (.bottom, 2)
             
             
+//-------------------------------KEEP ME FOR NOW 4:03 AM 23 November 2021 ---------------------
             
     /*        Text("\(category.name)") //variable category name
                 .font(.system(size: 21, weight: .light, design: .serif))
@@ -104,6 +105,7 @@ struct CategoryCard: View {
                 .multilineTextAlignment(.leading)
                 .padding(.leading, -139.0)
                 .padding(.bottom, -30) */
+//----------------------------------- END-------------------------------------------------
             
             
             HStack{ //attributes for the category colour tab to the left
