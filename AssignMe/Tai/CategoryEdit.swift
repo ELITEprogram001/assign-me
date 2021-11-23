@@ -48,8 +48,6 @@ struct CategoryEdit: View {
     
     func colorString (color: Color) -> String {
         switch color {
-        case Color.black: return "black"
-        case Color.white: return "white"
         case Color.gray: return "Gray"
         case Color.red: return "Red"
         case Color.green: return "Green"
@@ -68,7 +66,7 @@ struct CategoryEdit: View {
         
         //NavigationView{
         ZStack {
-            Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)//for gray mode
+            Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)//for gray mode
             VStack(spacing: 15){
                     
                     
@@ -77,7 +75,6 @@ struct CategoryEdit: View {
                     Button("Back"){
                         self.presentation.wrappedValue.dismiss()
                     }
-                    //.buttonStyle(FilledButton(isActive: false))
                     .frame(width: 60, height: 40)
                     .padding(.leading,5)
                     .background(Color(red: 0.17, green: 0.17, blue: 0.17))

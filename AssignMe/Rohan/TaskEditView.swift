@@ -6,31 +6,17 @@
 //
 import SwiftUI
 
-private struct FilledButton: ButtonStyle {
-    //@Environment(\.isEnabled) private var isEnabled
-    var isActive: Bool
-    func makeBody(configuration: Configuration) -> some View {
-        configuration
-            .label
-            .foregroundColor(configuration.isPressed ? .gray : .white)
-            .background(isActive ? Color.blue : Color(red: 0.15, green: 0.15, blue: 0.15))
-            .cornerRadius(8)
-    }
-}
-
-
-
 struct TaskEditView: View {
     @State var taskName: String = ""
     @State var taskDesc: String = ""
     @State var currentCategory: String = "Uncategorized"
-    @State var currentCategoryIndex: Int = 0
     @State var dueDate: Date = Date()
     @State var difficulty=1
     @State var isActive: Bool = false
     @EnvironmentObject var user: User
     var task: Task
     @Environment(\.presentationMode) var presentation
+    
     init(task: Task){
         self.task = task
         _taskName = State(initialValue: task.name)
@@ -64,13 +50,8 @@ struct TaskEditView: View {
                         .frame(width:120, height: 40)
                         .padding(.horizontal, 10)
                     Button("Save"){
-                        user.currTask.name = taskName
-                        user.currTask.description = taskDesc
-                        user.currTask.category = user.categoryList[currentCategoryIndex]
-                        user.currTask.dueDate = dueDate
-                        user.currTask.difficulty = difficulty
                         user.taskList[user.currTaskIndex].name=taskName
-                        user.taskList[user.currTaskIndex].category=user.categoryList[currentCategoryIndex]
+                        user.taskList[user.currTaskIndex].category=user.categoryList[user.indexCatList]
                         user.taskList[user.currTaskIndex].description=taskDesc
                         user.taskList[user.currTaskIndex].dueDate=dueDate
                         user.taskList[user.currTaskIndex].difficulty=difficulty
@@ -79,7 +60,6 @@ struct TaskEditView: View {
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
-                    //.buttonStyle(FilledButton(isActive: isActive))
                     .padding(.trailing, 55)
                     
                 } //hstack
@@ -114,23 +94,12 @@ struct TaskEditView: View {
                     Menu("\(currentCategory)"){
                         ForEach(0..<user.categoryList.count, id: \.self) { index in
                             Button(action:{currentCategory = user.categoryList[index].name;
-                                currentCategoryIndex = index
+                                user.indexCatList = index
                             }, label:{
                                 Text(user.categoryList[index].name)
                             })
                         }
-           /*             Button(action:{currentCategory="Physical Health" }, label:{
-                            Text("Physical Health")
-                            
-                        })
-                        Button(action:{currentCategory="Financial" }, label:{
-                            Text("Financial")
-                            
-                        })
-                        Button(action:{currentCategory="Spiritual" }, label:{
-                            Text("Spiritual")
-                            
-                        })  */
+
                     }   //menus
                         .foregroundColor(.white)
                         .padding(.horizontal, 30)

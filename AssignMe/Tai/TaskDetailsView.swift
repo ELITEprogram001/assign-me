@@ -13,6 +13,7 @@ struct TaskDetailsView: View {
     @State private var isActive = false
     @State private var willMoveToNextScreen = false
     let formatter = DateFormatter()
+    
     var body: some View {
         ZStack {
             Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
@@ -62,7 +63,7 @@ struct TaskDetailsView: View {
                     Text("Task Name:")
                         .foregroundColor(.blue)
                     
-                    Text(user.currTask.name)
+                    Text( user.taskList[user.currTaskIndex].name)
                         .font(.title)
                         .fontWeight(.semibold)
                         .lineLimit(2)
@@ -70,13 +71,13 @@ struct TaskDetailsView: View {
                         .padding(.horizontal)
                     Text("Description:")
                         .foregroundColor(.blue)
-                    Text(user.currTask.description)
+                    Text( user.taskList[user.currTaskIndex].description)
                         .lineLimit(2)
                         .multilineTextAlignment(.center) //to alight to center
                         .padding(.horizontal)
                     Text("Due Date:")
                         .foregroundColor(.blue)
-                    Text("\(user.currTask.dueDate)")
+                    Text("\( user.taskList[user.currTaskIndex].dueDate)")
                         
  //                   Text((formatter.date(from: "\(user.currTask.dueDate)" )
                         .lineLimit(2)
@@ -86,7 +87,7 @@ struct TaskDetailsView: View {
                     Text("Difficulty:")
                         .foregroundColor(.blue)
                     HStack( spacing: 1){
-                        let starCount = user.currTask.difficulty
+                        let starCount =  user.taskList[user.currTaskIndex].difficulty
                         ForEach (1...starCount, id:\.self) { _ in
                             Image(systemName: "star.fill")
                                 .resizable()
@@ -99,18 +100,6 @@ struct TaskDetailsView: View {
                     Group{
                         Text("Category:")
                             .foregroundColor(.blue)
-                        
-//                        Text("\(user.currTask.category)")
-//                            .font(.title)
-//                            .lineLimit(2)
-//                            .multilineTextAlignment(.center) //to alight to center
-//                            .padding(.horizontal)
-                        
-                        //                    Text("hello")
-                        //                    HStack(){
-                        //                        Text("Over Due ?:")
-                        //                            .foregroundColor(.blue)
-                        //                    } //hStack
                         
                         Spacer()
                         HStack{
@@ -139,11 +128,6 @@ struct TaskDetailsView: View {
                     }
                     
                     
-                    //                    Text(task.isOverdue)
-                    //                        .font(.title)
-                    //                        .lineLimit(2)
-                    //                        .multilineTextAlignment(.center) //to alight to center
-                    //                        .padding(.horizontal)
                 } //vstack
                 .frame(width: 370 , alignment: .leading)
                 .font(.title2)
@@ -154,9 +138,13 @@ struct TaskDetailsView: View {
             .navigationBarHidden(true)
             //.ignoresSafeArea()
         }
+        .onAppear{
+
+            print(user.indexCatList)
+        }
         .navigationBarTitle("")
         .navigationBarHidden(true)
-        .navigate(to: TaskEditView(task:user.currTask).navigationBarHidden(true), when: $willMoveToNextScreen)
+        .navigate(to: TaskEditView(task: user.taskList[user.currTaskIndex]).navigationBarHidden(true), when: $willMoveToNextScreen)
         //Zstack
         //.ignoresSafeArea(.all)
     } //body

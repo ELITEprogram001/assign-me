@@ -11,6 +11,7 @@ var Uncategorized = Category(name:"Uncategorized",color:Color.gray)
 class User: ObservableObject {
     @Published var currTask: Task
     @Published var currTaskIndex: Int
+    @Published var indexCatList: Int
     @Published var name: String
     @Published var taskList = [Task]()
     @Published var categoryList = [Category]()
@@ -27,6 +28,7 @@ class User: ObservableObject {
             dateCompleted: Date(),
             isOverdue: false )
         self.currTaskIndex = 0
+        self.indexCatList = 0
     }
     func addCategory(cat:Category){
         categoryList.append(cat)

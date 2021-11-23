@@ -61,7 +61,7 @@ struct TaskEntryView: View {
     
     var body: some View {
         ZStack(){
-            Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
+            Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)
             VStack(spacing: 15) {
                 HStack(alignment: .center){
                    

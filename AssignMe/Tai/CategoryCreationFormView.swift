@@ -6,29 +6,6 @@
 //
 
 import SwiftUI
-//struct FilledButton: ButtonStyle {
-//    @Environment(\.isEnabled) private var isEnabled
-//    var isActive: Bool
-//    func makeBody(configuration: Configuration) -> some View {
-//        configuration
-//            .label
-//            .foregroundColor(configuration.isPressed ? .gray : .white)
-//            .background(isActive ? Color.blue : Color(red: 0.15, green: 0.15, blue: 0.15))
-//            .cornerRadius(8)
-//    }
-//}
-//extension View {
-//    func placeholder<Content: View>(
-//        when shouldShow: Bool,
-//        alignment: Alignment = .leading,
-//        @ViewBuilder placeholder: () -> Content) -> some View {
-//
-//        ZStack(alignment: alignment) {
-//            placeholder().opacity(shouldShow ? 1 : 0)
-//            self
-//        }
-//    }
-//} //view extension
 
 struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
@@ -36,16 +13,6 @@ struct CategoryCreationFormView: View {
     @State var tabColor: Color = .red
     @EnvironmentObject var user: User
     @Environment(\.presentationMode) var presentation
-//    @State var isActive: Bool = false
-//    func ActiveLogic() -> Bool{
-//        if(categoryName=="Enter Category Name...")
-//        {
-//            return false
-//        }
-//        else{
-//            return true
-//        }
-//    }
     
     var body: some View {
         
@@ -69,16 +36,6 @@ struct CategoryCreationFormView: View {
 
                     })  //button
                     
-//                    Button("Back"){
-//                        self.presentation.wrappedValue.dismiss()
-//                    }
-//                    //.buttonStyle(FilledButton(isActive: false))
-//                    .frame(width: 60, height: 40)
-//                    .padding(.leading,5)
-//                    .background(Color(.blue))
-//                    .foregroundColor(.white)
-//                    .cornerRadius(10)
-                    
                     Spacer()
                     Text("Category Entry")
                         .bold()
@@ -87,8 +44,7 @@ struct CategoryCreationFormView: View {
                         .foregroundColor(.white)
                         .padding(.horizontal,10)
                     
-                 /*   BlueButton(title:"Add")
-                        .padding(.horizontal,10)  */
+
                     Spacer()
                     Button("Add"){
                         let toAdd = Category(
@@ -104,11 +60,6 @@ struct CategoryCreationFormView: View {
                     .padding(.horizontal,2)
                     
                     Spacer()
-//                    Button("Add"){
-//
-//                    }
-//                    .buttonStyle(FilledButton(isActive: isActive))
-//                    .padding(.trailing,15)
                     
                 } //hstack
                 

@@ -26,6 +26,11 @@ struct WeeklyView: View {
                                 .onAppear {
                                     user.currTask = user.taskList[index]
                                     user.currTaskIndex = index
+                                    for index in 0..<user.categoryList.count{
+                                        if (user.taskList[user.currTaskIndex].category.id == user.categoryList[index].id) {
+                                            user.indexCatList = index
+                                        }
+                                    }
                                 },
                                label:{
                                 TaskCard(task: user.taskList[index])
