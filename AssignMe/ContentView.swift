@@ -7,15 +7,13 @@
 
 import SwiftUI
 struct ContentView: View {
-///##############################
+    
 //    // Test Category
     @State private var tabSelection = 1
     var Uncategorized = Category(name:"Uncategorized",color:Color.gray) //var for uncategorized category that's hidden from CategoriesListView
     
     
-//    var task: Task
-//    var testing=true
-    var user:User = User(name: "Rommie")
+    var user:User = User(name: "User")
     init()
     {
         
@@ -29,28 +27,9 @@ struct ContentView: View {
         user.taskList.append(sample3)
         
     }
-//    var body: some View {
-//
-//        if (testing)
-//        {
-//
-//            NavigationView {
-//                NavigationLink(destination: TaskDetailsView(task: task)) {
-//                            Text("PUSH")
-//
-//                        }
-//            }
-//        } //end iff
-//    } //end body var
-//}
-//##################################
-
-
-    //var catList = [Category]()
 
     var body: some View {
         TabView(selection:$tabSelection){
-            //CategoryCreationFormView()
             WeeklyView(tabSelection: 1)
                 .tabItem {
                     Text("Weekly View")
@@ -94,12 +73,12 @@ struct ContentView: View {
 
     
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .preferredColorScheme(.dark)
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//            .preferredColorScheme(.dark)
+//    }
+//}
 
 struct CategoryView: View {
     var body: some View {
@@ -113,12 +92,6 @@ struct CategoryView: View {
                     }
                 }
         }
-    }
-}
-    
-struct Profile: View {
-    var body: some View {
-        Text("Profile")
     }
 }
 

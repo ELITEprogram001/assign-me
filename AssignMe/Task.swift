@@ -27,8 +27,8 @@ struct Task: Identifiable {
     }
     
     func isDue(_ d: Date) -> Bool {
-        var dueDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: dueDate)
-        var checkDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: d)
+        let dueDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: dueDate)
+        let checkDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: d)
         if(dueDateComponents.day == checkDateComponents.day) {
             if(dueDateComponents.month == checkDateComponents.month) {
                 if(dueDateComponents.year == checkDateComponents.year) {
@@ -52,7 +52,7 @@ struct TaskList {
             difficulty: 5,
             dueDate: Date(),
             dateCompleted: Date(),
-            isOverdue: Bool()
+            isOverdue: false
         ),
         Task(
             name: "Shopping",
@@ -61,7 +61,7 @@ struct TaskList {
             difficulty: 5,
             dueDate: Date(),
             dateCompleted: Date(),
-            isOverdue: Bool()
+            isOverdue: true
         ),
     ]
 }
