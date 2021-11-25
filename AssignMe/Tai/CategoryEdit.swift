@@ -27,7 +27,7 @@ extension UIColor {
         default: return nil
         }
     }
-}
+} //UI color
 
 struct CategoryEdit: View {
     @State private var categoryName: String = ""
@@ -59,17 +59,11 @@ struct CategoryEdit: View {
         default: return "uncolored"
         }
     }
-    
-    
     var body: some View {
-        
-        
         //NavigationView{
         ZStack {
             Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)//for gray mode
             VStack(spacing: 15){
-                    
-                    
                 HStack(){
                     Spacer()
                     Button(action:{
@@ -82,16 +76,14 @@ struct CategoryEdit: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         .padding(.leading, 10 )
-
-                    }) 
+                    })
                     Spacer()
                     Text("Category Edit")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
+                        .font(.custom("Viga-Regular", size: 25))
+                        //.font(.system(size: 25, weight: .bold, design: .serif))
                         .padding(.horizontal,20)
                         .foregroundColor(.white)
-                    
                     Spacer()
-                    
                     Button(
                         action:{
                             user.categoryList[catIndex].name = categoryName

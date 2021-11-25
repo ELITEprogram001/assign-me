@@ -120,21 +120,13 @@ struct TaskDetailsView: View {
                                 .multilineTextAlignment(.center) //to alight to center
                                 .padding(.horizontal)
                                 .foregroundColor(task.category.color)
-                            
-                            
-                            
 //                            Rectangle()
 //                                .frame(width: 80 ,height: 30)
 //                                .foregroundColor(task.category.color)
-                               
-                                    
+ 
                             Spacer()
                             //Text( "\(Color(task.category.color))" )
                         }
-                        
-                        
-                        
-                        
                         Spacer()
                         HStack{
                         Spacer()
@@ -158,9 +150,7 @@ struct TaskDetailsView: View {
                             .padding(.leading, 15 )
                         Spacer()
                         }
-                        
                     }
-                    
                     
                 } //vstack
                 .frame(width: 370 , alignment: .leading)

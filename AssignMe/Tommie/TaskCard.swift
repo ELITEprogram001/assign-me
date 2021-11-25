@@ -64,9 +64,6 @@ struct TaskCard: View {
                     .frame(minWidth: 0, idealWidth: 100, maxWidth: 300, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
                     .padding(.leading, 10.0)
                     .padding(.top, 40)
-                
-                
-                
                 HStack{ //attributes for the category colour tab to the left
                     Rectangle() //Left-hand category colour tab
                         .foregroundColor(task.category.color)
