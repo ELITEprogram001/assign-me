@@ -63,6 +63,16 @@ struct CategoryCard: View {
         return catIndex
     }
     
+    func taskNum() -> Int {
+        var count = 0
+        for index in 1..<user.taskList.count {
+            if (user.taskList[index].category.name == user.categoryList[catIndex].name){
+                count = count + 1
+            }
+        }
+        return count
+    }
+    
     var body: some View {
         ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
             Rectangle() //Card Body
@@ -82,6 +92,15 @@ struct CategoryCard: View {
                 .minimumScaleFactor(0.39)
                 .padding(.leading, -125.0)
                 .padding (.bottom, 2)
+            
+            
+            Text("\nTasks: \(taskNum())") //"\nTasks: (2)" number is a placeholder for now
+                       .font(.system(size: 21, weight: .light, design: .serif))
+                       .fontWeight(.bold)
+                       .foregroundColor(Color.white)
+                       .multilineTextAlignment(.leading)
+                       .padding(.leading, -139.0)
+                       .padding(.bottom, -30)
             
             
 //-------------------------------KEEP ME FOR NOW 4:03 AM 23 November 2021 ---------------------
