@@ -19,10 +19,18 @@ struct ContentView: View {
     init()
     {
         
-//        task = Task(name: "push ups", category: Mental_Health, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(),dateCompleted: Date(), isOverdue: true)
         
         
+        // TODO implement persistent data
         user.addCategory(cat:Uncategorized) //init for uncategorized category
+        var sample = Task(name: "push ups", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(), dateCompleted: Date(), isOverdue: true)
+        var sample2 = Task(name: "push downs", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date(), dateCompleted: Date(), isOverdue: true)
+        var sample3 = Task(name: "push sides", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Calendar.current.date(byAdding: .day, value: 14, to: Date()) ?? Date(), dateCompleted: Date(), isOverdue: true)
+        user.taskList.append(sample)
+        user.taskList.append(sample2)
+        user.taskList.append(sample3)
+        
+        
     }
 //    var body: some View {
 //

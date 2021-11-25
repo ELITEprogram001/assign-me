@@ -22,6 +22,7 @@ struct CalendarView: View {
     //Cell(id: "6666-66-66", "66", date: Date())
     @ObservedObject var cellState = CellState()
     var calendar: [[[Cell]]]
+    @EnvironmentObject var user: User
 
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -43,7 +44,7 @@ struct CalendarView: View {
                 }) {
                     Image(systemName: "arrow.left")
                 }
-                .foregroundColor(.red)
+                .foregroundColor(.bright_maroon)
                 Spacer()
                 Text(getMonthTitle(d: date))
                     .bold()
@@ -54,7 +55,7 @@ struct CalendarView: View {
                 }) {
                     Image(systemName: "arrow.right")
                 }
-                .foregroundColor(.red)
+                .foregroundColor(.bright_maroon)
                 Spacer()
             }
             .padding(.bottom, 10)
@@ -64,7 +65,7 @@ struct CalendarView: View {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(dayLabels) { item in
                     Text(item.label)
-                        .foregroundColor(Color.red)
+                        .foregroundColor(Color.bright_maroon)
                 }
                 .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.body))
                 .padding(.bottom, 10)
@@ -90,6 +91,10 @@ struct CalendarView: View {
                             // Update selected cell and highlight it red
                             selectedCell = cell
                             selectedCell.updateState(selected: true)
+                            // Used as debugging
+//                            for t in user.taskList {
+//                                print(t.name)
+//                            }
 
                             updateDailyViewTitle(d: selectedCell.date)
                         }
@@ -113,10 +118,13 @@ struct CalendarView: View {
                 .padding(.top, 10)
                 ScrollView {
                     LazyVStack(spacing: 0){
-                        // TODO: Add filter to only show the current day
-                        debugTaskCard(name: "Take Out Trash", desc: "Take out kitchen and bathroom trash", dif: 1, dueM: 11, dueD: 9)
-                        debugTaskCard(name: "Run 2 Miles", desc: "Training for a 5k", dif: 3, dueM: 11, dueD: 9)
-                        debugTaskCard(name: "Create an App", desc: "Learn Swift and make a functional app :/", dif: 5, dueM: 12, dueD: 9)
+                        // TODO add filter by day
+                        ForEach(user.taskList) { t in
+                            if(t.isDue(selectedCell.date)) {
+                                TaskCard(task: t)
+                            }
+                        }
+                        
                     } // end LazyVStack
                 } // end Scrollview
             }
@@ -223,17 +231,6 @@ struct CalendarView: View {
         return Calendar.current.monthSymbols[(Calendar.current.component(.month, from: d)) - 1]
     }
     
-    func debugTaskCard(name: String, desc: String, dif: Int, dueM: Int, dueD: Int) -> some View {
-        var dueDateComponents = DateComponents()
-        var dueDate: Date
-        dueDateComponents.month = dueM
-        dueDateComponents.day = dueD
-        dueDate = Calendar.current.date(from: dueDateComponents)!
-        let category = Category(name: "Uncategorized", color: Color.blew)
-        let task = Task(name: name, category: category, description: desc, difficulty: dif, dueDate: dueDate, dateCompleted: dueDate, isOverdue: false)
-        return TaskCard(task: task)
-    }
-    
     func getNextMonth(value: Int) {
         date = Calendar.current.date(byAdding: .month, value: value, to: date) ?? Date()
     }
@@ -277,56 +274,7 @@ struct DailyViewTitle: View {
     }
 }
 
-struct Cell: View, Identifiable, Equatable{
-    
-    let day: String
-    let id: String
-    let date: Date
-    @ObservedObject var cellState: CellState
-    
-    init(id: String, _ day: String, date: Date) {
-        self.day = day
-        self.id = id
-        self.date = date
-        self.cellState = CellState()
-    }
-    
-    var body: some View {
-        VStack(spacing: 3){
-            Divider()
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .frame(height: 1)
-                .padding(.vertical, 0)
-                .background(Color.gray)
-            Text(day).bold()
-                .foregroundColor(cellState.color)
-            Spacer()
-        }
-        .font(.custom("Ubuntu-Regular", size: 16, relativeTo: .body))
-        .frame(minHeight: 60, maxHeight: 100)
-        .contentShape(Rectangle())
-    }
-    
-    func updateState (selected: Bool) {
-        self.cellState.selected = selected
-        if(selected) {
-            self.cellState.color = Color.red
-        } else {
-            self.cellState.color = Color.white
-        }
-    }
-    
-    static func == (lhs: Cell, rhs: Cell) -> Bool {
-        let lhsComp = Calendar.current.dateComponents([.day, .month, .year], from: lhs.date)
-        let rhsComp = Calendar.current.dateComponents([.day, .month, .year], from: rhs.date)
-        return (lhsComp.day == rhsComp.day) && (lhsComp.month == rhsComp.month) && (lhsComp.year == rhsComp.year)
-    }
-}
 
-class CellState: ObservableObject {
-    @Published var color = Color.white
-    @Published var selected = false
-}
 
 private struct DayLabel: Identifiable {
     var id = UUID()
@@ -337,28 +285,10 @@ private struct DayLabel: Identifiable {
     }
 }
 
-struct EmptyCell: Identifiable, Hashable {
-    var id = UUID()
-}
 
-extension Color {
-    static let bg_dark = Color.init(red: 30/255, green: 30/255, blue: 30/255)
-    static let bg_light = Color.init(red: 45/255, green: 45/255, blue: 45/255)
-    static let blew = Color.init(red: 131/255, green: 201/255, blue: 244/255)
-    static let near_black = Color.init(red: 10/255, green: 10/255, blue: 10/255)
-    static let bright_maroon = Color.init(red: 185/255, green: 49/255, blue: 79/255)
-}
 
-class Offsets {
-    var offsets: [EmptyCell]
-    
-    init() {
-        offsets = []
-    }
-}
-
-struct CalendarView_Previews: PreviewProvider {
-    static var previews: some View {
-        CalendarView()
-    }
-}
+//struct CalendarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CalendarView()
+//    }
+//}
