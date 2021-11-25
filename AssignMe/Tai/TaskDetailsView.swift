@@ -12,9 +12,23 @@ struct TaskDetailsView: View {
     @EnvironmentObject var user: User
     @State private var isActive = false
     @State private var willMoveToNextScreen = false
+    
+    var task: Task
     let formatter = DateFormatter()
+    init(task:Task) {
+        self.task = task
+        formatter.dateFormat = "EEEE, MMMM d, yyyy HH:mm a"
+    }
+    func getIndex() -> Int {
+            if (user.currTaskIndex == user.taskList.count)
+            {
+                return user.currTaskIndex-1
+            }
+            return user.currTaskIndex
+    }
     
     var body: some View {
+        
         ZStack {
             Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
             VStack(alignment: .center, spacing: 30){
@@ -63,7 +77,7 @@ struct TaskDetailsView: View {
                     Text("Task Name:")
                         .foregroundColor(.blue)
                     
-                    Text( user.taskList[user.currTaskIndex].name)
+                    Text( user.taskList[getIndex()].name)
                         .font(.title)
                         .fontWeight(.semibold)
                         .lineLimit(2)
@@ -71,14 +85,14 @@ struct TaskDetailsView: View {
                         .padding(.horizontal)
                     Text("Description:")
                         .foregroundColor(.blue)
-                    Text( user.taskList[user.currTaskIndex].description)
+                    Text( user.taskList[getIndex()].description)
                         .lineLimit(2)
                         .multilineTextAlignment(.center) //to alight to center
                         .padding(.horizontal)
                     Text("Due Date:")
                         .foregroundColor(.blue)
-                    Text("\( user.taskList[user.currTaskIndex].dueDate)")
-                        
+                   // Text("\( user.taskList[user.currTaskIndex].dueDate)")
+                    Text("\(formatter.string(from:task.dueDate))")
  //                   Text((formatter.date(from: "\(user.currTask.dueDate)" )
                         .lineLimit(2)
                         .multilineTextAlignment(.center) //to alight to center
@@ -87,7 +101,7 @@ struct TaskDetailsView: View {
                     Text("Difficulty:")
                         .foregroundColor(.blue)
                     HStack( spacing: 1){
-                        let starCount =  user.taskList[user.currTaskIndex].difficulty
+                        let starCount =  user.taskList[getIndex()].difficulty
                         ForEach (1...starCount, id:\.self) { _ in
                             Image(systemName: "star.fill")
                                 .resizable()
@@ -98,31 +112,51 @@ struct TaskDetailsView: View {
                     .padding()
                     
                     Group{
-                        Text("Category:")
+                        Text("Category Name:")
                             .foregroundColor(.blue)
+                        
+                        HStack{
+                            Text(  "\(task.category.name )" )
+                                .multilineTextAlignment(.center) //to alight to center
+                                .padding(.horizontal)
+                                .foregroundColor(task.category.color)
+                            
+                            
+                            
+//                            Rectangle()
+//                                .frame(width: 80 ,height: 30)
+//                                .foregroundColor(task.category.color)
+                               
+                                    
+                            Spacer()
+                            //Text( "\(Color(task.category.color))" )
+                        }
+                        
+                        
+                        
                         
                         Spacer()
                         HStack{
-                            Spacer()
+                        Spacer()
                             
-                            Button("Delete",action:{
-                                DeleteTask()
-                            })
+                        Button("Delete",action:{
+                            DeleteTask()
+                        })
                             .frame(width: 120, height: 50)
                             .background(Color.red)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.leading, 15 )
-                            Spacer()
-                            Button("Complete",action:{
-                                CompleteTask()
-                            })
+                        Spacer()
+                        Button("Complete",action:{
+                            CompleteTask()
+                        })
                             .frame(width: 120, height: 50)
                             .background(Color.green)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.leading, 15 )
-                            Spacer()
+                        Spacer()
                         }
                         
                     }
@@ -138,26 +172,26 @@ struct TaskDetailsView: View {
             .navigationBarHidden(true)
             //.ignoresSafeArea()
         }
-        .onAppear{
-
-            print(user.indexCatList)
-        }
+        
         .navigationBarTitle("")
         .navigationBarHidden(true)
-        .navigate(to: TaskEditView(task: user.taskList[user.currTaskIndex]).navigationBarHidden(true), when: $willMoveToNextScreen)
+        
+        .navigate(to: TaskEditView(task: user.taskList[getIndex()]).navigationBarHidden(true), when: $willMoveToNextScreen)
         //Zstack
         //.ignoresSafeArea(.all)
     } //body
     
     
     func DeleteTask(){
-        user.taskList.remove(at:user.currTaskIndex)
         self.presentation.wrappedValue.dismiss()
+        user.taskList.remove(at:user.currTaskIndex)
+        
     }
     func CompleteTask(){
         user.completedList.append(user.taskList[user.currTaskIndex])
         user.taskList.remove(at:user.currTaskIndex)
         self.presentation.wrappedValue.dismiss()
+        
     }
 }// view
 

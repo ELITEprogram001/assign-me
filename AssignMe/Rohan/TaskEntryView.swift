@@ -109,7 +109,7 @@ struct TaskEntryView: View {
                     
                     Text("Description:")        //description
                         .foregroundColor(.blue)
-                    TextField("Enter Task Description...", text: self.$taskDesc)
+                    TextField("   Enter Task Description...", text: self.$taskDesc)
                         .frame(height: 55)
                         .textFieldStyle(PlainTextFieldStyle())
                         .background(Color(red: 0.17, green: 0.17, blue: 0.17))

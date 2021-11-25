@@ -17,6 +17,7 @@ class User: ObservableObject {
     @Published var categoryList = [Category]()
     @Published var completedList = [Task]()
     @Published var availableColors = [Color]()
+    
     init(name: String){
         self.name = name
         self.currTask = Task(
@@ -29,6 +30,15 @@ class User: ObservableObject {
             isOverdue: false )
         self.currTaskIndex = 0
         self.indexCatList = 0
+            //append a dummy task to prevent crashing ?
+        self.taskList.append(Task(
+            name:"",
+            category: Uncategorized,
+            description:"",
+            difficulty: 1,
+            dueDate: Date(),
+            dateCompleted: Date(),
+            isOverdue: false ))
     }
     func addCategory(cat:Category){
         categoryList.append(cat)

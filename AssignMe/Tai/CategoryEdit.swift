@@ -72,14 +72,18 @@ struct CategoryEdit: View {
                     
                 HStack(){
                     Spacer()
-                    Button("Back"){
+                    Button(action:{
                         self.presentation.wrappedValue.dismiss()
-                    }
-                    .frame(width: 60, height: 40)
-                    .padding(.leading,5)
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                    },label:{
+                        
+                        Image(systemName: "arrow.backward.circle")
+                        .frame(width: 60, height: 40)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .padding(.leading, 10 )
+
+                    }) 
                     Spacer()
                     Text("Category Edit")
                         .font(.system(size: 25, weight: .bold, design: .serif))

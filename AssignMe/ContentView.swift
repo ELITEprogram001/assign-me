@@ -19,8 +19,6 @@ struct ContentView: View {
     init()
     {
         
-        
-        
         // TODO implement persistent data
         user.addCategory(cat:Uncategorized) //init for uncategorized category
         var sample = Task(name: "push ups", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(), dateCompleted: Date(), isOverdue: true)
@@ -29,7 +27,6 @@ struct ContentView: View {
         user.taskList.append(sample)
         user.taskList.append(sample2)
         user.taskList.append(sample3)
-        
         
     }
 //    var body: some View {
