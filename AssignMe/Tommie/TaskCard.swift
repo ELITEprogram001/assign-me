@@ -27,8 +27,9 @@ struct TaskCard: View {
                     .cornerRadius(10)
                 
                 Text("\(task.name)") //Task name
-                    .font(.system(size: 20, design: .serif))
-                    .fontWeight(.medium)
+                    .fontWeight(.bold)
+                    .font(.custom("Montserrat-Regular", size: 20))
+                    //.font(.system(size: 20, design: .serif))
                     .foregroundColor(Color.white)
                     //.multilineTextAlignment(.leading)
                     .frame (width: 200, alignment: .leading)
@@ -36,24 +37,28 @@ struct TaskCard: View {
                     .padding(.leading, -93.0)
                     .padding (.bottom, 40)
                 
-                Text("\(formatter.string(from:task.dueDate)) -") //Task's due date
-                    .font(.system(size: 13, weight: .light, design: .serif))
+                Text("\(formatter.string(from:task.dueDate))  -") //Task's due date
+                    //.font(.system(size: 13, weight: .light, design: .serif))
+                    .font(.custom("Ubuntu-Regular", size: 14))
                     .fontWeight(.bold)
                     .foregroundColor(task.category.color) //Color of due date text that corresponds to assigned category's color
                     .frame(minWidth: 0, idealWidth: 100, maxWidth: 200, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
-                    .padding(.leading, -90.0)
+                    .padding(.leading, -95.0)
                 //.padding(.top, -5)
                 
                 Text("\(task.category.name)") //Name of category assigned to task
-                    .font(.system(size: 11, weight: .light, design: .serif))
+                    //.font(.system(size: 11, weight: .light, design: .serif))
                     .fontWeight(.bold)
+                    .font(.custom("Montserrat-Regular", size: 13))
+                    
                     .foregroundColor(task.category.color) //Color of category name text that corresponds to assigned category's color
-                    .frame(minWidth: 0, idealWidth: 100, maxWidth: 200, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
-                    .padding(.leading, 193.0)
+                    .frame(minWidth: 0, idealWidth: 100, maxWidth: 150, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
+                    .padding(.leading, 180.0)
                 //.padding(.top, -5)
                 
                 Text("\(task.description)") //Task description
-                    .font(.system(size: 13, weight: .light, design: .serif))
+                    .font(.custom("Ubuntu-Regular", size: 13))
+                    //.font(.system(size: 13, weight: .light, design: .serif))
                     //.fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .frame(minWidth: 0, idealWidth: 100, maxWidth: 300, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))

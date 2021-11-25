@@ -20,8 +20,8 @@ struct WeeklyView: View {
                 Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
                 VStack{
                     ScrollView{
-                        ForEach(0..<user.taskList.count, id: \.self) { index in
-                            NavigationLink(destination: TaskDetailsView()
+                        ForEach(1..<user.taskList.count, id: \.self) { index in
+                            NavigationLink(destination: TaskDetailsView(task: user.taskList[index] )
                                 .environmentObject(user)
                                 .onAppear {
                                     user.currTask = user.taskList[index]
@@ -53,6 +53,9 @@ struct WeeklyView: View {
                                             dateCompleted: Date(),
                                             isOverdue: false ))
                     user.taskList.removeLast()
+                    user.taskList = user.taskList.sorted(by: {
+                        $0.dueDate.compare($1.dueDate) == .orderedAscending
+                    })
                 }
         } //navigation
     }//body
