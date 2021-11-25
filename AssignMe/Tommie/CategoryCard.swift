@@ -73,7 +73,8 @@ struct CategoryCard: View {
             
             
             Text("\(category.name)") //variable category name
-                .font(.system(size: 30, weight: .light, design: .serif))
+                .font(.custom("Montserrat-Regular", size: 30))
+                //.font(.system(size: 30, weight: .light, design: ))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.leading)

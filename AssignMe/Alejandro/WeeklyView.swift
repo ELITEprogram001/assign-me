@@ -45,13 +45,13 @@ struct WeeklyView: View {
             } //navigation view
                 .onAppear{
                     user.taskList.append(Task(
-                                            name:"",
-                                            category:user.categoryList[0],
-                                            description:"",
-                                            difficulty: 1,
-                                            dueDate: Date(),
-                                            dateCompleted: Date(),
-                                            isOverdue: false ))
+                        name:"",
+                        category:user.categoryList[0],
+                        description:"",
+                        difficulty: 1,
+                        dueDate: Date(),
+                        dateCompleted: Date(),
+                        isOverdue: false ))
                     user.taskList.removeLast()
                     user.taskList = user.taskList.sorted(by: {
                         $0.dueDate.compare($1.dueDate) == .orderedAscending

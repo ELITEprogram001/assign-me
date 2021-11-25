@@ -119,11 +119,11 @@ struct CategoryEdit: View {
                     Button(action:{color = "Yellow";
                             actualColor = .yellow }, label:{
                         Text("Yellow")
+                                
                     })
                     Button(action:{color = "Blue";
                             actualColor = .blue }, label:{
                         Text("Blue")
-                        
                     })
                     Button(action:{color = "Red";
                             actualColor = .red }, label:{
@@ -151,9 +151,11 @@ struct CategoryEdit: View {
                             
 
                     })
-                    .foregroundColor(.purple)
+                    
                 } //menu
-                .foregroundColor(.gray)
+                .foregroundColor(actualColor)
+                .font(.custom("Montserrat-Regular", size: 20))
+                //.foregroundColor(.gray)
                 Spacer()
                     
             }

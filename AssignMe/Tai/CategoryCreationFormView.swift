@@ -84,8 +84,9 @@ struct CategoryCreationFormView: View {
                     Button(action:{currentColor = "Blue";
                             tabColor = .blue }, label:{
                         Text("Blue")
-                        
                     })
+                    
+                    
                     Button(action:{currentColor = "Red";
                             tabColor = .red }, label:{
                         Text("Red")
