@@ -37,8 +37,7 @@ struct CategoryCard: View {
     @State var showAlert = false
     @State private var showingAlert = false
     var catIndex: Int
-    
-    
+
     func del () {
         for index in 0..<user.taskList.count {
             if (user.taskList[index].category.id == user.categoryList[catIndex].id){
@@ -162,9 +161,7 @@ struct CategoryCard: View {
             
             Button( //Delete button with red 'trashcan' icon
                 action:{
-                    //showAlert = true
-      //              isActive = true
-                      del()
+                    self.showAlert = true
                 },
                 label: {
                     Image(systemName: "trash")
@@ -174,6 +171,14 @@ struct CategoryCard: View {
             ) //Delete button END
             .foregroundColor(.red)
             .padding(.leading, 245)
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Are you sure you want to delete this category?"),
+                    message: Text("This action cannot be undone"),
+                    primaryButton: .destructive(Text("Delete"), action: {del()} ),
+                    secondaryButton: .cancel()
+                ) //Alert END
+            } //.alert END
             
 //-------------------- Delete Buttons END---------------------------------
             
