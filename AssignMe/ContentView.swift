@@ -56,6 +56,7 @@ struct ContentView: View {
                 .tabItem {
                     Text("Calendar")
                     Image(systemName: "calendar")
+                    
                 }
                 .tag(2)
             TaskEntryView(tabSelection: $tabSelection)
@@ -76,14 +77,11 @@ struct ContentView: View {
                     Image(systemName: "person.fill")
                 }
                 .tag(5)
-            
-            
         }
         .environmentObject(user)//end body
         .preferredColorScheme(.dark)
         
     }
-    
 } //view
 
 
