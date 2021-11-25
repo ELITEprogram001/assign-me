@@ -7,14 +7,15 @@
 import SwiftUI
 import Foundation
 struct Task: Identifiable {
+    
     let id = UUID()
     var name:String
-     var category:Category
-     var description:String
-     var difficulty:Int
-     var dueDate:Date
-     var dateCompleted:Date
-     var isOverdue:Bool
+    var category:Category
+    var description:String
+    var difficulty:Int
+    var dueDate:Date
+    var dateCompleted:Date
+    var isOverdue:Bool
     
     init(name:String, category: Category, description: String, difficulty:Int, dueDate:Date,dateCompleted:Date, isOverdue:Bool){
         self.name=name

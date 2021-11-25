@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F04DBF4274FF81200E5CF42 /* AchievementTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04DBF3274FF81200E5CF42 /* AchievementTile.swift */; };
 		1F553B382737061D00362BAF /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B302737061C00362BAF /* Ubuntu-Italic.ttf */; };
 		1F553B392737061D00362BAF /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B312737061C00362BAF /* Ubuntu-MediumItalic.ttf */; };
 		1F553B3A2737061D00362BAF /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B322737061C00362BAF /* Ubuntu-Regular.ttf */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F04DBF3274FF81200E5CF42 /* AchievementTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTile.swift; sourceTree = "<group>"; };
 		1F553B302737061C00362BAF /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
 		1F553B312737061C00362BAF /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
 		1F553B322737061C00362BAF /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			children = (
 				1FB8CEEA274F4D7E00DAC1A8 /* ModalView.swift */,
 				1FB031B1274AF73E00CBC739 /* ProfileView.swift */,
+				1F04DBF3274FF81200E5CF42 /* AchievementTile.swift */,
 				8730CB9F2733725B00D175DB /* CalendarView.swift */,
 				1FB8CEEC274F68F300DAC1A8 /* Cell.swift */,
 				1FB8CEEE274F694700DAC1A8 /* CustomColors.swift */,
@@ -409,6 +412,7 @@
 				30954F14272E3E4000E100BE /* DifficultyView.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
 				8730CBA02733725B00D175DB /* CalendarView.swift in Sources */,
+				1F04DBF4274FF81200E5CF42 /* AchievementTile.swift in Sources */,
 				DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */,
 				303E9278272AF3AE00B71B63 /* User.swift in Sources */,
 				DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */,

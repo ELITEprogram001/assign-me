@@ -10,8 +10,10 @@ import SwiftUI
 struct ProfileView: View {
     
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(), spacing: 30, alignment: .center),
+        GridItem(.flexible(), alignment: .center)
+//        GridItem(.flexible()),
+//        GridItem(.flexible())
     ]
     
     @State var showModal: Bool = false
@@ -94,17 +96,17 @@ struct ProfileView: View {
                     // end HStack
                     
                     LazyVGrid (columns: columns, spacing: 15) {
-                        AchievementCards(title: "Redemption", desc: "Complete 3 tasks that were overdue.", color: .gray)
+                        AchievementTile(title: "Redemption", desc: "Complete 3 tasks that were overdue.", color: .gray)
                             .onTapGesture {
                                 showModal = !showModal
                             }
-                        AchievementCards(title: "Overachiever", desc: "Complete 5 tasks that aren't due for another week.", color: .gray)
-                        AchievementCards(title: "A Marathon Starts With a Step", desc: "Complete your first task!", color: .gray)
-                        AchievementCards(title: "Dedicated", desc: "Complete 4 tasks for one category back to back.", color: .gray)
-                        AchievementCards(title: "Busy Bee", desc: "Have 15 tasks scheduled.", color: .gray)
-                        AchievementCards(title: "Consistent Worker", desc: "Complete all your tasks on time for 5 days in a row.", color: .gray)
-                        AchievementCards(title: "The Planner", desc: "Plan your first 3 tasks.", color: .gray)
-                        AchievementCards(title: "Take a break", desc: "Complete 3 tasks in 1 hour.", color: .gray)
+                        AchievementTile(title: "Overachiever", desc: "Complete 5 tasks that aren't due for another week.", color: .gray)
+                        AchievementTile(title: "A Marathon Starts With a Step", desc: "Complete your first task!", color: .gray)
+                        AchievementTile(title: "Dedicated", desc: "Complete 4 tasks for one category back to back.", color: .gray)
+                        AchievementTile(title: "Busy Bee", desc: "Have 15 tasks scheduled.", color: .gray)
+                        AchievementTile(title: "Consistent Worker", desc: "Complete all your tasks on time for 5 days in a row.", color: .gray)
+                        AchievementTile(title: "The Planner", desc: "Plan your first 3 tasks.", color: .gray)
+                        AchievementTile(title: "Take a break", desc: "Complete 3 tasks in 1 hour.", color: .gray)
                     }
                     .padding(.horizontal)
                 }
@@ -121,42 +123,7 @@ struct ProfileView: View {
     } // end body
 }
 
-// Achievement Card Views
-struct AchievementCards: View {
-    
-    let color: Color
-    let title: String
-    let desc: String
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .fill(color)
-                    .frame(minWidth: 10, maxWidth: .infinity, minHeight: 40)
-                VStack(spacing: 0){
-                    HStack(spacing: 0) {
-                        Text(title)
-                            .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.caption))
-                            .padding(.vertical, 3)
-                            .padding(.horizontal, 6)
-                        Spacer()
-                    }
-                    Spacer()
-                    Text(desc)
-                        .font(.custom("Ubuntu-Regular", size: 12, relativeTo:.body))
-                        .padding(.vertical, 8)
-                }
-            }
-        }
-    }
-    
-    init(title: String, desc: String, color: Color) {
-        self.title = title
-        self.desc = desc
-        self.color = color
-    }
-}
+
 
 struct QuoteView: View {
     
