@@ -38,17 +38,17 @@ struct PersistenceController {
     
     func saveContext() {
         
-      let context = container.viewContext
-        
-      if context.hasChanges {
-        do {
-          try context.save()
-        } catch {
-          // The context couldn't be saved.
-          let nserror = error as NSError
-          fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        let context = container.viewContext
+
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // The context couldn't be saved.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
         }
-      }
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {

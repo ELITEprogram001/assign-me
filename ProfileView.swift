@@ -21,13 +21,13 @@ struct ProfileView: View {
     
     @FetchRequest(
       // 2
-      entity: User.entity(),
+      entity: UserEntity.entity(),
       // 3
       sortDescriptors: [
-        NSSortDescriptor(keyPath: \User.name, ascending: true)
+        NSSortDescriptor(keyPath: \UserEntity.name, ascending: true)
       ]
     // 4
-    ) var users: FetchedResults<User>
+    ) var users: FetchedResults<UserEntity>
     
     var body: some View {
         ZStack {
