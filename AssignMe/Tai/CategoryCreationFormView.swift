@@ -15,9 +15,9 @@ struct CategoryCreationFormView: View {
     @Environment(\.presentationMode) var presentation
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
-      entity: UserEntity.entity(),
+      entity: CategoryEntity.entity(),
       sortDescriptors: []
-    ) var u: FetchedResults<UserEntity>
+    ) var categories: FetchedResults<CategoryEntity>
     
     var body: some View {
         
@@ -54,10 +54,24 @@ struct CategoryCreationFormView: View {
                     // MARK: Add Button
                     Button("Add"){
                         
-                        let cat = CategoryEntity(context: managedObjectContext)
-                        cat.name = categoryName
-                        print("\(cat.wrappedName) added to core data.")
+                        var found = false
+                        for category in categories {
+                            if(category.wrappedName == categoryName){
+                                found = true
+                            }
+                        }
                         
+                        if(!found) {
+                            let cat = CategoryEntity(context: managedObjectContext)
+                            cat.name = categoryName
+                            cat.color = "red"
+                            try? managedObjectContext.save()
+                            print("\(cat.wrappedName) added to core data.")
+                        } else {
+                            print("\(categoryName) already exists")
+                        }
+                        
+                        // Old Add
 //                        let toAdd = Category(
 //                            name:categoryName,
 //                            color: tabColor)

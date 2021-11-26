@@ -17,7 +17,7 @@ extension CategoryEntity {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var user: UserEntity?
+    @NSManaged public var color: String?
     @NSManaged public var colorDescription: ColorDescription?
     @NSManaged public var task: NSSet?
 
@@ -25,11 +25,11 @@ extension CategoryEntity {
         name ?? "Default Cat"
     }
     
-    public var wrappedUser: UserEntity {
-        user ?? UserEntity()
+    public var wrappedColor: String {
+        color ?? "red"
     }
     
-    public var wrappedColor: ColorDescription {
+    public var wrappedColorDesc: ColorDescription {
         colorDescription ?? ColorDescription()
     }
     

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G224" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CategoryEntity" representedClassName="CategoryEntity" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String" defaultValueString=".red"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="colorDescription" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ColorDescription" inverseName="category" inverseEntity="ColorDescription"/>
         <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskEntity" inverseName="category" inverseEntity="TaskEntity"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="category" inverseEntity="UserEntity"/>
     </entity>
     <entity name="ColorDescription" representedClassName="ColorDescription" syncable="YES">
         <attribute name="b" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -19,12 +19,7 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="task" inverseEntity="CategoryEntity"/>
     </entity>
-    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" defaultValueString="fuck"/>
-        <relationship name="category" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="user" inverseEntity="CategoryEntity"/>
-    </entity>
     <elements>
-        <element name="UserEntity" positionX="-63" positionY="-18" width="128" height="59"/>
         <element name="CategoryEntity" positionX="-63" positionY="0" width="128" height="89"/>
         <element name="ColorDescription" positionX="-45" positionY="27" width="128" height="89"/>
         <element name="TaskEntity" positionX="-36" positionY="63" width="128" height="104"/>

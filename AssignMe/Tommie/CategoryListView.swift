@@ -22,6 +22,12 @@ struct CategoryListView: View {
         }
     } // func TorF END
     
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+      entity: CategoryEntity.entity(),
+      sortDescriptors: []
+    ) var categories: FetchedResults<CategoryEntity>
+    
     var body: some View {
         ZStack{
             Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)
@@ -62,15 +68,27 @@ struct CategoryListView: View {
     
                 } //HStack END
                 
+                // MARK: Category Card List
                 ScrollView { //scroll view containing the CategoryCards to be populated into the CategoryListView
-                    ForEach(1..<user.categoryList.count, id: \.self) { //starts at index 0 and cycles through categoryList
-                        index in
-                        HStack{ //HStack for Category Cards
-                            CategoryCard(category: user.categoryList[index], catIndex: index)
-                        } //HStack for Categories Cards END
-                        .padding(.bottom, 15)
-                        
-                    } //ForEach loop END
+
+                    ForEach(categories) { category in
+                        Text(category.wrappedName)
+                            .background(Color(category.wrappedColor))
+                            .onTapGesture {
+                                self.managedObjectContext.delete(category)
+                                
+                                try? managedObjectContext.save()
+                            }
+                    }
+                    // Old Scrollview
+//                    ForEach(1..<user.categoryList.count, id: \.self) { //starts at index 0 and cycles through categoryList
+//                        index in
+//                        HStack{ //HStack for Category Cards
+//                            CategoryCard(category: user.categoryList[index], catIndex: index)
+//                        } //HStack for Categories Cards END
+//                        .padding(.bottom, 15)
+//
+//                    } //ForEach loop END
                 } //ScrollView END
                 .frame(width: 350, height: 600)
                 
@@ -82,8 +100,8 @@ struct CategoryListView: View {
     } //var body: some View END
 } //struct CategoryListView: View END
 
-struct CategoryListView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryListView()
-    }
-}
+//struct CategoryListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CategoryListView()
+//    }
+//}

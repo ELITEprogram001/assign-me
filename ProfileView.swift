@@ -108,7 +108,7 @@ struct ProfileView: View {
                                 showModal = !showModal
                                 print("--------------------------------")
                                 for category in categories {
-                                    print(category.wrappedName)
+                                    print("\(category.wrappedName) - \(category.wrappedColor)")
                                 }
                                 print("--------------------------------")
                             }
@@ -122,7 +122,7 @@ struct ProfileView: View {
                     }
                     .padding(.horizontal, 25)
                 }
-                .background(Color.bg_dark.ignoresSafeArea())
+                .background(Color.red.ignoresSafeArea())
                 
             }
             // end VStack

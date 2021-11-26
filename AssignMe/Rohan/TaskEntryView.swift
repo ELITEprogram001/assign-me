@@ -197,11 +197,11 @@ struct TaskEntryView: View {
     }
     
     func addUser(name: String) {
-        let u = UserEntity(context: managedObjectContext)
-
-        u.name = name
-
-        saveContext()
+//        let u = UserEntity(context: managedObjectContext)
+//
+//        u.name = name
+//
+//        saveContext()
     }
     
     func deleteCategory(name: String) {

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1F04DBF4274FF81200E5CF42 /* AchievementTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04DBF3274FF81200E5CF42 /* AchievementTile.swift */; };
-		1F36721E2750A14800B99296 /* UserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36721A2750A14800B99296 /* UserEntity+CoreDataClass.swift */; };
-		1F36721F2750A14800B99296 /* UserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36721B2750A14800B99296 /* UserEntity+CoreDataProperties.swift */; };
 		1F3672202750A14800B99296 /* CategoryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36721C2750A14800B99296 /* CategoryEntity+CoreDataClass.swift */; };
 		1F3672212750A14800B99296 /* CategoryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36721D2750A14800B99296 /* CategoryEntity+CoreDataProperties.swift */; };
 		1F3672262750A8D800B99296 /* TaskEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3672222750A8D800B99296 /* TaskEntity+CoreDataClass.swift */; };
@@ -73,8 +71,6 @@
 
 /* Begin PBXFileReference section */
 		1F04DBF3274FF81200E5CF42 /* AchievementTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTile.swift; sourceTree = "<group>"; };
-		1F36721A2750A14800B99296 /* UserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UserEntity+CoreDataClass.swift"; path = "Models/UserEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		1F36721B2750A14800B99296 /* UserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UserEntity+CoreDataProperties.swift"; path = "Models/UserEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1F36721C2750A14800B99296 /* CategoryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CategoryEntity+CoreDataClass.swift"; path = "Models/CategoryEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		1F36721D2750A14800B99296 /* CategoryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CategoryEntity+CoreDataProperties.swift"; path = "Models/CategoryEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1F3672222750A8D800B99296 /* TaskEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TaskEntity+CoreDataClass.swift"; path = "Models/TaskEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -257,8 +253,6 @@
 				1F3672232750A8D800B99296 /* TaskEntity+CoreDataProperties.swift */,
 				1F3672242750A8D800B99296 /* ColorDescription+CoreDataClass.swift */,
 				1F3672252750A8D800B99296 /* ColorDescription+CoreDataProperties.swift */,
-				1F36721A2750A14800B99296 /* UserEntity+CoreDataClass.swift */,
-				1F36721B2750A14800B99296 /* UserEntity+CoreDataProperties.swift */,
 				1F36721C2750A14800B99296 /* CategoryEntity+CoreDataClass.swift */,
 				1F36721D2750A14800B99296 /* CategoryEntity+CoreDataProperties.swift */,
 				1FB8CEEA274F4D7E00DAC1A8 /* ModalView.swift */,
@@ -451,7 +445,6 @@
 				8730CBA02733725B00D175DB /* CalendarView.swift in Sources */,
 				1F04DBF4274FF81200E5CF42 /* AchievementTile.swift in Sources */,
 				DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */,
-				1F36721E2750A14800B99296 /* UserEntity+CoreDataClass.swift in Sources */,
 				1F3672202750A14800B99296 /* CategoryEntity+CoreDataClass.swift in Sources */,
 				1F3672292750A8D800B99296 /* ColorDescription+CoreDataProperties.swift in Sources */,
 				303E9278272AF3AE00B71B63 /* UserOld.swift in Sources */,
@@ -464,7 +457,6 @@
 				303E927A272C5E9200B71B63 /* TaskEntryView.swift in Sources */,
 				1FB8CEEF274F694700DAC1A8 /* CustomColors.swift in Sources */,
 				1F8BF5BC27505E5D0025226A /* Achievement.swift in Sources */,
-				1F36721F2750A14800B99296 /* UserEntity+CoreDataProperties.swift in Sources */,
 				303E9276272AF1F000B71B63 /* CategoryCard.swift in Sources */,
 				1FB8CEED274F68F300DAC1A8 /* Cell.swift in Sources */,
 				1FBB93C52717338E00C6C2F2 /* AssignMeApp.swift in Sources */,
