@@ -57,11 +57,8 @@ struct WeeklyView: View {
                         $0.dueDate.compare($1.dueDate) == .orderedAscending
                     })
                 }
-            
-//            GeometryReader{ geomertry in
-//                WeeklyView()
-//                    .frame(width: geomertry.size.width, height: geomertry.size.height)
-//            } //geometryreader
+                        
+           
             
         } //navigation
         

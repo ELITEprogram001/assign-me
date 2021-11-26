@@ -18,27 +18,8 @@ struct ContentView: View {
     var user:User = User(name: "Rommie")
     init()
     {
-        
-//        task = Task(name: "push ups", category: Mental_Health, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(),dateCompleted: Date(), isOverdue: true)
-        
-        
         user.addCategory(cat:Uncategorized) //init for uncategorized category
     }
-//    var body: some View {
-//
-//        if (testing)
-//        {
-//
-//            NavigationView {
-//                NavigationLink(destination: TaskDetailsView(task: task)) {
-//                            Text("PUSH")
-//
-//                        }
-//            }
-//        } //end iff
-//    } //end body var
-//}
-//##################################
 
 
     //var catList = [Category]()
@@ -80,8 +61,26 @@ struct ContentView: View {
         }
         .environmentObject(user)//end body
         .preferredColorScheme(.dark)
+       
+  //###############################################################################
+//            // this is for the category filter view
+//        GeometryReader{ geomertry in
+//            WeeklyView(tabSelection: 1)
+//                .frame(width: geomertry.size.width, height: geomertry.size.height)
+//        } //geometryreader
+//        
+//        ZStack(alignment: .leading) {
+//            WeeklyView(tabSelection: 1)
+//                .frame(width: geomertry.size.width, height: geomertry.size.height)
+//            if self.showMenu {
+//                FilterMenu()
+//            }
+//        }
+   //#########################################################################
         
-    }
+    } //body
+    
+    
 } //view
 
 
