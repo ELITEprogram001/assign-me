@@ -7,183 +7,130 @@
 
 import SwiftUI
 
-extension UIColor {
-    var name: String? {
-        switch self {
-        case UIColor.black: return "black"
-        case UIColor.darkGray: return "darkGray"
-        case UIColor.lightGray: return "lightGray"
-        case UIColor.white: return "white"
-        case UIColor.gray: return "gray"
-        case UIColor.red: return "red"
-        case UIColor.green: return "green"
-        case UIColor.blue: return "blue"
-        case UIColor.cyan: return "cyan"
-        case UIColor.yellow: return "yellow"
-        case UIColor.magenta: return "magenta"
-        case UIColor.orange: return "orange"
-        case UIColor.purple: return "purple"
-        case UIColor.brown: return "brown"
-        default: return nil
-        }
-    }
-}
-
 struct CategoryEdit: View {
     @State private var categoryName: String = ""
-//    @State private var color: String = ""
-//    @State private var actualColor: Color
     var category: CategoryEntity
-    @State var colorSelection: Int = 0
-//    var catIndex: Int
-    @EnvironmentObject var user: UserOld
+    @State var currentColor: String = "red"
+    
+    @Binding var showSheet: Bool
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentation
     
-    init(category: CategoryEntity){
+    init(category: CategoryEntity, showSheet: Binding<Bool>){
         self.category = category
         _categoryName = State(initialValue: category.wrappedName)
-//        _actualColor = State(initialValue: category?.color)
-//        _color = State(initialValue: colorString (color: category.color))
+        _showSheet = showSheet
     }
-    
-    func colorString (color: Color) -> String {
-        switch color {
-        case Color.gray: return "Gray"
-        case Color.red: return "Red"
-        case Color.green: return "Green"
-        case Color.blue: return "Blue"
-        case Color.yellow: return "Yellow"
-        case Color.orange: return "Orange"
-        case Color.purple: return "Purple"
-        case Color.pink: return "Pink"
-        default: return "uncolored"
-        }
-    }
-    
     
     var body: some View {
         
-        ZStack {
-            Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)//for gray mode
-            VStack(spacing: 15){
-                    
-                    
-                HStack(){
-                    Spacer()
-                    Button(action:{
-                        self.presentation.wrappedValue.dismiss()
-                    },label:{
-                        
-                        Image(systemName: "arrow.backward.circle")
-                        .frame(width: 60, height: 40)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.leading, 10 )
-
-                    }) 
-                    Spacer()
-                    Text("Category Edit")
-                        .font(.system(size: 25, weight: .bold, design: .serif))
-                        .padding(.horizontal,20)
-                        .foregroundColor(.white)
-                    
-                    Spacer()
-                    
-                    Button(
-                        action:{
-//                            user.categoryList[catIndex].name = categoryName
-//                            user.categoryList[catIndex].color = actualColor
-                            self.presentation.wrappedValue.dismiss()},
-                        label:{Text("Save")
-                            .bold()
-                            .frame(width:60, height: 40)
-                            .background(Color(.systemBlue))
+        VStack(spacing: 0) {
+            
+            Divider()
+                .frame(height: 3)
+                .frame(maxWidth: .infinity)
+                .background(Color.bright_maroon)
+            
+            HStack(){
+                Spacer()
+                
+                // MARK: Back Button
+                Button(action: {
+                    showSheet = false
+                }, label: {
+                    ZStack() {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.bright_maroon)
+                            .frame(width: 40, height: 30)
+                        Image(systemName: "arrow.backward")
+                            .resizable()
+                            .frame(width: 15, height: 15)
                             .foregroundColor(.white)
                             .cornerRadius(10)
-                        }
-                    ) //Button END
-                    Spacer()
-                } //hstack
-            
-                        
-                    
-                    
-                Text("Name:")
-                    .foregroundColor(.blue)
-                TextField("   Enter Category Name", text: $categoryName)
-                    .frame(height: 55)
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .padding(.horizontal, 1)
-                    .cornerRadius(15)
-              
-                Text("Color:")
-                    .foregroundColor(.blue)
-                   
-                Menu("\(colorSelection)"){
-                    Picker(selection: $colorSelection, label: Text("Sorting options")) {
-                        Text("Orange").tag(0)
-                        Text("Red").tag(1)
-                        Text("Purple").tag(2)
-                    }
-//                    Button(action:{color = "Yellow";
-//                            actualColor = .yellow }, label:{
-//                        Text("Yellow")
-//                    })
-//                    Button(action:{color = "Blue";
-//                            actualColor = .blue }, label:{
-//                        Text("Blue")
-//
-//                    })
-//                    Button(action:{color = "Red";
-//                            actualColor = .red }, label:{
-//                        Text("Red")
-//
-//                    })
-//                    Button(action:{color = "Green";
-//                            actualColor = .green}, label:{
-//                        Text("Green")
-//
-//                    })
-//                    Button(action:{color = "Orange";
-//                            actualColor = .orange }, label:{
-//                        Text("Orange")
-//
-//                    })
-//                    Button(action:{color = "Pink";
-//                            actualColor = .pink}, label:{
-//                        Text("Pink")
-//
-//                    })
-//                    Button(action:{color = "Purple";
-//                            actualColor = .purple }, label:{
-//                        Text("Purple")
-//
-//
-//                    })
-//                    .foregroundColor(.purple)
-                } //menu
-                .foregroundColor(.gray)
+                            .padding()
+                    } // end label zstack
+                })  //button
+                
                 Spacer()
+                
+                Text("Category Entry")
+                    .font(.custom("Viga-Regular", size: 25))
+                    .foregroundColor(.white)
+                    .padding(.horizontal,10)
+                
+                Spacer()
+                
+                // MARK: Update Button
+                Button(action: {
+                    category.name = categoryName
+                    category.color = currentColor
                     
+                    try? managedObjectContext.save()
+                    showSheet = false
+                }, label: {
+                    Text("Update")
+                        .font(.custom("Ubuntu-Bold", size: 16))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 5)
+                }) // end add button
+                .background(Color.bright_maroon)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                
+                Spacer()
+                
             }
-        } //vstack
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
-            //.navigationTitle("Category Edit")
-        //} //NavigationView
+            .padding(.vertical, 10)
+            // end top bar hstack
+            
+            VStack {
+                HStack(){
+                    Text("Name:")
+                        .foregroundColor(.bright_maroon)
+                        .padding(.bottom, 2)
+                    Spacer()
+                }
+                
+                TextField("Enter Category Name...", text: $categoryName)
+                    .font(.custom("Ubuntu-Regular", size: 16))
+                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity, maxHeight: 40)
+                    .background(Color.bg_light)
+                    .cornerRadius(10)
+            }
+            .padding()
+            
+            // MARK: Color Selection
+            VStack(alignment: .leading){
+                HStack(){
+                    Text("Color:")
+                        .foregroundColor(.bright_maroon)
+                        .padding(.bottom, 2)
+                    Spacer()
+                }
+                
+                Picker("Color Options", selection: $currentColor) {
+                    Text("Red").tag("red")
+                    Text("Orange").tag("orange")
+                    Text("Blue").tag("blue")
+                    Text("Pink").tag("pink")
+                    Text("Yellow").tag("yellow")
+                }
+                .padding(.horizontal)
+                .pickerStyle(SegmentedPickerStyle())
+                .background(Color.clear)
+                .foregroundColor(.bg_light)
+            }
+            .padding()
+            
+            Spacer()
+        }
+        .background(Color.bg_dark.ignoresSafeArea())
+        // end vstack
         
     } //body
 } //category edit struc
-/*
-struct CategoryEdit_Previews: PreviewProvider {
-    static var previews: some View {
-
-        CategoryEdit().preferredColorScheme(.dark)
-
-    }
-}
-*/
 
 
 private struct BlueButton: View {

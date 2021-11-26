@@ -58,9 +58,11 @@ struct CategoryListView: View {
                         } // end label
                     ) // end button
                     .disabled(TorF()) //func ToF() for 'true'/'false' condition to disable button
-                } // end vstack
+                }
                 .padding(.horizontal, 20)
+                // end vstack
             }
+            .padding(.top, 10)
             .padding(.bottom, 30)
             
             // MARK: Category Card List

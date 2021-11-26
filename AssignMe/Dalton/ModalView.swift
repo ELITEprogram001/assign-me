@@ -82,9 +82,3 @@ struct ModalView: View {
 struct MainView {
     
 }
-
-//struct ModalView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ModalView()
-//    }
-//}

@@ -11,7 +11,7 @@ struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
     @State var currentColor: String = "red"
     @State var tabColor: Color = .red
-    @EnvironmentObject var user: UserOld
+    
     @Environment(\.presentationMode) var presentation
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
@@ -19,75 +19,84 @@ struct CategoryCreationFormView: View {
       sortDescriptors: []
     ) var categories: FetchedResults<CategoryEntity>
     
+    init() {
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.init(red: 120/255, green: 120/255, blue: 120/255, alpha: 1.0)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+    }
+    
     var body: some View {
         
-        ZStack(){
-            Color(red: 0.133, green: 0.133, blue: 0.133).edgesIgnoringSafeArea(.all)
-            VStack(spacing: 15) {
-                HStack(){
-                    Spacer()
-                    Button(action:{
-                    
-                     
-                        self.presentation.wrappedValue.dismiss()
-                    },label:{
-                        
-                        Image(systemName: "arrow.backward.circle")
-                        .frame(width: 60, height: 40)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.leading, 8 )
-
-                    })  //button
-                    
-                    Spacer()
-                    Text("Category Entry")
-                        .bold()
-                        .font(.custom("Viga-Regular", size: 25))
-                        //.padding(.horizontal)
-                        .foregroundColor(.white)
-                        .padding(.horizontal,10)
-                    
-
-                    Spacer()
-                    // MARK: Add Button
-                    Button("Add"){
-                        
-                        var found = false
-                        for category in categories {
-                            if(category.wrappedName == categoryName){
-                                found = true
-                            }
-                        }
-                        
-                        if(!found) {
-                            let cat = CategoryEntity(context: managedObjectContext)
-                            cat.name = categoryName
-                            cat.color = currentColor.lowercased()
-                            try? managedObjectContext.save()
-                            print("\(cat.wrappedName) added to core data.")
-                        } else {
-                            print("\(categoryName) already exists")
-                        }
-//                        self.presentation.wrappedValue.dismiss()
-                    } //button
-                    .frame(width: 60, height: 40)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal,2)
-                    
-                    Spacer()
-                    
-                } // end hstack
+        VStack(spacing: 0) {
+            HStack(){
+                Spacer()
                 
+                Button(action: {
+                    self.presentation.wrappedValue.dismiss()
+                }, label: {
+                    ZStack() {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.blue)
+                            .frame(width: 40, height: 30)
+                        Image(systemName: "arrow.backward")
+                            .resizable()
+                            .frame(width: 15, height: 15)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                            .padding()
+                    } // end label zstack
+                })  //button
+                
+                Spacer()
+                
+                Text("Category Entry")
+                    .font(.custom("Viga-Regular", size: 25))
+                    .foregroundColor(.white)
+                    .padding(.horizontal,10)
+                
+                Spacer()
+                
+                // MARK: Add Button
+                Button(action: {
+                    var found = false
+                    for category in categories {
+                        if(category.wrappedName == categoryName){
+                            found = true
+                        }
+                    }
+                    
+                    if(!found) {
+                        let cat = CategoryEntity(context: managedObjectContext)
+                        cat.name = categoryName
+                        cat.color = currentColor.lowercased()
+                        try? managedObjectContext.save()
+                        print("\(cat.wrappedName) added to core data.")
+                    } else {
+                        print("\(categoryName) already exists")
+                    }
+                }, label: {
+                    Text("Save")
+                        .font(.custom("Ubuntu-Bold", size: 16))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 5)
+                }) // end add button
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                
+                Spacer()
+                
+            }
+            .padding(.vertical, 10)
+            // end top bar hstack
+            
+            VStack {
                 HStack(){
                     Text("Name:")
                         .foregroundColor(.bright_maroon)
+                        .padding(.bottom, 2)
                     Spacer()
                 }
-                .padding(.horizontal)
                 
                 TextField("Enter Category Name...", text: $categoryName)
                     .font(.custom("Ubuntu-Regular", size: 16))
@@ -95,15 +104,18 @@ struct CategoryCreationFormView: View {
                     .frame(maxWidth: .infinity, maxHeight: 40)
                     .background(Color.bg_light)
                     .cornerRadius(10)
-                
+            }
+            .padding()
+            
+            // MARK: Color Selection
+            VStack(alignment: .leading){
                 HStack(){
                     Text("Color:")
                         .foregroundColor(.bright_maroon)
+                        .padding(.bottom, 2)
                     Spacer()
                 }
-                .padding(.horizontal)
                 
-                // MARK: Picker
                 Picker("Color Options", selection: $currentColor) {
                     Text("Red").tag("red")
                     Text("Orange").tag("orange")
@@ -113,23 +125,17 @@ struct CategoryCreationFormView: View {
                 }
                 .padding(.horizontal)
                 .pickerStyle(SegmentedPickerStyle())
-                .background(Color.bg_light)
-                
-                Spacer()
-            } //vstack
+                .background(Color.clear)
+            }
+            .padding()
             
+            Spacer()
         }
-        .navigationBarHidden(true)
+        .background(Color.bg_dark)
+        //vstack
         
     }
 }
-
-//struct CategoryCreationFormView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CategoryCreationFormView()
-//
-//    }
-//}
 
 private struct BlueButton: View {
     var title: String

@@ -17,6 +17,7 @@ struct CategoryCard: View {
     @Environment(\.presentationMode) var presentation
     @State var showAlert = false
     @State private var showingAlert = false
+    @State var showSheet: Bool = false
     @Environment(\.managedObjectContext) var managedObjectContext
     
     init(category: CategoryEntity) {
@@ -40,20 +41,25 @@ struct CategoryCard: View {
             Spacer()
             
             // Pencil Icon
-            NavigationLink(destination: CategoryEdit(category: category)) {
-                Button(
-                    action:{
-                        isActive = true
-                    },
-                    label: {
-                        Image(systemName: "pencil")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                    }
-                ) // end button
-                .frame(width: 40, height: 40)
-                .foregroundColor(.white)
-            } // end NavigationLink
+            Button(
+                action:{
+//                        isActive = true
+                    showSheet = true
+                },
+                label: {
+                    Image(systemName: "pencil")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+            ) // end button
+            .sheet(isPresented: $showSheet, content: {
+                CategoryEdit(category: category, showSheet: $showSheet)
+            })
+            .frame(width: 40, height: 40)
+            .foregroundColor(.white)
+//            NavigationLink(destination: CategoryEdit(category: category)) {
+//
+//            } // end NavigationLink
             
             // Delete Button
             Button(
