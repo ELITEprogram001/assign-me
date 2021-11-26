@@ -13,7 +13,7 @@ struct TaskEditView: View {
     @State var dueDate: Date = Date()
     @State var difficulty=1
     @State var isActive: Bool = false
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserOld
     var task: Task
     @Environment(\.presentationMode) var presentation
     

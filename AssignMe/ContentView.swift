@@ -12,8 +12,9 @@ struct ContentView: View {
     @State private var tabSelection = 1
     var Uncategorized = Category(name:"Uncategorized",color:Color.gray) //var for uncategorized category that's hidden from CategoriesListView
     
+    let persistenceController = PersistenceController.shared
+    var user: UserOld = UserOld(name: "User")
     
-    var user:User = User(name: "User")
     init()
     {
         
@@ -64,13 +65,13 @@ struct ContentView: View {
             
         }
         .environmentObject(user)//end body
+        .environment(\.managedObjectContext, persistenceController.container.viewContext)
         .preferredColorScheme(.dark)
         
     }
     
+    
 } //view
-
-
     
 
 //struct ContentView_Previews: PreviewProvider {

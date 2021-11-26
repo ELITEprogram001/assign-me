@@ -12,7 +12,7 @@ var task: [Task] = TaskList.taskArray
 
 
 struct WeeklyView: View {
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserOld
     @State var tabSelection: Int
     var body: some View {
         NavigationView{
@@ -64,11 +64,11 @@ struct WeeklyView: View {
     
 } //weeklyview
 
-struct WeeklyView_Previews: PreviewProvider {
-    static var previews: some View {
-        WeeklyView(tabSelection: 1)
-            .environmentObject(User.init(name: ""))
-            .preferredColorScheme(.dark)
-    }
-}
+//struct WeeklyView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WeeklyView(tabSelection: 1)
+//            .environmentObject(User.init(name: ""))
+//            .preferredColorScheme(.dark)
+//    }
+//}
 

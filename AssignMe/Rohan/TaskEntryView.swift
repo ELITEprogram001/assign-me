@@ -57,7 +57,17 @@ struct TaskEntryView: View {
     @State var difficulty=1
     @State var isActive: Bool = false
     @Binding var tabSelection: Int
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserOld
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+      // 2
+      entity: User.entity(),
+      // 3
+      sortDescriptors: [
+        NSSortDescriptor(keyPath: \User.name, ascending: true)
+      ]
+    // 4
+    ) var users: FetchedResults<User>
     
     var body: some View {
         ZStack(){
@@ -73,6 +83,10 @@ struct TaskEntryView: View {
                     Spacer()
                     
                     Button("Add"){
+                        
+                        addUser(name: taskName)
+                        
+                        /* Old Task Add
                         let toAdd = Task(
                             name:taskName,
                             category: user.categoryList[currentCategoryIndex],
@@ -86,7 +100,28 @@ struct TaskEntryView: View {
                         taskName = ""
                         taskDesc = ""
                         difficulty = 1
+                        */
                     } //button
+                    Button("Delete"){
+                        
+                        deleteUser(name: taskName)
+                        
+                        /* Old Task Add
+                        let toAdd = Task(
+                            name:taskName,
+                            category: user.categoryList[currentCategoryIndex],
+                            description:taskDesc,
+                            difficulty:difficulty,
+                            dueDate:dueDate,
+                            dateCompleted:dueDate,
+                            isOverdue:false)
+                        user.taskList.append(toAdd)
+                        self.tabSelection=1
+                        taskName = ""
+                        taskDesc = ""
+                        difficulty = 1
+                        */
+                    }
                     .frame(width: 60, height: 40)
                     .background(Color.blue)
                     .foregroundColor(.white)
@@ -170,6 +205,33 @@ struct TaskEntryView: View {
         }
        .navigationBarHidden(true)
 
+    }
+    
+    func saveContext() {
+      do {
+        try managedObjectContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
+    }
+    
+    func addUser(name: String) {
+        let u = User(context: managedObjectContext)
+
+        u.name = name
+
+        saveContext()
+    }
+    
+    func deleteUser(name: String) {
+        
+        for u in users {
+            if(u.name == name) {
+                self.managedObjectContext.delete(u)
+            }
+        }
+        
+        saveContext()
     }
 }
 /*

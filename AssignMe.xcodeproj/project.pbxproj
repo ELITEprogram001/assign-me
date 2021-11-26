@@ -17,6 +17,9 @@
 		1F553B3E2737061D00362BAF /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B362737061D00362BAF /* Ubuntu-Light.ttf */; };
 		1F553B3F2737061D00362BAF /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B372737061D00362BAF /* Ubuntu-LightItalic.ttf */; };
 		1F553B4127370B2100362BAF /* Viga-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B4027370B2100362BAF /* Viga-Regular.ttf */; };
+		1F8BF5BC27505E5D0025226A /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8BF5BB27505E5D0025226A /* Achievement.swift */; };
+		1F8BF5BF275065970025226A /* NSManagedObjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8BF5BD275065970025226A /* NSManagedObjectModel.xcdatamodeld */; };
+		1F8BF5C527506A370025226A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8BF5C427506A370025226A /* Persistence.swift */; };
 		1FB031B2274AF73E00CBC739 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB031B1274AF73E00CBC739 /* ProfileView.swift */; };
 		1FB8CEEB274F4D7E00DAC1A8 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8CEEA274F4D7E00DAC1A8 /* ModalView.swift */; };
 		1FB8CEED274F68F300DAC1A8 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8CEEC274F68F300DAC1A8 /* Cell.swift */; };
@@ -31,7 +34,7 @@
 		303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */; };
 		303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */; };
 		303E9276272AF1F000B71B63 /* CategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9275272AF1F000B71B63 /* CategoryCard.swift */; };
-		303E9278272AF3AE00B71B63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9277272AF3AE00B71B63 /* User.swift */; };
+		303E9278272AF3AE00B71B63 /* UserOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9277272AF3AE00B71B63 /* UserOld.swift */; };
 		303E927A272C5E9200B71B63 /* TaskEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E9279272C5E9200B71B63 /* TaskEntryView.swift */; };
 		30954F14272E3E4000E100BE /* DifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30954F13272E3E4000E100BE /* DifficultyView.swift */; };
 		30954F1A273478FA00E100BE /* TaskEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30954F19273478FA00E100BE /* TaskEditView.swift */; };
@@ -71,6 +74,9 @@
 		1F553B362737061D00362BAF /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		1F553B372737061D00362BAF /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
 		1F553B4027370B2100362BAF /* Viga-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Viga-Regular.ttf"; sourceTree = "<group>"; };
+		1F8BF5BB27505E5D0025226A /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		1F8BF5BE275065970025226A /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
+		1F8BF5C427506A370025226A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1FB031B1274AF73E00CBC739 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = SOURCE_ROOT; };
 		1FB8CEEA274F4D7E00DAC1A8 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		1FB8CEEC274F68F300DAC1A8 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -91,7 +97,7 @@
 		303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationFormView.swift; sourceTree = "<group>"; };
 		303CFCB82720F6DE003B7139 /* SwiftUIViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewTest.swift; sourceTree = "<group>"; };
 		303E9275272AF1F000B71B63 /* CategoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCard.swift; sourceTree = "<group>"; };
-		303E9277272AF3AE00B71B63 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		303E9277272AF3AE00B71B63 /* UserOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOld.swift; sourceTree = "<group>"; };
 		303E9279272C5E9200B71B63 /* TaskEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEntryView.swift; sourceTree = "<group>"; };
 		30954F13272E3E4000E100BE /* DifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyView.swift; sourceTree = "<group>"; };
 		30954F19273478FA00E100BE /* TaskEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditView.swift; sourceTree = "<group>"; };
@@ -180,7 +186,7 @@
 				CE630701273367DA0031B8A9 /* Rohan */,
 				303CFCAE2719C38B003B7139 /* Category.swift */,
 				303CFCB02719C705003B7139 /* Task.swift */,
-				303E9277272AF3AE00B71B63 /* User.swift */,
+				303E9277272AF3AE00B71B63 /* UserOld.swift */,
 				1FBB93C62717338E00C6C2F2 /* ContentView.swift */,
 				1FBB93C82717339300C6C2F2 /* Assets.xcassets */,
 				1FBB93C42717338E00C6C2F2 /* AssignMeApp.swift */,
@@ -237,6 +243,9 @@
 				8730CB9F2733725B00D175DB /* CalendarView.swift */,
 				1FB8CEEC274F68F300DAC1A8 /* Cell.swift */,
 				1FB8CEEE274F694700DAC1A8 /* CustomColors.swift */,
+				1F8BF5BB27505E5D0025226A /* Achievement.swift */,
+				1F8BF5BD275065970025226A /* NSManagedObjectModel.xcdatamodeld */,
+				1F8BF5C427506A370025226A /* Persistence.swift */,
 			);
 			path = Dalton;
 			sourceTree = "<group>";
@@ -405,16 +414,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F8BF5BF275065970025226A /* NSManagedObjectModel.xcdatamodeld in Sources */,
 				CE25728727422138006C5C66 /* TaskDetailsView.swift in Sources */,
 				303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */,
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */,
 				30954F14272E3E4000E100BE /* DifficultyView.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
+				1F8BF5C527506A370025226A /* Persistence.swift in Sources */,
 				8730CBA02733725B00D175DB /* CalendarView.swift in Sources */,
 				1F04DBF4274FF81200E5CF42 /* AchievementTile.swift in Sources */,
 				DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */,
-				303E9278272AF3AE00B71B63 /* User.swift in Sources */,
+				303E9278272AF3AE00B71B63 /* UserOld.swift in Sources */,
 				DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */,
 				1FB031B2274AF73E00CBC739 /* ProfileView.swift in Sources */,
 				1FB8CEEB274F4D7E00DAC1A8 /* ModalView.swift in Sources */,
@@ -423,6 +434,7 @@
 				CE630707273369B50031B8A9 /* CategoryEdit.swift in Sources */,
 				303E927A272C5E9200B71B63 /* TaskEntryView.swift in Sources */,
 				1FB8CEEF274F694700DAC1A8 /* CustomColors.swift in Sources */,
+				1F8BF5BC27505E5D0025226A /* Achievement.swift in Sources */,
 				303E9276272AF1F000B71B63 /* CategoryCard.swift in Sources */,
 				1FB8CEED274F68F300DAC1A8 /* Cell.swift in Sources */,
 				1FBB93C52717338E00C6C2F2 /* AssignMeApp.swift in Sources */,
@@ -740,6 +752,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1F8BF5BD275065970025226A /* NSManagedObjectModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1F8BF5BE275065970025226A /* User.xcdatamodel */,
+			);
+			currentVersion = 1F8BF5BE275065970025226A /* User.xcdatamodel */;
+			path = NSManagedObjectModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1FBB93B92717338D00C6C2F2 /* Project object */;
 }

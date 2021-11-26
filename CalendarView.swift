@@ -22,7 +22,7 @@ struct CalendarView: View {
     //Cell(id: "6666-66-66", "66", date: Date())
     @ObservedObject var cellState = CellState()
     var calendar: [[[Cell]]]
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserOld
 
     let columns = [
         GridItem(.flexible(), spacing: 0),

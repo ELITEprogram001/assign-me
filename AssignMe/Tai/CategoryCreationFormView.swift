@@ -11,7 +11,7 @@ struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
     @State var currentColor: String = "Select Category Color..."
     @State var tabColor: Color = .red
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserOld
     @Environment(\.presentationMode) var presentation
     
     var body: some View {

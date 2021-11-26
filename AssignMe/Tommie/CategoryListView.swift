@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoryListView: View {
     @State private var isActive = false
-    @EnvironmentObject var user: User //Connects CategoryListView to the User object
+    @EnvironmentObject var user: UserOld //Connects CategoryListView to the User object
     @State private var willMoveToNextScreen = false
     var categoryList = [Category]() //from User classSS
     var maxCategories = 8 //variable for func TorF

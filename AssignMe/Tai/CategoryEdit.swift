@@ -35,7 +35,7 @@ struct CategoryEdit: View {
     @State private var actualColor: Color
     var category: Category
     var catIndex: Int
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserOld
     @Environment(\.presentationMode) var presentation
     
     init(category: Category, catIndex: Int){

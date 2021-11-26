@@ -32,7 +32,7 @@ struct CategoryCard: View {
     @State private var isActive = false
     var category: Category  //KEEP THIS; uncomment when ready for use
     var categoryList = [Category]()
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserOld
     @Environment(\.presentationMode) var presentation
     @State var showAlert = false
     @State private var showingAlert = false

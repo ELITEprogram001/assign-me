@@ -16,7 +16,18 @@ struct ProfileView: View {
 //        GridItem(.flexible())
     ]
     
+    @Environment(\.managedObjectContext) var managedObjectContext
     @State var showModal: Bool = false
+    
+    @FetchRequest(
+      // 2
+      entity: User.entity(),
+      // 3
+      sortDescriptors: [
+        NSSortDescriptor(keyPath: \User.name, ascending: true)
+      ]
+    // 4
+    ) var users: FetchedResults<User>
     
     var body: some View {
         ZStack {
@@ -99,6 +110,11 @@ struct ProfileView: View {
                         AchievementTile(title: "Redemption", desc: "Complete 3 tasks that were overdue.", color: .gray)
                             .onTapGesture {
                                 showModal = !showModal
+                                print("--------------------------------")
+                                for u in users {
+                                    print(u.name)
+                                }
+                                print("--------------------------------")
                             }
                         AchievementTile(title: "Overachiever", desc: "Complete 5 tasks that aren't due for another week.", color: .gray)
                         AchievementTile(title: "A Marathon Starts With a Step", desc: "Complete your first task!", color: .gray)
@@ -108,7 +124,7 @@ struct ProfileView: View {
                         AchievementTile(title: "The Planner", desc: "Plan your first 3 tasks.", color: .gray)
                         AchievementTile(title: "Take a break", desc: "Complete 3 tasks in 1 hour.", color: .gray)
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 25)
                 }
                 .background(Color.bg_dark.ignoresSafeArea())
                 
@@ -121,7 +137,10 @@ struct ProfileView: View {
         
         
     } // end body
-}
+    
+    
+    
+} // end profile struct
 
 
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskDetailsView: View {
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var user: User
+    @EnvironmentObject var user: UserOld
     @State private var isActive = false
     @State private var willMoveToNextScreen = false
     

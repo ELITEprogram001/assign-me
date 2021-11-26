@@ -22,34 +22,16 @@ struct AchievementTile: View {
             Image("book")
                 .resizable()
                 .frame(width: 64, height: 64)
+                .padding(.vertical, 10)
             Text("Level 0")
                 .font(.custom("Ubuntu", size: 14, relativeTo: .body))
             Spacer()
-            
-            // DELETE: Old Tile Card
-//            ZStack {
-//                RoundedRectangle(cornerRadius: 8, style: .continuous)
-//                    .fill(color)
-//                    .frame(minWidth: 10, maxWidth: .infinity, minHeight: 40)
-//                VStack(spacing: 0){
-//                    HStack(spacing: 0) {
-//                        Text(title)
-//                            .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.caption))
-//                            .padding(.vertical, 3)
-//                            .padding(.horizontal, 6)
-//                        Spacer()
-//                    }
-//                    Spacer()
-//                    Text(desc)
-//                        .font(.custom("Ubuntu-Regular", size: 12, relativeTo:.body))
-//                        .padding(.vertical, 8)
-//                }
-//            }
-            
         }
         .frame(minWidth: 40, maxWidth: .infinity)
-        .aspectRatio(1.5, contentMode: .fill)
-        .background(Color.pink)
+        .background(Color.bg_light)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.bright_maroon, lineWidth: 2))
+        //.aspectRatio(1.5, contentMode: .fill)
     }
     
     init(title: String, desc: String, color: Color) {

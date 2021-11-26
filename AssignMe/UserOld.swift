@@ -8,7 +8,7 @@ import SwiftUI
 import Foundation
 var Uncategorized = Category(name:"Uncategorized",color:Color.gray)
 
-class User: ObservableObject {
+class UserOld: ObservableObject {
     @Published var currTask: Task
     @Published var currTaskIndex: Int
     @Published var indexCatList: Int
