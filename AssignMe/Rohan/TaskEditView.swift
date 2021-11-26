@@ -25,7 +25,7 @@ struct TaskEditView: View {
     init(task: TaskEntity){
         self.task = task
         _taskName = State(initialValue: task.wrappedName)
-        _taskDesc = State(initialValue: task.description)
+        _taskDesc = State(initialValue: task.wrappedDesc)
         _currentCategory = State(initialValue: task.category?.wrappedName ?? "")
         _dueDate = State(initialValue: task.dueDate ?? Date())
 //        _difficulty = State(initialValue: task.difficulty)
@@ -85,7 +85,7 @@ struct TaskEditView: View {
                         .foregroundColor(.white)
                     Text("Description:")
                         .foregroundColor(.blue)
-                    TextField("Enter Task Description...", text: self.$taskDesc)
+                    TextField("Enter Task Description...", text: $taskDesc)
                         .frame(height: 55)
                         .textFieldStyle(PlainTextFieldStyle())
                         .background(Color(red: 0.17, green: 0.17, blue: 0.17))

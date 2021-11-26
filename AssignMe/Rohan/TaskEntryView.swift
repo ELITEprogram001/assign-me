@@ -57,7 +57,6 @@ struct TaskEntryView: View {
     @State var difficulty=1
     @State var isActive: Bool = false
     @Binding var tabSelection: Int
-    @EnvironmentObject var user: UserOld
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
       entity: CategoryEntity.entity(),
@@ -150,27 +149,6 @@ struct TaskEntryView: View {
                                 Text(category.wrappedName)
                             })
                         }
-                        
-//                        ForEach(0..<user.categoryList.count, id: \.self) { index in
-//                            Button(action:{
-//                                currentCategory = user.categoryList[index].name;
-//                                currentCategoryIndex = index
-//                            }, label:{
-//                                Text(user.categoryList[index].name)
-//                            })
-//                        }
-                    /*    Button(action:{currentCategory="Physical Health" }, label:{
-                            Text("Physical Health")
-                            
-                        })
-                        Button(action:{currentCategory="Financial" }, label:{
-                            Text("Financial")
-                            
-                        })
-                        Button(action:{currentCategory="Spiritual" }, label:{
-                            Text("Spiritual")
-                            
-                        })   */
                     } //menu
                     .onAppear{currentCategory = "Uncategorized"; currentCategoryIndex = 0}
                     

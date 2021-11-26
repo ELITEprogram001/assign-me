@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
-    @State var currentColor: String = "Select Category Color..."
+    @State var currentColor: String = "red"
     @State var tabColor: Color = .red
     @EnvironmentObject var user: UserOld
     @Environment(\.presentationMode) var presentation
@@ -64,18 +64,12 @@ struct CategoryCreationFormView: View {
                         if(!found) {
                             let cat = CategoryEntity(context: managedObjectContext)
                             cat.name = categoryName
-                            cat.color = "red"
+                            cat.color = currentColor.lowercased()
                             try? managedObjectContext.save()
                             print("\(cat.wrappedName) added to core data.")
                         } else {
                             print("\(categoryName) already exists")
                         }
-                        
-                        // Old Add
-//                        let toAdd = Category(
-//                            name:categoryName,
-//                            color: tabColor)
-//                        user.categoryList.append(toAdd)
 //                        self.presentation.wrappedValue.dismiss()
                     } //button
                     .frame(width: 60, height: 40)
@@ -86,60 +80,41 @@ struct CategoryCreationFormView: View {
                     
                     Spacer()
                     
-                } //hstack
+                } // end hstack
                 
-                Text("Name:")
-                    .foregroundColor(.blue)
-                TextField("    Enter Category Name...", text: $categoryName)
-                    .padding(.horizontal, 1)
-                    .frame(height: 55)
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .padding(.horizontal, 1)
-                    .cornerRadius(15)
+                HStack(){
+                    Text("Name:")
+                        .foregroundColor(.bright_maroon)
+                    Spacer()
+                }
+                .padding(.horizontal)
                 
-                Text("Color:")
-                    .foregroundColor(.blue)
-                   
-                Menu("\(currentColor)"){
-                    //Text("hello")
-                    Button(action:{currentColor = "Yellow";
-                            tabColor = .yellow }, label:{
-                        Text("Yellow")
-                    })
-                    Button(action:{currentColor = "Blue";
-                            tabColor = .blue }, label:{
-                        Text("Blue")
-                        
-                    })
-                    Button(action:{currentColor = "Red";
-                            tabColor = .red }, label:{
-                        Text("Red")
-                        
-                    })
-                    Button(action:{currentColor = "Green";
-                            tabColor = .green}, label:{
-                        Text("Green")
-                        
-                    })
-                    Button(action:{currentColor = "Orange";
-                            tabColor = .orange }, label:{
-                        Text("Orange")
-                        
-                    })
-                    Button(action:{currentColor = "Pink";
-                            tabColor = .pink}, label:{
-                        Text("Pink")
-                        
-                    })
-                    Button(action:{currentColor = "Purple";
-                            tabColor = .purple }, label:{
-                        Text("Purple")
-                            
-
-                    })
-                    .foregroundColor(.purple)
-                } //menu
-                .foregroundColor(.gray)
+                TextField("Enter Category Name...", text: $categoryName)
+                    .font(.custom("Ubuntu-Regular", size: 16))
+                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity, maxHeight: 40)
+                    .background(Color.bg_light)
+                    .cornerRadius(10)
+                
+                HStack(){
+                    Text("Color:")
+                        .foregroundColor(.bright_maroon)
+                    Spacer()
+                }
+                .padding(.horizontal)
+                
+                // MARK: Picker
+                Picker("Color Options", selection: $currentColor) {
+                    Text("Red").tag("red")
+                    Text("Orange").tag("orange")
+                    Text("Blue").tag("blue")
+                    Text("Pink").tag("pink")
+                    Text("Yellow").tag("yellow")
+                }
+                .padding(.horizontal)
+                .pickerStyle(SegmentedPickerStyle())
+                .background(Color.bg_light)
+                
                 Spacer()
             } //vstack
             

@@ -8,62 +8,16 @@
 import SwiftUI
 import Foundation
 
-//comment
-
-//var Testing = Category(name: "Fitness", color: .red) //comment out when no longer needed for designing category card
-//var Cat_Task_Count = Int count of items in list of tasks assigned to specific category
-//var Cat_Task_Count = 13 //placeholder test for Cat_Task_CounttTT
-
-
-
-
-//Personal Notes:
-//Note 1:
-//        Text("\(category.name)") // Replace 'category name' with this
-
-//Note 2:
-/*Button(
- action:{NavigationLink (destination: CategoryEdit())},
- label: {Image("edit")}
- )*/
-
 struct CategoryCard: View {
     
     @State private var isActive = false
-//    var category: Category  //KEEP THIS; uncomment when ready for use
     let category: CategoryEntity
-//    var categoryList = [Category]()
+    
     @EnvironmentObject var user: UserOld
     @Environment(\.presentationMode) var presentation
     @State var showAlert = false
     @State private var showingAlert = false
-//    var catIndex: Int
-    
-    
-//    func del () {
-//        for index in 0..<user.taskList.count {
-//            if (user.taskList[index].category.id == user.categoryList[catIndex].id){
-//                user.taskList[index].category = user.categoryList[0]
-//            }
-//        }
-//
-//        user.categoryList.remove(at: catIndex)
-//        //self.presentation.wrappedValue.dismiss()
-//    }
-    
-//    func indexCheck () ->Category {
-//        if catIndex >= user.categoryList.count {
-//            return user.categoryList[0]
-//        }
-//        return user.categoryList[catIndex]
-//    }
-    
-//    func intCheck () -> Int {
-//        if catIndex >= user.categoryList.count{
-//            return 0
-//        }
-//        return catIndex
-//    }
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     init(category: CategoryEntity) {
         self.category = category
@@ -71,7 +25,63 @@ struct CategoryCard: View {
     
     // MARK: Category Card Body
     var body: some View {
-        ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
+        
+        HStack(){
+            
+            // Color Strip
+            Rectangle()
+                .fill(Color(category.wrappedColor))
+                .frame(width: 10)
+            
+            // Text Info
+            Text(category.wrappedName)
+                .font(.custom("Ubuntu-Bold", size: 18))
+            
+            Spacer()
+            
+            // Pencil Icon
+            NavigationLink(destination: CategoryEdit(category: category)) {
+                Button(
+                    action:{
+                        isActive = true
+                    },
+                    label: {
+                        Image(systemName: "pencil")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                    }
+                ) // end button
+                .frame(width: 40, height: 40)
+                .foregroundColor(.white)
+            } // end NavigationLink
+            
+            // Delete Button
+            Button(
+                action:{
+                    self.managedObjectContext.delete(category)
+                    try? managedObjectContext.save()
+//                    showAlert = true
+//                    isActive = true
+//                    del()
+                },
+                label: {
+                    Image(systemName: "trash")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+            )
+            .frame(width: 40, height: 40)
+            .padding(.horizontal, 5)
+            .foregroundColor(.red)
+            // end delete button
+            
+        }
+        .frame(maxWidth: .infinity, maxHeight: 120)
+        .background(Color.bg_light)
+    } // end body
+} // end struct
+        /*
+        ZStack{
             
             //Card Body
             Rectangle()
@@ -86,32 +96,10 @@ struct CategoryCard: View {
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.leading)
                 .lineLimit(2)
-                //.frame(minWidth: 0, idealWidth: 150, maxWidth: 150, minHeight: 0, idealHeight: 3, maxHeight: 5, alignment: .leading)
                 .frame(width: 150, height: 50, alignment: .leading)
                 .minimumScaleFactor(0.39)
                 .padding(.leading, -125.0)
                 .padding (.bottom, 2)
-            
-            
-            
-    /*        Text("\(category.name)") //variable category name
-                .font(.system(size: 21, weight: .light, design: .serif))
-                .fontWeight(.bold)
-                .foregroundColor(Color.white)
-                .multilineTextAlignment(.leading)
-                .frame(minWidth: 0, idealWidth: 150, maxWidth: 150, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .leading)
-                .lineLimit(1)
-                .padding(.leading, -125.0)
-                .padding (.bottom, 50) */
-            
-            
-     /*       Text("\nTasks: 3") //"\nTasks: (2)" number is a placeholder for now
-                .font(.system(size: 21, weight: .light, design: .serif))
-                .fontWeight(.bold)
-                .foregroundColor(Color.white)
-                .multilineTextAlignment(.leading)
-                .padding(.leading, -139.0)
-                .padding(.bottom, -30) */
             
             
             HStack{ //attributes for the category colour tab to the left
@@ -141,7 +129,25 @@ struct CategoryCard: View {
                 .padding(.leading, 100)
             } //NavigationLink END
             
-            
+            //Delete button with red 'trashcan' icon
+            Button(
+                action:{
+                    self.managedObjectContext.delete(category)
+                    try? managedObjectContext.save()
+//                    showAlert = true
+//                    isActive = true
+//                    del()
+                },
+                label: {
+                    Image(systemName: "trash")
+                        .resizable()
+                        .frame(width: 45, height: 45)
+                }
+            )
+            .foregroundColor(.red)
+            .padding(.leading, 245)
+            //Delete button END
+*/
 //-------------------- Delete Buttons ---------------------------------
             //Partially functional delete alert popup
             
@@ -166,23 +172,9 @@ struct CategoryCard: View {
             
             
             
-            Button( //Delete button with red 'trashcan' icon
-                action:{
-                    //showAlert = true
-      //              isActive = true
-//                      del()
-                },
-                label: {
-                    Image(systemName: "trash")
-                        .resizable()
-                        .frame(width: 45, height: 45)
-                }
-            ) //Delete button END
-            .foregroundColor(.red)
-            .padding(.leading, 245)
             
 //-------------------- Delete Buttons END---------------------------------
-            
+/*
             
             VStack{ //black bottom line
                 Rectangle()
@@ -197,3 +189,4 @@ struct CategoryCard: View {
     } //var body: some View END
     
 } //struct CategoryCard: View END
+ */
