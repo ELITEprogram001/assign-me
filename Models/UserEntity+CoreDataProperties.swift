@@ -20,7 +20,7 @@ extension UserEntity {
     @NSManaged public var category: NSSet?
     
     public var wrappedName: String {
-        name ?? "Username"
+        name ?? "poop"
     }
     
     public var categoryArray: [CategoryEntity] {

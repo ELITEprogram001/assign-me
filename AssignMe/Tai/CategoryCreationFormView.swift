@@ -13,6 +13,11 @@ struct CategoryCreationFormView: View {
     @State var tabColor: Color = .red
     @EnvironmentObject var user: UserOld
     @Environment(\.presentationMode) var presentation
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+      entity: UserEntity.entity(),
+      sortDescriptors: []
+    ) var u: FetchedResults<UserEntity>
     
     var body: some View {
         
@@ -46,12 +51,18 @@ struct CategoryCreationFormView: View {
                     
 
                     Spacer()
+                    // MARK: Add Button
                     Button("Add"){
-                        let toAdd = Category(
-                            name:categoryName,
-                            color: tabColor)
-                        user.categoryList.append(toAdd)
-                        self.presentation.wrappedValue.dismiss()
+                        
+                        let cat = CategoryEntity(context: managedObjectContext)
+                        cat.name = categoryName
+                        print("\(cat.wrappedName) added to core data.")
+                        
+//                        let toAdd = Category(
+//                            name:categoryName,
+//                            color: tabColor)
+//                        user.categoryList.append(toAdd)
+//                        self.presentation.wrappedValue.dismiss()
                     } //button
                     .frame(width: 60, height: 40)
                     .background(Color.blue)
@@ -123,12 +134,13 @@ struct CategoryCreationFormView: View {
         
     }
 }
-struct CategoryCreationFormView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryCreationFormView()
-       
-    }
-}
+
+//struct CategoryCreationFormView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CategoryCreationFormView()
+//
+//    }
+//}
 
 private struct BlueButton: View {
     var title: String

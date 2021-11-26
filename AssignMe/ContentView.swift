@@ -15,6 +15,11 @@ struct ContentView: View {
     let persistenceController = PersistenceController.shared
     var user: UserOld = UserOld(name: "User")
     
+//    @FetchRequest(
+//      entity: UserEntity.entity(),
+//      sortDescriptors: []
+//    ) var u: FetchedResults<UserEntity>
+    
     init()
     {
         
@@ -26,6 +31,13 @@ struct ContentView: View {
         user.taskList.append(sample)
         user.taskList.append(sample2)
         user.taskList.append(sample3)
+        
+//        for us in u {
+//            if( us.wrappedName != "fuck" ) {
+//                let use = UserEntity(context: persistenceController.container.viewContext)
+//                use.name = "fuck"
+//            }
+//        }
         
     }
 

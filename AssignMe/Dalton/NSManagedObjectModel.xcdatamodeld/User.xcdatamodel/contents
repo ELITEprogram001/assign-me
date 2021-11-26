@@ -20,7 +20,7 @@
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="task" inverseEntity="CategoryEntity"/>
     </entity>
     <entity name="UserEntity" representedClassName="UserEntity" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" defaultValueString="User"/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="fuck"/>
         <relationship name="category" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="user" inverseEntity="CategoryEntity"/>
     </entity>
     <elements>

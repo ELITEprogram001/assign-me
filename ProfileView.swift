@@ -20,14 +20,9 @@ struct ProfileView: View {
     @State var showModal: Bool = false
     
     @FetchRequest(
-      // 2
-      entity: UserEntity.entity(),
-      // 3
-      sortDescriptors: [
-        NSSortDescriptor(keyPath: \UserEntity.name, ascending: true)
-      ]
-    // 4
-    ) var users: FetchedResults<UserEntity>
+      entity: CategoryEntity.entity(),
+      sortDescriptors: []
+    ) var categories: FetchedResults<CategoryEntity>
     
     var body: some View {
         ZStack {
@@ -109,10 +104,11 @@ struct ProfileView: View {
                     LazyVGrid (columns: columns, spacing: 15) {
                         AchievementTile(title: "Redemption", desc: "Complete 3 tasks that were overdue.", color: .gray)
                             .onTapGesture {
+                                // MARK: Temporary Debug
                                 showModal = !showModal
                                 print("--------------------------------")
-                                for u in users {
-                                    print(u.name)
+                                for category in categories {
+                                    print(category.wrappedName)
                                 }
                                 print("--------------------------------")
                             }

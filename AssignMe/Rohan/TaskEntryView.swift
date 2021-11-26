@@ -47,7 +47,7 @@ extension View {
     }
 } //view extension
 
-
+// MARK: Task Entry Struct
 struct TaskEntryView: View {
     @State var taskName: String = ""
     @State var taskDesc: String = ""
@@ -60,14 +60,12 @@ struct TaskEntryView: View {
     @EnvironmentObject var user: UserOld
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
-      // 2
-      entity: UserEntity.entity(),
-      // 3
-      sortDescriptors: [
-        NSSortDescriptor(keyPath: \UserEntity.name, ascending: true)
-      ]
-    // 4
-    ) var users: FetchedResults<UserEntity>
+        
+      entity: CategoryEntity.entity(),
+        
+      sortDescriptors: []
+        
+    ) var categories: FetchedResults<CategoryEntity>
     
     var body: some View {
         ZStack(){
@@ -84,8 +82,11 @@ struct TaskEntryView: View {
                     
                     Button("Add"){
                         
-                        addUser(name: taskName)
-                        
+                        print("[DEBUG] start - Add button categories")
+                        for category in categories {
+                            print("\(category.wrappedName)")
+                        }
+                        print("[DEBUG]   end - Add button categories")
                         /* Old Task Add
                         let toAdd = Task(
                             name:taskName,
@@ -102,26 +103,6 @@ struct TaskEntryView: View {
                         difficulty = 1
                         */
                     } //button
-                    Button("Delete"){
-                        
-                        deleteUser(name: taskName)
-                        
-                        /* Old Task Add
-                        let toAdd = Task(
-                            name:taskName,
-                            category: user.categoryList[currentCategoryIndex],
-                            description:taskDesc,
-                            difficulty:difficulty,
-                            dueDate:dueDate,
-                            dateCompleted:dueDate,
-                            isOverdue:false)
-                        user.taskList.append(toAdd)
-                        self.tabSelection=1
-                        taskName = ""
-                        taskDesc = ""
-                        difficulty = 1
-                        */
-                    }
                     .frame(width: 60, height: 40)
                     .background(Color.blue)
                     .foregroundColor(.white)
@@ -223,11 +204,11 @@ struct TaskEntryView: View {
         saveContext()
     }
     
-    func deleteUser(name: String) {
+    func deleteCategory(name: String) {
         
-        for u in users {
-            if(u.name == name) {
-                self.managedObjectContext.delete(u)
+        for category in categories {
+            if(category.wrappedName == name) {
+                self.managedObjectContext.delete(category)
             }
         }
         
