@@ -30,49 +30,57 @@ import Foundation
 struct CategoryCard: View {
     
     @State private var isActive = false
-    var category: Category  //KEEP THIS; uncomment when ready for use
-    var categoryList = [Category]()
+//    var category: Category  //KEEP THIS; uncomment when ready for use
+    let category: CategoryEntity
+//    var categoryList = [Category]()
     @EnvironmentObject var user: UserOld
     @Environment(\.presentationMode) var presentation
     @State var showAlert = false
     @State private var showingAlert = false
-    var catIndex: Int
+//    var catIndex: Int
     
     
-    func del () {
-        for index in 0..<user.taskList.count {
-            if (user.taskList[index].category.id == user.categoryList[catIndex].id){
-                user.taskList[index].category = user.categoryList[0]
-            }
-        }
-        
-        user.categoryList.remove(at: catIndex)
-        //self.presentation.wrappedValue.dismiss()
+//    func del () {
+//        for index in 0..<user.taskList.count {
+//            if (user.taskList[index].category.id == user.categoryList[catIndex].id){
+//                user.taskList[index].category = user.categoryList[0]
+//            }
+//        }
+//
+//        user.categoryList.remove(at: catIndex)
+//        //self.presentation.wrappedValue.dismiss()
+//    }
+    
+//    func indexCheck () ->Category {
+//        if catIndex >= user.categoryList.count {
+//            return user.categoryList[0]
+//        }
+//        return user.categoryList[catIndex]
+//    }
+    
+//    func intCheck () -> Int {
+//        if catIndex >= user.categoryList.count{
+//            return 0
+//        }
+//        return catIndex
+//    }
+    
+    init(category: CategoryEntity) {
+        self.category = category
     }
     
-    func indexCheck () ->Category {
-        if catIndex >= user.categoryList.count {
-            return user.categoryList[0]
-        }
-        return user.categoryList[catIndex]
-    }
-    
-    func intCheck () -> Int {
-        if catIndex >= user.categoryList.count{
-            return 0
-        }
-        return catIndex
-    }
-    
+    // MARK: Category Card Body
     var body: some View {
         ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
-            Rectangle() //Card Body
+            
+            //Card Body
+            Rectangle()
                 .fill(Color.clear) //(red: 0.35, green: 0.35, blue: 0.35)) //can be Color: .Clear
                 .frame(width: 325, height: 100)
                 .shadow(radius: 6) //optional
             
             
-            Text("\(category.name)") //variable category name
+            Text("\(category.wrappedName)") //variable category name
                 .font(.system(size: 30, weight: .light, design: .serif))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
@@ -108,30 +116,30 @@ struct CategoryCard: View {
             
             HStack{ //attributes for the category colour tab to the left
                 Rectangle() //Left-hand category colour tab
-                    .foregroundColor(category.color)
+                    .foregroundColor(Color(category.wrappedColor))
                     .padding(.leading, 0.0)
                     .frame(width: 20.0, height: 100)
             } //attributes for the category colour tab END
             .padding(.leading, -165.0) //padding for category colour tab
             
             
-            NavigationLink(destination: CategoryEdit(category: indexCheck(), catIndex: intCheck()), isActive: $isActive){
-            Button( //Blue edit button with black 'pencil' icon
-                action:{
-                    isActive = true
-                },
-                label: {
-                    Image(systemName: "pencil")
-                        .resizable()
-                        .frame(width: 35, height: 35)
-                }
-            ) //Blue edit button END
-            .frame(width: 50, height: 50)
-            .background(Color.blue)
-            .foregroundColor(.black)
-            .cornerRadius(15.0)
-            .padding(.leading, 100)
-        } //NavigationLink END
+            NavigationLink(destination: CategoryEdit(category: category)) {
+                Button( //Blue edit button with black 'pencil' icon
+                    action:{
+                        isActive = true
+                    },
+                    label: {
+                        Image(systemName: "pencil")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                    }
+                ) //Blue edit button END
+                .frame(width: 50, height: 50)
+                .background(Color.blue)
+                .foregroundColor(.black)
+                .cornerRadius(15.0)
+                .padding(.leading, 100)
+            } //NavigationLink END
             
             
 //-------------------- Delete Buttons ---------------------------------
@@ -162,7 +170,7 @@ struct CategoryCard: View {
                 action:{
                     //showAlert = true
       //              isActive = true
-                      del()
+//                      del()
                 },
                 label: {
                     Image(systemName: "trash")
@@ -189,10 +197,3 @@ struct CategoryCard: View {
     } //var body: some View END
     
 } //struct CategoryCard: View END
-/*
- struct CategoryCard_Previews: PreviewProvider {
- static var previews: some View {
- CategoryCard()
- }
- }
- */

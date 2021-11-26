@@ -8,13 +8,17 @@
 import SwiftUI
 
 
-var task: [Task] = TaskList.taskArray
+//var task: [Task] = TaskList.taskArray
 
 
 struct WeeklyView: View {
     @EnvironmentObject var user: UserOld
     @State var tabSelection: Int
-    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+      entity: TaskEntity.entity(),
+      sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.dueDate, ascending: true)]
+    ) var tasks: FetchedResults<TaskEntity>
     
     
     var body: some View {
@@ -24,21 +28,21 @@ struct WeeklyView: View {
                 VStack{
                     ScrollView{
 					
-                        ForEach(1..<user.taskList.count, id: \.self) { index in
-                            NavigationLink(destination: TaskDetailsView(task: user.taskList[index] )
+                        ForEach(tasks) { task in
+                            NavigationLink(destination: TaskDetailsView(task: task)
 
                                 .environmentObject(user)
                                 .onAppear {
-                                    user.currTask = user.taskList[index]
-                                    user.currTaskIndex = index
-                                    for index in 0..<user.categoryList.count{
-                                        if (user.taskList[user.currTaskIndex].category.id == user.categoryList[index].id) {
-                                            user.indexCatList = index
-                                        }
-                                    }
+//                                    user.currTask = user.taskList[index]
+//                                    user.currTaskIndex = index
+//                                    for index in 0..<user.categoryList.count{
+//                                        if (user.taskList[user.currTaskIndex].category.id == user.categoryList[index].id) {
+//                                            user.indexCatList = index
+//                                        }
+//                                    }
                                 },
                                label:{
-                                TaskCard(task: user.taskList[index])
+                                TaskCard(task: task)
                                     .ignoresSafeArea(.all)
                                })
                             Spacer()
@@ -48,20 +52,20 @@ struct WeeklyView: View {
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
             } //navigation view
-                .onAppear{
-                    user.taskList.append(Task(
-                                            name:"",
-                                            category:user.categoryList[0],
-                                            description:"",
-                                            difficulty: 1,
-                                            dueDate: Date(),
-                                            dateCompleted: Date(),
-                                            isOverdue: false ))
-                    user.taskList.removeLast()
-                    user.taskList = user.taskList.sorted(by: {
-                        $0.dueDate.compare($1.dueDate) == .orderedAscending
-                    })
-                }
+//                .onAppear{
+//                    user.taskList.append(Task(
+//                                            name:"",
+//                                            category:user.categoryList[0],
+//                                            description:"",
+//                                            difficulty: 1,
+//                                            dueDate: Date(),
+//                                            dateCompleted: Date(),
+//                                            isOverdue: false ))
+//                    user.taskList.removeLast()
+//                    user.taskList = user.taskList.sorted(by: {
+//                        $0.dueDate.compare($1.dueDate) == .orderedAscending
+//                    })
+//                }
             
         } //navigation
         

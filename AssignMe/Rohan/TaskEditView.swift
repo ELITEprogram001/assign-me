@@ -11,19 +11,24 @@ struct TaskEditView: View {
     @State var taskDesc: String = ""
     @State var currentCategory: String = "Uncategorized"
     @State var dueDate: Date = Date()
-    @State var difficulty=1
+//    @State var difficulty=1
     @State var isActive: Bool = false
-    @EnvironmentObject var user: UserOld
-    var task: Task
+//    @EnvironmentObject var user: UserOld
+    var task: TaskEntity
     @Environment(\.presentationMode) var presentation
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+      entity: CategoryEntity.entity(),
+      sortDescriptors: []
+    ) var categories: FetchedResults<CategoryEntity>
     
-    init(task: Task){
+    init(task: TaskEntity){
         self.task = task
-        _taskName = State(initialValue: task.name)
+        _taskName = State(initialValue: task.wrappedName)
         _taskDesc = State(initialValue: task.description)
-        _currentCategory = State(initialValue: task.category.name)
-        _dueDate = State(initialValue: task.dueDate)
-        _difficulty = State(initialValue: task.difficulty)
+        _currentCategory = State(initialValue: task.category?.wrappedName ?? "")
+        _dueDate = State(initialValue: task.dueDate ?? Date())
+//        _difficulty = State(initialValue: task.difficulty)
     }
     var body: some View {
         ZStack(){
@@ -50,11 +55,11 @@ struct TaskEditView: View {
                         .frame(width:120, height: 40)
                         .padding(.horizontal, 10)
                     Button("Save"){
-                        user.taskList[user.currTaskIndex].name=taskName
-                        user.taskList[user.currTaskIndex].category=user.categoryList[user.indexCatList]
-                        user.taskList[user.currTaskIndex].description=taskDesc
-                        user.taskList[user.currTaskIndex].dueDate=dueDate
-                        user.taskList[user.currTaskIndex].difficulty=difficulty
+//                        user.taskList[user.currTaskIndex].name=taskName
+//                        user.taskList[user.currTaskIndex].category=user.categoryList[user.indexCatList]
+//                        user.taskList[user.currTaskIndex].description=taskDesc
+//                        user.taskList[user.currTaskIndex].dueDate=dueDate
+//                        user.taskList[user.currTaskIndex].difficulty=difficulty
                         self.presentation.wrappedValue.dismiss()
                     }.frame(width: 60, height: 40)
                     .background(Color.blue)
@@ -92,15 +97,12 @@ struct TaskEditView: View {
                     Text("Category:")
                         .foregroundColor(.blue)
                     Menu("\(currentCategory)"){
-                        ForEach(0..<user.categoryList.count, id: \.self) { index in
-                            Button(action:{currentCategory = user.categoryList[index].name;
-                                user.indexCatList = index
-                            }, label:{
-                                Text(user.categoryList[index].name)
-                            })
+                        Picker(selection: $currentCategory, label: Text("Category options")) {
+                            ForEach(categories.indices) { categoryIndex in
+                                Text(categories[categoryIndex].wrappedName).tag(categoryIndex)
+                            }
                         }
-
-                    }   //menus
+                    } // end menu
                         .foregroundColor(.white)
                         .padding(.horizontal, 30)
                     Rectangle()
@@ -120,7 +122,7 @@ struct TaskEditView: View {
                         .padding(.horizontal, 30)
                 Text("Difficulty:")
                     .foregroundColor(.blue)
-                DifficultyView(rating: $difficulty)
+//                DifficultyView(rating: $difficulty)
                 Spacer()
             }
     

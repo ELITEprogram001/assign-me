@@ -27,7 +27,7 @@ struct CalendarView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
       entity: TaskEntity.entity(),
-      sortDescriptors: []
+      sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.dueDate, ascending: true)]
     ) var tasks: FetchedResults<TaskEntity>
 
     let columns = [
@@ -131,12 +131,18 @@ struct CalendarView: View {
                             .frame(maxWidth: .infinity)
                             .background(Color(task.category?.wrappedColor ?? "orange"))
                         }
-                        // TODO add filter by day
-                        ForEach(user.taskList) { t in
-                            if(t.isDue(selectedCell.date)) {
-                                TaskCard(task: t)
+                        ForEach(tasks) { task in
+                            if(task.isDue(d: selectedCell.date)) {
+                                TaskCard(task: task)
                             }
                         }
+                        
+                        // OLD Task Display
+//                        ForEach(user.taskList) { t in
+//                            if(t.isDue(selectedCell.date)) {
+//                                TaskCard(task: t)
+//                            }
+//                        }
                         
                     } // end LazyVStack
                 } // end Scrollview

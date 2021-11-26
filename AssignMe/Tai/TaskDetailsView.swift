@@ -9,23 +9,23 @@ import SwiftUI
 
 struct TaskDetailsView: View {
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var user: UserOld
+//    @EnvironmentObject var user: UserOld
     @State private var isActive = false
     @State private var willMoveToNextScreen = false
     
-    var task: Task
+    var task: TaskEntity
     let formatter = DateFormatter()
-    init(task:Task) {
+    init(task: TaskEntity) {
         self.task = task
         formatter.dateFormat = "EEEE, MMMM d, yyyy HH:mm a"
     }
-    func getIndex() -> Int {
-            if (user.currTaskIndex == user.taskList.count)
-            {
-                return user.currTaskIndex-1
-            }
-            return user.currTaskIndex
-    }
+//    func getIndex() -> Int {
+//            if (user.currTaskIndex == user.taskList.count)
+//            {
+//                return user.currTaskIndex-1
+//            }
+//            return user.currTaskIndex
+//    }
     
     var body: some View {
         
@@ -77,7 +77,7 @@ struct TaskDetailsView: View {
                     Text("Task Name:")
                         .foregroundColor(.blue)
                     
-                    Text( user.taskList[getIndex()].name)
+                    Text( task.wrappedName)
                         .font(.title)
                         .fontWeight(.semibold)
                         .lineLimit(2)
@@ -85,14 +85,14 @@ struct TaskDetailsView: View {
                         .padding(.horizontal)
                     Text("Description:")
                         .foregroundColor(.blue)
-                    Text( user.taskList[getIndex()].description)
+                    Text( task.wrappedDesc)
                         .lineLimit(2)
                         .multilineTextAlignment(.center) //to alight to center
                         .padding(.horizontal)
                     Text("Due Date:")
                         .foregroundColor(.blue)
                    // Text("\( user.taskList[user.currTaskIndex].dueDate)")
-                    Text("\(formatter.string(from:task.dueDate))")
+                    Text("\(formatter.string(from:task.dueDate ?? Date()))")
  //                   Text((formatter.date(from: "\(user.currTask.dueDate)" )
                         .lineLimit(2)
                         .multilineTextAlignment(.center) //to alight to center
@@ -101,7 +101,7 @@ struct TaskDetailsView: View {
                     Text("Difficulty:")
                         .foregroundColor(.blue)
                     HStack( spacing: 1){
-                        let starCount =  user.taskList[getIndex()].difficulty
+                        let starCount =  task.difficulty
                         ForEach (1...starCount, id:\.self) { _ in
                             Image(systemName: "star.fill")
                                 .resizable()
@@ -116,10 +116,10 @@ struct TaskDetailsView: View {
                             .foregroundColor(.blue)
                         
                         HStack{
-                            Text(  "\(task.category.name )" )
+                            Text(task.category?.wrappedName ?? "Empty Category")
                                 .multilineTextAlignment(.center) //to alight to center
                                 .padding(.horizontal)
-                                .foregroundColor(task.category.color)
+                                .foregroundColor(Color(task.category?.color ?? "gray"))
                             
                             
                             
@@ -176,7 +176,7 @@ struct TaskDetailsView: View {
         .navigationBarTitle("")
         .navigationBarHidden(true)
         
-        .navigate(to: TaskEditView(task: user.taskList[getIndex()]).navigationBarHidden(true), when: $willMoveToNextScreen)
+        .navigate(to: TaskEditView(task: task).navigationBarHidden(true), when: $willMoveToNextScreen)
         //Zstack
         //.ignoresSafeArea(.all)
     } //body
@@ -184,12 +184,12 @@ struct TaskDetailsView: View {
     
     func DeleteTask(){
         self.presentation.wrappedValue.dismiss()
-        user.taskList.remove(at:user.currTaskIndex)
+//        user.taskList.remove(at:user.currTaskIndex)
         
     }
     func CompleteTask(){
-        user.completedList.append(user.taskList[user.currTaskIndex])
-        user.taskList.remove(at:user.currTaskIndex)
+//        user.completedList.append(user.taskList[user.currTaskIndex])
+//        user.taskList.remove(at:user.currTaskIndex)
         self.presentation.wrappedValue.dismiss()
         
     }

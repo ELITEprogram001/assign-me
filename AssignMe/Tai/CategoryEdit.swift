@@ -31,19 +31,19 @@ extension UIColor {
 
 struct CategoryEdit: View {
     @State private var categoryName: String = ""
-    @State private var color: String = ""
-    @State private var actualColor: Color
-    var category: Category
-    var catIndex: Int
+//    @State private var color: String = ""
+//    @State private var actualColor: Color
+    var category: CategoryEntity
+    @State var colorSelection: Int = 0
+//    var catIndex: Int
     @EnvironmentObject var user: UserOld
     @Environment(\.presentationMode) var presentation
     
-    init(category: Category, catIndex: Int){
+    init(category: CategoryEntity){
         self.category = category
-        self.catIndex = catIndex
-        _categoryName = State(initialValue: category.name)
-        _actualColor = State(initialValue: category.color)
-        _color = State(initialValue: colorString (color: category.color))
+        _categoryName = State(initialValue: category.wrappedName)
+//        _actualColor = State(initialValue: category?.color)
+//        _color = State(initialValue: colorString (color: category.color))
     }
     
     func colorString (color: Color) -> String {
@@ -63,8 +63,6 @@ struct CategoryEdit: View {
     
     var body: some View {
         
-        
-        //NavigationView{
         ZStack {
             Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)//for gray mode
             VStack(spacing: 15){
@@ -94,8 +92,8 @@ struct CategoryEdit: View {
                     
                     Button(
                         action:{
-                            user.categoryList[catIndex].name = categoryName
-                            user.categoryList[catIndex].color = actualColor
+//                            user.categoryList[catIndex].name = categoryName
+//                            user.categoryList[catIndex].color = actualColor
                             self.presentation.wrappedValue.dismiss()},
                         label:{Text("Save")
                             .bold()
@@ -122,44 +120,48 @@ struct CategoryEdit: View {
                 Text("Color:")
                     .foregroundColor(.blue)
                    
-                Menu("\(color)"){
-                    //Text("hello")
-                    Button(action:{color = "Yellow";
-                            actualColor = .yellow }, label:{
-                        Text("Yellow")
-                    })
-                    Button(action:{color = "Blue";
-                            actualColor = .blue }, label:{
-                        Text("Blue")
-                        
-                    })
-                    Button(action:{color = "Red";
-                            actualColor = .red }, label:{
-                        Text("Red")
-                        
-                    })
-                    Button(action:{color = "Green";
-                            actualColor = .green}, label:{
-                        Text("Green")
-                        
-                    })
-                    Button(action:{color = "Orange";
-                            actualColor = .orange }, label:{
-                        Text("Orange")
-                        
-                    })
-                    Button(action:{color = "Pink";
-                            actualColor = .pink}, label:{
-                        Text("Pink")
-                        
-                    })
-                    Button(action:{color = "Purple";
-                            actualColor = .purple }, label:{
-                        Text("Purple")
-                            
-
-                    })
-                    .foregroundColor(.purple)
+                Menu("\(colorSelection)"){
+                    Picker(selection: $colorSelection, label: Text("Sorting options")) {
+                        Text("Orange").tag(0)
+                        Text("Red").tag(1)
+                        Text("Purple").tag(2)
+                    }
+//                    Button(action:{color = "Yellow";
+//                            actualColor = .yellow }, label:{
+//                        Text("Yellow")
+//                    })
+//                    Button(action:{color = "Blue";
+//                            actualColor = .blue }, label:{
+//                        Text("Blue")
+//
+//                    })
+//                    Button(action:{color = "Red";
+//                            actualColor = .red }, label:{
+//                        Text("Red")
+//
+//                    })
+//                    Button(action:{color = "Green";
+//                            actualColor = .green}, label:{
+//                        Text("Green")
+//
+//                    })
+//                    Button(action:{color = "Orange";
+//                            actualColor = .orange }, label:{
+//                        Text("Orange")
+//
+//                    })
+//                    Button(action:{color = "Pink";
+//                            actualColor = .pink}, label:{
+//                        Text("Pink")
+//
+//                    })
+//                    Button(action:{color = "Purple";
+//                            actualColor = .purple }, label:{
+//                        Text("Purple")
+//
+//
+//                    })
+//                    .foregroundColor(.purple)
                 } //menu
                 .foregroundColor(.gray)
                 Spacer()
