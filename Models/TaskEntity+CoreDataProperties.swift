@@ -16,14 +16,14 @@ extension TaskEntity {
         return NSFetchRequest<TaskEntity>(entityName: "TaskEntity")
     }
 
-    @NSManaged public var title: String?
+    @NSManaged public var name: String?
     @NSManaged public var desc: String?
     @NSManaged public var difficulty: Int64
     @NSManaged public var dueDate: Date?
     @NSManaged public var category: CategoryEntity?
     
-    public var wrappedTitle: String {
-        title ?? "Default Task Title"
+    public var wrappedName: String {
+        name ?? "Default Task Name"
     }
     
     public var wrappedDesc: String {

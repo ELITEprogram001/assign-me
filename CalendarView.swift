@@ -23,6 +23,12 @@ struct CalendarView: View {
     @ObservedObject var cellState = CellState()
     var calendar: [[[Cell]]]
     @EnvironmentObject var user: UserOld
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(
+      entity: TaskEntity.entity(),
+      sortDescriptors: []
+    ) var tasks: FetchedResults<TaskEntity>
 
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -118,6 +124,13 @@ struct CalendarView: View {
                 .padding(.top, 10)
                 ScrollView {
                     LazyVStack(spacing: 0){
+                        ForEach(tasks) { task in
+                            VStack {
+                                Text(task.wrappedName)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .background(Color(task.category?.wrappedColor ?? "orange"))
+                        }
                         // TODO add filter by day
                         ForEach(user.taskList) { t in
                             if(t.isDue(selectedCell.date)) {

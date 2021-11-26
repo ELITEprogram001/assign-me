@@ -36,7 +36,7 @@ extension CategoryEntity {
     public var taskArray: [TaskEntity] {
         let set = task as? Set<TaskEntity> ?? []
         return set.sorted {
-            $0.wrappedTitle < $1.wrappedTitle
+            $0.wrappedName < $1.wrappedName
         }
     }
     

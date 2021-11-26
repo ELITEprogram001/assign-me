@@ -16,7 +16,7 @@
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="difficulty" optional="YES" attributeType="Integer 64" minValueString="1" maxValueString="5" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="task" inverseEntity="CategoryEntity"/>
     </entity>
     <elements>

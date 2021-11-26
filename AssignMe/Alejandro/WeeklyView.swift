@@ -14,6 +14,9 @@ var task: [Task] = TaskList.taskArray
 struct WeeklyView: View {
     @EnvironmentObject var user: UserOld
     @State var tabSelection: Int
+    
+    
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -59,7 +62,12 @@ struct WeeklyView: View {
                         $0.dueDate.compare($1.dueDate) == .orderedAscending
                     })
                 }
+            
         } //navigation
+        
+        
+        
+        
     }//body
     
 } //weeklyview

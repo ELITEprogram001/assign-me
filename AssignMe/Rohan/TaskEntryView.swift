@@ -60,11 +60,8 @@ struct TaskEntryView: View {
     @EnvironmentObject var user: UserOld
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
-        
       entity: CategoryEntity.entity(),
-        
       sortDescriptors: []
-        
     ) var categories: FetchedResults<CategoryEntity>
     
     var body: some View {
@@ -82,11 +79,21 @@ struct TaskEntryView: View {
                     
                     Button("Add"){
                         
-                        print("[DEBUG] start - Add button categories")
+                        let task = TaskEntity(context: managedObjectContext)
+                        task.name = taskName
+                        task.desc = taskDesc
+                        task.dueDate = Date()
+                        
+                        
                         for category in categories {
-                            print("\(category.wrappedName)")
+                            if(category.wrappedName == currentCategory) {
+                                category.addToTask(task)
+                                print("added \(taskName) to category: \(category.wrappedName)")
+                            }
                         }
-                        print("[DEBUG]   end - Add button categories")
+                        
+                        try? managedObjectContext.save()
+                        
                         /* Old Task Add
                         let toAdd = Task(
                             name:taskName,
@@ -136,13 +143,22 @@ struct TaskEntryView: View {
                     Text("Category:")       //category
                         .foregroundColor(.blue)
                     Menu("\(currentCategory)"){
-                        ForEach(0..<user.categoryList.count, id: \.self) { index in
-                            Button(action:{currentCategory = user.categoryList[index].name;
-                                currentCategoryIndex = index
+                        ForEach(categories) { category in
+                            Button(action:{
+                                currentCategory = category.wrappedName;
                             }, label:{
-                                Text(user.categoryList[index].name)
+                                Text(category.wrappedName)
                             })
                         }
+                        
+//                        ForEach(0..<user.categoryList.count, id: \.self) { index in
+//                            Button(action:{
+//                                currentCategory = user.categoryList[index].name;
+//                                currentCategoryIndex = index
+//                            }, label:{
+//                                Text(user.categoryList[index].name)
+//                            })
+//                        }
                     /*    Button(action:{currentCategory="Physical Health" }, label:{
                             Text("Physical Health")
                             
