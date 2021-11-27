@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     
     let columns = [
-        GridItem(.flexible(), spacing: 30, alignment: .center),
+        GridItem(.flexible(), spacing: 40, alignment: .center),
         GridItem(.flexible(), alignment: .center)
 //        GridItem(.flexible()),
 //        GridItem(.flexible())
@@ -104,7 +104,7 @@ struct ProfileView: View {
                     LazyVGrid (columns: columns, spacing: 15) {
                         AchievementTile(title: "Redemption", image: "checkmark", desc: "Complete 3 tasks that were overdue.", color: .gray, showModal: $showModal)
                         AchievementTile(title: "Overachiever", image: "brain", desc: "Complete 5 tasks that aren't due for another week.", color: .gray, showModal: $showModal)
-                        AchievementTile(title: "A Marathon Starts With a Step", image: "climbing", desc: "Complete your first task!", color: .gray, showModal: $showModal)
+                        AchievementTile(title: "First Steps", image: "climbing", desc: "Complete your first task!", color: .gray, showModal: $showModal)
                         AchievementTile(title: "Dedicated", image: "focus", desc: "Complete 4 tasks for one category back to back.", color: .gray, showModal: $showModal)
                         AchievementTile(title: "Busy Bee", image: "focus_eye", desc: "Have 15 tasks scheduled.", color: .gray, showModal: $showModal)
                         AchievementTile(title: "Consistent Worker", image: "fire", desc: "Complete all your tasks on time for 5 days in a row.", color: .gray, showModal: $showModal)

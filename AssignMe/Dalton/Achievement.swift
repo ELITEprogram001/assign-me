@@ -11,4 +11,5 @@ struct Achievement: Identifiable {
     let id = UUID()
     let title: String
     let desc: String
+    var progress: Int
 }

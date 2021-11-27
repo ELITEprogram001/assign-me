@@ -13,4 +13,6 @@ extension Color {
     static let blew = Color.init(red: 131/255, green: 201/255, blue: 244/255)
     static let near_black = Color.init(red: 10/255, green: 10/255, blue: 10/255)
     static let bright_maroon = Color.init(red: 185/255, green: 49/255, blue: 79/255)
+    
+    static var primary_color = Color.init(red: 0, green: 0, blue: 0)
 }

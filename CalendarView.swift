@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct CalendarView: View {
     
     // MARK: Struct Variables
@@ -18,10 +19,12 @@ struct CalendarView: View {
     @State var suffix: String
     private let dayLabels = [DayLabel("S"),DayLabel("M"),DayLabel("T"),DayLabel("W"),DayLabel("T"),DayLabel("F"),DayLabel("S")]
     private var shift = Offsets()
+    private var calendar: Calendar = Calendar.current
     @State var lastSelectedCell = Cell(id: "9999-99-99", "99", date: Date())
     @State var selectedCell: Cell
     @ObservedObject var cellState = CellState()
-    var calendar: [[[Cell]]]
+    var allCells: [[[Cell]]]
+    var allDays: [[Cell]]
     @EnvironmentObject var user: UserOld
     
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -90,7 +93,7 @@ struct CalendarView: View {
                     }
                 }
                 // Call a method to calculate what the current month is and return all the cells
-                ForEach(getMonthCells(d: date) ?? calendar[0][0]) { cell in
+                ForEach(getMonthCells(d: date) ?? allCells[0][0]) { cell in
                     cell
                         .onTapGesture {
                             // Update lastSelectedCell and make it white
@@ -147,7 +150,9 @@ struct CalendarView: View {
     // MARK: Init
     init() {
         
-        calendar = [[[Cell]]]()
+        print("[INIT] calendar initialized")
+        allCells = [[[Cell]]]()
+        allDays = [[]]
         _selectedCell = State(initialValue: Cell(id: "6666-66-66", "66", date: Date()))
         _dayTitle = State(initialValue: "Error")
         _numTitle = State(initialValue: 99)
@@ -182,7 +187,7 @@ struct CalendarView: View {
                 }
                 yearArr.append(currentMonth)
             }
-            calendar.append(yearArr)
+            allCells.append(yearArr)
         }
         
         // Update the initial value of the Daily View title
@@ -190,18 +195,62 @@ struct CalendarView: View {
         _numTitle = State(initialValue: Calendar.current.component(.day, from: selectedCell.date))
         _suffix = State(initialValue: getDaySuffix(Calendar.current.component(.day, from: selectedCell.date)))
         
+        // Debug
+//        createCells(d: Date())
     }
     
     // MARK: Custom Functions
     
+    /// Creates cells for the calendar and adds them to the existing cells.
+    ///
+    /// - Precondition: The desired cells don't already exist in the cells array.
+//    func createCells(d: Date) {
+//        let nextMonth = calendar.date(byAdding: .month, value: 1, to: d)
+//        var nextMonthDateComponents = calendar.dateComponents([.month, .day], from: nextMonth ?? Date())
+//        nextMonthDateComponents.day = 1
+//        let lastDayofThisMonth = calendar.date(byAdding: .day, value: -1, to: calendar.date(from: nextMonthDateComponents) ?? Date())
+//        let currentDay = calendar.component(.day, from: d) - 1
+//        let firstDayOfThisMonth = calendar.date(byAdding: .day, value: (-1) * currentDay, to: d)
+//        var monthCells: [Cell] = []
+//
+//        for day in (1...calendar.component(.day, from: lastDayofThisMonth ?? Date())) {
+//            //Cell(
+//        }
+//
+//        print(firstDayOfThisMonth)
+//        print(lastDayofThisMonth)
+//    }
+    
+    /// Gets all the cells in a month and updates their task circle indicator.
+    /// - Parameter d: Any date inside of a desired month.
+    /// - Returns: The month of cells to be displayed if they exist.
     func getMonthCells(d: Date) -> [Cell]? {
         let year = Calendar.current.component(.year, from: d)
         let month = Calendar.current.component(.month, from: d)
-        for yearArr in calendar {
-            if (Calendar.current.component(.year, from: yearArr[0][0].date) == year) {
+        for yearArr in allCells {
+            if (calendar.component(.year, from: yearArr[0][0].date) == year) {
                 for monthArr in yearArr {
-                    //print("[INFO] found month: \(Calendar.current.component(.month, from: monthArr[0].date))")
                     if (Calendar.current.component(.month, from: monthArr[0].date) == month) {
+                        
+                        // Reset all tasks indicators
+                        for cell in monthArr {
+                            cell.turnOffTaskIndicator()
+                        }
+                        
+                        // Add indicators to cells with tasks due that day
+                        for task in tasks {
+                            let taskYear = calendar.component(.year, from: task.dueDate ?? Date())
+                            let taskMonth = calendar.component(.month, from: task.dueDate ?? Date())
+                            if(taskYear == year) {
+                                // There is a task in the relevant month
+                                if(taskMonth == month) {
+                                    monthArr[calendar.component(.day, from: task.dueDate ?? Date()) - 1].turnOnTaskIndicator()
+                                }
+                            } else if(taskYear > year) {
+                                
+                            }
+                        }
+                        
                         return monthArr
                     }
                 }

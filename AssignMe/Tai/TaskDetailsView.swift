@@ -67,7 +67,6 @@ struct TaskDetailsView: View {
                     
                     // MARK: Edit Button
                     Button(action: {
-                        print("task edit clicked.")
                         showEdit = true
                     }, label: {
                         Text("Edit")
@@ -166,25 +165,59 @@ struct TaskDetailsView: View {
                         Spacer()
                     }
                     
+                    // MARK: Difficulty
                     HStack {
-                        ForEach(0...task.difficulty, id:\.self) { _ in
-                            ZStack{
-                                Image(systemName: "star.fill")
-                                    .resizable()
-                                    .foregroundColor(Color.yellow)
-                                    .frame(width: 35, height: 35)
-                                    .padding(.horizontal, 2)
-                                Image(systemName: "star")
-                                    .resizable()
-                                    .foregroundColor(Color.bg_dark)
-                                    .frame(width: 35, height: 35)
-                                    .padding(.horizontal, 2)
+                        if(task.difficulty != 0) {
+                            ForEach(1...task.difficulty, id:\.self) { _ in
+                                ZStack{
+                                    Image(systemName: "star.fill")
+                                        .resizable()
+                                        .foregroundColor(Color.yellow)
+                                        .frame(width: 35, height: 35)
+                                        .padding(.horizontal, 2)
+                                    Image(systemName: "star")
+                                        .resizable()
+                                        .foregroundColor(Color.bg_dark)
+                                        .frame(width: 35, height: 35)
+                                        .padding(.horizontal, 2)
+                                }
                             }
+                            Spacer()
                         }
-                        Spacer()
+                        
                     }
                 }
                 .padding()
+                
+                HStack() {
+                    Spacer()
+                    Button(action: {
+                        managedObjectContext.delete(task)
+                        try? managedObjectContext.save()
+                    }, label: {
+                        Text("Delete")
+                            .padding(6)
+                            .background(Color.red)
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 10)
+                            )
+                    })
+                    Spacer()
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("Complete")
+                            .padding(6)
+                            .background(Color.green)
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 10)
+                            )
+                    })
+                    Spacer()
+                }
+                .padding(.vertical, 10)
+                .font(.custom("Ubuntu-Bold", size: 16))
+                // end delete/complete button hstack
                 
                 Spacer()
             }

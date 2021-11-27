@@ -30,10 +30,16 @@ struct Cell: View, Identifiable, Equatable{
                 .background(Color.gray)
             Text(day).bold()
                 .foregroundColor(cellState.color)
-            if(true) {
+            if(cellState.hasTask) {
                 Circle()
                     .fill(Color.white)
-                    .frame(width: 5, height: 5)
+                    .frame(width: 7, height: 7)
+                    .padding(.vertical, 8)
+            } else {
+                Circle()
+                    .fill(Color.bg_light)
+                    .frame(width: 7, height: 7)
+                    .padding(.vertical, 8)
             }
             Spacer()
         }
@@ -51,6 +57,14 @@ struct Cell: View, Identifiable, Equatable{
         }
     }
     
+    func turnOnTaskIndicator() {
+        self.cellState.hasTask = true
+    }
+    
+    func turnOffTaskIndicator() {
+        self.cellState.hasTask = false
+    }
+    
     static func == (lhs: Cell, rhs: Cell) -> Bool {
         let lhsComp = Calendar.current.dateComponents([.day, .month, .year], from: lhs.date)
         let rhsComp = Calendar.current.dateComponents([.day, .month, .year], from: rhs.date)
@@ -61,6 +75,7 @@ struct Cell: View, Identifiable, Equatable{
 class CellState: ObservableObject {
     @Published var color = Color.white
     @Published var selected = false
+    @Published var hasTask = false
 }
 
 struct EmptyCell: Identifiable, Hashable {

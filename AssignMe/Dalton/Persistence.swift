@@ -52,6 +52,6 @@ struct PersistenceController {
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-      saveContext()
+        saveContext()
     }
 }
