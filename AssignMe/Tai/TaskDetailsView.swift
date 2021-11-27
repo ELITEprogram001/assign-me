@@ -10,6 +10,7 @@ import SwiftUI
 struct TaskDetailsView: View {
     @Environment(\.presentationMode) var presentation
     @Binding var showSheet: Bool
+    @State var showEdit: Bool = false
     @State private var isActive = false
     @State private var willMoveToNextScreen = false
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -27,6 +28,10 @@ struct TaskDetailsView: View {
     var body: some View {
         
         VStack(spacing: 0) {
+            
+            NavigationLink(destination: CategoryListView(), isActive: $showEdit) {
+                EmptyView()
+            }
             
             Divider()
                 .frame(height: 3)
@@ -66,16 +71,22 @@ struct TaskDetailsView: View {
                     
                     // MARK: Edit Button
                     Button(action: {
-                        
+                        print("task edit clicked.")
+                        showEdit = true
                     }, label: {
                         Text("Edit")
                             .font(.custom("Ubuntu-Bold", size: 16))
                             .padding(.horizontal, 8)
                             .padding(.vertical, 5)
-                    }) // end add button
+                    })
+                    .sheet(isPresented: $showEdit) {
+                        TaskEditView(task: task, showEdit: $showEdit)
+                            .environment(\.managedObjectContext, self.managedObjectContext)
+                    }
                     .background(Color.bright_maroon)
                     .foregroundColor(.white)
                     .cornerRadius(10)
+                    // end add button
                 }
                 .padding(.vertical, 10)
                 // end top bar hstack

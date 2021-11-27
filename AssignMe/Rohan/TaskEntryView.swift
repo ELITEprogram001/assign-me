@@ -218,18 +218,18 @@ struct TaskEntryView: View {
                     Spacer()
                 }
                 
-//                HStack {
-//                    ForEach(0...task.difficulty, id: \.self){ _ in
-//                        Image(for: number)
-//                            .resizable()
-//                            .frame(width: 32.0, height: 32.0)
-//                            .foregroundColor(number > self.rating ? self.offColor : self.onColor)
-//                            .onTapGesture {
-//                                self.rating = number
-//                            }
-//                        
-//                    }
-//                }
+                HStack {
+                    ForEach(1...5, id: \.self){ number in
+                        Image(systemName: "star.fill")
+                            .resizable()
+                            .frame(width: 32.0, height: 32.0)
+                            .foregroundColor(number > difficulty ? .bg_light : .yellow)
+                            .onTapGesture {
+                                difficulty = number
+                            }
+                        
+                    }
+                }
             }
             .font(.custom("Ubuntu-Regular", size: 16))
             .padding()
