@@ -11,15 +11,25 @@ struct AchievementTile: View {
     
     let color: Color
     let title: String
+    let image: String
     let desc: String
+    @Binding var showModal: Bool
+    
+    init (title: String, image: String, desc: String, color: Color, showModal: Binding<Bool>) {
+        self.title = title
+        self.image = image
+        self.desc = desc
+        self.color = color
+        _showModal = showModal
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             
             Spacer()
-            Text("Example Achievement")
+            Text(title)
                 .font(.custom("Viga-Regular", size: 16, relativeTo: .title))
-            Image("book")
+            Image(image)
                 .resizable()
                 .frame(width: 64, height: 64)
                 .padding(.vertical, 10)
@@ -31,18 +41,9 @@ struct AchievementTile: View {
         .background(Color.bg_light)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.bright_maroon, lineWidth: 2))
-        //.aspectRatio(1.5, contentMode: .fill)
-    }
-    
-    init(title: String, desc: String, color: Color) {
-        self.title = title
-        self.desc = desc
-        self.color = color
+        .onTapGesture {
+            showModal = true
+            print("showModal please")
+        }
     }
 }
-
-//struct AchievementTile_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AchievementTile()
-//    }
-//}

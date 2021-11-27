@@ -102,27 +102,18 @@ struct ProfileView: View {
                     // end HStack
                     
                     LazyVGrid (columns: columns, spacing: 15) {
-                        AchievementTile(title: "Redemption", desc: "Complete 3 tasks that were overdue.", color: .gray)
-                            .onTapGesture {
-                                // MARK: Temporary Debug
-                                showModal = !showModal
-                                print("--------------------------------")
-                                for category in categories {
-                                    print("\(category.wrappedName) - \(category.wrappedColor)")
-                                }
-                                print("--------------------------------")
-                            }
-                        AchievementTile(title: "Overachiever", desc: "Complete 5 tasks that aren't due for another week.", color: .gray)
-                        AchievementTile(title: "A Marathon Starts With a Step", desc: "Complete your first task!", color: .gray)
-                        AchievementTile(title: "Dedicated", desc: "Complete 4 tasks for one category back to back.", color: .gray)
-                        AchievementTile(title: "Busy Bee", desc: "Have 15 tasks scheduled.", color: .gray)
-                        AchievementTile(title: "Consistent Worker", desc: "Complete all your tasks on time for 5 days in a row.", color: .gray)
-                        AchievementTile(title: "The Planner", desc: "Plan your first 3 tasks.", color: .gray)
-                        AchievementTile(title: "Take a break", desc: "Complete 3 tasks in 1 hour.", color: .gray)
+                        AchievementTile(title: "Redemption", image: "checkmark", desc: "Complete 3 tasks that were overdue.", color: .gray, showModal: $showModal)
+                        AchievementTile(title: "Overachiever", image: "brain", desc: "Complete 5 tasks that aren't due for another week.", color: .gray, showModal: $showModal)
+                        AchievementTile(title: "A Marathon Starts With a Step", image: "climbing", desc: "Complete your first task!", color: .gray, showModal: $showModal)
+                        AchievementTile(title: "Dedicated", image: "focus", desc: "Complete 4 tasks for one category back to back.", color: .gray, showModal: $showModal)
+                        AchievementTile(title: "Busy Bee", image: "focus_eye", desc: "Have 15 tasks scheduled.", color: .gray, showModal: $showModal)
+                        AchievementTile(title: "Consistent Worker", image: "fire", desc: "Complete all your tasks on time for 5 days in a row.", color: .gray, showModal: $showModal)
+                        AchievementTile(title: "The Planner", image: "book", desc: "Plan your first 3 tasks.", color: .gray, showModal: $showModal)
+                        AchievementTile(title: "Take a break", image: "clock", desc: "Complete 3 tasks in 1 hour.", color: .gray, showModal: $showModal)
                     }
                     .padding(.horizontal, 25)
                 }
-                .background(Color.red.ignoresSafeArea())
+                .background(Color.bg_dark.ignoresSafeArea())
                 
             }
             // end VStack

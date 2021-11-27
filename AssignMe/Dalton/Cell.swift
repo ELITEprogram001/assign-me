@@ -22,7 +22,7 @@ struct Cell: View, Identifiable, Equatable{
     }
     
     var body: some View {
-        VStack(spacing: 3){
+        VStack(spacing: 3) {
             Divider()
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .frame(height: 1)
@@ -30,6 +30,11 @@ struct Cell: View, Identifiable, Equatable{
                 .background(Color.gray)
             Text(day).bold()
                 .foregroundColor(cellState.color)
+            if(true) {
+                Circle()
+                    .fill(Color.white)
+                    .frame(width: 5, height: 5)
+            }
             Spacer()
         }
         .font(.custom("Ubuntu-Regular", size: 16, relativeTo: .body))

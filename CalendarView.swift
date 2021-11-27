@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
     
-    // MARK: Variables
+    // MARK: Struct Variables
     var userCalendar = Calendar(identifier: .gregorian)
     @State var date = Date()
     @State var monthTitle = "Error"
@@ -44,6 +44,8 @@ struct CalendarView: View {
     var body: some View {
         
         VStack(spacing: 0){
+            
+            // MARK: Top Bar
             HStack {
                 Spacer()
                 Button(action: {
@@ -68,7 +70,7 @@ struct CalendarView: View {
             .padding(.bottom, 10)
             // end HStack
             
-            
+            // MARK: Calendar Creation
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(dayLabels) { item in
                     Text(item.label)
@@ -98,10 +100,6 @@ struct CalendarView: View {
                             // Update selected cell and highlight it red
                             selectedCell = cell
                             selectedCell.updateState(selected: true)
-                            // Used as debugging
-//                            for t in user.taskList {
-//                                print(t.name)
-//                            }
 
                             updateDailyViewTitle(d: selectedCell.date)
                         }
@@ -115,6 +113,7 @@ struct CalendarView: View {
                 .frame(height: 3)
                 .background(Color.white)
             
+            // MARK: Start Task List Section
             VStack(spacing: 10){
                 HStack {
                     DailyViewTitle(dayTitle: $dayTitle, numTitle: $numTitle, suffix: $suffix)
@@ -123,35 +122,19 @@ struct CalendarView: View {
                     Spacer()
                 }
                 .font(.custom("Viga-Regular", size: 28, relativeTo: .title2))
-                .padding(.leading)
-                .padding(.top, 10)
                 
                 ScrollView {
                     LazyVStack(spacing: 0){
-                        // DELETE - Debug only
-//                        ForEach(tasks) { task in
-//                            VStack {
-//                                Text(task.wrappedName)
-//                            }
-//                            .frame(maxWidth: .infinity)
-//                            .background(Color(task.category?.wrappedColor ?? "orange"))
-//                        }
                         ForEach(tasks) { task in
                             if(task.isDue(d: selectedCell.date)) {
                                 TaskCard(task: task)
                             }
                         }
                         
-                        // OLD Task Display
-//                        ForEach(user.taskList) { t in
-//                            if(t.isDue(selectedCell.date)) {
-//                                TaskCard(task: t)
-//                            }
-//                        }
-                        
                     } // end LazyVStack
                 } // end Scrollview
             }
+            .padding()
             .background(Color.bg_dark.ignoresSafeArea())
             .foregroundColor(Color.white)
             // end VStack
@@ -161,8 +144,9 @@ struct CalendarView: View {
         // end VStack
     } // end body
     
+    // MARK: Init
     init() {
-        print("[INIT] start")
+        
         calendar = [[[Cell]]]()
         _selectedCell = State(initialValue: Cell(id: "6666-66-66", "66", date: Date()))
         _dayTitle = State(initialValue: "Error")
@@ -190,7 +174,6 @@ struct CalendarView: View {
                     let monthNow = DateComponents.month!
                     let dayNow = DateComponents.day!
                     if((year == yearNow) && (month == monthNow) && (day == dayNow)) {
-                        print("[INFO] initial selected cell \(year)-\(month)-\(day)")
                         cell.updateState(selected: true)
                         lastSelectedCell = cell
                         _selectedCell = State(initialValue: cell)
@@ -207,8 +190,9 @@ struct CalendarView: View {
         _numTitle = State(initialValue: Calendar.current.component(.day, from: selectedCell.date))
         _suffix = State(initialValue: getDaySuffix(Calendar.current.component(.day, from: selectedCell.date)))
         
-        print("[INIT] end")
     }
+    
+    // MARK: Custom Functions
     
     func getMonthCells(d: Date) -> [Cell]? {
         let year = Calendar.current.component(.year, from: d)
@@ -288,6 +272,7 @@ struct CalendarView: View {
     
 }
 
+// MARK: Small Helper Structs
 struct DailyViewTitle: View {
     @Binding var dayTitle: String
     @Binding var numTitle: Int
@@ -308,11 +293,3 @@ private struct DayLabel: Identifiable {
         self.label = label
     }
 }
-
-
-
-//struct CalendarView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CalendarView()
-//    }
-//}

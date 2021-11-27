@@ -35,7 +35,7 @@ struct WeeklyView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("PlaceHolder Date")
+                Text("Your Next Week")
                     .font(.custom("Viga-Regular", size: 25))
                 Spacer()
             }
@@ -57,6 +57,4 @@ struct WeeklyView: View {
     }//body
     
 }
-
-//struct
 
