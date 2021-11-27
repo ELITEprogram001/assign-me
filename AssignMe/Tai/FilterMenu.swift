@@ -14,7 +14,7 @@ struct FilterMenu: View {
     
     var body: some View {
         ZStack{
-            Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
+            Color(red: 20/255, green: 20/255, blue: 20/255).edgesIgnoringSafeArea(.all)
             VStack{
                 
                 Picker("Please choose a choose", selection: $selectedColor) {
@@ -22,9 +22,9 @@ struct FilterMenu: View {
                         Text($0)
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 Text("You selected: \(selectedColor)")
             } //vstack
-            
         } //ZStack
         
     } // body
