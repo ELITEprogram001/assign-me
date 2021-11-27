@@ -9,177 +9,186 @@ import SwiftUI
 
 struct TaskDetailsView: View {
     @Environment(\.presentationMode) var presentation
-//    @EnvironmentObject var user: UserOld
+    @Binding var showSheet: Bool
     @State private var isActive = false
     @State private var willMoveToNextScreen = false
     @Environment(\.managedObjectContext) var managedObjectContext
     
     var task: TaskEntity
     let formatter = DateFormatter()
-    init(task: TaskEntity) {
+    init(task: TaskEntity, showSheet: Binding<Bool>) {
         self.task = task
         formatter.dateFormat = "EEEE, MMMM d, yyyy HH:mm a"
+        _showSheet = showSheet
     }
     
     
     
     var body: some View {
         
-        ZStack {
-            Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
-            VStack(alignment: .center, spacing: 30){
-                
+        VStack(spacing: 0) {
+            
+            Divider()
+                .frame(height: 3)
+                .background(Color.bright_maroon)
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.gray)
+                .frame(width: 50, height: 5)
+                .padding(.vertical, 8)
+            
+            VStack {
                 HStack(){
-                    Button(action:{
-                    
-                        isActive = true
-                        self.presentation.wrappedValue.dismiss()
-                    },label:{
-                        
-                        Image(systemName: "arrow.backward.circle")
-                        .frame(width: 60, height: 40)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.leading, 15 )
-
+                    // MARK: Back Button
+                    Button(action: {
+                        showSheet = false
+                    }, label: {
+                        ZStack() {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.bright_maroon)
+                                .frame(width: 40, height: 30)
+                            Image(systemName: "arrow.backward")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .padding()
+                        } // end label zstack
                     })  //button
                     
                     Spacer()
+                    
                     Text("Task Details")
-                        .bold()
                         .font(.custom("Viga-Regular", size: 25))
-                        //.padding(.horizontal,45)
                         .foregroundColor(.white)
+                        .padding(.horizontal,10)
                     
                     Spacer()
+                    
                     // MARK: Edit Button
-                    Button(action:{
-                        isActive = true
-                        willMoveToNextScreen = true
-                    },label:{
+                    Button(action: {
                         
-                        Image(systemName: "square.and.pencil")
-                            .frame(width: 60, height: 40)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .padding(.trailing, 15 )
-                    })  //button
-                } //hstack
+                    }, label: {
+                        Text("Edit")
+                            .font(.custom("Ubuntu-Bold", size: 16))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 5)
+                    }) // end add button
+                    .background(Color.bright_maroon)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                }
+                .padding(.vertical, 10)
+                // end top bar hstack
                 
                 
-                
-                VStack(alignment: .leading, spacing: 10){
-                    Text("Task Name:")
-                        .foregroundColor(.blue)
+                VStack {
                     
-                    Text( task.wrappedName)
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center) //to alight to center
-                        .padding(.horizontal)
-                    Text("Description:")
-                        .foregroundColor(.blue)
-                    Text( task.wrappedDesc)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center) //to alight to center
-                        .padding(.horizontal)
-                    Text("Due Date:")
-                        .foregroundColor(.blue)
-                   // Text("\( user.taskList[user.currTaskIndex].dueDate)")
-                    Text("\(formatter.string(from:task.dueDate ?? Date()))")
- //                   Text((formatter.date(from: "\(user.currTask.dueDate)" )
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center) //to alight to center
-                        .padding(.horizontal)
-                        
-                    Text("Difficulty:")
-                        .foregroundColor(.blue)
-                    HStack( spacing: 1){
-//                        let starCount =  task.difficulty
-//                        ForEach (1...starCount, id:\.self) { _ in
-//                            Image(systemName: "star.fill")
-//                                .resizable()
-//                                .foregroundColor(Color.yellow)
-//                                .frame(width: 45,height: 45)
-//                        }.padding(.horizontal, 10 )
-                    } //hstack
-                    .padding()
-                    
-                    Group{
-                        Text("Category Name:")
-                            .foregroundColor(.blue)
-                        
-                        HStack{
-                            Text(task.category?.wrappedName ?? "Empty Category")
-                                .multilineTextAlignment(.center) //to alight to center
-                                .padding(.horizontal)
-                                .foregroundColor(Color(task.category?.color ?? "gray"))
-                            
-                            
-                            
-//                            Rectangle()
-//                                .frame(width: 80 ,height: 30)
-//                                .foregroundColor(task.category.color)
-                               
-                                    
+                    // MARK: Task Name
+                    VStack(spacing: 6) {
+                        HStack {
+                            Text("Name:")
+                                .foregroundColor(.bright_maroon)
                             Spacer()
-                            //Text( "\(Color(task.category.color))" )
                         }
+                        .font(.custom("Ubuntu-Bold", size: 16))
                         
-                        
-                        
-                        
-                        Spacer()
-                        HStack{
-                        Spacer()
-                        // MARK: Delete Button
-                        Button("Delete",action: {
-                            managedObjectContext.delete(task)
-                            print("task deleted.")
-                            
-                            try? managedObjectContext.save()
-                        })
-                            .frame(width: 120, height: 50)
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .padding(.leading, 15 )
-                        Spacer()
-                        // MARK: Complete Button
-                        Button("Complete",action:{
-                            CompleteTask()
-                        })
-                            .frame(width: 120, height: 50)
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .padding(.leading, 15 )
-                        Spacer()
+                        HStack {
+                            Text(task.wrappedName)
+                                .foregroundColor(.white)
+                            Spacer()
                         }
                         
                     }
+                    .padding()
                     
+                    // MARK: Task Description
+                    VStack(spacing: 6) {
+                        HStack {
+                            Text("Description:")
+                                .foregroundColor(.bright_maroon)
+                            Spacer()
+                        }
+                        .font(.custom("Ubuntu-Bold", size: 16))
+                        
+                        HStack {
+                            Text(task.wrappedDesc)
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                    }
+                    .padding()
                     
-                } //vstack
-                .frame(width: 370 , alignment: .leading)
-                .font(.title2)
+                    // MARK: Category Selection
+                    VStack(spacing: 6) {
+                        HStack {
+                            Text("Category:")
+                                .foregroundColor(.bright_maroon)
+                            Spacer()
+                        }
+                        .font(.custom("Ubuntu-Bold", size: 16))
+                        
+                        HStack {
+                            Text(task.category?.wrappedName ?? "Uncategorized")
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
+                    }
+                    .padding()
+                }
+                
+                // MARK: Date
+                VStack(spacing: 6) {
+                    HStack() {
+                        Text("Due Date:")
+                            .foregroundColor(.bright_maroon)
+                            .font(.custom("Ubuntu-Bold", size: 16))
+                        Spacer()
+                    }
+                    HStack {
+                        Text(task.dueDate?.description ?? "Error")
+                        Spacer()
+                    }
+                }
+                .padding()
+                
+                VStack(spacing: 6) {
+                    HStack() {
+                        Text("Difficulty:")
+                            .foregroundColor(.bright_maroon)
+                            .font(.custom("Ubuntu-Bold", size: 16))
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        ForEach(0...task.difficulty, id:\.self) { _ in
+                            ZStack{
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .foregroundColor(Color.yellow)
+                                    .frame(width: 35, height: 35)
+                                    .padding(.horizontal, 2)
+                                Image(systemName: "star")
+                                    .resizable()
+                                    .foregroundColor(Color.bg_dark)
+                                    .frame(width: 35, height: 35)
+                                    .padding(.horizontal, 2)
+                            }
+                        }
+                        Spacer()
+                    }
+                }
+                .padding()
+                
                 Spacer()
-            } //vstack
-            .frame(width: 370)
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
-            //.ignoresSafeArea()
+            }
+            .font(.custom("Ubuntu-Regular", size: 20))
+            .padding(.horizontal)
+            
+            Spacer()
         }
-        
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
-        
-        .navigate(to: TaskEditView(task: task).navigationBarHidden(true), when: $willMoveToNextScreen)
-        //Zstack
-        //.ignoresSafeArea(.all)
+        .background(Color.bg_dark.ignoresSafeArea())
+        .foregroundColor(Color.white)
+        // end vstack
     } //body
     
     
@@ -194,14 +203,9 @@ struct TaskDetailsView: View {
         self.presentation.wrappedValue.dismiss()
         
     }
-}// view
 
-//struct ActualTaskDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        //ActualTaskDetailView(task: TaskList.allTask.first!).preferredColorScheme(.dark)
-//        //TaskDetailsView(task:Task).preferredColorScheme(.dark)
-//    }
-//}
+} // view
+
 extension Int: Sequence {
     public func makeIterator() -> CountableRange<Int>.Iterator {
         return (0..<self).makeIterator()

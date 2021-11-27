@@ -218,7 +218,18 @@ struct TaskEntryView: View {
                     Spacer()
                 }
                 
-                DifficultyView(rating: $difficulty)
+//                HStack {
+//                    ForEach(0...task.difficulty, id: \.self){ _ in
+//                        Image(for: number)
+//                            .resizable()
+//                            .frame(width: 32.0, height: 32.0)
+//                            .foregroundColor(number > self.rating ? self.offColor : self.onColor)
+//                            .onTapGesture {
+//                                self.rating = number
+//                            }
+//                        
+//                    }
+//                }
             }
             .font(.custom("Ubuntu-Regular", size: 16))
             .padding()

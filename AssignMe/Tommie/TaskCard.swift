@@ -10,83 +10,79 @@ import SwiftUI
 struct TaskCard: View {
     let task: TaskEntity
     let formatter = DateFormatter()
+    @State var showSheet: Bool = false
     
     init(task: TaskEntity) {
         self.task = task
         formatter.dateFormat = "h:mm a, E MMM d"
     }
-        
+    
     var body: some View {
         
-        ZStack{ //Stacks all text, buttons, and other details; starting from bottom to topPP
+        HStack(){
             
-            //Card Body
+            // Color Strip
             Rectangle()
-                .fill(Color (red: 0.25, green: 0.25, blue: 0.25))
-                .frame(width: 325, height: 70)
-                .shadow(radius: 6) //optional
-                .cornerRadius(10)
+                .fill(Color(task.category?.wrappedColor ?? "gray"))
+                .frame(width: 10)
             
-            //Task name
-            Text("\(task.wrappedName)")
-                .fontWeight(.bold)
-                .font(.custom("Ubuntu-Regular", size: 20))
-                .foregroundColor(Color.white)
-                .frame (width: 200, alignment: .leading)
-                .lineLimit(1)
-                .padding(.leading, -93.0)
-                .padding (.bottom, 40)
-            
-            //Task's due date
-            Text("\(formatter.string(from:task.dueDate ?? Date()))  -")
-                .font(.custom("Ubuntu-Regular", size: 14))
-                .fontWeight(.bold)
-                .foregroundColor(Color(task.category?.color ?? "gray"))
-                .frame(minWidth: 0, idealWidth: 100, maxWidth: 200, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
-                .padding(.leading, -95.0)
-            
-            //Name of category assigned to task
-            Text(task.category?.wrappedName ?? "")
-                .fontWeight(.bold)
-                .font(.custom("Ubuntu-Regular", size: 13))
-                .foregroundColor(Color(task.category?.color ?? "gray"))
-                .frame(minWidth: 0, idealWidth: 100, maxWidth: 150, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
-                .padding(.leading, 180.0)
-            
-            //Task description
-            Text("\(task.wrappedDesc)")
-                .font(.custom("Ubuntu-Regular", size: 13))
-                .foregroundColor(Color.white)
-                .frame(minWidth: 0, idealWidth: 100, maxWidth: 300, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
-                .padding(.leading, 10.0)
-                .padding(.top, 40)
-            
-            
-            
-            HStack{ //attributes for the category colour tab to the left
-                Rectangle() //Left-hand category colour tab
-                    .foregroundColor(Color(task.category?.color ?? "gray"))
-                    .padding(.leading, 0.0)
-                    .frame(width: 15.0, height: 70)
-                    .cornerRadius(4)
-            } //attributes for the category colour tab END
-            .padding(.leading, -165.0) //padding for category colour tab
-            
-            
-            VStack{ //anchors difficulty stars to top of card
-                HStack{ //anchors difficulty stars to right of card
-                    let starCount = task.difficulty
-                    ForEach (1...starCount, id:\.self) { _ in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(Color.yellow)
-                            .frame(width: 13)
-                    } //ForEach loop to populate difficulty stars END
-                } //HStack END
-                .padding(.top, -30)
+            // MARK: Text Formatting
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Text("\(task.wrappedName)")
+                        .font(.custom("Ubuntu-Regular", size: 20))
+                        .foregroundColor(Color.white)
+                        .lineLimit(1)
+                    
+                    Spacer()
+                    ForEach(0...task.difficulty, id:\.self) { _ in
+                        ZStack{
+                            Image(systemName: "star.fill")
+                                .resizable()
+                                .foregroundColor(Color.yellow)
+                                .frame(width: 20, height: 20)
+                                .padding(.horizontal, 1)
+                            Image(systemName: "star")
+                                .resizable()
+                                .foregroundColor(Color.bg_dark)
+                                .frame(width: 20, height: 20)
+                                .padding(.horizontal, 1)
+                        }
+                    }
+                    
+                }
                 
-            } //VStack END
-            .frame(width: 305, height: 75, alignment: .trailing)
+                // Task's due date and category
+                HStack {
+                    Text("\(formatter.string(from:task.dueDate ?? Date())) - \(task.category?.wrappedName ?? "")")
+                        .font(.custom("Ubuntu-Regular", size: 14))
+                        .foregroundColor(Color(task.category?.color ?? "gray"))
+                    
+                    Spacer()
+                }
+                .padding(.vertical, 4)
+                
+                // Task description
+                HStack {
+                    Text("\(task.wrappedDesc)")
+                        .font(.custom("Ubuntu-Regular", size: 13))
+                        .foregroundColor(Color.white)
+                    
+                    Spacer()
+                }
+            }
+            .padding(.horizontal, 5)
+            .padding(.vertical, 8)
             
-        } //ZStack END
+        }
+        .frame(maxWidth: .infinity, maxHeight: 180)
+        .background(Color.bg_light)
+        .onTapGesture {
+            showSheet = true
+        }
+        .sheet(isPresented: $showSheet) {
+            TaskDetailsView(task: task, showSheet: $showSheet)
+        }
+        
     } // var body: some View END
 } // struct TaskCard: View END

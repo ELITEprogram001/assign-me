@@ -18,7 +18,6 @@ extension CategoryEntity {
 
     @NSManaged public var name: String?
     @NSManaged public var color: String?
-    @NSManaged public var colorDescription: ColorDescription?
     @NSManaged public var task: NSSet?
 
     public var wrappedName: String {
@@ -27,10 +26,6 @@ extension CategoryEntity {
     
     public var wrappedColor: String {
         color ?? "red"
-    }
-    
-    public var wrappedColorDesc: ColorDescription {
-        colorDescription ?? ColorDescription()
     }
     
     public var taskArray: [TaskEntity] {

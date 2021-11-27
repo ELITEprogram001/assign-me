@@ -34,14 +34,12 @@ struct WeeklyView: View {
                 ScrollView {
                     LazyVStack() {
                         ForEach(tasks) { task in
-                            NavigationLink(destination: TaskDetailsView(task: task),
-                               label: {
-                                    TaskCard(task: task)
-                               })
+                            TaskCard(task: task)
                         }
                         .padding(.bottom, 10)
                     }
                 }
+                .padding()
             }
             .background(Color.bg_dark.ignoresSafeArea())
             .navigationBarTitle("")

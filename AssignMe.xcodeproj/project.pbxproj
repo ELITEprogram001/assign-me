@@ -12,8 +12,6 @@
 		1F3672212750A14800B99296 /* CategoryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36721D2750A14800B99296 /* CategoryEntity+CoreDataProperties.swift */; };
 		1F3672262750A8D800B99296 /* TaskEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3672222750A8D800B99296 /* TaskEntity+CoreDataClass.swift */; };
 		1F3672272750A8D800B99296 /* TaskEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3672232750A8D800B99296 /* TaskEntity+CoreDataProperties.swift */; };
-		1F3672282750A8D800B99296 /* ColorDescription+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3672242750A8D800B99296 /* ColorDescription+CoreDataClass.swift */; };
-		1F3672292750A8D800B99296 /* ColorDescription+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3672252750A8D800B99296 /* ColorDescription+CoreDataProperties.swift */; };
 		1F553B382737061D00362BAF /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B302737061C00362BAF /* Ubuntu-Italic.ttf */; };
 		1F553B392737061D00362BAF /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B312737061C00362BAF /* Ubuntu-MediumItalic.ttf */; };
 		1F553B3A2737061D00362BAF /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B322737061C00362BAF /* Ubuntu-Regular.ttf */; };
@@ -75,8 +73,6 @@
 		1F36721D2750A14800B99296 /* CategoryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CategoryEntity+CoreDataProperties.swift"; path = "Models/CategoryEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1F3672222750A8D800B99296 /* TaskEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TaskEntity+CoreDataClass.swift"; path = "Models/TaskEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		1F3672232750A8D800B99296 /* TaskEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TaskEntity+CoreDataProperties.swift"; path = "Models/TaskEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		1F3672242750A8D800B99296 /* ColorDescription+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ColorDescription+CoreDataClass.swift"; path = "Models/ColorDescription+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		1F3672252750A8D800B99296 /* ColorDescription+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ColorDescription+CoreDataProperties.swift"; path = "Models/ColorDescription+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1F553B302737061C00362BAF /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
 		1F553B312737061C00362BAF /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
 		1F553B322737061C00362BAF /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
@@ -251,8 +247,6 @@
 			children = (
 				1F3672222750A8D800B99296 /* TaskEntity+CoreDataClass.swift */,
 				1F3672232750A8D800B99296 /* TaskEntity+CoreDataProperties.swift */,
-				1F3672242750A8D800B99296 /* ColorDescription+CoreDataClass.swift */,
-				1F3672252750A8D800B99296 /* ColorDescription+CoreDataProperties.swift */,
 				1F36721C2750A14800B99296 /* CategoryEntity+CoreDataClass.swift */,
 				1F36721D2750A14800B99296 /* CategoryEntity+CoreDataProperties.swift */,
 				1FB8CEEA274F4D7E00DAC1A8 /* ModalView.swift */,
@@ -438,7 +432,6 @@
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */,
 				30954F14272E3E4000E100BE /* DifficultyView.swift in Sources */,
-				1F3672282750A8D800B99296 /* ColorDescription+CoreDataClass.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
 				1F8BF5C527506A370025226A /* Persistence.swift in Sources */,
 				1F3672272750A8D800B99296 /* TaskEntity+CoreDataProperties.swift in Sources */,
@@ -446,7 +439,6 @@
 				1F04DBF4274FF81200E5CF42 /* AchievementTile.swift in Sources */,
 				DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */,
 				1F3672202750A14800B99296 /* CategoryEntity+CoreDataClass.swift in Sources */,
-				1F3672292750A8D800B99296 /* ColorDescription+CoreDataProperties.swift in Sources */,
 				303E9278272AF3AE00B71B63 /* UserOld.swift in Sources */,
 				DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */,
 				1FB031B2274AF73E00CBC739 /* ProfileView.swift in Sources */,

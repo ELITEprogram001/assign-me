@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
     
+    // MARK: Variables
     var userCalendar = Calendar(identifier: .gregorian)
     @State var date = Date()
     @State var monthTitle = "Error"
@@ -19,7 +20,6 @@ struct CalendarView: View {
     private var shift = Offsets()
     @State var lastSelectedCell = Cell(id: "9999-99-99", "99", date: Date())
     @State var selectedCell: Cell
-    //Cell(id: "6666-66-66", "66", date: Date())
     @ObservedObject var cellState = CellState()
     var calendar: [[[Cell]]]
     @EnvironmentObject var user: UserOld
@@ -30,6 +30,7 @@ struct CalendarView: View {
       sortDescriptors: [NSSortDescriptor(keyPath: \TaskEntity.dueDate, ascending: true)]
     ) var tasks: FetchedResults<TaskEntity>
 
+    // MARK: Grid Definitions
     let columns = [
         GridItem(.flexible(), spacing: 0),
         GridItem(.flexible(), spacing: 0),
@@ -109,9 +110,11 @@ struct CalendarView: View {
             .padding(.horizontal, 30.0)
             .padding(.bottom)
             // end LazyVGrid
+            
             Divider()
                 .frame(height: 3)
                 .background(Color.white)
+            
             VStack(spacing: 10){
                 HStack {
                     DailyViewTitle(dayTitle: $dayTitle, numTitle: $numTitle, suffix: $suffix)
@@ -122,15 +125,17 @@ struct CalendarView: View {
                 .font(.custom("Viga-Regular", size: 28, relativeTo: .title2))
                 .padding(.leading)
                 .padding(.top, 10)
+                
                 ScrollView {
                     LazyVStack(spacing: 0){
-                        ForEach(tasks) { task in
-                            VStack {
-                                Text(task.wrappedName)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .background(Color(task.category?.wrappedColor ?? "orange"))
-                        }
+                        // DELETE - Debug only
+//                        ForEach(tasks) { task in
+//                            VStack {
+//                                Text(task.wrappedName)
+//                            }
+//                            .frame(maxWidth: .infinity)
+//                            .background(Color(task.category?.wrappedColor ?? "orange"))
+//                        }
                         ForEach(tasks) { task in
                             if(task.isDue(d: selectedCell.date)) {
                                 TaskCard(task: task)
