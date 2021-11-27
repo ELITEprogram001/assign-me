@@ -16,13 +16,15 @@ struct WeeklyView: View {
     
     @EnvironmentObject var user: User
     @State var tabSelection: Int
+    
+
     var body: some View {
     
         
         
         let drag = DragGesture()// this to close the Side MEnu by dragging from right to left
             .onEnded{
-                if $0.translation.width < -200{ //if pixel less then -100 ??
+                if $0.translation.width < -100{ //if pixel less then -100 ??
                     withAnimation{
                         self.showMenu = false
                     }
@@ -32,7 +34,11 @@ struct WeeklyView: View {
         return NavigationView{
             ZStack{ Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
                 GeometryReader { geometry in
-                    Button(action: {    //button
+                    
+//                    Text("Filter by:  \(filter.selected) ")
+//                        .padding(.leading, 200)
+                        
+                    Button(action: {    // Hamburger Menu
                         withAnimation{
                             self.showMenu.toggle()
                         }
@@ -40,8 +46,9 @@ struct WeeklyView: View {
                         Image(systemName: "line.horizontal.3")
                             .imageScale(.large)
                             .frame(width: 30 ,height: 30)
-                    })   //))
+                    })
                     .padding(.leading, 320)
+                    
                     ScrollView{
                         ForEach(1..<user.taskList.count, id: \.self) { index in
                             NavigationLink(destination: TaskDetailsView(task: user.taskList[index] )
@@ -78,21 +85,6 @@ struct WeeklyView: View {
                 } //geometry reader
                 .navigationBarTitle("")
                 .navigationBarHidden(true)
-                
-                //######################################hamburger button
-//                    Button(action: {
-//                        withAnimation{
-//                            self.showMenu.toggle()
-//                        }
-//                    }, label: {
-//                        Image(systemName: "line.horizontal.3")
-//                            .imageScale(.large)
-//                            .frame(width: 30 ,height: 30)
-//                    })   //))
-//
-//                    .padding(.leading, 320)
-//                    .padding(.top, 620)
-                //####################################################
                 
                 
                 
