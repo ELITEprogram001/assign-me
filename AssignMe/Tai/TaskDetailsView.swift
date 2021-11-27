@@ -12,6 +12,7 @@ struct TaskDetailsView: View {
 //    @EnvironmentObject var user: UserOld
     @State private var isActive = false
     @State private var willMoveToNextScreen = false
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     var task: TaskEntity
     let formatter = DateFormatter()
@@ -19,13 +20,8 @@ struct TaskDetailsView: View {
         self.task = task
         formatter.dateFormat = "EEEE, MMMM d, yyyy HH:mm a"
     }
-//    func getIndex() -> Int {
-//            if (user.currTaskIndex == user.taskList.count)
-//            {
-//                return user.currTaskIndex-1
-//            }
-//            return user.currTaskIndex
-//    }
+    
+    
     
     var body: some View {
         
@@ -57,6 +53,7 @@ struct TaskDetailsView: View {
                         .foregroundColor(.white)
                     
                     Spacer()
+                    // MARK: Edit Button
                     Button(action:{
                         isActive = true
                         willMoveToNextScreen = true
@@ -101,13 +98,13 @@ struct TaskDetailsView: View {
                     Text("Difficulty:")
                         .foregroundColor(.blue)
                     HStack( spacing: 1){
-                        let starCount =  task.difficulty
-                        ForEach (1...starCount, id:\.self) { _ in
-                            Image(systemName: "star.fill")
-                                .resizable()
-                                .foregroundColor(Color.yellow)
-                                .frame(width: 45,height: 45)
-                        }.padding(.horizontal, 10 )
+//                        let starCount =  task.difficulty
+//                        ForEach (1...starCount, id:\.self) { _ in
+//                            Image(systemName: "star.fill")
+//                                .resizable()
+//                                .foregroundColor(Color.yellow)
+//                                .frame(width: 45,height: 45)
+//                        }.padding(.horizontal, 10 )
                     } //hstack
                     .padding()
                     
@@ -138,9 +135,12 @@ struct TaskDetailsView: View {
                         Spacer()
                         HStack{
                         Spacer()
+                        // MARK: Delete Button
+                        Button("Delete",action: {
+                            managedObjectContext.delete(task)
+                            print("task deleted.")
                             
-                        Button("Delete",action:{
-                            DeleteTask()
+                            try? managedObjectContext.save()
                         })
                             .frame(width: 120, height: 50)
                             .background(Color.red)
@@ -148,6 +148,7 @@ struct TaskDetailsView: View {
                             .cornerRadius(10)
                             .padding(.leading, 15 )
                         Spacer()
+                        // MARK: Complete Button
                         Button("Complete",action:{
                             CompleteTask()
                         })

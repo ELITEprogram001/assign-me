@@ -10,10 +10,12 @@ struct ContentView: View {
     
 //    // Test Category
     @State private var tabSelection = 1
-    var Uncategorized = Category(name:"Uncategorized",color:Color.gray) //var for uncategorized category that's hidden from CategoriesListView
+    @State var showTaskEntry: Bool = false
+    
+    //var for uncategorized category that's hidden from CategoriesListView
+    var Uncategorized = Category(name:"Uncategorized",color:Color.gray)
     
     let persistenceController = PersistenceController.shared
-    var user: UserOld = UserOld(name: "User")
     
 //    @FetchRequest(
 //      entity: UserEntity.entity(),
@@ -23,14 +25,6 @@ struct ContentView: View {
     init()
     {
         
-        // TODO implement persistent data
-        user.addCategory(cat:Uncategorized) //init for uncategorized category
-        var sample = Task(name: "push ups", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(), dateCompleted: Date(), isOverdue: true)
-        var sample2 = Task(name: "push downs", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date(), dateCompleted: Date(), isOverdue: true)
-        var sample3 = Task(name: "push sides", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Calendar.current.date(byAdding: .day, value: 14, to: Date()) ?? Date(), dateCompleted: Date(), isOverdue: true)
-        user.taskList.append(sample)
-        user.taskList.append(sample2)
-        user.taskList.append(sample3)
         
 //        for us in u {
 //            if( us.wrappedName != "fuck" ) {
@@ -76,37 +70,30 @@ struct ContentView: View {
             
             
         }
-        .environmentObject(user)//end body
         .environment(\.managedObjectContext, persistenceController.container.viewContext)
         .preferredColorScheme(.dark)
         
     }
     
     
-} //view
+} // end content view
     
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//            .preferredColorScheme(.dark)
+
+//struct CategoryView: View {
+//    var body: some View {
+//        NavigationView{
+//            Text("category view")
+//                .toolbar {
+//                    ToolbarItem(placement: .navigationBarTrailing) {
+//
+//                        NavigationLink("add", destination: CategoryCreationFormView())
+//
+//                    }
+//                }
+//        }
 //    }
 //}
-
-struct CategoryView: View {
-    var body: some View {
-        NavigationView{
-            Text("category view")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        
-                        NavigationLink("add", destination: CategoryCreationFormView())
-                        
-                    }
-                }
-        }
-    }
-}
 
 
 

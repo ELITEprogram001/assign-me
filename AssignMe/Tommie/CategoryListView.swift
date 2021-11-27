@@ -9,18 +9,10 @@ import SwiftUI
 
 struct CategoryListView: View {
     @State private var isActive = false
-    @EnvironmentObject var user: UserOld //Connects CategoryListView to the User object
     @State private var willMoveToNextScreen = false
     var categoryList = [Category]() //from User classSS
     var maxCategories = 8 //variable for func TorF
-    func TorF () -> Bool { //Boolean condition to disable 'blue plus' button when maximum amount of categories exist
-        if user.categoryList.count == maxCategories {
-            return true
-        }
-        else {
-            return false
-        }
-    } // func TorF END
+    
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
@@ -39,13 +31,13 @@ struct CategoryListView: View {
                     Spacer()
                 }
                 
-                //VStack to access CategoriesCreationPage view via 'blue plus' button
+                // MARK: Add Button
                 VStack{
                     Button(
                         action:{ isActive = true
                                 willMoveToNextScreen = true},
                         label: {
-                            //ZStack for 'plus' symbol and blue background
+                            
                             ZStack{
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .frame(width: 30, height: 30)
@@ -53,11 +45,13 @@ struct CategoryListView: View {
                                     .resizable()
                                     .foregroundColor(.white)
                                     .frame(width: 20, height: 20)
-                            } // end ZStack
+                            }
                             .padding(.horizontal, 10)
+                            // end ZStack
+                            
                         } // end label
                     ) // end button
-                    .disabled(TorF()) //func ToF() for 'true'/'false' condition to disable button
+                    .disabled(userAtMaxCategories())
                 }
                 .padding(.horizontal, 20)
                 // end vstack
@@ -81,5 +75,16 @@ struct CategoryListView: View {
         .navigationBarHidden(true)
         .navigate(to: CategoryCreationFormView(), when: $willMoveToNextScreen)
     } //var body: some View END
+    
+    // MARK: Custom Functions
+    
+    //Boolean condition to disable 'blue plus' button when maximum amount of categories exist
+    func userAtMaxCategories () -> Bool {
+        if categories.count >= maxCategories {
+            return true
+        }
+        return false
+    }
+    
 } //struct CategoryListView: View END
 

@@ -12,7 +12,7 @@ import SwiftUI
 
 
 struct WeeklyView: View {
-    @EnvironmentObject var user: UserOld
+    
     @State var tabSelection: Int
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
@@ -22,65 +22,39 @@ struct WeeklyView: View {
     
     
     var body: some View {
-        NavigationView{
-            ZStack{
-                Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
-                VStack{
-                    ScrollView{
-					
+        NavigationView {
+            VStack {
+                HStack {
+                    Text("PlaceHolder Date")
+                        .font(.custom("Viga-Regular", size: 25))
+                    Spacer()
+                }
+                .padding(.horizontal)
+                
+                ScrollView {
+                    LazyVStack() {
                         ForEach(tasks) { task in
-                            NavigationLink(destination: TaskDetailsView(task: task)
-
-                                .environmentObject(user)
-                                .onAppear {
-//                                    user.currTask = user.taskList[index]
-//                                    user.currTaskIndex = index
-//                                    for index in 0..<user.categoryList.count{
-//                                        if (user.taskList[user.currTaskIndex].category.id == user.categoryList[index].id) {
-//                                            user.indexCatList = index
-//                                        }
-//                                    }
-                                },
-                               label:{
-                                TaskCard(task: task)
-                                    .ignoresSafeArea(.all)
+                            NavigationLink(destination: TaskDetailsView(task: task),
+                               label: {
+                                    TaskCard(task: task)
                                })
-                            Spacer()
-                        } //foreach
+                        }
+                        .padding(.bottom, 10)
                     }
-                } //vsatck
-                .navigationBarTitle("")
-                .navigationBarHidden(true)
-            } //navigation view
-//                .onAppear{
-//                    user.taskList.append(Task(
-//                                            name:"",
-//                                            category:user.categoryList[0],
-//                                            description:"",
-//                                            difficulty: 1,
-//                                            dueDate: Date(),
-//                                            dateCompleted: Date(),
-//                                            isOverdue: false ))
-//                    user.taskList.removeLast()
-//                    user.taskList = user.taskList.sorted(by: {
-//                        $0.dueDate.compare($1.dueDate) == .orderedAscending
-//                    })
-//                }
+                }
+            }
+            .background(Color.bg_dark.ignoresSafeArea())
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            // end vstack
+                
             
-        } //navigation
+        } // end navigation view
         
         
         
         
     }//body
     
-} //weeklyview
-
-//struct WeeklyView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WeeklyView(tabSelection: 1)
-//            .environmentObject(User.init(name: ""))
-//            .preferredColorScheme(.dark)
-//    }
-//}
+}
 

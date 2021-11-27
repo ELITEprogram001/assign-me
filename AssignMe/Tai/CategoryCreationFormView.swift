@@ -11,6 +11,7 @@ struct CategoryCreationFormView: View {
     @State var categoryName: String = ""
     @State var currentColor: String = "red"
     @State var tabColor: Color = .red
+    @State var backClicked: Bool = false
     
     @Environment(\.presentationMode) var presentation
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -28,11 +29,17 @@ struct CategoryCreationFormView: View {
     var body: some View {
         
         VStack(spacing: 0) {
+            
+            NavigationLink(destination: CategoryListView(), isActive: $backClicked) {
+                EmptyView()
+            }
+            
             HStack(){
                 Spacer()
                 
+                // MARK: Back Button
                 Button(action: {
-                    self.presentation.wrappedValue.dismiss()
+                    backClicked = true
                 }, label: {
                     ZStack() {
                         RoundedRectangle(cornerRadius: 10)

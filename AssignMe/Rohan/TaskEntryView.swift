@@ -57,6 +57,7 @@ struct TaskEntryView: View {
     @State var difficulty=1
     @State var isActive: Bool = false
     @Binding var tabSelection: Int
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
       entity: CategoryEntity.entity(),
@@ -64,83 +65,104 @@ struct TaskEntryView: View {
     ) var categories: FetchedResults<CategoryEntity>
     
     var body: some View {
-        ZStack(){
-            Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)
-            VStack(spacing: 15) {
-                HStack(alignment: .center){
-                   
+        
+        VStack(spacing: 0) {
+            
+            ZStack(alignment: .trailing) {
+                HStack() {
+                    Spacer()
                     Text("Task Entry")
-                        .bold()
                         .font(.custom("Viga-Regular", size: 25))
-                        .padding(.leading,140 )
                         .foregroundColor(.white)
                     Spacer()
-                    
-                    Button("Add"){
-                        
-                        let task = TaskEntity(context: managedObjectContext)
-                        task.name = taskName
-                        task.desc = taskDesc
-                        task.dueDate = Date()
-                        
-                        
-                        for category in categories {
-                            if(category.wrappedName == currentCategory) {
-                                category.addToTask(task)
-                                print("added \(taskName) to category: \(category.wrappedName)")
-                            }
-                        }
-                        
-                        try? managedObjectContext.save()
-                        
-                        /* Old Task Add
-                        let toAdd = Task(
-                            name:taskName,
-                            category: user.categoryList[currentCategoryIndex],
-                            description:taskDesc,
-                            difficulty:difficulty,
-                            dueDate:dueDate,
-                            dateCompleted:dueDate,
-                            isOverdue:false)
-                        user.taskList.append(toAdd)
-                        self.tabSelection=1
-                        taskName = ""
-                        taskDesc = ""
-                        difficulty = 1
-                        */
-                    } //button
-                    .frame(width: 60, height: 40)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal,30)
-                    
-                } //hstack
+                }
                 
-                Group{
-                    Text("Name:")           //task name
-                        .foregroundColor(.blue)
-                    TextField("   Enter Task Name...", text: self.$taskName, onCommit: {
-                        isActive=true
-                    })
-                    .frame(height: 55)
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .cornerRadius(16)
-                    .padding(.horizontal, 24)
-                    .foregroundColor(.white)
+                // MARK: Add Button
+                Button("Add"){
                     
-                    Text("Description:")        //description
-                        .foregroundColor(.blue)
-                    TextField("   Enter Task Description...", text: self.$taskDesc)
-                        .frame(height: 55)
-                        .textFieldStyle(PlainTextFieldStyle())
-                        .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                        .cornerRadius(16)
-                        .padding(.horizontal, 25)
+                    let task = TaskEntity(context: managedObjectContext)
+                    task.name = taskName
+                    task.desc = taskDesc
+                    task.dueDate = dueDate
+                    task.difficulty = Int64(difficulty)
+                    
+                    for category in categories {
+                        if(category.wrappedName == currentCategory) {
+                            category.addToTask(task)
+                            print("added \(taskName) to category: \(category.wrappedName)")
+                        }
+                    }
+                    
+                    try? managedObjectContext.save()
+                    
+                    // Reset values
+                    taskName = ""
+                    taskDesc = ""
+                    dueDate = Date()
+                    difficulty = 1
+                    
+                }
+                .frame(width: 50, height: 30)
+                .background(Color.bright_maroon)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .padding(.horizontal, 10)
+                // end add button
+                
+            }
+            .padding(.horizontal)
+            // end zstack
+            
+            
+            VStack {
+                
+                // MARK: Task Name
+                VStack{
+                    HStack {
+                        Text("Name:")
+                            .foregroundColor(.bright_maroon)
+                        Spacer()
+                    }
+                    .font(.custom("Ubuntu-Bold", size: 16))
+                    
+                    TextField("Enter Task Name...", text: $taskName)
+                        .padding(.leading, 10)
+                        .frame(height: 40)
+                        .background(Color.bg_light)
+                        .cornerRadius(10)
                         .foregroundColor(.white)
+                }
+                .font(.custom("Ubuntu-Regular", size: 16))
+                .padding()
+                
+                // MARK: Task Description
+                VStack{
+                    HStack {
+                        Text("Description:")
+                            .foregroundColor(.bright_maroon)
+                        Spacer()
+                    }
+                    .font(.custom("Ubuntu-Bold", size: 16))
                     
-                    Text("Category:")       //category
-                        .foregroundColor(.blue)
+                    TextField("Enter description...", text: $taskDesc)
+                        .padding(.leading, 10)
+                        .frame(height: 40)
+                        .background(Color.bg_light)
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                }
+                .font(.custom("Ubuntu-Regular", size: 16))
+                .padding()
+                
+                // MARK: Category Selection
+                VStack {
+                    HStack {
+                        Text("Category:")
+                            .foregroundColor(.bright_maroon)
+                        Spacer()
+                    }
+                    .font(.custom("Ubuntu-Bold", size: 16))
+                    
                     Menu("\(currentCategory)"){
                         ForEach(categories) { category in
                             Button(action:{
@@ -149,71 +171,61 @@ struct TaskEntryView: View {
                                 Text(category.wrappedName)
                             })
                         }
-                    } //menu
-                    .onAppear{currentCategory = "Uncategorized"; currentCategoryIndex = 0}
-                    
+                    }
+                    .onAppear{
+                        currentCategory = "Uncategorized"; currentCategoryIndex = 0
+                    }
                     .foregroundColor(.white)
-                    .padding(.horizontal, 30)
-                    Rectangle()
-                        .fill(Color.black)
-                        .frame(width:340, height:1)
-                        .padding(.horizontal, 30)
+                    // end menu
                 }
-                Text("Due Date:")   //due date
-                    .foregroundColor(.blue)
-                DatePicker("", selection: $dueDate)
+                .font(.custom("Ubuntu-Regular", size: 16))
+                .padding()
+            }
+            
+            Divider()
+                .frame(height: 3)
+                .frame(maxWidth: .infinity)
+                .background(Color.gray)
+            
+            // MARK: Date Picker
+            VStack {
+                HStack() {
+                    Text("Due Date:")
+                        .foregroundColor(.bright_maroon)
+                        .font(.custom("Ubuntu-Bold", size: 16))
+                    Spacer()
+                }
+                
+                DatePicker("Pick", selection: $dueDate)
+                    .colorScheme(.dark)
                     .labelsHidden()
                     .accentColor(.white)
-                    .colorScheme(.dark)
-                    .onAppear{dueDate = Date()}
-                Rectangle()
-                        .fill(Color.black)
-                        .frame(width:340, height:1)
-                        .padding(.horizontal, 30)
+                    .onAppear{ dueDate = Date() }
+            }
+            .font(.custom("Ubuntu-Regular", size: 16))
+            .padding()
+            
+            Divider()
+                .frame(height: 3)
+                .frame(maxWidth: .infinity)
+                .background(Color.gray)
+            
+            VStack {
+                HStack() {
+                    Text("Difficulty:")
+                        .foregroundColor(.bright_maroon)
+                        .font(.custom("Ubuntu-Bold", size: 16))
+                    Spacer()
+                }
                 
-                Text("Difficulty:")     //difficulty
-                    .foregroundColor(.blue)
                 DifficultyView(rating: $difficulty)
-                Spacer()
             }
-    
+            .font(.custom("Ubuntu-Regular", size: 16))
+            .padding()
+            
+            Spacer()
         }
-       .navigationBarHidden(true)
-
-    }
-    
-    func saveContext() {
-      do {
-        try managedObjectContext.save()
-      } catch {
-        print("Error saving managed object context: \(error)")
-      }
-    }
-    
-    func addUser(name: String) {
-//        let u = UserEntity(context: managedObjectContext)
-//
-//        u.name = name
-//
-//        saveContext()
-    }
-    
-    func deleteCategory(name: String) {
-        
-        for category in categories {
-            if(category.wrappedName == name) {
-                self.managedObjectContext.delete(category)
-            }
-        }
-        
-        saveContext()
-    }
+        .background(Color.bg_dark.ignoresSafeArea())
+        // end VStack
+    } // end body
 }
-/*
-struct TaskCreationFormView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskEntryView().preferredColorScheme(.dark)
-       
-    }
-}
-*/
