@@ -32,7 +32,7 @@ struct WeeklyView: View {
         return NavigationView{
             ZStack{ Color(red: 0.150, green: 0.150, blue:0.150).edgesIgnoringSafeArea(.all)
                 GeometryReader { geometry in
-                    Button(action: {
+                    Button(action: {    //button
                         withAnimation{
                             self.showMenu.toggle()
                         }
@@ -67,12 +67,12 @@ struct WeeklyView: View {
                     .padding(.top, 30)
                         .gesture(drag)
                         .frame(width: geometry.size.width, height: geometry.size.height)
-                        //.offset(x: self.showMenu ? geometry.size.width/2 : 0)   //this to push the MainView to the right
+                    .offset(x: self.showMenu ? geometry.size.width/2.5 : 0)   //this to push the MainView to the right
                         .disabled(self.showMenu ? true : false)
                     
                     if self.showMenu{
                         FilterMenu()
-                            .frame(width: geometry.size.width/2)
+                            .frame(width: geometry.size.width/2.5)
                             .transition(.move(edge: .leading))
                     } //if
                 } //geometry reader
