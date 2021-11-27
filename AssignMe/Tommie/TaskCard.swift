@@ -35,7 +35,7 @@ struct TaskCard: View {
                         .lineLimit(1)
                     
                     Spacer()
-                    ForEach(0...task.difficulty, id:\.self) { _ in
+                    ForEach(1...task.difficulty, id:\.self) { _ in
                         ZStack{
                             Image(systemName: "star.fill")
                                 .resizable()
