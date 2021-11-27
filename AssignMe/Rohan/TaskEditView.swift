@@ -11,7 +11,7 @@ struct TaskEditView: View {
     @State var taskDesc: String = ""
     @State var currentCategory: String = "Uncategorized"
     @State var dueDate: Date = Date()
-//    @State var difficulty=1
+    @State var difficulty: Int64 = 1
     @State var isActive: Bool = false
 //    @EnvironmentObject var user: UserOld
     var task: TaskEntity
@@ -30,98 +30,206 @@ struct TaskEditView: View {
         _taskDesc = State(initialValue: task.wrappedDesc)
         _currentCategory = State(initialValue: task.category?.wrappedName ?? "")
         _dueDate = State(initialValue: task.dueDate ?? Date())
-//        _difficulty = State(initialValue: task.difficulty)
+        _difficulty = State(initialValue: task.difficulty)
         _showEdit = showEdit
     }
     var body: some View {
-        VStack() {
-            HStack(alignment: .center, spacing: 40){
-                
-                Button(action:{
-                    showEdit = false
-//                        isActive = true
-//                        self.presentation.wrappedValue.dismiss()
-                },label:{
-                    Image(systemName: "arrow.backward.circle")
-                        .frame(width: 60, height: 40)
+        VStack(spacing: 0) {
+            
+            
+            Divider()
+                .frame(height: 3)
+                .background(Color.bright_maroon)
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.gray)
+                .frame(width: 50, height: 5)
+                .padding(.vertical, 8)
+            
+            // Top Bar
+            ZStack {
+                HStack(){
+                    // MARK: Back Button
+                    Button(action: {
+                        showEdit = false
+                    }, label: {
+                        ZStack() {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.bright_maroon)
+                                .frame(width: 40, height: 30)
+                            Image(systemName: "arrow.backward")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                                .padding()
+                        } // end label zstack
+                    })  //button
                     
-                })
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding(.leading,55)
-                Text("Task Edit")
-                    .bold()
+                    Spacer()
+                    
+                    // MARK: Update Button
+                    Button(action: {
+                        task.name = taskName
+                        task.desc = taskDesc
+                        task.dueDate = dueDate
+                        task.difficulty = Int64(difficulty)
+                        
+                        if(currentCategory != task.category?.wrappedName) {
+                            for category in categories {
+                                if(category.wrappedName == currentCategory) {
+                                    task.category?.removeFromTask(task)
+                                    task.category = category
+                                    break
+                                }
+                            }
+                        }
+                        
+                        try? managedObjectContext.save()
+                    }, label: {
+                        Text("Update")
+                            .font(.custom("Ubuntu-Bold", size: 16))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 5)
+                    })
+                    .background(Color.bright_maroon)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    // end update button
+                }
+                .padding(.vertical, 10)
+                .padding(.horizontal)
+                // end top bar hstack
+                
+                Text("Task Editing")
                     .font(.custom("Viga-Regular", size: 25))
                     .foregroundColor(.white)
-                    .frame(width:120, height: 40)
-                    .padding(.horizontal, 10)
-                Button("Save"){
-                    self.presentation.wrappedValue.dismiss()
-                }.frame(width: 60, height: 40)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding(.trailing, 55)
-                
-            } //hstack
+                    .padding(.horizontal,10)
+            } // end top bar zstack
             
-            Group{
-                Text("Name:")
-                    .foregroundColor(.blue)
-                TextField("Enter Task Name...", text: self.$taskName, onCommit: {
-                    isActive=true
-                })
-                    .frame(height: 55)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .padding([.horizontal], 4)
-                    .cornerRadius(16)
-                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                    .padding(.horizontal, 40)
-                    .foregroundColor(.white)
-                Text("Description:")
-                    .foregroundColor(.blue)
-                TextField("Enter Task Description...", text: $taskDesc)
-                    .frame(height: 55)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                    .padding([.horizontal], 4)
-                    .cornerRadius(16)
-                    .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                    .padding(.horizontal, 40)
-                    .foregroundColor(.white)
-                Text("Category:")
-                    .foregroundColor(.blue)
-                Menu("\(currentCategory)"){
-                    Picker(selection: $currentCategory, label: Text("Category options")) {
-                        ForEach(categories.indices) { categoryIndex in
-                            Text(categories[categoryIndex].wrappedName).tag(categoryIndex)
+            
+            VStack {
+                
+                // MARK: Task Name
+                VStack{
+                    HStack {
+                        Text("Name:")
+                            .foregroundColor(.bright_maroon)
+                        Spacer()
+                    }
+                    .font(.custom("Ubuntu-Bold", size: 16))
+                    
+                    TextField("Enter Task Name...", text: $taskName)
+                        .padding(.leading, 10)
+                        .frame(height: 40)
+                        .background(Color.bg_light)
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                }
+                .font(.custom("Ubuntu-Regular", size: 16))
+                .padding()
+                
+                // MARK: Task Description
+                VStack{
+                    HStack {
+                        Text("Description:")
+                            .foregroundColor(.bright_maroon)
+                        Spacer()
+                    }
+                    .font(.custom("Ubuntu-Bold", size: 16))
+                    
+                    TextField("Enter description...", text: $taskDesc)
+                        .padding(.leading, 10)
+                        .frame(height: 40)
+                        .background(Color.bg_light)
+                        .cornerRadius(10)
+                        .foregroundColor(.white)
+                }
+                .font(.custom("Ubuntu-Regular", size: 16))
+                .padding()
+                
+                // MARK: Category Selection
+                VStack {
+                    HStack {
+                        Text("Category:")
+                            .foregroundColor(.bright_maroon)
+                        Spacer()
+                    }
+                    .font(.custom("Ubuntu-Bold", size: 16))
+                    
+                    Menu("\(currentCategory)"){
+                        ForEach(categories) { category in
+                            Button(action:{
+                                currentCategory = category.wrappedName;
+                            }, label:{
+                                Text(category.wrappedName)
+                            })
                         }
                     }
-                } // end menu
+                    .onAppear{
+                        currentCategory = task.category?.wrappedName ?? "Error"
+                    }
                     .foregroundColor(.white)
-                    .padding(.horizontal, 30)
-                Rectangle()
-                    .fill(Color.black)
-                    .frame(width:340, height:1)
-                    .padding(.horizontal, 30)
-            } //group
-            Text("Due Date:")
-                .foregroundColor(.blue)
-            DatePicker("", selection: $dueDate)
-                .labelsHidden()
-                .accentColor(.white)
-                .colorScheme(.dark)
-            Rectangle()
-                    .fill(Color.black)
-                    .frame(width:340, height:1)
-                    .padding(.horizontal, 30)
-            Text("Difficulty:")
-                .foregroundColor(.blue)
-//                DifficultyView(rating: $difficulty)
+                    // end menu
+                }
+                .font(.custom("Ubuntu-Regular", size: 16))
+                .padding()
+            }
+            
+            Divider()
+                .frame(height: 3)
+                .frame(maxWidth: .infinity)
+                .background(Color.gray)
+            
+            // MARK: Date Picker
+            VStack {
+                HStack() {
+                    Text("Due Date:")
+                        .foregroundColor(.bright_maroon)
+                        .font(.custom("Ubuntu-Bold", size: 16))
+                    Spacer()
+                }
+                
+                DatePicker("Pick", selection: $dueDate)
+                    .colorScheme(.dark)
+                    .labelsHidden()
+                    .accentColor(.white)
+            }
+            .font(.custom("Ubuntu-Regular", size: 16))
+            .padding()
+            
+            Divider()
+                .frame(height: 3)
+                .frame(maxWidth: .infinity)
+                .background(Color.gray)
+            
+            VStack {
+                HStack() {
+                    Text("Difficulty:")
+                        .foregroundColor(.bright_maroon)
+                        .font(.custom("Ubuntu-Bold", size: 16))
+                    Spacer()
+                }
+                
+                HStack {
+                    ForEach(1...5, id: \.self){ number in
+                        Image(systemName: "star.fill")
+                            .resizable()
+                            .frame(width: 32.0, height: 32.0)
+                            .foregroundColor(number > difficulty ? .bg_light : .yellow)
+                            .onTapGesture {
+                                difficulty = Int64(number)
+                            }
+                        
+                    }
+                }
+            }
+            .font(.custom("Ubuntu-Regular", size: 16))
+            .padding()
+            
             Spacer()
         }
+        .background(Color.bg_dark.ignoresSafeArea())
+        // end VStack
     }
 }
 

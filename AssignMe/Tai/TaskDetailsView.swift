@@ -29,10 +29,6 @@ struct TaskDetailsView: View {
         
         VStack(spacing: 0) {
             
-            NavigationLink(destination: CategoryListView(), isActive: $showEdit) {
-                EmptyView()
-            }
-            
             Divider()
                 .frame(height: 3)
                 .background(Color.bright_maroon)
