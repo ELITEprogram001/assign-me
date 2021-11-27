@@ -37,8 +37,7 @@ struct CategoryCard: View {
     @State var showAlert = false
     @State private var showingAlert = false
     var catIndex: Int
-    
-    
+
     func del () {
         for index in 0..<user.taskList.count {
             if (user.taskList[index].category.id == user.categoryList[catIndex].id){
@@ -64,6 +63,16 @@ struct CategoryCard: View {
         return catIndex
     }
     
+    func taskNum() -> Int {
+        var count = 0
+        for index in 1..<user.taskList.count {
+            if (user.taskList[index].category.name == user.categoryList[catIndex].name){
+                count = count + 1
+            }
+        }
+        return count
+    }
+    
     var body: some View {
         ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
             Rectangle() //Card Body
@@ -86,6 +95,16 @@ struct CategoryCard: View {
                 .padding (.bottom, 2)
             
             
+            Text("\nTasks: \(taskNum())") //"\nTasks: (2)" number is a placeholder for now
+                       .font(.system(size: 21, weight: .light, design: .serif))
+                       .fontWeight(.bold)
+                       .foregroundColor(Color.white)
+                       .multilineTextAlignment(.leading)
+                       .padding(.leading, -139.0)
+                       .padding(.bottom, -30)
+            
+            
+//-------------------------------KEEP ME FOR NOW 4:03 AM 23 November 2021 ---------------------
             
     /*        Text("\(category.name)") //variable category name
                 .font(.system(size: 21, weight: .light, design: .serif))
@@ -105,6 +124,7 @@ struct CategoryCard: View {
                 .multilineTextAlignment(.leading)
                 .padding(.leading, -139.0)
                 .padding(.bottom, -30) */
+//----------------------------------- END-------------------------------------------------
             
             
             HStack{ //attributes for the category colour tab to the left
@@ -161,9 +181,7 @@ struct CategoryCard: View {
             
             Button( //Delete button with red 'trashcan' icon
                 action:{
-                    //showAlert = true
-      //              isActive = true
-                      del()
+                    self.showAlert = true
                 },
                 label: {
                     Image(systemName: "trash")
@@ -173,6 +191,14 @@ struct CategoryCard: View {
             ) //Delete button END
             .foregroundColor(.red)
             .padding(.leading, 245)
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Are you sure you want to delete this category?"),
+                    message: Text("This action cannot be undone"),
+                    primaryButton: .destructive(Text("Delete"), action: {del()} ),
+                    secondaryButton: .cancel()
+                ) //Alert END
+            } //.alert END
             
 //-------------------- Delete Buttons END---------------------------------
             
