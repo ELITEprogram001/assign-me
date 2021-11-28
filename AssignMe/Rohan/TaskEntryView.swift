@@ -78,9 +78,7 @@ struct TaskEntryView: View {
                             category: user.categoryList[currentCategoryIndex],
                             description:taskDesc,
                             difficulty:difficulty,
-                            dueDate:dueDate,
-                            dateCompleted:dueDate,
-                            isOverdue:false)
+                            dueDate:dueDate)
                         user.taskList.append(toAdd)
                         self.tabSelection=1
                         taskName = ""

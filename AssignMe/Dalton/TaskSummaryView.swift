@@ -28,7 +28,7 @@ struct TaskSummaryView: View {
                 } // end section title
                 
                 // Task completion per difficulty
-                HStack(spacing: 25) {
+                HStack(spacing: 20) {
                     
                     Spacer()
                     

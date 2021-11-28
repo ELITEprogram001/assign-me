@@ -52,8 +52,7 @@ struct WeeklyView: View {
                                             description:"",
                                             difficulty: 1,
                                             dueDate: Date(),
-                                            dateCompleted: Date(),
-                                            isOverdue: false ))
+                                            dateCompleted: Date()))
                     user.taskList.removeLast()
                     user.taskList = user.taskList.sorted(by: {
                         $0.dueDate.compare($1.dueDate) == .orderedAscending

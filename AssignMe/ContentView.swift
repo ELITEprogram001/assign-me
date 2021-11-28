@@ -11,20 +11,56 @@ struct ContentView: View {
 //    // Test Category
     @State private var tabSelection = 1
     var Uncategorized = Category(name:"Uncategorized",color:Color.gray) //var for uncategorized category that's hidden from CategoriesListView
+    let cal = Calendar.current
     
     
     var user:User = User(name: "User")
     init()
     {
         
-        // TODO implement persistent data - or waste 12-16 hours creating the whole app again with persistent data.
+        // TODO implement persistent data - or waste 12-16 hours creating a functional app.
+        
+        // non-optional testing data since our app has no persistent data
         user.addCategory(cat:Uncategorized) //init for uncategorized category
-        var sample = Task(name: "push ups", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Date(), dateCompleted: Date(), isOverdue: true)
-        var sample2 = Task(name: "push downs", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Calendar.current.date(byAdding: .day, value: -7, to: Date()) ?? Date(), dateCompleted: Date(), isOverdue: true)
-        var sample3 = Task(name: "push sides", category: Uncategorized, description: "I will do 100 push ups!", difficulty: 5, dueDate: Calendar.current.date(byAdding: .day, value: 14, to: Date()) ?? Date(), dateCompleted: Date(), isOverdue: true)
-        user.taskList.append(sample)
-        user.taskList.append(sample2)
-        user.completedList.append(sample3)
+        var physical = Category(name: "Physical Health", color: .yellow)
+        var school = Category(name: "School", color: .green)
+        
+        user.categoryList.append(school)
+        user.categoryList.append(physical)
+        
+        user.taskList.append(Task(
+                                name: "Push-ups",
+                                category: physical,
+                                description: "I will do 100 push ups!",
+                                difficulty: 4,
+                                dueDate: Date()))
+        user.taskList.append(Task(
+                                name: "Complete app",
+                                category: school,
+                                description: "Complete this amazing app.",
+                                difficulty: 2,
+                                dueDate: cal.date(byAdding: .day, value: -7, to: Date()) ?? Date()))
+        user.completedList.append(Task(
+                                    name: "Implement Core Data",
+                                    category: school,
+                                    description: "Implement persistent data.",
+                                    difficulty: 5,
+                                    dueDate: cal.date(byAdding: .day, value: 14, to: Date()) ?? Date(),
+                                    dateCompleted: Date()))
+        user.completedList.append(Task(
+                                    name: "Homework 1",
+                                    category: school,
+                                    description: "Submit homework 1.",
+                                    difficulty: 1,
+                                    dueDate: cal.date(byAdding: .day, value: 1, to: Date()) ?? Date(),
+                                    dateCompleted: Date()))
+        user.completedList.append(Task(
+                                    name: "Run 3 Miles",
+                                    category: school,
+                                    description: "Begin training for the half-marathon.",
+                                    difficulty: 4,
+                                    dueDate: Date(),
+                                    dateCompleted: Date()))
         
         // Creating Achievements
         user.achievements.append(Achievement(

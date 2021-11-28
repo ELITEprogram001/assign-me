@@ -9,22 +9,20 @@ import Foundation
 struct Task: Identifiable {
     
     let id = UUID()
-    var name:String
-    var category:Category
-    var description:String
-    var difficulty:Int
-    var dueDate:Date
-    var dateCompleted:Date
-    var isOverdue:Bool
+    var name: String
+    var category: Category
+    var description: String
+    var difficulty: Int
+    var dueDate: Date
+    var dateCompleted: Date?
     
-    init(name:String, category: Category, description: String, difficulty:Int, dueDate:Date,dateCompleted:Date, isOverdue:Bool){
-        self.name=name
-        self.category=category
-        self.description=description
-        self.difficulty=difficulty
-        self.dueDate=dueDate
-        self.dateCompleted=dateCompleted
-        self.isOverdue=isOverdue
+    init(name: String, category: Category, description: String, difficulty: Int, dueDate: Date, dateCompleted: Date? = nil){
+        self.name = name
+        self.category = category
+        self.description = description
+        self.difficulty = difficulty
+        self.dueDate = dueDate
+        self.dateCompleted = dateCompleted
     }
     
     func isDue(_ d: Date) -> Bool {
@@ -36,6 +34,13 @@ struct Task: Identifiable {
                     return true
                 }
             }
+        }
+        return false
+    }
+    
+    func isOverdue() -> Bool{
+        if(dateCompleted != nil) {
+            return dueDate < Date()
         }
         return false
     }
@@ -52,8 +57,7 @@ struct TaskList {
             description: "100 push up, 100 situp, 10k run AHHHHhhhhHHHhhhhHHHHHhhhhhhHHHHHhh",
             difficulty: 5,
             dueDate: Date(),
-            dateCompleted: Date(),
-            isOverdue: false
+            dateCompleted: Date()
         ),
         Task(
             name: "Shopping",
@@ -61,8 +65,7 @@ struct TaskList {
             description: "trying not to spend alot of money at the mall",
             difficulty: 5,
             dueDate: Date(),
-            dateCompleted: Date(),
-            isOverdue: true
+            dateCompleted: Date()
         ),
     ]
 }

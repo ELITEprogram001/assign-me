@@ -49,15 +49,15 @@ struct ProfileView: View {
                             .frame(height: 3)
                             .background(Color.white)
                         
-                        // Graph and Quote Section
+                        // MARK: Tab View
                         TabView {
+                            TaskBreakdownView()
                             TaskSummaryView()
                             QuoteView(quote: "You simply have to put one foot in front of the other and keep going. Put blinders on and plow right ahead.", author: "George Lucas")
                         }
                         .tabViewStyle(PageTabViewStyle())
                         .indexViewStyle(PageIndexViewStyle())
                         .background(Color.black)
-                        .font(.custom("Viga-Regular", size: 20, relativeTo: .title))
                         .foregroundColor(Color.white)
                         // end TabView
                         
@@ -84,7 +84,7 @@ struct ProfileView: View {
                     .frame(height: 3)
                     .background(Color.white)
                 
-                // Achievement Section
+                // MARK: Achievement View
                 ScrollView(.vertical) {
                     HStack {
                         Text("Achievements")

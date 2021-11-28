@@ -26,9 +26,7 @@ class User: ObservableObject {
             category: Uncategorized,
             description:"",
             difficulty: 1,
-            dueDate: Date(),
-            dateCompleted: Date(),
-            isOverdue: false )
+            dueDate: Date())
         self.currTaskIndex = 0
         self.indexCatList = 0
             //append a dummy task to prevent crashing ?
@@ -37,9 +35,7 @@ class User: ObservableObject {
             category: Uncategorized,
             description:"",
             difficulty: 1,
-            dueDate: Date(),
-            dateCompleted: Date(),
-            isOverdue: false ))
+            dueDate: Date()))
     }
     func addCategory(cat:Category){
         categoryList.append(cat)
