@@ -16,8 +16,10 @@ struct WeeklyView: View {
     
     @EnvironmentObject var user: User
     @State var tabSelection: Int
-    
-
+    @State var myDictionaryDateToInt:[String:Int] = [:]
+    @State var myDictionaryIntToDate:[Int:String] = [:]
+    @State var myDictionaryNext6Days:[String:Int] = [:]
+    @State var formatterDMY = DateFormatter()
     var body: some View {
     
         
@@ -51,6 +53,11 @@ struct WeeklyView: View {
                     
                     ScrollView{
                         ForEach(1..<user.taskList.count, id: \.self) { index in
+                            if (myDictionaryNext6Days[formatterDMY.string(from: user.taskList[index].dueDate )] == 1 && myDictionaryIntToDate[index] != nil){
+                                Text("\(myDictionaryIntToDate[index]!)")
+                            }
+                            if(myDictionaryNext6Days[formatterDMY.string(from: user.taskList[index].dueDate )] == 1)
+                            {
                             NavigationLink(destination: TaskDetailsView(task: user.taskList[index] )
                                 .environmentObject(user)
                                 .onAppear {
@@ -66,6 +73,7 @@ struct WeeklyView: View {
                                 TaskCard(task: user.taskList[index])
                                     .ignoresSafeArea(.all)
                                })
+                            }
                             Spacer()
                             
                         } //foreach
@@ -103,6 +111,33 @@ struct WeeklyView: View {
                 user.taskList = user.taskList.sorted(by: {
                     $0.dueDate.compare($1.dueDate) == .orderedAscending
                 })
+                let formatter = DateFormatter()
+                let formatter2 = DateFormatter()
+                formatter.dateFormat = "M - dd - yyyy"
+                formatter2.dateFormat = "EE, MMM dd"
+                for count in 1...user.taskList.count {
+                    if (count<user.taskList.count)
+                    {
+                        formatter.string(from:user.taskList[count].dueDate)
+                        if(myDictionaryDateToInt[formatter.string(from:user.taskList[count].dueDate)] == nil)
+                        {
+                            myDictionaryIntToDate[count] = formatter2.string(from:user.taskList[count].dueDate)
+                        }
+                        myDictionaryDateToInt[formatter.string(from:user.taskList[count].dueDate)] = 1
+                        
+                        //myDictionaryIntToDate[count] = formatter.string(from:user.taskList[count].dueDate)
+                        //print(user.taskList[count].dueDate)
+                    }
+                }
+                let date = Date()
+                formatterDMY.timeZone = .current
+                formatterDMY.locale = .current
+                formatterDMY.dateFormat = "M - dd - yyyy"
+                for n in 0...6
+                {
+                    let modifiedDate = Calendar.current.date(byAdding: .day, value: n, to: date)
+                    myDictionaryNext6Days[formatterDMY.string(from: modifiedDate ?? Date())] = 1
+                }
             }
         } //navigation View
         
