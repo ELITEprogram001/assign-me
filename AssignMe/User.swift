@@ -17,6 +17,7 @@ class User: ObservableObject {
     @Published var categoryList = [Category]()
     @Published var completedList = [Task]()
     @Published var availableColors = [Color]()
+    @Published var achievements = [Achievement]()
     
     init(name: String){
         self.name = name

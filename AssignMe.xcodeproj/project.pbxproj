@@ -26,6 +26,8 @@
 		1FBB93C92717339300C6C2F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FBB93C82717339300C6C2F2 /* Assets.xcassets */; };
 		1FBB93D72717339400C6C2F2 /* AssignMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB93D62717339400C6C2F2 /* AssignMeTests.swift */; };
 		1FBB93E22717339400C6C2F2 /* AssignMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB93E12717339400C6C2F2 /* AssignMeUITests.swift */; };
+		1FF67A162753587C00E47032 /* TaskSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF67A152753587C00E47032 /* TaskSummaryView.swift */; };
+		1FF67A18275379F000E47032 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF67A17275379F000E47032 /* Achievement.swift */; };
 		303CFCAF2719C38B003B7139 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCAE2719C38B003B7139 /* Category.swift */; };
 		303CFCB12719C705003B7139 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB02719C705003B7139 /* Task.swift */; };
 		303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */; };
@@ -86,6 +88,8 @@
 		1FBB93DD2717339400C6C2F2 /* AssignMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssignMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FBB93E12717339400C6C2F2 /* AssignMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignMeUITests.swift; sourceTree = "<group>"; };
 		1FBB93E32717339400C6C2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1FF67A152753587C00E47032 /* TaskSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSummaryView.swift; sourceTree = "<group>"; };
+		1FF67A17275379F000E47032 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		303CFCAE2719C38B003B7139 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		303CFCB02719C705003B7139 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationFormView.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				8730CB9F2733725B00D175DB /* CalendarView.swift */,
 				1FB8CEEC274F68F300DAC1A8 /* Cell.swift */,
 				1FB8CEEE274F694700DAC1A8 /* CustomColors.swift */,
+				1FF67A152753587C00E47032 /* TaskSummaryView.swift */,
+				1FF67A17275379F000E47032 /* Achievement.swift */,
 			);
 			path = Dalton;
 			sourceTree = "<group>";
@@ -410,6 +416,8 @@
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,
 				303CFCB3271D0116003B7139 /* CategoryCreationFormView.swift in Sources */,
 				30954F14272E3E4000E100BE /* DifficultyView.swift in Sources */,
+				1FF67A18275379F000E47032 /* Achievement.swift in Sources */,
+				1FF67A162753587C00E47032 /* TaskSummaryView.swift in Sources */,
 				1FBB93C72717338E00C6C2F2 /* ContentView.swift in Sources */,
 				8730CBA02733725B00D175DB /* CalendarView.swift in Sources */,
 				1F04DBF4274FF81200E5CF42 /* AchievementTile.swift in Sources */,

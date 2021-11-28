@@ -9,53 +9,34 @@ import SwiftUI
 
 struct AchievementTile: View {
     
-    let color: Color
     let title: String
-    let desc: String
+    let image: String
+    let achievement: Achievement
     
     var body: some View {
         VStack(spacing: 0) {
             
             Spacer()
-            Text("Example Achievement")
-                .font(.custom("Viga-Regular", size: 16, relativeTo: .title))
-            Image("book")
+            Text(title)
+                .font(.custom("Ubuntu-Regular", size: 14, relativeTo: .title))
+            Image(image)
                 .resizable()
-                .frame(width: 64, height: 64)
-            Text("Level 0")
-                .font(.custom("Ubuntu", size: 14, relativeTo: .body))
+                .frame(width: 40, height: 40)
+                .padding(.vertical, 5)
+//            Text("Level 0")
+//                .font(.custom("Ubuntu", size: 10, relativeTo: .body))
             Spacer()
-            
-            // DELETE: Old Tile Card
-//            ZStack {
-//                RoundedRectangle(cornerRadius: 8, style: .continuous)
-//                    .fill(color)
-//                    .frame(minWidth: 10, maxWidth: .infinity, minHeight: 40)
-//                VStack(spacing: 0){
-//                    HStack(spacing: 0) {
-//                        Text(title)
-//                            .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.caption))
-//                            .padding(.vertical, 3)
-//                            .padding(.horizontal, 6)
-//                        Spacer()
-//                    }
-//                    Spacer()
-//                    Text(desc)
-//                        .font(.custom("Ubuntu-Regular", size: 12, relativeTo:.body))
-//                        .padding(.vertical, 8)
-//                }
-//            }
             
         }
         .frame(minWidth: 40, maxWidth: .infinity)
-        .aspectRatio(1.5, contentMode: .fill)
-        .background(Color.pink)
+        .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.fg_main, lineWidth: 1))
     }
     
-    init(title: String, desc: String, color: Color) {
-        self.title = title
-        self.desc = desc
-        self.color = color
+    init(achievement: Achievement) {
+        self.achievement = achievement
+        self.title = achievement.name
+        self.image = achievement.image
     }
 }
 

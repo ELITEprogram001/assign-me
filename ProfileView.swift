@@ -10,13 +10,17 @@ import SwiftUI
 struct ProfileView: View {
     
     let columns = [
-        GridItem(.flexible(), spacing: 30, alignment: .center),
+        GridItem(.flexible(), spacing: 40, alignment: .center),
         GridItem(.flexible(), alignment: .center)
-//        GridItem(.flexible()),
-//        GridItem(.flexible())
     ]
     
     @State var showModal: Bool = false
+    @EnvironmentObject var user: User
+    @State var selectedAchievement: Achievement
+    
+    init() {
+        _selectedAchievement = State(initialValue: Achievement(name: "", desc: "", image: "", progress: 0))
+    }
     
     var body: some View {
         ZStack {
@@ -26,10 +30,8 @@ struct ProfileView: View {
                     VStack(spacing: 0) {
                         // Banner Section
                         HStack() {
-                            //Image("underwater_banner")
-                            //.resizable()
                             Rectangle()
-                                .fill(Color.bright_maroon)
+                                .fill(Color.fg_main)
                                 /* Uncomment if a gradient is desired
                                 .overlay(Rectangle()
                                             .fill(
@@ -39,7 +41,7 @@ struct ProfileView: View {
                                 */
                                 .ignoresSafeArea()
                         }
-                        .frame(minHeight: 40, idealHeight: 60, maxHeight: 70)
+                        .frame(minHeight: 40, idealHeight: 50, maxHeight: 70)
                         .background(Color.yellow)
                         // end HStack
              
@@ -49,8 +51,7 @@ struct ProfileView: View {
                         
                         // Graph and Quote Section
                         TabView {
-                            Text("TODO Graph")
-                            Text("TODO Medal Stats")
+                            TaskSummaryView()
                             QuoteView(quote: "You simply have to put one foot in front of the other and keep going. Put blinders on and plow right ahead.", author: "George Lucas")
                         }
                         .tabViewStyle(PageTabViewStyle())
@@ -76,7 +77,7 @@ struct ProfileView: View {
                         Spacer()
                     }
                 }
-                .frame(minHeight: 20, idealHeight: 80, maxHeight: 300)
+                .frame(minHeight: 20, maxHeight: 400)
                 // end ZStack
                 
                 Divider()
@@ -96,26 +97,22 @@ struct ProfileView: View {
                     // end HStack
                     
                     LazyVGrid (columns: columns, spacing: 15) {
-                        AchievementTile(title: "Redemption", desc: "Complete 3 tasks that were overdue.", color: .gray)
-                            .onTapGesture {
-                                showModal = !showModal
-                            }
-                        AchievementTile(title: "Overachiever", desc: "Complete 5 tasks that aren't due for another week.", color: .gray)
-                        AchievementTile(title: "A Marathon Starts With a Step", desc: "Complete your first task!", color: .gray)
-                        AchievementTile(title: "Dedicated", desc: "Complete 4 tasks for one category back to back.", color: .gray)
-                        AchievementTile(title: "Busy Bee", desc: "Have 15 tasks scheduled.", color: .gray)
-                        AchievementTile(title: "Consistent Worker", desc: "Complete all your tasks on time for 5 days in a row.", color: .gray)
-                        AchievementTile(title: "The Planner", desc: "Plan your first 3 tasks.", color: .gray)
-                        AchievementTile(title: "Take a break", desc: "Complete 3 tasks in 1 hour.", color: .gray)
+                        ForEach(user.achievements) { achievement in
+                            AchievementTile(achievement: achievement)
+                                .onTapGesture {
+                                    showModal = true
+                                    selectedAchievement = achievement
+                                }
+                        }
                     }
                     .padding(.horizontal)
                 }
-                .background(Color.bg_dark.ignoresSafeArea())
+                .background(Color.near_black.ignoresSafeArea())
                 
             }
             // end VStack
             
-            ModalView(showModal: $showModal)
+            ModalView(showModal: $showModal, achievement: $selectedAchievement)
             
         } // end ZStack
         

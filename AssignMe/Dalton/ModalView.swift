@@ -10,6 +10,7 @@ import SwiftUI
 struct ModalView: View {
     
     @Binding var showModal: Bool
+    @Binding var achievement: Achievement
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -34,15 +35,15 @@ struct ModalView: View {
         VStack(){
             Divider()
                 .frame(height: 3)
-                .background(Color.bright_maroon)
+                .background(Color.fg_main)
                 .padding(.bottom, 20)
             VStack(spacing: 0){
-                Text("Example Achievement")
+                Text(achievement.name)
                     .font(.custom("Viga-Regular", size: 30, relativeTo: .title))
-                Image("book")
+                Image(achievement.image)
                     .resizable()
                     .frame(width: 100, height: 100)
-                    .padding(16)
+                    .padding(25)
                 HStack {
                     GeometryReader { geometry in
                         ZStack(alignment: .leading){
@@ -50,22 +51,23 @@ struct ModalView: View {
                                 .fill(Color.gray)
                                 .frame(width: geometry.size.width, height: 10)
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill(Color.bright_maroon)
-                                .frame(width: (geometry.size.width * 0.5), height: 10)
+                                .fill(Color.fg_main)
+                                .frame(width: (geometry.size.width * achievement.progress), height: 10)
                                 
                         }
                     }
                 }
                 .frame(height: 12)
                 .padding(.horizontal, 50)
-                HStack{
-                    Text("Lvl. 0")
-                        .font(.custom("Ubuntu-Bold", size: 16, relativeTo: .body))
-                    Text("Next level in 5 more tasks.")
-                        .font(.custom("Ubuntu-Light", size: 16, relativeTo: .body))
-                }
-                .padding(4)
-                Text("This is just filler text. If you have seen this, then I have failed as a quality assurance tester. I humbly request that you end my life quickly for my heinous crime.")
+                .padding(.bottom, 20)
+//                HStack{
+//                    Text("Lvl. 0")
+//                        .font(.custom("Ubuntu-Bold", size: 16, relativeTo: .body))
+//                    Text("Next level in 5 more tasks.")
+//                        .font(.custom("Ubuntu-Light", size: 16, relativeTo: .body))
+//                }
+//                .padding(4)
+                Text(achievement.desc)
                     .multilineTextAlignment(.center)
                     .padding()
                     .padding(.horizontal, 10)

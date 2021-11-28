@@ -21,7 +21,8 @@ struct CalendarView: View {
     @State var selectedCell: Cell
     //Cell(id: "6666-66-66", "66", date: Date())
     @ObservedObject var cellState = CellState()
-    var calendar: [[[Cell]]]
+    var allCells: [[[Cell]]]
+    let cal: Calendar = Calendar.current
     @EnvironmentObject var user: User
 
     let columns = [
@@ -44,7 +45,7 @@ struct CalendarView: View {
                 }) {
                     Image(systemName: "arrow.left")
                 }
-                .foregroundColor(.bright_maroon)
+                .foregroundColor(.fg_main)
                 Spacer()
                 Text(getMonthTitle(d: date))
                     .bold()
@@ -55,7 +56,7 @@ struct CalendarView: View {
                 }) {
                     Image(systemName: "arrow.right")
                 }
-                .foregroundColor(.bright_maroon)
+                .foregroundColor(.fg_main)
                 Spacer()
             }
             .padding(.bottom, 10)
@@ -65,7 +66,7 @@ struct CalendarView: View {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(dayLabels) { item in
                     Text(item.label)
-                        .foregroundColor(Color.bright_maroon)
+                        .foregroundColor(Color.fg_main)
                 }
                 .font(.custom("Ubuntu-Bold", size: 18, relativeTo:.body))
                 .padding(.bottom, 10)
@@ -81,7 +82,7 @@ struct CalendarView: View {
                     }
                 }
                 // Call a method to calculate what the current month is and return all the cells
-                ForEach(getMonthCells(d: date) ?? calendar[0][0]) { cell in
+                ForEach(getMonthCells(d: date) ?? allCells[0][0]) { cell in
                     cell
                         .onTapGesture {
                             // Update lastSelectedCell and make it white
@@ -128,18 +129,19 @@ struct CalendarView: View {
                     } // end LazyVStack
                 } // end Scrollview
             }
-            .background(Color.bg_dark.ignoresSafeArea())
+            .background(Color.near_black.ignoresSafeArea())
             .foregroundColor(Color.white)
             // end VStack
         }
-        .background(Color.bg_light.ignoresSafeArea())
+        .background(Color.bg_dark.ignoresSafeArea())
         .foregroundColor(Color.white)
         // end VStack
     } // end body
     
+    // MARK: Initialization
     init() {
-        print("[INIT] start")
-        calendar = [[[Cell]]]()
+        
+        allCells = [[[Cell]]]()
         _selectedCell = State(initialValue: Cell(id: "6666-66-66", "66", date: Date()))
         _dayTitle = State(initialValue: "Error")
         _numTitle = State(initialValue: 99)
@@ -166,7 +168,6 @@ struct CalendarView: View {
                     let monthNow = DateComponents.month!
                     let dayNow = DateComponents.day!
                     if((year == yearNow) && (month == monthNow) && (day == dayNow)) {
-                        print("[INFO] initial selected cell \(year)-\(month)-\(day)")
                         cell.updateState(selected: true)
                         lastSelectedCell = cell
                         _selectedCell = State(initialValue: cell)
@@ -175,7 +176,7 @@ struct CalendarView: View {
                 }
                 yearArr.append(currentMonth)
             }
-            calendar.append(yearArr)
+            allCells.append(yearArr)
         }
         
         // Update the initial value of the Daily View title
@@ -183,17 +184,27 @@ struct CalendarView: View {
         _numTitle = State(initialValue: Calendar.current.component(.day, from: selectedCell.date))
         _suffix = State(initialValue: getDaySuffix(Calendar.current.component(.day, from: selectedCell.date)))
         
-        print("[INIT] end")
     }
     
     func getMonthCells(d: Date) -> [Cell]? {
-        let year = Calendar.current.component(.year, from: d)
-        let month = Calendar.current.component(.month, from: d)
-        for yearArr in calendar {
-            if (Calendar.current.component(.year, from: yearArr[0][0].date) == year) {
+        let year = cal.component(.year, from: d)
+        let month = cal.component(.month, from: d)
+        for yearArr in allCells {
+            if (cal.component(.year, from: yearArr[0][0].date) == year) {
                 for monthArr in yearArr {
-                    //print("[INFO] found month: \(Calendar.current.component(.month, from: monthArr[0].date))")
-                    if (Calendar.current.component(.month, from: monthArr[0].date) == month) {
+                    if (cal.component(.month, from: monthArr[0].date) == month) {
+                        
+                        for cell in monthArr {
+                            cell.turnOffTaskIndicator()
+                        }
+                        
+                        for task in user.taskList {
+                            let dueDateComp = cal.dateComponents([.year, .month, .day], from: task.dueDate)
+                            if(dueDateComp.year == year && dueDateComp.month == month) {
+                                monthArr[dueDateComp.day! - 1].turnOnTaskIndicator()
+                            }
+                        }
+                        
                         return monthArr
                     }
                 }
