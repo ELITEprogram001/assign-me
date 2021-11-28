@@ -85,6 +85,8 @@ struct TaskEditView: View {
                         }
                         
                         try? managedObjectContext.save()
+                        
+                        showEdit = false
                     }, label: {
                         Text("Update")
                             .font(.custom("Ubuntu-Bold", size: 16))

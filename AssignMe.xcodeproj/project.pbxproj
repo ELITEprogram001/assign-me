@@ -21,6 +21,7 @@
 		1F553B3E2737061D00362BAF /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B362737061D00362BAF /* Ubuntu-Light.ttf */; };
 		1F553B3F2737061D00362BAF /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B372737061D00362BAF /* Ubuntu-LightItalic.ttf */; };
 		1F553B4127370B2100362BAF /* Viga-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F553B4027370B2100362BAF /* Viga-Regular.ttf */; };
+		1F644AC22753261A0016ADC5 /* CategoryTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F644AC12753261A0016ADC5 /* CategoryTaskView.swift */; };
 		1F8BF5BC27505E5D0025226A /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8BF5BB27505E5D0025226A /* Achievement.swift */; };
 		1F8BF5BF275065970025226A /* NSManagedObjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F8BF5BD275065970025226A /* NSManagedObjectModel.xcdatamodeld */; };
 		1F8BF5C527506A370025226A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8BF5C427506A370025226A /* Persistence.swift */; };
@@ -82,6 +83,7 @@
 		1F553B362737061D00362BAF /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		1F553B372737061D00362BAF /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
 		1F553B4027370B2100362BAF /* Viga-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Viga-Regular.ttf"; sourceTree = "<group>"; };
+		1F644AC12753261A0016ADC5 /* CategoryTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTaskView.swift; sourceTree = "<group>"; };
 		1F8BF5BB27505E5D0025226A /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		1F8BF5BE275065970025226A /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
 		1F8BF5C427506A370025226A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				DE998A4327336DC3000A08CF /* TaskCard.swift */,
+				1F644AC12753261A0016ADC5 /* CategoryTaskView.swift */,
 				303E9275272AF1F000B71B63 /* CategoryCard.swift */,
 				DE998A4527336ECE000A08CF /* CategoryListView.swift */,
 			);
@@ -427,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F8BF5BF275065970025226A /* NSManagedObjectModel.xcdatamodeld in Sources */,
+				1F644AC22753261A0016ADC5 /* CategoryTaskView.swift in Sources */,
 				CE25728727422138006C5C66 /* TaskDetailsView.swift in Sources */,
 				303CFCB92720F6DF003B7139 /* SwiftUIViewTest.swift in Sources */,
 				303CFCB12719C705003B7139 /* Task.swift in Sources */,

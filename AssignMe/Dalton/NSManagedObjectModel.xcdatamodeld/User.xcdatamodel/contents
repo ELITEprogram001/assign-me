@@ -4,6 +4,11 @@
         <attribute name="color" optional="YES" attributeType="String" defaultValueString=".red"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskEntity" inverseName="category" inverseEntity="TaskEntity"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="TaskEntity" representedClassName="TaskEntity" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String"/>

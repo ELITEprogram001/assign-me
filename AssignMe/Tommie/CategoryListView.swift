@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    @State private var isActive = false
-    @State private var willMoveToNextScreen = false
-    var categoryList = [Category]() //from User classSS
-    var maxCategories = 8 //variable for func TorF
+//    @State private var isActive = false
+//    @State private var willMoveToNextScreen = false
+//    var categoryList = [Category]() //from User classSS
+    var maxCategories = 8
+    @State var showCategoryCreate: Bool = false
     
     
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -34,12 +35,16 @@ struct CategoryListView: View {
                 // MARK: Add Button
                 VStack{
                     Button(
-                        action:{ isActive = true
-                                willMoveToNextScreen = true},
+                        action:{
+//                            isActive = true
+//                            willMoveToNextScreen = true
+                            showCategoryCreate = true
+                        },
                         label: {
                             
                             ZStack{
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(Color.bright_maroon)
                                     .frame(width: 30, height: 30)
                                 Image(systemName: "plus")
                                     .resizable()
@@ -52,6 +57,10 @@ struct CategoryListView: View {
                         } // end label
                     ) // end button
                     .disabled(userAtMaxCategories())
+                    .sheet(isPresented: $showCategoryCreate) {
+                        CategoryCreationFormView(showCategoryCreate: $showCategoryCreate)
+                            .environment(\.managedObjectContext, managedObjectContext)
+                    }
                 }
                 .padding(.horizontal, 20)
                 // end vstack
@@ -60,10 +69,14 @@ struct CategoryListView: View {
             .padding(.bottom, 30)
             
             // MARK: Category Card List
-            ScrollView { //scroll view containing the CategoryCards to be populated into the CategoryListView
+            ScrollView {
 
                 ForEach(categories) { category in
-                    CategoryCard(category: category)
+                    if(category.wrappedName == "Uncategorized") {
+                        CategoryCard(category: category, editable: false, deletable: false)
+                    } else {
+                        CategoryCard(category: category)
+                    }
                 }
             } //ScrollView END
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -73,7 +86,7 @@ struct CategoryListView: View {
         .background(Color.bg_dark.ignoresSafeArea())
         .navigationBarTitle("")
         .navigationBarHidden(true)
-        .navigate(to: CategoryCreationFormView(), when: $willMoveToNextScreen)
+//        .navigate(to: CategoryCreationFormView(), when: $willMoveToNextScreen)
     } //var body: some View END
     
     // MARK: Custom Functions

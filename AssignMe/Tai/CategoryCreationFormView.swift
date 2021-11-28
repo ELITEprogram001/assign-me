@@ -12,23 +12,34 @@ struct CategoryCreationFormView: View {
     @State var currentColor: String = "red"
     @State var tabColor: Color = .red
     @State var backClicked: Bool = false
+    @Binding var showCategoryCreate: Bool
     
-    @Environment(\.presentationMode) var presentation
+//    @Environment(\.presentationMode) var presentation
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(
       entity: CategoryEntity.entity(),
       sortDescriptors: []
     ) var categories: FetchedResults<CategoryEntity>
     
-    init() {
+    init(showCategoryCreate: Binding<Bool>) {
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.init(red: 120/255, green: 120/255, blue: 120/255, alpha: 1.0)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+        
+        _showCategoryCreate = showCategoryCreate
     }
     
     var body: some View {
         
         VStack(spacing: 0) {
+            
+            Divider()
+                .frame(height: 3)
+                .background(Color.bright_maroon)
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.gray)
+                .frame(width: 50, height: 5)
+                .padding(.vertical, 8)
             
             NavigationLink(destination: CategoryListView(), isActive: $backClicked) {
                 EmptyView()
@@ -39,11 +50,11 @@ struct CategoryCreationFormView: View {
                 
                 // MARK: Back Button
                 Button(action: {
-                    backClicked = true
+                    showCategoryCreate = false
                 }, label: {
                     ZStack() {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.blue)
+                            .fill(Color.bright_maroon)
                             .frame(width: 40, height: 30)
                         Image(systemName: "arrow.backward")
                             .resizable()
@@ -87,7 +98,7 @@ struct CategoryCreationFormView: View {
                         .padding(.horizontal, 8)
                         .padding(.vertical, 5)
                 }) // end add button
-                .background(Color.blue)
+                .background(Color.bright_maroon)
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 
@@ -112,6 +123,7 @@ struct CategoryCreationFormView: View {
                     .background(Color.bg_light)
                     .cornerRadius(10)
             }
+            .foregroundColor(.white)
             .padding()
             
             // MARK: Color Selection
@@ -138,7 +150,7 @@ struct CategoryCreationFormView: View {
             
             Spacer()
         }
-        .background(Color.bg_dark)
+        .background(Color.bg_dark.ignoresSafeArea())
         //vstack
         
     }

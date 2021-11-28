@@ -7,33 +7,10 @@
 
 import SwiftUI
 struct ContentView: View {
-    
-//    // Test Category
     @State private var tabSelection = 1
     @State var showTaskEntry: Bool = false
     
-    //var for uncategorized category that's hidden from CategoriesListView
-    var Uncategorized = Category(name:"Uncategorized",color:Color.gray)
-    
     let persistenceController = PersistenceController.shared
-    
-//    @FetchRequest(
-//      entity: UserEntity.entity(),
-//      sortDescriptors: []
-//    ) var u: FetchedResults<UserEntity>
-    
-    init()
-    {
-        
-        
-//        for us in u {
-//            if( us.wrappedName != "fuck" ) {
-//                let use = UserEntity(context: persistenceController.container.viewContext)
-//                use.name = "fuck"
-//            }
-//        }
-        
-    }
 
     var body: some View {
         TabView(selection:$tabSelection){
@@ -79,21 +56,6 @@ struct ContentView: View {
 } // end content view
     
 
-
-//struct CategoryView: View {
-//    var body: some View {
-//        NavigationView{
-//            Text("category view")
-//                .toolbar {
-//                    ToolbarItem(placement: .navigationBarTrailing) {
-//
-//                        NavigationLink("add", destination: CategoryCreationFormView())
-//
-//                    }
-//                }
-//        }
-//    }
-//}
 
 
 
