@@ -73,7 +73,7 @@ struct CategoryCard: View {
     } //taskNum END
     
     var body: some View {
-        ZStack{ //Stacks all text, buttons, and other details; starting from bottom to top
+        ZStack{ //Stacks all text, buttons, and other details; starting from bottom to topp
             Rectangle() //Card Body
                 .fill(Color.clear) //(red: 0.35, green: 0.35, blue: 0.35)) //can be Color: .Clear
                 .frame(width: 325, height: 100)
