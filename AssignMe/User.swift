@@ -37,7 +37,4 @@ class User: ObservableObject {
             difficulty: 1,
             dueDate: Date()))
     }
-    func addCategory(cat:Category){
-        categoryList.append(cat)
-    }
 }

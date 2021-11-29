@@ -21,7 +21,8 @@ struct ContentView: View {
         // TODO implement persistent data - or waste 12-16 hours creating a functional app.
         
         // non-optional testing data since our app has no persistent data
-        user.addCategory(cat:Uncategorized) //init for uncategorized category
+        //user.addCategory(cat:Uncategorized) //init for uncategorized category
+        user.categoryList.append(Uncategorized)
         var physical = Category(name: "Physical Health", color: .yellow)
         var school = Category(name: "School", color: .green)
         
