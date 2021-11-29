@@ -96,9 +96,11 @@ struct TaskEntryView: View {
                 Group{
                     Text("Name:")           //task name
                         .foregroundColor(.blue)
-                    TextField("   Enter Task Name...", text: self.$taskName, onCommit: {
+                    TextField("Enter Task Name...", text: self.$taskName, onCommit: {
                         isActive=true
                     })
+                    .disableAutocorrection(true)
+                    .padding(.leading, 10)
                     .frame(height: 55)
                     .background(Color(red: 0.17, green: 0.17, blue: 0.17))
                     .cornerRadius(16)
@@ -107,7 +109,9 @@ struct TaskEntryView: View {
                     
                     Text("Description:")        //description
                         .foregroundColor(.blue)
-                    TextField("   Enter Task Description...", text: self.$taskDesc)
+                    TextField("Enter Task Description...", text: self.$taskDesc)
+                        .disableAutocorrection(true)
+                        .padding(.leading, 10)
                         .frame(height: 55)
                         .textFieldStyle(PlainTextFieldStyle())
                         .background(Color(red: 0.17, green: 0.17, blue: 0.17))
