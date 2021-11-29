@@ -56,6 +56,11 @@ struct WeeklyView: View {
                         ForEach(1..<user.taskList.count, id: \.self) { index in
                             if (myDictionaryNext6Days[formatterDMY.string(from: user.taskList[index].dueDate )] == 1 && myDictionaryIntToDate[index] != nil){
                                 Text("\(myDictionaryIntToDate[index]!)")
+                                    .bold()
+                                    .font(.custom("Viga-Regular", size: 28))
+                                    .padding(.trailing,200)
+                                    .padding(.top,20)
+                                    
                             }
                             if(myDictionaryNext6Days[formatterDMY.string(from: user.taskList[index].dueDate )] == 1)
                             {
