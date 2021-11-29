@@ -203,6 +203,7 @@ struct TaskDetailsView: View {
         
     }
     func CompleteTask(){
+        user.taskList[user.currTaskIndex].dateCompleted = Date()
         user.completedList.append(user.taskList[user.currTaskIndex])
         user.taskList.remove(at:user.currTaskIndex)
         self.presentation.wrappedValue.dismiss()
