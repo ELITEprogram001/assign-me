@@ -28,7 +28,7 @@ struct TaskCard: View {
                 
                 Text("\(task.name)") //Task name
                     .fontWeight(.bold)
-                    .font(.custom("Montserrat-Regular", size: 20))
+                    .font(.custom("Ubuntu-Regular", size: 20))
                     //.font(.system(size: 20, design: .serif))
                     .foregroundColor(Color.white)
                     //.multilineTextAlignment(.leading)
@@ -49,7 +49,7 @@ struct TaskCard: View {
                         Text("\(task.category.name)") //Name of category assigned to task
                             //.font(.system(size: 11, weight: .light, design: .serif))
                             .fontWeight(.bold)
-                            .font(.custom("Montserrat-Regular", size: 13))
+                            .font(.custom("Ubuntu-Regular", size: 13))
                             .foregroundColor(task.category.color) //Color of category name text that corresponds to assigned category's color
                             .frame(width: 143, height: 1, alignment: .leading)
                     } //HStack end
