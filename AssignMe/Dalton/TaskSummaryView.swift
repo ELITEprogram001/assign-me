@@ -25,7 +25,9 @@ struct TaskSummaryView: View {
                         .padding(.top, 5)
                         .padding(.bottom, 8)
                     Spacer()
-                } // end section title
+                }
+                .padding(.horizontal)
+                // end section title
                 
                 // Task completion per difficulty
                 HStack(spacing: 20) {
@@ -84,7 +86,9 @@ struct TaskSummaryView: View {
                         .font(.custom("Viga", size: 16, relativeTo:.title))
                         .padding(.vertical)
                     Spacer()
-                } // end view title
+                }
+                .padding(.horizontal)
+                // end view title
                 
                 HStack(spacing: 0) {
                     Spacer()
