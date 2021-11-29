@@ -28,7 +28,7 @@ struct FilterMenu: View {
 var data = ["None","Yellow","Blue","Red","Green","Orange","Pink","Purple"]
 
 struct RadioButtons : View {
-    
+    @EnvironmentObject var user: User
     @Binding var selected : String
     @Binding var show : Bool
     var body : some View{
@@ -44,6 +44,8 @@ struct RadioButtons : View {
                 ForEach(data,id: \.self) { i in     //go through "data" then create a Button for each Color in "data" with the name along side
                     Button(action: {
                         self.selected = i
+                        user.filterSelecColor = self.selected
+                        
                     }){
                         HStack{ //hstack contain the name and the circle button
                             Text(i) //name

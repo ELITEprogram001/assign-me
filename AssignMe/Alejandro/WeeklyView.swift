@@ -20,6 +20,22 @@ struct WeeklyView: View {
     @State var myDictionaryIntToDate:[Int:String] = [:]
     @State var myDictionaryNext6Days:[String:Int] = [:]
     @State var formatterDMY = DateFormatter()
+    
+    func colorString (color: Color) -> String {
+                switch color {
+                    case Color.gray: return "Gray"
+                    case Color.red: return "Red"
+                    case Color.green: return "Green"
+                    case Color.blue: return "Blue"
+                    case Color.yellow: return "Yellow"
+                    case Color.orange: return "Orange"
+                    case Color.purple: return "Purple"
+                    case Color.pink: return "Pink"
+                default: return "uncolored"
+                }
+            }
+    
+    
     var body: some View {
     
         
@@ -62,8 +78,11 @@ struct WeeklyView: View {
                                     .padding(.top,20)
                                     
                             }
-                            if(myDictionaryNext6Days[formatterDMY.string(from: user.taskList[index].dueDate )] == 1)
+                            if(myDictionaryNext6Days[formatterDMY.string(from: user.taskList[index].dueDate )] == 1 && colorString(color: user.taskList[index].category.color)  == user.filterSelecColor || user.filterSelecColor == "None")
                             {
+                                
+                                
+                                
                             NavigationLink(destination: TaskDetailsView(task: user.taskList[index] )
 
                                 .environmentObject(user)

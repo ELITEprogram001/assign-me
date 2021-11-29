@@ -18,7 +18,7 @@ class User: ObservableObject {
     @Published var completedList = [Task]()
     @Published var availableColors = [Color]()
     @Published var achievements = [Achievement]()
-    
+    @Published var filterSelecColor = "None"
     init(name: String){
         self.name = name
         self.currTask = Task(
