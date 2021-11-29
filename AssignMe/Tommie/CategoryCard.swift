@@ -100,7 +100,7 @@ struct CategoryCard: View {
             
             
             Text("\(category.name)") //variable category name
-                .font(.system(size: 21, weight: .light, design: .serif))
+                .font(.custom("Ubuntu-Regular", size: 21))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.leading)
@@ -115,7 +115,7 @@ struct CategoryCard: View {
             
             
             Text("\nTasks: \(taskNum())") //"\nTasks: (2)" number is a placeholder for now
-                .font(.system(size: 16, weight: .light, design: .serif))
+                .font(.custom("Ubuntu-Regular", size: 16))
                 .fontWeight(.bold)
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.leading)
