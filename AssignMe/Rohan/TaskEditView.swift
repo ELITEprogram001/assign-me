@@ -65,48 +65,54 @@ struct TaskEditView: View {
                 } //hstack
                 
                 Group{
-                    Text("Name:")
-                        .foregroundColor(.blue)
-                    TextField("Enter Task Name...", text: self.$taskName, onCommit: {
-                        isActive=true
-                    })
-                        .frame(height: 55)
-                        .textFieldStyle(PlainTextFieldStyle())
-                        .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                        .padding([.horizontal], 4)
-                        .cornerRadius(16)
-                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                        .padding(.horizontal, 40)
-                        .foregroundColor(.white)
-                    Text("Description:")
-                        .foregroundColor(.blue)
-                    TextField("Enter Task Description...", text: self.$taskDesc)
-                        .frame(height: 55)
-                        .textFieldStyle(PlainTextFieldStyle())
-                        .background(Color(red: 0.17, green: 0.17, blue: 0.17))
-                        .padding([.horizontal], 4)
-                        .cornerRadius(16)
-                        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
-                        .padding(.horizontal, 40)
-                        .foregroundColor(.white)
-                    Text("Category:")
-                        .foregroundColor(.blue)
-                    Menu("\(currentCategory)"){
-                        ForEach(0..<user.categoryList.count, id: \.self) { index in
-                            Button(action:{currentCategory = user.categoryList[index].name;
-                                user.indexCatList = index
-                            }, label:{
-                                Text(user.categoryList[index].name)
-                            })
-                        }
+                    VStack(spacing: 15){
+                        Text("Name:")
+                            .foregroundColor(.blue)
+                        TextField("Enter Task Name...", text: self.$taskName, onCommit: {
+                            isActive=true
+                        })
+                            .frame(height: 55)
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .background(Color(red: 0.17, green: 0.17, blue: 0.17))
+                            .padding([.horizontal], 4)
+                            .cornerRadius(16)
+                            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                            .padding(.horizontal, 40)
+                            .foregroundColor(.white)
+                        Text("Description:")
+                            .foregroundColor(.blue)
+                        TextField("Enter Task Description...", text: self.$taskDesc)
+                            .frame(height: 55)
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .background(Color(red: 0.17, green: 0.17, blue: 0.17))
+                            .padding([.horizontal], 4)
+                            .cornerRadius(16)
+                            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.gray))
+                            .padding(.horizontal, 40)
+                            .foregroundColor(.white)
+                        Text("Category:")
+                            .foregroundColor(.blue)
+                        Menu("\(currentCategory)"){
+                            ForEach(0..<user.categoryList.count, id: \.self) { index in
+                                Button(action:{currentCategory = user.categoryList[index].name;
+                                    user.indexCatList = index
+                                    
+                                }, label:{
+                                    Text(user.categoryList[index].name)
+                                })
+                            }
 
-                    }   //menus
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 30)
-                    Rectangle()
-                        .fill(Color.black)
-                        .frame(width:340, height:1)
-                        .padding(.horizontal, 30)
+                        }   //menus
+                            .font(.custom("Montserrat-Regular", size: 20))
+                            .foregroundColor(user.categoryList[user.indexCatList].color)
+                        
+                            .padding(.horizontal, 30)
+                        Rectangle()
+                            .fill(Color.black)
+                            .frame(width:340, height:1)
+                            .padding(.horizontal, 30)
+                    }
+                    
                 } //group
                 Text("Due Date:")
                     .foregroundColor(.blue)

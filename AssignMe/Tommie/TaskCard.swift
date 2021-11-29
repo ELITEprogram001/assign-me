@@ -37,24 +37,26 @@ struct TaskCard: View {
                     .padding(.leading, -93.0)
                     .padding (.bottom, 40)
                 
-                Text("\(formatter.string(from:task.dueDate))  -") //Task's due date
-                    //.font(.system(size: 13, weight: .light, design: .serif))
-                    .font(.custom("Ubuntu-Regular", size: 14))
-                    .fontWeight(.bold)
-                    .foregroundColor(task.category.color) //Color of due date text that corresponds to assigned category's color
-                    .frame(minWidth: 0, idealWidth: 100, maxWidth: 200, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
-                    .padding(.leading, -95.0)
-                //.padding(.top, -5)
-                
-                Text("\(task.category.name)") //Name of category assigned to task
-                    //.font(.system(size: 11, weight: .light, design: .serif))
-                    .fontWeight(.bold)
-                    .font(.custom("Montserrat-Regular", size: 13))
+                HStack () { //alignment for the dueDate and Category name on the task card
                     
-                    .foregroundColor(task.category.color) //Color of category name text that corresponds to assigned category's color
-                    .frame(minWidth: 0, idealWidth: 100, maxWidth: 150, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
-                    .padding(.leading, 180.0)
-                //.padding(.top, -5)
+                    Text("\(formatter.string(from:task.dueDate))  -") //Task's due date
+                        //.font(.system(size: 13, weight: .light, design: .serif))
+                        .font(.custom("Ubuntu-Regular", size: 14))
+                        .fontWeight(.bold)
+                        .foregroundColor(task.category.color) //Color of due date text that corresponds to assigned category's color
+                    
+                    HStack () {
+                        Text("\(task.category.name)") //Name of category assigned to task
+                            //.font(.system(size: 11, weight: .light, design: .serif))
+                            .fontWeight(.bold)
+                            .font(.custom("Montserrat-Regular", size: 13))
+                            .foregroundColor(task.category.color) //Color of category name text that corresponds to assigned category's color
+                            .frame(width: 143, height: 1, alignment: .leading)
+                    } //HStack end
+                    
+                } //HStack end
+                .padding(.leading, 37)
+                .frame(width: 370, height: 1, alignment: .leading)
                 
                 Text("\(task.description)") //Task description
                     .font(.custom("Ubuntu-Regular", size: 13))
@@ -64,9 +66,6 @@ struct TaskCard: View {
                     .frame(minWidth: 0, idealWidth: 100, maxWidth: 300, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: .init(horizontal: .leading, vertical: .center))
                     .padding(.leading, 10.0)
                     .padding(.top, 40)
-                
-                
-                
                 HStack{ //attributes for the category colour tab to the left
                     Rectangle() //Left-hand category colour tab
                         .foregroundColor(task.category.color)

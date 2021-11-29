@@ -43,6 +43,7 @@
 		8730CBA02733725B00D175DB /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730CB9F2733725B00D175DB /* CalendarView.swift */; };
 		CE25728727422138006C5C66 /* TaskDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE25728627422138006C5C66 /* TaskDetailsView.swift */; };
 		CE630707273369B50031B8A9 /* CategoryEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE630706273369B50031B8A9 /* CategoryEdit.swift */; };
+		CE85B18D274F6F7C00A3F3AB /* FilterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85B18C274F6F7C00A3F3AB /* FilterMenu.swift */; };
 		DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE998A4327336DC3000A08CF /* TaskCard.swift */; };
 		DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE998A4527336ECE000A08CF /* CategoryListView.swift */; };
 /* End PBXBuildFile section */
@@ -109,6 +110,8 @@
 		CE85B185274F34A700A3F3AB /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "../../../../Desktop/Montserrat/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		CE85B187274F356A00A3F3AB /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		CE85B18A274F420B00A3F3AB /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "../../../../../Desktop/Montserrat/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		CE85B18B274F572D00A3F3AB /* Chivo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Chivo-Regular.ttf"; path = "../../../../../Desktop/Chivo/Chivo-Regular.ttf"; sourceTree = "<group>"; };
+		CE85B18C274F6F7C00A3F3AB /* FilterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMenu.swift; sourceTree = "<group>"; };
 		DE998A4327336DC3000A08CF /* TaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCard.swift; sourceTree = "<group>"; };
 		DE998A4527336ECE000A08CF /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,6 +235,7 @@
 				CE25728627422138006C5C66 /* TaskDetailsView.swift */,
 				CE630706273369B50031B8A9 /* CategoryEdit.swift */,
 				303CFCB2271D0116003B7139 /* CategoryCreationFormView.swift */,
+				CE85B18C274F6F7C00A3F3AB /* FilterMenu.swift */,
 			);
 			path = Tai;
 			sourceTree = "<group>";
@@ -273,6 +277,7 @@
 		CE85B186274F355600A3F3AB /* task card font */ = {
 			isa = PBXGroup;
 			children = (
+				CE85B18B274F572D00A3F3AB /* Chivo-Regular.ttf */,
 				CE85B18A274F420B00A3F3AB /* Montserrat-Regular.ttf */,
 				CE85B187274F356A00A3F3AB /* Montserrat-Regular.ttf */,
 			);
@@ -435,6 +440,7 @@
 				DE998A4627336ECE000A08CF /* CategoryListView.swift in Sources */,
 				303E9278272AF3AE00B71B63 /* User.swift in Sources */,
 				DE998A4427336DC3000A08CF /* TaskCard.swift in Sources */,
+				CE85B18D274F6F7C00A3F3AB /* FilterMenu.swift in Sources */,
 				1FB031B2274AF73E00CBC739 /* ProfileView.swift in Sources */,
 				1FB8CEEB274F4D7E00DAC1A8 /* ModalView.swift in Sources */,
 				30954F1A273478FA00E100BE /* TaskEditView.swift in Sources */,

@@ -17,7 +17,7 @@ struct TaskDetailsView: View {
     let formatter = DateFormatter()
     init(task:Task) {
         self.task = task
-        formatter.dateFormat = "EEEE, MMMM d, yyyy HH:mm a"
+        formatter.dateFormat = "h:mm a - EEEE \n MMM. d, yyyy"
     }
     func getIndex() -> Int {
             if (user.currTaskIndex == user.taskList.count)
@@ -76,7 +76,7 @@ struct TaskDetailsView: View {
                 VStack(alignment: .leading, spacing: 10){
                     Text("Task Name:")
                         .foregroundColor(.blue)
-                    
+                        .font(.custom("Chivo-Regular", size: 16))
                     Text( user.taskList[getIndex()].name)
                         .font(.title)
                         .fontWeight(.semibold)
@@ -84,83 +84,98 @@ struct TaskDetailsView: View {
                         .multilineTextAlignment(.center) //to alight to center
                         .padding(.horizontal)
                     Text("Description:")
+                        .font(.custom("Chivo-Regular", size: 16))
                         .foregroundColor(.blue)
                     Text( user.taskList[getIndex()].description)
                         .lineLimit(2)
-                        .multilineTextAlignment(.center) //to alight to center
+                        //.multilineTextAlignment(.center) //to alight to center
                         .padding(.horizontal)
-                    Text("Due Date:")
+                    
+                    
+/* catergory*/      Text("Category Name:")
                         .foregroundColor(.blue)
+                        .font(.custom("Chivo-Regular", size: 16))
+                    HStack(alignment: .center){
+                        //Spacer()
+                        Text(  "\(task.category.name )" )
+                            .font(.custom("Montserrat-Regular", size: 26))
+                            .padding()
+                            .foregroundColor(task.category.color)
+                        Spacer()
+                    } //hstack Category
+                    
+                    
+                    
+                    Group{
+                        
+                    Text("Due Date:")
+                        .font(.custom("Chivo-Regular", size: 16))
+                        .foregroundColor(.blue)
+            
                    // Text("\( user.taskList[user.currTaskIndex].dueDate)")
-                    Text("\(formatter.string(from:task.dueDate))")
- //                   Text((formatter.date(from: "\(user.currTask.dueDate)" )
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center) //to alight to center
-                        .padding(.horizontal)
+                    HStack{
+                        Spacer()
+                        Text("\(formatter.string(from:task.dueDate))")
+                            .font(.custom("Montserrat-Regular", size: 24))
+                            .lineLimit(2)
+                            .frame(width: 300)
+                            .multilineTextAlignment(.center) //to alight to center
+                        Spacer()
+                    }
+                    
                         
                     Text("Difficulty:")
+                        .font(.custom("Chivo-Regular", size: 16))
                         .foregroundColor(.blue)
                     HStack( spacing: 1){
                         let starCount =  user.taskList[getIndex()].difficulty
                         ForEach (1...starCount, id:\.self) { _ in
                             Image(systemName: "star.fill")
-                                .resizable()
-                                .foregroundColor(Color.yellow)
-                                .frame(width: 45,height: 45)
-                        }.padding(.horizontal, 10 )
+                            .resizable()
+                            .foregroundColor(Color.yellow)
+                            .frame(width: 45,height: 45)
+                        }
+                        .padding(.horizontal, 10 )
                     } //hstack
                     .padding()
                     
-                    Group{
-                        Text("Category Name:")
-                            .foregroundColor(.blue)
-                        
-                        HStack{
-                            Text(  "\(task.category.name )" )
-                                .multilineTextAlignment(.center) //to alight to center
-                                .padding(.horizontal)
-                                .foregroundColor(task.category.color)
-                            
-                            
-                            
-//                            Rectangle()
-//                                .frame(width: 80 ,height: 30)
-//                                .foregroundColor(task.category.color)
-                               
-                                    
-                            Spacer()
-                            //Text( "\(Color(task.category.color))" )
-                        }
-                        
-                        
-                        
-                        
-                        Spacer()
-                        HStack{
-                        Spacer()
-                            
-                        Button("Delete",action:{
-                            DeleteTask()
-                        })
-                            .frame(width: 120, height: 50)
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .padding(.leading, 15 )
-                        Spacer()
-                        Button("Complete",action:{
-                            CompleteTask()
-                        })
-                            .frame(width: 120, height: 50)
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                            .padding(.leading, 15 )
-                        Spacer()
-                        }
-                        
-                    }
                     
+//                        Text("Category Name:")
+//                            .foregroundColor(.blue)
+//                            .font(.custom("Chivo-Regular", size: 16))
+//                        HStack(alignment: .center){
+//                            Spacer()
+//                            Text(  "\(task.category.name )" )
+//                                .font(.custom("Montserrat-Regular", size: 30))
+//                                .padding()
+//                                .foregroundColor(task.category.color)
+//                            Spacer()
+//                        } //hstack Category
+                        Spacer()
+                        HStack{
+                            Spacer()
+                                
+                            Button("Delete",action:{
+                                DeleteTask()
+                            })
+                                .font(.custom("Chivo-Regular", size: 20))
+                                .frame(width: 130, height: 50)
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                            Spacer()
+                            Button("Complete",action:{
+                                CompleteTask()
+                            })
+                                .font(.custom("Chivo-Regular", size: 20))
+                                .frame(width: 130, height: 50)
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                            Spacer()
+                        } // hstack
+                        Spacer()
+                    }
                     
                 } //vstack
                 .frame(width: 370 , alignment: .leading)

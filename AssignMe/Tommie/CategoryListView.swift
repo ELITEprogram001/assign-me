@@ -22,19 +22,36 @@ struct CategoryListView: View {
         }
     } // func TorF END
     
+    func taskNum() -> Int {
+        var count = 0
+        for index in 1..<user.taskList.count {
+            if (user.taskList[index].category.name == user.categoryList[0].name){
+                count = count + 1
+            }
+        }
+        return count
+    }
+    
     var body: some View {
         ZStack{
             Color(red: 0.150, green: 0.150, blue: 0.150).edgesIgnoringSafeArea(.all)
             VStack{
                 HStack{
 
-                    Text("Categories")
-                        .bold()
-                        .font(.custom("Viga-Regular", size: 25))
-                        //.font(.system(size: 25, weight: .bold, design: .serif))
-                        //.padding(.horizontal,45)
-                        .padding(.leading,120)
-                        .foregroundColor(.white)
+                    VStack{
+                        Text("Categories")
+                            .bold()
+                            .font(.custom("Viga-Regular", size: 25))
+                            //.font(.system(size: 25, weight: .bold, design: .serif))
+                            //.padding(.horizontal,45)
+                            .padding(.leading,120)
+                            .foregroundColor(.white)
+                        
+                        Text("Uncategorized: \(taskNum())")
+                            .font(.custom("Viga-Regular", size: 17))
+                            .padding(.leading, 120)
+                            .foregroundColor(.white)
+                    }
                     
                     Spacer()
                     

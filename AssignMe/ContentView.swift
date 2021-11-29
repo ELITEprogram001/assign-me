@@ -96,6 +96,9 @@ struct ContentView: View {
         
     }
 
+
+    //var catList = [Category]()
+
     var body: some View {
         TabView(selection:$tabSelection){
             WeeklyView(tabSelection: 1)
@@ -108,6 +111,7 @@ struct ContentView: View {
                 .tabItem {
                     Text("Calendar")
                     Image(systemName: "calendar")
+                    
                 }
                 .tag(2)
             TaskEntryView(tabSelection: $tabSelection)
@@ -128,13 +132,28 @@ struct ContentView: View {
                     Image(systemName: "person.fill")
                 }
                 .tag(5)
-            
-            
         }
         .environmentObject(user)//end body
         .preferredColorScheme(.dark)
+       
+  //###############################################################################
+//            // this is for the category filter view
+//        GeometryReader{ geomertry in
+//            WeeklyView(tabSelection: 1)
+//                .frame(width: geomertry.size.width, height: geomertry.size.height)
+//        } //geometryreader
+//        
+//        ZStack(alignment: .leading) {
+//            WeeklyView(tabSelection: 1)
+//                .frame(width: geomertry.size.width, height: geomertry.size.height)
+//            if self.showMenu {
+//                FilterMenu()
+//            }
+//        }
+   //#########################################################################
         
-    }
+    } //body
+    
     
 } //view
 
