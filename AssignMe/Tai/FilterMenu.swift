@@ -41,6 +41,7 @@ struct RadioButtons : View {
                     .font(.title)
                     .padding(.top)
                 Text((self.selected) )
+                    .font(.custom("Viga-Regular", size: 20))
                 ForEach(data,id: \.self) { i in     //go through "data" then create a Button for each Color in "data" with the name along side
                     Button(action: {
                         self.selected = i
