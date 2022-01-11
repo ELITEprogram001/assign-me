@@ -3,8 +3,8 @@ AssignMe is a motivational to-do application for the iPhone. It was created for 
 
 ## Main Features
 #### Add/Remove Tasks
-Tasks can be tracked throughout the app by adding them in the task entry page.
-![Demo - Task Adding](https://media4.giphy.com/media/8aLctxeGHRRWFBGLkV/giphy.gif?cid=790b7611756ca2228caea7e340e1ed3ec8095bce619a84d9&rid=giphy.gif&ct=g)
+Tasks can be tracked throughout the app by adding them in the task entry page.  
+![Demo - Task Adding](https://media.giphy.com/media/8aLctxeGHRRWFBGLkV/giphy.gif)
 
 #### Add/Remove Categories
 #### View the next 7 days of tasks
