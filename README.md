@@ -12,7 +12,7 @@ Categories act as labels to help the user keep track of related tasks. These cat
 
 #### View the next 7 days of tasks
 The weekly view shows the next 7 days of tasks to give a quick glance of what the user has coming up. It will skip over days that don't have tasks due. The list is empty if the user doesn't have tasks in the next 7 days.  
-![Demo - Weekly View](https://i.imgur.com/uWSisbF.png)
+![Demo - Weekly View](https://i.imgur.com/STqUSG0l.png)
 
 #### Display a calendar with all of your tasks
 The calendar view shows tasks on a given day by displaying a dot under the day number. It serves to show the user what they have coming on a long term scale.   
