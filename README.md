@@ -1,5 +1,7 @@
 # AssignMe
 AssignMe is a motivational to-do application for the iPhone. It was created for a senior project. The application is designed to motivate the user to complete their goals by gamifying the process.
+#### Check out our video demo
+[![Demo Video](https://youtu.be/7av0BeRR_Vg)
 
 ## Main Features
 #### Add/Remove Tasks
